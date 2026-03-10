@@ -787,13 +787,13 @@ themeBtn.addEventListener('click', () => {
       const s = Math.floor((diff%60000)/1000);
       timer.textContent = `시작까지 ${h}시간 ${m}분 ${s}초`;
     } else if(end && now > end){
-      // 종료
+      // 종료 → 오프라인으로 표시
       dot.style.background = '#FF3B3B';
       dot.style.boxShadow = '0 0 8px rgba(255,59,59,0.6)';
-      status.textContent = '🔴 종료';
+      status.textContent = '🔴 오프라인';
       status.style.color = 'var(--red)';
-      mode.textContent = COUPONI_LABEL || '종료됨';
-      timer.textContent = '종료';
+      mode.textContent = '운영 종료';
+      timer.textContent = '--:--:--';
     } else {
       // 운영 중
       dot.style.background = '#4ADE80';
