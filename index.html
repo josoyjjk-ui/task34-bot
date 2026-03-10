@@ -749,9 +749,10 @@ themeBtn.addEventListener('click', () => {
 
 /* ── COUPONI BOT TIMER ── */
 (function(){
-  // Set couponi bot end time here (KST). null = no timer, just show status.
-  const COUPONI_END = null; // e.g. '2026-03-20T23:59:00+09:00'
-  const COUPONI_ACTIVE = true; // true = 운영 중, false = 오프라인
+  // 해병님이 내용 줄 때마다 여기 세팅. 내용 없으면 ACTIVE=false
+  const COUPONI_ACTIVE = false; // true = 운영 중, false = 오프라인
+  const COUPONI_END = null;   // 종료 시각 e.g. '2026-03-20T23:59:00+09:00'
+  const COUPONI_LABEL = '';   // 현재 운영 내용 e.g. '블록스트릿 리캡 캠페인'
 
   const dot = document.getElementById('couponi-dot');
   const status = document.getElementById('couponi-status');
@@ -772,7 +773,7 @@ themeBtn.addEventListener('click', () => {
     dot.style.boxShadow = '0 0 8px rgba(74,222,128,0.6)';
     status.textContent = '🟢 운영 중';
     status.style.color = 'var(--green)';
-    mode.textContent = '정상 가동';
+    mode.textContent = COUPONI_LABEL || '정상 가동';
 
     if(!COUPONI_END){ timer.textContent = '∞'; return; }
     const end = new Date(COUPONI_END).getTime();
