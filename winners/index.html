@@ -488,7 +488,7 @@
     <div id="applyFormWrap">
       <div class="form-card">
         <div class="form-title">📬 리워드 수령 정보 제출</div>
-        <div class="form-desc">당첨이 확인된 분만 제출해 주세요. 입력하신 정보는 리워드 지급 목적으로만 사용되며, 지급 완료 후 즉시 파기됩니다.</div>
+        <div class="form-desc">당첨이 확인된 분만 제출해 주세요. 제출 즉시 담당자에게 전달됩니다.</div>
 
         <form id="rewardForm" onsubmit="submitForm(event)">
           <div class="form-group">
@@ -801,42 +801,33 @@ async function submitForm(e) {
   e.preventDefault();
   const agree = document.getElementById('f_agree').checked;
   if (!agree) { showToast('개인정보 수집에 동의해 주세요.', true); return; }
-  window.open('https://docs.google.com/forms/d/12Athk-r6r_5y2lJOUbDXw8PAIveNAAqZ06g0H6oic9Y/viewform', '_blank');
-  showToast('✅ 리워드 신청 폼으로 이동합니다!');
-  return;
+
   const btn = document.getElementById('submitBtn');
-  if (!agree) { alert('개인정보 수집에 동의해 주세요.'); return; }
-
-  const payload = {
-    type: 'reward',
-    telegram: document.getElementById('f_telegram').value.trim(),
-    twitter: document.getElementById('f_twitter').value.trim(),
-    event: document.getElementById('f_event').value.trim(),
-    wallet: document.getElementById('f_wallet').value.trim(),
-    email: document.getElementById('f_email').value,
-    contactType: document.getElementById('f_contact_type').value,
-    contact: document.getElementById('f_contact').value.trim(),
-    timestamp: new Date().toISOString()
-  };
-
   btn.disabled = true;
-  btn.textContent = '제출 중...';
+  btn.textContent = '⏳ 제출 중...';
+
+  const form = new FormData();
+  form.append('entry.2010035811', document.getElementById('f_telegram').value || '');
+  form.append('entry.255925888',  document.getElementById('f_twitter').value || '');
+  form.append('entry.512449725',  document.getElementById('f_event').value || '');
+  form.append('entry.300366735',  document.getElementById('f_email').value || '');
+  form.append('entry.751056827',  document.getElementById('f_contact_type').value || '');
+  form.append('entry.700922868',  document.getElementById('f_contact').value || '');
+  form.append('entry.1181800932', document.getElementById('f_reward_item').value || '');
+  form.append('entry.775141613',  document.getElementById('f_wallet').value || '');
+  form.append('entry.1927096291', '✅ 동의합니다');
 
   try {
-    // Send to Google Apps Script or Google Form
-    await fetch(GAS_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    // no-cors → can't read response, assume success
-    document.getElementById('applyFormWrap').style.display = 'none';
+    await fetch(
+      'https://docs.google.com/forms/d/12Athk-r6r_5y2lJOUbDXw8PAIveNAAqZ06g0H6oic9Y/formResponse',
+      { method: 'POST', body: form, mode: 'no-cors' }
+    );
+    document.getElementById('applyForm').style.display = 'none';
     document.getElementById('applySuccess').style.display = '';
-  } catch (err) {
+  } catch(err) {
+    showToast('제출 중 오류가 발생했습니다. 다시 시도해 주세요.', true);
     btn.disabled = false;
     btn.textContent = '🎁 리워드 신청하기';
-    alert('제출 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
   }
 }
 
