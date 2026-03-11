@@ -738,12 +738,12 @@ function runSearch(query) {
     <span class="hit-icon">🎉</span>
     <div class="hit-text">
       <div class="hit-title">당첨 확인! ${hits.length}건</div>
-      <div class="hit-sub">아래에서 이벤트 및 리워드를 확인하세요</div>
+      <div class="hit-sub">아래에서 이벤트를 확인하세요</div>
     </div>
   </div>`;
   hits.forEach(w => { html += renderCard(w); });
   html += `<div style="margin-top:16px;text-align:center">
-    <button class="form-submit" style="max-width:260px" onclick="prefillAndSwitch('${escAttr(query)}')">📬 리워드 신청하기 →</button>
+    
   </div>`;
   resEl.innerHTML = html;
 }
