@@ -512,6 +512,11 @@
           </div>
 
           <div class="form-group">
+            <label class="form-label">이메일 주소 <span class="req">*</span></label>
+            <input type="email" class="form-input" id="f_email" placeholder="example@email.com" required>
+          </div>
+
+          <div class="form-group">
             <label class="form-label">연락처 <span class="req">*</span></label>
             <div class="contact-row">
               <select class="form-select" id="f_contact_type" required>
@@ -803,6 +808,7 @@ async function submitForm(e) {
     twitter: document.getElementById('f_twitter').value.trim(),
     event: document.getElementById('f_event').value.trim(),
     wallet: document.getElementById('f_wallet').value.trim(),
+    email: document.getElementById('f_email').value,
     contactType: document.getElementById('f_contact_type').value,
     contact: document.getElementById('f_contact').value.trim(),
     timestamp: new Date().toISOString()
