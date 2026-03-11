@@ -444,7 +444,6 @@
     <div class="nav-brand">🔥 불개미</div>
     <div class="nav-links">
       <a href="#events">이벤트</a>
-      <a href="winners.html" style="background:var(--orange);color:#fff;padding:4px 10px;border-radius:6px;font-weight:700;">🏆 당첨자 조회 및 신청</a>
       <a href="#insights">인사이트</a>
       <a href="#links">채널</a>
       <button class="theme-toggle" id="themeToggle" title="테마 전환">🌙</button>
@@ -846,5 +845,20 @@ themeBtn.addEventListener('click', () => {
   setInterval(updateCouponi, 1000);
 })();
 </script>
+
+  <!-- 당첨자 조회 플로팅 버튼 -->
+  <a href="winners.html" style="
+    position:fixed; bottom:24px; right:20px; z-index:999;
+    background:var(--orange); color:#fff;
+    padding:10px 16px; border-radius:50px;
+    font-size:0.82rem; font-weight:700;
+    box-shadow:0 4px 18px rgba(255,107,53,0.45);
+    text-decoration:none; display:flex; align-items:center; gap:6px;
+    transition:transform 0.15s, box-shadow 0.15s;
+  " onmouseover="this.style.transform='scale(1.05)';this.style.boxShadow='0 6px 24px rgba(255,107,53,0.6)'"
+     onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 18px rgba(255,107,53,0.45)'">
+    🏆 당첨자 조회 및 신청
+  </a>
+
 </body>
 </html>
