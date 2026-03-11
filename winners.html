@@ -752,7 +752,7 @@ function prefillAndSwitch(nick) {
 
 // ── FORM SUBMIT ──
 // Google Apps Script Web App URL (doPost endpoint)
-
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxS89ovB-E8iXkqoKJ_643AJJoJu1flCSx7HLGKDSWhJZsW5_RhDNCSwStoF2fbCQ/exec';
 
 async function submitForm(e) {
   e.preventDefault();
@@ -765,6 +765,7 @@ async function submitForm(e) {
   if (!agree) { alert('개인정보 수집에 동의해 주세요.'); return; }
 
   const payload = {
+    type: 'reward',
     telegram: document.getElementById('f_telegram').value.trim(),
     twitter: document.getElementById('f_twitter').value.trim(),
     event: document.getElementById('f_event').value.trim(),
