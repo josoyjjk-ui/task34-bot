@@ -694,10 +694,10 @@ function renderAllWinners() {
       ">`;
     list.forEach(w => {
       html += `<span style="
-        font-size:0.62rem;
+        font-size:0.81rem;
         font-weight:700;
         color:#ffffff;
-        padding:16px 6px;
+        padding:0;
         border-radius:6px;
         background:rgba(255,255,255,0.12);
         border:1px solid rgba(255,255,255,0.2);
@@ -706,6 +706,10 @@ function renderAllWinners() {
         text-overflow:ellipsis;
         text-align:center;
         line-height:1.2;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        min-height:44px;
       ">${escHtml(w.telegram || '')}</span>`;
     });
     html += `</div></div>`;
