@@ -453,7 +453,7 @@
   <div class="page-header">
     <span class="icon">🏆</span>
     <h1>당첨자 조회 & 리워드 신청</h1>
-    <p>텔레그램 또는 트위터 닉네임으로 당첨 여부를 확인하세요</p>
+    <p>텔레그램 닉네임으로 당첨 여부를 확인하세요</p>
   </div>
 
   <!-- TABS -->
@@ -470,14 +470,14 @@
         type="text"
         class="search-input"
         id="searchInput"
-        placeholder="@텔레그램닉네임 또는 @트위터닉네임"
+        placeholder="@텔레그램닉네임"
         autocomplete="off"
         autocorrect="off"
         autocapitalize="off"
         spellcheck="false"
       >
     </div>
-    <p class="search-hint">@ 포함하여 입력 · 대소문자 구분 없음</p>
+    <p class="search-hint">@ 포함하여 입력 · 대소문자 구분 없음 · 텔레그램 닉네임만 조회</p>
 
     <div id="searchResults"></div>
     <div id="allWinners"></div>
@@ -689,8 +689,7 @@ function runSearch(query) {
     return;
   }
   const hits = winnersData.filter(w =>
-    normalize(w.telegram) === q || normalize(w.twitter) === q ||
-    normalize(w.telegram).includes(q) || normalize(w.twitter).includes(q)
+    normalize(w.telegram) === q || normalize(w.telegram).includes(q)
   );
 
   if (hits.length === 0) {
