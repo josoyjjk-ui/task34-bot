@@ -332,6 +332,15 @@
     <a href="https://t.me/Billions_Korea/61" target="_blank" style="margin-top:10px; display:inline-block; padding:8px 20px; background:rgba(255,107,53,0.12); border:1px solid rgba(255,107,53,0.35); border-radius:8px; font-size:0.84rem; font-weight:600; color:var(--orange); text-decoration:none;">
       🔥 이벤트 참여하기 →
     </a>
+
+    <!-- 포인트 리워드 계산기 -->
+    <div id="rewardCalc" style="margin-top:14px; padding:12px 20px; background:rgba(255,215,64,0.06); border:1px solid rgba(255,215,64,0.2); border-radius:10px; text-align:center; min-width:260px;">
+      <div style="font-size:0.78rem; color:var(--text-dim); margin-bottom:4px;">총 누적 포인트</div>
+      <div id="totalPointsDisplay" style="font-size:1.4rem; font-weight:900; color:var(--gold);">—</div>
+      <div style="margin-top:8px; font-size:0.78rem; color:var(--text-dim);">10포인트당 예상 리워드</div>
+      <div id="rewardPerDisplay" style="font-size:1.1rem; font-weight:700; color:var(--text);">—</div>
+      <div style="margin-top:6px; font-size:0.68rem; color:var(--text-muted);">총 리워드 풀: 500만원 기준</div>
+    </div>
   </div>
 
   <!-- 갱신 시각 -->
@@ -444,6 +453,18 @@ async function loadData() {
       periodEl.innerHTML = `이벤트 기간: <span>${data.period.start}</span> ~ <span>${data.period.end}</span>`;
     } else {
       periodEl.textContent = '친구초대 이벤트 진행 중';
+    }
+
+    // 포인트 리워드 계산
+    const totalPoints = data.total_points || 0;
+    document.getElementById('totalPointsDisplay').textContent =
+      totalPoints > 0 ? totalPoints.toLocaleString() + '점' : '0점';
+    if (totalPoints > 0) {
+      const rewardPer10 = Math.floor(5000000 / totalPoints * 10);
+      document.getElementById('rewardPerDisplay').textContent =
+        '₩' + rewardPer10.toLocaleString();
+    } else {
+      document.getElementById('rewardPerDisplay').textContent = '참여자 대기 중';
     }
 
     // 갱신 시각
