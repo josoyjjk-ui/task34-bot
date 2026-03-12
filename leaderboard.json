@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-03-13 06:04 KST",
+  "updated_at": "2026-03-13 06:09 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 3470,
+  "total_points": 3480,
   "leaderboard": [
     {
       "rank": 1,
@@ -1004,6 +1004,13 @@
       "rank": 143,
       "username": "bong247",
       "first_name": "보이차 ♾️ 🎮MGG",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 144,
+      "username": "tnwjdv13",
+      "first_name": "녹곰",
       "points": 10,
       "invite_count": 0
     }
