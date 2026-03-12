@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-03-13 07:50 KST",
+  "updated_at": "2026-03-13 07:55 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 4080,
+  "total_points": 4090,
   "leaderboard": [
     {
       "rank": 1,
@@ -1179,6 +1179,13 @@
       "rank": 168,
       "username": "ogga2026",
       "first_name": "멍게 🎮MGG",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 169,
+      "username": "lgelato96344",
+      "first_name": "레오",
       "points": 10,
       "invite_count": 0
     }
