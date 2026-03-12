@@ -1,24 +1,24 @@
 {
-  "updated_at": "2026-03-13 02:03 KST",
+  "updated_at": "2026-03-13 02:08 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 1730,
+  "total_points": 1900,
   "leaderboard": [
     {
       "rank": 1,
       "username": "cosmolin2",
       "first_name": "코생(KoSaeng)",
-      "points": 160,
-      "invite_count": 15
+      "points": 170,
+      "invite_count": 16
     },
     {
       "rank": 2,
       "username": "fireantico",
       "first_name": "불개미",
-      "points": 140,
-      "invite_count": 13
+      "points": 160,
+      "invite_count": 15
     },
     {
       "rank": 3,
@@ -31,8 +31,8 @@
       "rank": 4,
       "username": "Astrazene",
       "first_name": "N 🟩",
-      "points": 60,
-      "invite_count": 4
+      "points": 80,
+      "invite_count": 6
     },
     {
       "rank": 5,
@@ -323,225 +323,260 @@
     },
     {
       "rank": 46,
+      "username": "seongyeong",
+      "first_name": "seongyeong 🎮MGG",
+      "points": 20,
+      "invite_count": 1
+    },
+    {
+      "rank": 47,
       "username": "Inbfjkk",
       "first_name": "정보 뉴스",
       "points": 20,
       "invite_count": 0
     },
     {
-      "rank": 47,
+      "rank": 48,
       "username": "kraken4793",
       "first_name": "명태봇",
       "points": 20,
       "invite_count": 0
     },
     {
-      "rank": 48,
+      "rank": 49,
       "username": "luckyswilly",
       "first_name": "Wi11y",
       "points": 20,
       "invite_count": 0
     },
     {
-      "rank": 49,
+      "rank": 50,
+      "username": "tamay544",
+      "first_name": "닭다리⚡️K A M I ☠️ 🟠⚫️ 🎮MGG",
+      "points": 20,
+      "invite_count": 0
+    },
+    {
+      "rank": 51,
+      "username": "tlsdP",
+      "first_name": "고추바사삭ㅣGGH Labs",
+      "points": 20,
+      "invite_count": 0
+    },
+    {
+      "rank": 52,
+      "username": "zxkaya",
+      "first_name": "Kaya",
+      "points": 20,
+      "invite_count": 0
+    },
+    {
+      "rank": 53,
+      "username": "manmanse1",
+      "first_name": "장자 🎮MGG",
+      "points": 20,
+      "invite_count": 0
+    },
+    {
+      "rank": 54,
+      "username": "Kmong2",
+      "first_name": "크",
+      "points": 20,
+      "invite_count": 0
+    },
+    {
+      "rank": 55,
+      "username": "kyb73",
+      "first_name": "zzaby ETHGas ⛽️",
+      "points": 20,
+      "invite_count": 0
+    },
+    {
+      "rank": 56,
       "username": "karf5115",
       "first_name": "K=“🎮MGG UDT🎮”- .grvt🍏 - Limitless♾️ - TEAM DAM - SPACE🛰-QuackAI",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 50,
+      "rank": 57,
       "username": "ausbro80",
       "first_name": "Terry",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 51,
+      "rank": 58,
       "username": "potato053",
       "first_name": "🎮MGG l 🛰SPACE l potato l 🟢STABLE",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 52,
+      "rank": 59,
       "username": "hihihi111999",
       "first_name": "거북선 l TEAM DAM l WITCH l 🎮MGG",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 53,
+      "rank": 60,
       "username": "dejavu1271",
       "first_name": "Justine2017 🎮MGG Quack AI",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 54,
+      "rank": 61,
       "username": "coinshoott",
       "first_name": "코인슛",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 55,
+      "rank": 62,
       "username": "donbug7",
       "first_name": "돈벌레",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 56,
+      "rank": 63,
       "username": "bum2ya",
       "first_name": "Goldman",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 57,
+      "rank": 64,
       "username": "ASrising",
       "first_name": "AS",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 58,
+      "rank": 65,
       "username": "cutiro6534",
       "first_name": "로메로",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 59,
+      "rank": 66,
       "username": "Ksasu1789",
       "first_name": "하쿠",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 60,
+      "rank": 67,
       "username": "kkminsu2002",
       "first_name": "민수",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 61,
+      "rank": 68,
       "username": "choigoat99",
       "first_name": "오롯치",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 62,
+      "rank": 69,
       "username": "penguin1487",
       "first_name": "그네 🎮 MGG",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 63,
+      "rank": 70,
       "username": "happyppy",
       "first_name": "호날두",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 64,
+      "rank": 71,
       "username": "edgesingular",
       "first_name": "edgesingular🎮MGG",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 65,
+      "rank": 72,
       "username": "LoadCosmos",
       "first_name": "LoadCosmos🎮MGG",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 66,
+      "rank": 73,
       "username": "Hustlewtf",
       "first_name": "Arkyuu- need$1B",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 67,
+      "rank": 74,
       "username": "kenshing11",
       "first_name": "켄신",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 68,
+      "rank": 75,
       "username": "Imoreoleo",
       "first_name": "오레오",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 69,
+      "rank": 76,
       "username": "Soeolinyoung",
       "first_name": "🎮MGG Limitless♾[🇰🇷] Quack AI🤖",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 70,
+      "rank": 77,
       "username": "leeje6690",
       "first_name": "lee",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 71,
+      "rank": 78,
       "username": "ramgtd",
       "first_name": "람쥐",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 72,
+      "rank": 79,
       "username": "poracy00",
       "first_name": "grvt🍀 ㅋ",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 73,
+      "rank": 80,
       "username": "yeoniyeoni",
       "first_name": "Kite (연) 🎮MGG",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 74,
+      "rank": 81,
       "username": "younge0703",
       "first_name": "Quack AI😄 🎮MGG⛽️ETHGAS koko.grvt🍏",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 75,
-      "username": "seongyeong",
-      "first_name": "seongyeong 🎮MGG",
-      "points": 10,
-      "invite_count": 0
-    },
-    {
-      "rank": 76,
+      "rank": 82,
       "username": "KryptoYeager",
       "first_name": "크립토예거",
-      "points": 10,
-      "invite_count": 0
-    },
-    {
-      "rank": 77,
-      "username": "tamay544",
-      "first_name": "닭다리⚡️K A M I ☠️ 🟠⚫️ 🎮MGG",
       "points": 10,
       "invite_count": 0
     }
