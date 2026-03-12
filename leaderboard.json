@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-03-13 06:25 KST",
+  "updated_at": "2026-03-13 06:30 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 3520,
+  "total_points": 3530,
   "leaderboard": [
     {
       "rank": 1,
@@ -1025,6 +1025,13 @@
       "rank": 146,
       "username": "rodwlek",
       "first_name": "갱지🍀 River 🌊 | 𝔽rAI | 🎮MGG",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 147,
+      "username": "Ian_kim_official",
+      "first_name": "이안",
       "points": 10,
       "invite_count": 0
     }
