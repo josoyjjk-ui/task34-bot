@@ -494,10 +494,30 @@
         <div class="form-title">📬 리워드 수령 정보 제출</div>
         <div class="form-desc">당첨이 확인된 분만 제출해 주세요. 제출 즉시 담당자에게 전달됩니다.</div>
 
+        <div style="background:#fff3cd; border:1px solid #ffc107; border-radius:8px; padding:10px 14px; margin-bottom:16px; font-size:0.82rem; color:#856404;">
+          ⚠️ 오류신청은 쿠포니봇 운영시간 중 제출된 오류만 유효하게 처리될 예정입니다.
+        </div>
+
         <form id="rewardForm" onsubmit="submitForm(event)">
+          <div class="form-group">
+            <label class="form-label">연락처 <span class="req">*</span></label>
+            <div class="contact-row">
+              <select class="form-select" id="f_contact_type" required>
+                <option value="">유형 선택</option>
+                <option value="전화번호">전화번호</option>
+              </select>
+              <input type="text" class="form-input" id="f_contact" placeholder="전화번호" required>
+            </div>
+          </div>
+
           <div class="form-group">
             <label class="form-label">텔레그램 닉네임 <span class="req">*</span></label>
             <input type="text" class="form-input" id="f_telegram" placeholder="@username" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">이메일 주소 <span class="req">*</span></label>
+            <input type="email" class="form-input" id="f_email" placeholder="example@email.com" required>
           </div>
 
           <div class="form-group">
@@ -513,22 +533,6 @@
           <div class="form-group">
             <label class="form-label">지갑 주소 <span class="opt">(선택 — 필요한 경우만)</span></label>
             <input type="text" class="form-input" id="f_wallet" placeholder="0x... 또는 지갑 주소">
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">이메일 주소 <span class="req">*</span></label>
-            <input type="email" class="form-input" id="f_email" placeholder="example@email.com" required>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">연락처 <span class="req">*</span></label>
-            <div class="contact-row">
-              <select class="form-select" id="f_contact_type" required>
-                <option value="">유형 선택</option>
-                <option value="전화번호">전화번호</option>
-              </select>
-              <input type="text" class="form-input" id="f_contact" placeholder="전화번호" required>
-            </div>
           </div>
 
           <div class="form-group">
@@ -837,6 +841,15 @@ async function submitForm(e) {
 
 // ── INIT ──
 loadWinners();
+// URL 해시로 탭 자동 전환 (#tab-apply → 리워드 신청 탭)
+(function() {
+  if (window.location.hash === '#tab-apply') {
+    switchTab('apply');
+    setTimeout(() => {
+      document.getElementById('tab-apply').scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  }
+})();
 </script>
 </body>
 </html>
