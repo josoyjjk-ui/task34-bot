@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-03-13 05:44 KST",
+  "updated_at": "2026-03-13 05:49 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 3370,
+  "total_points": 3380,
   "leaderboard": [
     {
       "rank": 1,
@@ -976,6 +976,13 @@
       "rank": 139,
       "username": "bong247",
       "first_name": "보이차 ♾️ 🎮MGG",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 140,
+      "username": "paek00789",
+      "first_name": "🎮MGG 준범 MOM River🌊🟠⚫️.grvt🍏",
       "points": 10,
       "invite_count": 0
     }
