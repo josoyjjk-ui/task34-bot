@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-03-13 03:19 KST",
+  "updated_at": "2026-03-13 03:24 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 2610,
+  "total_points": 2620,
   "leaderboard": [
     {
       "rank": 1,
@@ -780,6 +780,13 @@
       "rank": 111,
       "username": "aerennim",
       "first_name": "𝒜𝑒𝓇𝒾𝓃",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 112,
+      "username": "popomonkor",
+      "first_name": "포포몬",
       "points": 10,
       "invite_count": 0
     }
