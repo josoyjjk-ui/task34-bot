@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-03-13 11:31 KST",
+  "updated_at": "2026-03-13 11:36 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 8480,
+  "total_points": 8490,
   "leaderboard": [
     {
       "rank": 1,
@@ -2355,6 +2355,13 @@
       "rank": 336,
       "username": "apple_coffeeee",
       "first_name": "apple",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 337,
+      "username": "yeast507",
+      "first_name": "옙옙.grvt🍏 🎮MGG",
       "points": 10,
       "invite_count": 0
     }
