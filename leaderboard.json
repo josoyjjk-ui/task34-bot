@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-03-14 07:46 KST",
+  "updated_at": "2026-03-14 07:51 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 23140,
+  "total_points": 23150,
   "leaderboard": [
     {
       "rank": 1,
@@ -5995,6 +5995,13 @@
       "rank": 856,
       "username": "silverplus81",
       "first_name": ".grvt🍏🎮MGG🟢STABLE⛽️ETHGAS Quack AI😄🟠bitgogo50",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 857,
+      "username": "MGB_G",
+      "first_name": "MGB_G",
       "points": 10,
       "invite_count": 0
     }
