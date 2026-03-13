@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-03-14 04:35 KST",
+  "updated_at": "2026-03-14 04:40 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 22920,
+  "total_points": 22950,
   "leaderboard": [
     {
       "rank": 1,
@@ -5939,6 +5939,27 @@
       "rank": 848,
       "username": "miline1944",
       "first_name": "뚱띙이 ETHGas ⛽️ .grvt🍏",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 849,
+      "username": "nhkimmm112",
+      "first_name": "erernallove",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 850,
+      "username": "gustm0207",
+      "first_name": "winter",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 851,
+      "username": "richardkown",
+      "first_name": "kim(0g)",
       "points": 10,
       "invite_count": 0
     }
