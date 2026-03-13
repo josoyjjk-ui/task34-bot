@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-03-13 22:39 KST",
+  "updated_at": "2026-03-13 22:44 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 21040,
+  "total_points": 21050,
   "leaderboard": [
     {
       "rank": 1,
@@ -5477,6 +5477,13 @@
       "rank": 782,
       "username": "soeun9872",
       "first_name": "키아라",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 783,
+      "username": "m8y77",
+      "first_name": "m8y77",
       "points": 10,
       "invite_count": 0
     }
