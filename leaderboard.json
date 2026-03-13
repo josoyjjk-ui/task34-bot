@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-03-13 23:39 KST",
+  "updated_at": "2026-03-13 23:44 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 21480,
+  "total_points": 21500,
   "leaderboard": [
     {
       "rank": 1,
@@ -5589,6 +5589,20 @@
       "rank": 798,
       "username": "m8y77",
       "first_name": "m8y77",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 799,
+      "username": "mrcle777",
+      "first_name": "돈좀요",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 800,
+      "username": "BuldakTang",
+      "first_name": "Buldak",
       "points": 10,
       "invite_count": 0
     }
