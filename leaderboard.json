@@ -1,17 +1,17 @@
 {
-  "updated_at": "2026-03-13 19:03 KST",
+  "updated_at": "2026-03-13 19:08 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 18940,
+  "total_points": 18990,
   "leaderboard": [
     {
       "rank": 1,
       "username": "fireantico",
       "first_name": "불개미",
-      "points": 1070,
-      "invite_count": 106
+      "points": 1080,
+      "invite_count": 107
     },
     {
       "rank": 2,
@@ -204,73 +204,73 @@
     },
     {
       "rank": 29,
+      "username": "cobacknam",
+      "first_name": "cobacknam",
+      "points": 70,
+      "invite_count": 6
+    },
+    {
+      "rank": 30,
       "username": "hihihi111999",
       "first_name": "거북선 l TEAM DAM l WITCH l 🎮MGG",
       "points": 60,
       "invite_count": 5
     },
     {
-      "rank": 30,
+      "rank": 31,
       "username": "donbug7",
       "first_name": "돈벌레",
       "points": 60,
       "invite_count": 4
     },
     {
-      "rank": 31,
+      "rank": 32,
       "username": "Keepgoingthat",
       "first_name": "Keepgoing 🐈‍⬛",
       "points": 60,
       "invite_count": 5
     },
     {
-      "rank": 32,
+      "rank": 33,
       "username": "br21br",
       "first_name": "CUP NOODLE",
       "points": 60,
       "invite_count": 4
     },
     {
-      "rank": 33,
+      "rank": 34,
       "username": "lelepepe_0",
       "first_name": "lele 🎮MGG🟠⚫️ .grvt🍏",
       "points": 60,
       "invite_count": 4
     },
     {
-      "rank": 34,
+      "rank": 35,
       "username": "sdvdvz34",
       "first_name": "34234",
       "points": 60,
       "invite_count": 4
     },
     {
-      "rank": 35,
+      "rank": 36,
       "username": "greoryeony",
       "first_name": "그러려니",
       "points": 60,
       "invite_count": 4
     },
     {
-      "rank": 36,
+      "rank": 37,
       "username": "pangdung0105",
       "first_name": "팡덩 (AIF)",
       "points": 60,
       "invite_count": 4
     },
     {
-      "rank": 37,
+      "rank": 38,
       "username": "iddnow",
       "first_name": "JY.grvt🍀 | 🎮MGG",
       "points": 60,
       "invite_count": 4
-    },
-    {
-      "rank": 38,
-      "username": "cobacknam",
-      "first_name": "cobacknam",
-      "points": 60,
-      "invite_count": 5
     },
     {
       "rank": 39,
@@ -4530,435 +4530,442 @@
     },
     {
       "rank": 647,
+      "username": "sosun3",
+      "first_name": "sosun3",
+      "points": 20,
+      "invite_count": 0
+    },
+    {
+      "rank": 648,
+      "username": "cookie852",
+      "first_name": "jerrybbo 🎮MGG",
+      "points": 20,
+      "invite_count": 0
+    },
+    {
+      "rank": 649,
       "username": "bum2ya",
       "first_name": "Goldman",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 648,
+      "rank": 650,
       "username": "Hustlewtf",
       "first_name": "Arkyuu- need$1B",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 649,
+      "rank": 651,
       "username": "Soeolinyoung",
       "first_name": "🎮MGG Limitless♾[🇰🇷] Quack AI🤖",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 650,
+      "rank": 652,
       "username": "ramgtd",
       "first_name": "람쥐",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 651,
+      "rank": 653,
       "username": "poracy00",
       "first_name": "grvt🍀 ㅋ",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 652,
+      "rank": 654,
       "username": "younge0703",
       "first_name": "Quack AI😄 🎮MGG⛽️ETHGAS koko.grvt🍏",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 653,
+      "rank": 655,
       "username": "KryptoYeager",
       "first_name": "크립토예거",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 654,
+      "rank": 656,
       "username": "anthony_kim_k",
       "first_name": "Anthony",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 655,
+      "rank": 657,
       "username": "Inzulmi",
       "first_name": "쌀먹코인 river🌊",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 656,
+      "rank": 658,
       "username": "tina8470",
       "first_name": "베리 꽁이 Limitless / .grvt🍀🎮MGG",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 657,
+      "rank": 659,
       "username": "K0reanguy",
       "first_name": "Koreanguy",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 658,
+      "rank": 660,
       "username": "aerennim",
       "first_name": "𝒜𝑒𝓇𝒾𝓃",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 659,
+      "rank": 661,
       "username": "Lithos_t3",
       "first_name": "(Lithos)",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 660,
+      "rank": 662,
       "username": "Ian_kim_official",
       "first_name": "이안",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 661,
+      "rank": 663,
       "username": "bluegreenpurp",
       "first_name": "김광준",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 662,
+      "rank": 664,
       "username": "photoazit",
       "first_name": "HUR 🌊",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 663,
+      "rank": 665,
       "username": "NOZY25",
       "first_name": "NOZY",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 664,
+      "rank": 666,
       "username": "changho4064",
       "first_name": "some.grvt🍏",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 665,
+      "rank": 667,
       "username": "Sondhmam",
       "first_name": "쪼끄미두목🎮MGG",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 666,
+      "rank": 668,
       "username": "mooooon10000",
       "first_name": "mandu_nowar",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 667,
+      "rank": 669,
       "username": "umjungil",
       "first_name": "umjungil",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 668,
+      "rank": 670,
       "username": "Dimi6597",
       "first_name": "플레이",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 669,
+      "rank": 671,
       "username": "co0228",
       "first_name": "아미타불",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 670,
+      "rank": 672,
       "username": "bobdoo1",
       "first_name": "bobdoo",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 671,
+      "rank": 673,
       "username": "sumiru6258",
       "first_name": "Lego💖.grvt🍏",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 672,
+      "rank": 674,
       "username": "adele6244",
       "first_name": "🎮MGG ETHGas ⛽️ ♾️ Quack AI",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 673,
+      "rank": 675,
       "username": "jyp0226",
       "first_name": "박",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 674,
+      "rank": 676,
       "username": "zaemi59",
       "first_name": "재미 | KDP",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 675,
+      "rank": 677,
       "username": "jhj498800",
       "first_name": "쩡",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 676,
+      "rank": 678,
       "username": "ethgo99",
       "first_name": "eth",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 677,
+      "rank": 679,
       "username": "hanroro12",
       "first_name": "Hyun",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 678,
+      "rank": 680,
       "username": "ltm0629",
       "first_name": "TAEBO",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 679,
+      "rank": 681,
       "username": "songsworld32",
       "first_name": "지니진 River 🌊",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 680,
+      "rank": 682,
       "username": "misty2318",
       "first_name": "kanegi♾",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 681,
+      "rank": 683,
       "username": "ki6859kile",
       "first_name": "⚡️ Orexn",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 682,
+      "rank": 684,
       "username": "apple_coffeeee",
       "first_name": "apple",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 683,
+      "rank": 685,
       "username": "yong6273",
       "first_name": "️ Juju",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 684,
+      "rank": 686,
       "username": "Zohothat",
       "first_name": "토",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 685,
+      "rank": 687,
       "username": "cryptosensei_co",
       "first_name": "💜Cryptosensei💜",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 686,
+      "rank": 688,
       "username": "muscleinvestor",
       "first_name": "MuscleInvestor 🦍",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 687,
+      "rank": 689,
       "username": "goraniya018",
       "first_name": "라니핑",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 688,
+      "rank": 690,
       "username": "nogiethereum",
       "first_name": "nogie",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 689,
+      "rank": 691,
       "username": "imterry7",
       "first_name": "네오 🇰🇷 ETHGas ⛽️",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 690,
+      "rank": 692,
       "username": "asas938",
       "first_name": "A+",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 691,
+      "rank": 693,
       "username": "mrssense",
       "first_name": "No.007",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 692,
+      "rank": 694,
       "username": "Panzee1",
       "first_name": "팬치",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 693,
+      "rank": 695,
       "username": "corvl22",
       "first_name": "🌊",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 694,
+      "rank": 696,
       "username": "moongchinuna",
       "first_name": "뭉치누나",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 695,
+      "rank": 697,
       "username": "nodot5",
       "first_name": "richyou",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 696,
+      "rank": 698,
       "username": "c_ramtrade",
       "first_name": "NoFOMO",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 697,
+      "rank": 699,
       "username": "mcsvan",
       "first_name": "tavan 🐦SUI",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 698,
+      "rank": 700,
       "username": "naniR0913",
       "first_name": "Nani_ 🎮MGG|Quack AI😄",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 699,
+      "rank": 701,
       "username": "ksjeong1983",
       "first_name": "편경장",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 700,
+      "rank": 702,
       "username": "jmn2823",
       "first_name": "시엘",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 701,
+      "rank": 703,
       "username": "NINANO7979",
       "first_name": "ninano",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 702,
+      "rank": 704,
       "username": "oplk99",
       "first_name": "Blank💜",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 703,
+      "rank": 705,
       "username": "iphone09",
       "first_name": "고흐 💢",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 704,
+      "rank": 706,
       "username": "thankyouuu",
       "first_name": "개화",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 705,
+      "rank": 707,
       "username": "ingudayo",
       "first_name": "LD",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 706,
+      "rank": 708,
       "username": "arise2000",
       "first_name": "James",
       "points": 10,
       "invite_count": 0
     },
     {
-      "rank": 707,
+      "rank": 709,
       "username": "sky7925",
       "first_name": "Earnpark",
-      "points": 10,
-      "invite_count": 0
-    },
-    {
-      "rank": 708,
-      "username": "sosun3",
-      "first_name": "sosun3",
       "points": 10,
       "invite_count": 0
     }
