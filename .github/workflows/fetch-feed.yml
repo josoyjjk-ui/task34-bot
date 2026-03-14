@@ -1,0 +1,45 @@
+name: Fetch Content Feed
+
+on:
+  schedule:
+    # 6시간마다 실행 (UTC 기준: 0, 6, 12, 18시 = KST 9, 15, 21, 3시)
+    - cron: '0 0,6,12,18 * * *'
+  workflow_dispatch:  # 수동 실행 허용
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-feed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run feed fetcher
+        run: |
+          cd ${{ github.workspace }}
+          python scripts/fetch_feed.py
+
+      - name: Check if feed.json changed
+        id: check_changes
+        run: |
+          git diff --quiet feed.json && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push feed.json
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add feed.json
+          git commit -m "chore: auto-update feed.json [$(date -u +%Y-%m-%dT%H:%M:%SZ)]"
+          git push
