@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-03-14 17:54 KST",
+  "updated_at": "2026-03-14 17:59 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 26820,
+  "total_points": 26830,
   "leaderboard": [
     {
       "rank": 1,
@@ -6933,6 +6933,13 @@
       "rank": 990,
       "username": "windbell7678",
       "first_name": "windbell7678",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 991,
+      "username": "fjrzl1004",
+      "first_name": "갈비찜",
       "points": 10,
       "invite_count": 0
     }
