@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-03-14 16:59 KST",
+  "updated_at": "2026-03-14 17:04 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 26670,
+  "total_points": 26680,
   "leaderboard": [
     {
       "rank": 1,
@@ -6884,6 +6884,13 @@
       "rank": 983,
       "username": "coinboy717",
       "first_name": "COINBOY",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 984,
+      "username": "KimYoungTAek",
+      "first_name": "KimYoungTaek",
       "points": 10,
       "invite_count": 0
     }
