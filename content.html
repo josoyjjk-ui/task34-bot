@@ -275,6 +275,37 @@
     text-align: right; margin-bottom: 10px;
   }
 
+  /* INSIGHT */
+  .insight {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .insight:hover {
+    border-color: var(--border-hover);
+    background: var(--surface-hover);
+  }
+  .insight-icon {
+    width: 36px; height: 36px; min-width: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    background: var(--glow-red);
+  }
+  .insight-body { flex: 1; min-width: 0; }
+  .insight-title {
+    font-size: 0.88rem; font-weight: 700;
+    color: var(--text);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .insight-date { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+  .insight-arrow { color: var(--text-muted); font-size: 0.9rem; }
+
   /* SOCIAL */
   .social-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
@@ -337,6 +368,37 @@
   <div class="hero">
     <h1>📡 콘텐츠 & 채널</h1>
     <p class="tagline">불개미의 최신 콘텐츠와 채널 모음</p>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="section" id="insights">
+    <div class="section-head">
+      <h2>💡 불개미 시장 인사이트 아티클</h2>
+    </div>
+    <a href="https://t.me/fireantcrypto/40112" target="_blank" class="insight">
+      <div class="insight-icon">🤔</div>
+      <div class="insight-body">
+        <div class="insight-title">지금 시점에 투자할만한 자산, 크립토밖에 안 보이는건 나뿐인가?</div>
+        <div class="insight-date">2026.03.10</div>
+      </div>
+      <span class="insight-arrow">→</span>
+    </a>
+    <a href="https://t.me/fireantcrypto/39918" target="_blank" class="insight">
+      <div class="insight-icon">📌</div>
+      <div class="insight-body">
+        <div class="insight-title">FIRE-ANTERVIEW with 조셉 루빈 (이더리움, Consensys and 메타마스크 창업자)</div>
+        <div class="insight-date">2026.02.26</div>
+      </div>
+      <span class="insight-arrow">→</span>
+    </a>
+    <a href="https://t.me/fireantcrypto/39785" target="_blank" class="insight">
+      <div class="insight-icon">🔥</div>
+      <div class="insight-body">
+        <div class="insight-title">크립토 시총 5,700조 vs 코스피+코스닥 2,700조 — 한국이 놓친 기회</div>
+        <div class="insight-date">2026.02.22</div>
+      </div>
+      <span class="insight-arrow">→</span>
+    </a>
   </div>
 
   <!-- FEED: 최신 콘텐츠 -->
