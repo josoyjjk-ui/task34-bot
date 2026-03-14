@@ -2,8 +2,8 @@ name: Fetch Content Feed
 
 on:
   schedule:
-    # 6시간마다 실행 (UTC 기준: 0, 6, 12, 18시 = KST 9, 15, 21, 3시)
-    - cron: '0 0,6,12,18 * * *'
+    # 30분마다 실행
+    - cron: '*/30 * * * *'
   workflow_dispatch:  # 수동 실행 허용
 
 permissions:
