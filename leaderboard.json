@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-03-14 16:54 KST",
+  "updated_at": "2026-03-14 16:59 KST",
   "period": {
     "start": "2026-03-13",
     "end": "2026-03-22"
   },
-  "total_points": 26650,
+  "total_points": 26670,
   "leaderboard": [
     {
       "rank": 1,
@@ -6870,6 +6870,20 @@
       "rank": 981,
       "username": "elikagang",
       "first_name": "수이이이잉 .grvt🍏 🛰SPACE",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 982,
+      "username": "teddy9444",
+      "first_name": "teddy🇰🇷.grvt🍏",
+      "points": 10,
+      "invite_count": 0
+    },
+    {
+      "rank": 983,
+      "username": "coinboy717",
+      "first_name": "COINBOY",
       "points": 10,
       "invite_count": 0
     }
