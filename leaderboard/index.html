@@ -330,9 +330,27 @@
     <div id="eventTitleWrap" style="margin-top:10px; padding:8px 18px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; font-size:0.88rem; color:var(--text); font-weight:600; min-width:220px; text-align:center;">
       진행중인 이벤트: <span id="eventTitleText" style="color:var(--orange);">Billions 한국 커뮤니티 친구초대 이벤트</span>
     </div>
-    <a href="https://t.me/Billions_Korea/61" target="_blank" style="margin-top:10px; display:inline-block; padding:8px 20px; background:rgba(255,107,53,0.12); border:1px solid rgba(255,107,53,0.35); border-radius:8px; font-size:0.84rem; font-weight:600; color:var(--orange); text-decoration:none;">
-      🔥 이벤트 참여하기 →
-    </a>
+    <div style="margin-top:10px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+      <a href="https://t.me/Billions_Korea/61" target="_blank" style="display:inline-block; padding:8px 20px; background:rgba(255,107,53,0.12); border:1px solid rgba(255,107,53,0.35); border-radius:8px; font-size:0.84rem; font-weight:600; color:var(--orange); text-decoration:none;">
+        🔥 이벤트 참여하기 →
+      </a>
+      <button onclick="openPointLookup()" style="padding:8px 20px; background:rgba(91,141,239,0.12); border:1px solid rgba(91,141,239,0.35); border-radius:8px; font-size:0.84rem; font-weight:600; color:#5B8DEF; cursor:pointer; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
+        🔍 내 포인트 조회하기
+      </button>
+    </div>
+
+    <!-- 포인트 조회 모달 -->
+    <div id="pointModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:999; align-items:center; justify-content:center;">
+      <div style="background:#12121e; border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:28px 24px; width:90%; max-width:360px; text-align:center; position:relative;">
+        <button onclick="closePointLookup()" style="position:absolute; top:12px; right:16px; background:none; border:none; color:var(--text-dim); font-size:1.2rem; cursor:pointer;">✕</button>
+        <div style="font-size:1rem; font-weight:700; margin-bottom:16px; color:var(--text);">🔍 내 포인트 조회</div>
+        <input id="usernameInput" type="text" placeholder="텔레그램 아이디 입력 (@ 제외)" 
+          style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.06); color:var(--text); font-size:0.9rem; box-sizing:border-box; outline:none;"
+          onkeydown="if(event.key==='Enter')lookupPoint()">
+        <button onclick="lookupPoint()" style="margin-top:10px; width:100%; padding:10px; background:rgba(91,141,239,0.2); border:1px solid rgba(91,141,239,0.4); border-radius:8px; color:#5B8DEF; font-weight:700; font-size:0.9rem; cursor:pointer;">조회하기</button>
+        <div id="pointResult" style="margin-top:16px; min-height:48px;"></div>
+      </div>
+    </div>
 
     <!-- 포인트 리워드 계산기 -->
     <div id="rewardCalc" style="margin-top:14px; padding:12px 20px; background:rgba(255,215,64,0.06); border:1px solid rgba(255,215,64,0.2); border-radius:10px; text-align:center; min-width:260px;">
@@ -534,6 +552,54 @@ loadData();
 
 // 5분마다 자동 fetch 갱신 (서버 데이터는 1시간, 페이지 자체는 5분마다 체크)
 setInterval(loadData, 5 * 60 * 1000);
+
+function openPointLookup() {
+  document.getElementById('pointModal').style.display = 'flex';
+  document.getElementById('usernameInput').value = '';
+  document.getElementById('pointResult').innerHTML = '';
+  setTimeout(() => document.getElementById('usernameInput').focus(), 100);
+}
+
+function closePointLookup() {
+  document.getElementById('pointModal').style.display = 'none';
+}
+
+function lookupPoint() {
+  const input = document.getElementById('usernameInput').value.trim().replace(/^@/, '').toLowerCase();
+  const resultEl = document.getElementById('pointResult');
+  if (!input) {
+    resultEl.innerHTML = '<div style="color:#ff6b6b;font-size:0.85rem;">아이디를 입력해주세요.</div>';
+    return;
+  }
+  resultEl.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem;">조회 중...</div>';
+
+  fetch('leaderboard.json?_=' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      const list = data.leaderboard || [];
+      const user = list.find(u => (u.username || '').toLowerCase() === input);
+      if (!user) {
+        resultEl.innerHTML = `<div style="color:#ff6b6b;font-size:0.85rem;">@${input} 유저를 찾을 수 없습니다.<br><span style="font-size:0.75rem;color:var(--text-muted)">봇에서 /start를 먼저 눌러주세요.</span></div>`;
+        return;
+      }
+      const rank = list.findIndex(u => (u.username || '').toLowerCase() === input) + 1;
+      const name = user.first_name || user.username || '?';
+      resultEl.innerHTML = `
+        <div style="background:rgba(91,141,239,0.08);border:1px solid rgba(91,141,239,0.2);border-radius:10px;padding:14px;">
+          <div style="font-size:0.8rem;color:var(--text-dim);margin-bottom:4px;">@${user.username || input}</div>
+          <div style="font-size:1.5rem;font-weight:900;color:#5B8DEF;">${user.points}<span style="font-size:0.9rem;font-weight:400;color:var(--text-dim);margin-left:4px;">점</span></div>
+          <div style="margin-top:6px;font-size:0.8rem;color:var(--text-dim);">현재 순위 <span style="color:var(--gold);font-weight:700;">${rank}위</span> / ${list.length}명</div>
+        </div>`;
+    })
+    .catch(() => {
+      resultEl.innerHTML = '<div style="color:#ff6b6b;font-size:0.85rem;">데이터를 불러올 수 없습니다.</div>';
+    });
+}
+
+// 모달 바깥 클릭 시 닫기
+document.getElementById('pointModal').addEventListener('click', function(e) {
+  if (e.target === this) closePointLookup();
+});
 </script>
 </body>
 </html>
