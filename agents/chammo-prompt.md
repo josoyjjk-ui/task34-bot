@@ -96,6 +96,17 @@ doc.components.map(c => ({
 }))
 ```
 
+### ⚡ 검증된 스크립트 (최우선 사용)
+블로그 삭제+재발행은 아래 스크립트를 직접 실행:
+```bash
+pkill -f "Google Chrome" 2>/dev/null; sleep 2
+rm -f "/Users/fireant/.openclaw/browser/openclaw/user-data/SingletonLock" 2>/dev/null
+# 스크립트 상단 LOG_NO_DELETE, IMAGE_PATH, POST_TITLE, POST_TEXT 수정 후:
+python3 /Users/fireant/.openclaw/workspace/scripts/naver-blog/publish.py
+```
+- 캡차 발생 시: 해병님 직접 로그인 요청 후 재실행
+- Chrome SingletonLock 충돌 시: pkill + rm SingletonLock 후 재실행
+
 ### 글 삭제 절차
 ```
 1. 포스트 뷰 페이지로 이동 (blog.naver.com/fireant_korea/logNo)
