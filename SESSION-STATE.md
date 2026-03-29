@@ -9,6 +9,11 @@
 
 ## ACTIVE
 
+### [완료] 2026-03-29 일일시황 블로그
+- logNo: 224233588152
+- URL: https://blog.naver.com/fireant_korea/224233588152
+- 이미지+텍스트 정상 발행 (Playwright BASE64 업로드 방식)
+
 ### [진행중] Eigen Cloud 친구초대 이벤트
 - 기간: 2026-03-21 ~ 2026-04-03
 - 구글시트: `1prtoKycManbOj-HoMnzZ68kl6VEEm3h5vvvTUzK6QHs`
