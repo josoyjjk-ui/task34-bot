@@ -156,6 +156,121 @@ def _supabase_headers() -> dict:
     }
 
 
+def _dashboard_headers() -> dict:
+    return {
+        **_supabase_headers(),
+        "Prefer": "return=representation",
+    }
+
+
+def _is_dashboard_thread(update: Update) -> bool:
+    return (
+        update.effective_chat is not None
+        and update.effective_chat.id == MAIN_CHAT_ID
+        and update.message is not None
+        and update.message.message_thread_id == TODO_THREAD_ID
+    )
+
+
+def dashboard_find_client_by_keyword(keyword: str) -> Optional[dict]:
+    q = keyword.strip()
+    if not q:
+        return None
+    try:
+        resp = requests.get(
+            f"{SUPABASE_URL}/rest/v1/clients",
+            headers=_dashboard_headers(),
+            params={
+                "select": "id,client",
+                "client": f"ilike.*{q}*",
+                "order": "id.asc",
+                "limit": "1",
+            },
+            timeout=15,
+        )
+        if not resp.ok:
+            logger.warning("Supabase client lookup failed: %s %s", resp.status_code, resp.text)
+            return None
+        rows = resp.json()
+        return rows[0] if rows else None
+    except Exception as e:
+        logger.warning("Supabase client lookup exception: %s", e)
+        return None
+
+
+def dashboard_update_project(client_id: int, next_action: str, notes: str) -> bool:
+    try:
+        resp = requests.patch(
+            f"{SUPABASE_URL}/rest/v1/clients?id=eq.{client_id}",
+            headers=_dashboard_headers(),
+            data=json.dumps({"next_action": next_action, "notes": notes}, ensure_ascii=False),
+            timeout=15,
+        )
+        if not resp.ok:
+            logger.warning("Supabase project update failed: %s %s", resp.status_code, resp.text)
+            return False
+        return True
+    except Exception as e:
+        logger.warning("Supabase project update exception: %s", e)
+        return False
+
+
+def dashboard_upsert_deal(client_name: str, category: str) -> bool:
+    try:
+        resp = requests.post(
+            f"{SUPABASE_URL}/rest/v1/clients?on_conflict=client",
+            headers={**_dashboard_headers(), "Prefer": "resolution=merge-duplicates,return=representation"},
+            data=json.dumps({"client": client_name, "category": category}, ensure_ascii=False),
+            timeout=15,
+        )
+        if not resp.ok:
+            logger.warning("Supabase deal upsert failed: %s %s", resp.status_code, resp.text)
+            return False
+        return True
+    except Exception as e:
+        logger.warning("Supabase deal upsert exception: %s", e)
+        return False
+
+
+def dashboard_update_deal_category(client_id: int, category: str) -> bool:
+    try:
+        resp = requests.patch(
+            f"{SUPABASE_URL}/rest/v1/clients?id=eq.{client_id}",
+            headers=_dashboard_headers(),
+            data=json.dumps({"category": category}, ensure_ascii=False),
+            timeout=15,
+        )
+        if not resp.ok:
+            logger.warning("Supabase deal category update failed: %s %s", resp.status_code, resp.text)
+            return False
+        return True
+    except Exception as e:
+        logger.warning("Supabase deal category update exception: %s", e)
+        return False
+
+
+def dashboard_list_by_category(category: str) -> List[str]:
+    try:
+        resp = requests.get(
+            f"{SUPABASE_URL}/rest/v1/clients",
+            headers=_dashboard_headers(),
+            params={
+                "select": "client",
+                "category": f"eq.{category}",
+                "order": "client.asc",
+            },
+            timeout=15,
+        )
+        if not resp.ok:
+            logger.warning("Supabase list by category failed: %s %s", resp.status_code, resp.text)
+            return []
+        rows = resp.json()
+        return [r.get("client") for r in rows if r.get("client")]
+    except Exception as e:
+        logger.warning("Supabase list by category exception: %s", e)
+        return []
+
+
 def upsert_to_supabase(task_row: dict) -> None:
     """SQLite todos -> Supabase tasks 동기화 (add 시 INSERT)."""
     payload = {
@@ -929,6 +1044,100 @@ async def cmd_due(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await refresh_live_todo(context.bot, update.effective_chat.id)
 
 
+async def cmd_proj(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not _is_dashboard_thread(update):
+        return
+    if len(context.args) < 3:
+        await reply_and_delete(update, "사용법: /proj 프로젝트명 기준일 서비스명")
+        return
+
+    keyword = context.args[0].strip()
+    base_date = context.args[1].strip()
+    service_name = " ".join(context.args[2:]).strip()
+
+    row = dashboard_find_client_by_keyword(keyword)
+    if not row:
+        await reply_and_delete(update, f"❌ 프로젝트 없음: {keyword}")
+        return
+
+    client_id = row.get("id")
+    client_name = row.get("client") or keyword
+    if client_id is None or not dashboard_update_project(int(client_id), base_date, service_name):
+        await reply_and_delete(update, "❌ 업데이트 실패: 잠시 후 다시 시도해 주세요")
+        return
+
+    await reply_and_delete(update, f"✅ {client_name} 업데이트: 기준일={base_date}, 서비스={service_name}")
+
+
+async def cmd_deal(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not _is_dashboard_thread(update):
+        return
+    if len(context.args) < 1:
+        await reply_and_delete(update, "사용법: /deal 딜명 [on|off|done]")
+        return
+
+    deal_name = context.args[0].strip()
+    state = (context.args[1].strip().lower() if len(context.args) >= 2 else "on")
+
+    if state not in {"on", "off", "done"}:
+        await reply_and_delete(update, "상태는 on/off/done 중 하나여야 합니다")
+        return
+
+    if state == "on":
+        ok = dashboard_upsert_deal(deal_name, "논의중")
+        if ok:
+            await reply_and_delete(update, f"✅ {deal_name} 논의중 추가")
+        else:
+            await reply_and_delete(update, "❌ 딜 추가 실패: 잠시 후 다시 시도해 주세요")
+        return
+
+    row = dashboard_find_client_by_keyword(deal_name)
+    if not row:
+        await reply_and_delete(update, f"❌ 프로젝트 없음: {deal_name}")
+        return
+
+    client_id = row.get("id")
+    client_name = row.get("client") or deal_name
+    category = "종료" if state == "off" else "진행중"
+    ok = client_id is not None and dashboard_update_deal_category(int(client_id), category)
+    if not ok:
+        await reply_and_delete(update, "❌ 상태 변경 실패: 잠시 후 다시 시도해 주세요")
+        return
+
+    if state == "off":
+        await reply_and_delete(update, f"✅ {client_name} 종료 처리")
+    else:
+        await reply_and_delete(update, f"✅ {client_name} 계약 성사 — 진행중으로 이동")
+
+
+async def cmd_projlist(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not _is_dashboard_thread(update):
+        return
+
+    clients = dashboard_list_by_category("진행중")
+    if not clients:
+        await reply_and_delete(update, "📌 진행중 프로젝트 없음")
+        return
+
+    lines = ["📌 진행중 프로젝트", ""]
+    lines.extend([f"- {name}" for name in clients])
+    await reply_and_delete(update, "\n".join(lines))
+
+
+async def cmd_deallist(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not _is_dashboard_thread(update):
+        return
+
+    clients = dashboard_list_by_category("논의중")
+    if not clients:
+        await reply_and_delete(update, "🗂 논의중 딜 없음")
+        return
+
+    lines = ["🗂 논의중 딜", ""]
+    lines.extend([f"- {name}" for name in clients])
+    await reply_and_delete(update, "\n".join(lines))
+
+
 async def cmd_stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_chat.id == MAIN_CHAT_ID and update.message.message_thread_id != TODO_THREAD_ID:
         return
@@ -1112,6 +1321,10 @@ async def async_main() -> None:
     app.add_handler(CommandHandler("stats", cmd_stats))
     app.add_handler(CommandHandler("report", cmd_report))
     app.add_handler(CommandHandler("remind", cmd_remind))
+    app.add_handler(CommandHandler("proj", cmd_proj))
+    app.add_handler(CommandHandler("deal", cmd_deal))
+    app.add_handler(CommandHandler("projlist", cmd_projlist))
+    app.add_handler(CommandHandler("deallist", cmd_deallist))
 
     logger.info("Task34 bot starting...")
     async with app:
