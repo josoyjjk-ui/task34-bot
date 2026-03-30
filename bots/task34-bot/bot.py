@@ -271,6 +271,27 @@ def dashboard_list_by_category(category: str) -> List[str]:
         return []
 
 
+
+def dashboard_list_projects_full(category: str) -> List[dict]:
+    """카테고리별 프로젝트 전체 정보(client, next_action, notes) 반환."""
+    try:
+        resp = requests.get(
+            f"{SUPABASE_URL}/rest/v1/clients",
+            headers=_dashboard_headers(),
+            params={
+                "select": "client,next_action,notes",
+                "category": f"eq.{category}",
+                "order": "client.asc",
+            },
+            timeout=15,
+        )
+        if not resp.ok:
+            return []
+        return resp.json()
+    except Exception as e:
+        logger.warning("dashboard_list_projects_full exception: %s", e)
+        return []
+
 def upsert_to_supabase(task_row: dict) -> None:
     """SQLite todos -> Supabase tasks 동기화 (add 시 INSERT)."""
     payload = {
@@ -721,21 +742,51 @@ def get_todo_summary_for_group(chat_id: int, now: datetime) -> Dict[str, List[sq
 
 
 def render_group_todo_reminder(chat_id: int, now: datetime) -> Optional[str]:
-    buckets = get_todo_summary_for_group(chat_id, now)
-    if not buckets:
-        return None
+    lines = []
 
-    lines = [f"📋 미완료 업무 현황 ({now.strftime('%m/%d %H:%M')} 기준)", ""]
-    for user, rows in buckets.items():
-        lines.append(user)
-        for num, row in enumerate(rows, start=1):
-            badge = due_badge(row["due_date"], now)
-            if badge:
-                lines.append(f"  {num}. {row['task']} {badge}")
-            else:
-                lines.append(f"  {num}. {row['task']}")
-        lines.append("  ↳ /done N · /del N · /due N 날짜")
-        lines.append("")
+    # ── 1. 협업 프로젝트 현황 ──
+    projects = dashboard_list_projects_full("진행중")
+    lines.append(f"📌 협업 프로젝트 현황 ({now.strftime('%m/%d')} 기준)")
+    lines.append("─────────────────────────")
+    if projects:
+        for p in projects:
+            name = p.get("client") or "-"
+            base = p.get("next_action") or "-"
+            svc  = p.get("notes") or "-"
+            lines.append(f"• {name}")
+            lines.append(f"  기준일: {base}  |  서비스: {svc}")
+    else:
+        lines.append("  진행중 프로젝트 없음")
+    lines.append("")
+
+    # ── 2. 논의중 딜 현황 ──
+    deals = dashboard_list_by_category("논의중")
+    lines.append(f"🤝 논의중인 딜 현황")
+    lines.append("─────────────────────────")
+    if deals:
+        for d in deals:
+            lines.append(f"• {d}")
+    else:
+        lines.append("  논의중 딜 없음")
+    lines.append("")
+
+    # ── 3. 미완료 업무 현황 ──
+    buckets = get_todo_summary_for_group(chat_id, now)
+    lines.append(f"📋 미완료 업무 현황 ({now.strftime('%m/%d %H:%M')} 기준)")
+    lines.append("─────────────────────────")
+    if buckets:
+        for user, rows in buckets.items():
+            lines.append(user)
+            for num, row in enumerate(rows, start=1):
+                badge = due_badge(row["due_date"], now)
+                if badge:
+                    lines.append(f"  {num}. {row['task']} {badge}")
+                else:
+                    lines.append(f"  {num}. {row['task']}")
+            lines.append("  ↳ /done N · /del N · /due N 날짜")
+            lines.append("")
+    else:
+        lines.append("  ✅ 미완료 업무 없음")
 
     return "\n".join(lines).strip()
 
