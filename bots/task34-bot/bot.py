@@ -357,6 +357,24 @@ def mark_done_in_supabase(task_row: dict) -> None:
         logger.warning("Supabase update(done) exception: %s", e)
 
 
+def delete_from_supabase(task_text: str, assignee: str) -> None:
+    """/del 시 Supabase tasks에서 동일 task+assignee 삭제."""
+    if not task_text:
+        return
+    try:
+        q_task = requests.utils.quote(task_text, safe='')
+        q_assignee = requests.utils.quote(assignee or '', safe='')
+        resp = requests.delete(
+            f"{SUPABASE_URL}/rest/v1/tasks?task=eq.{q_task}&assignee=eq.{q_assignee}",
+            headers=_supabase_headers(),
+            timeout=15,
+        )
+        if not resp.ok:
+            logger.warning("Supabase delete(del) failed: %s %s", resp.status_code, resp.text)
+    except Exception as e:
+        logger.warning("Supabase delete(del) exception: %s", e)
+
+
 def refresh_google_access_token(token_data: dict) -> dict:
     payload = {
         "client_id": token_data["client_id"],
@@ -1038,6 +1056,11 @@ async def cmd_del(update: Update, context: ContextTypes.DEFAULT_TYPE):
     finally:
         conn.close()
 
+    delete_from_supabase(
+        target["task"],
+        target["username"] if "username" in target.keys() else "",
+    )
+
     await reply_and_delete(update, f"🗑 삭제됨: {target['task']}")
     await refresh_live_todo(context.bot, update.effective_chat.id)
 
@@ -1367,6 +1390,7 @@ async def async_main() -> None:
     app.add_handler(CommandHandler("list", cmd_list))
     app.add_handler(CommandHandler("done", cmd_done))
     app.add_handler(CommandHandler("del", cmd_del))
+    app.add_handler(CommandHandler("delete", cmd_del))
     app.add_handler(CommandHandler("due", cmd_due))
     app.add_handler(CommandHandler("stats", cmd_stats))
     app.add_handler(CommandHandler("report", cmd_report))
