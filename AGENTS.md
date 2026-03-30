@@ -193,7 +193,7 @@ sessions_spawn(agentId: "inspector", task: "...", mode: "run")
 | **네이버 블로그 발행/수정/삭제** | **참모** | 예외 없음. naver-blog 스킬 참조 |
 | 대시보드/코드 수정 (>20줄) | **공병** | `agentId: "ops"` |
 | HTML/CSS 수정 (어떤 크기든) | **공병** | 직접 수정 금지, 예외 없음 |
-| 구글 API 작업 (폼/슬라이드/드라이브) | **공병** | |
+| 구글 API 작업 (폼/슬라이드/드라이브/닥스/시트/Gmail) | **딸수 직접 (Gemini CLI)** | `gemini` 스킬 사용, 공병 금지 |
 | 봇 개발/유지보수 | **공병** | |
 | 영상편집/이미지 생성 | **공병** | |
 | 크론잡/시스템 점검 | **공병** | |
@@ -214,6 +214,7 @@ sessions_spawn(agentId: "ops", task: "...", mode: "run")     // 공병
 **위임 임계값**: 도구 호출 3회 이상 예상되면 spawn. 결과는 요약으로 수신.
 **HTML/CSS는 무조건 공병**: 줄 수 관계없이 대시보드 HTML/CSS 수정은 항상 공병 위임. 딸수가 직접 하면 규칙 위반.
 **네이버 블로그는 무조건 참모**: 발행/수정/삭제/관리 모두. 딸수가 직접 하면 규칙 위반.
+**Google Workspace는 무조건 Gemini**: Google Docs/Forms/Sheets/Slides/Gmail 작업은 딸수가 Gemini CLI로 직접 처리. 공병에 위임 금지.
 
 ---
 
