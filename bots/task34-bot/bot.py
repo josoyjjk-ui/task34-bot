@@ -764,8 +764,7 @@ def render_group_todo_reminder(chat_id: int, now: datetime) -> Optional[str]:
     lines.append(f"🤝 논의중인 딜 현황")
     lines.append("─────────────────────────")
     if deals:
-        for d in deals:
-            lines.append(f"• {d}")
+        lines.append(" / ".join(deals))
     else:
         lines.append("  논의중 딜 없음")
     lines.append("")
