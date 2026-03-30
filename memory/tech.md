@@ -41,3 +41,9 @@
 - 참모 (chammo): `anthropic/claude-sonnet-4-6`
 - 공병 (ops): `openai-codex/gpt-5.3-codex`
 - 실제 테스트로 확인 완료
+
+## Google 이미지 생성 키 교체 시 주의사항 (2026-03-30)
+- auth-profiles.json 키 교체 후 게이트웨이 SIGUSR1 재시작으로는 런타임 캐시 미갱신
+- image_generate 툴이 구 키를 계속 사용 → "API key expired" 반복 오류
+- **해결**: 키 교체 후 반드시 cold restart (stop → start) 또는 API 직접 호출로 우회
+- Google API 직접 호출: `gemini-3.1-flash-image-preview:generateContent` + `responseModalities: ["IMAGE","TEXT"]`
