@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import asyncio
+import os
 import pytz
 import json
 import logging
@@ -32,6 +33,9 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
 logger = logging.getLogger("task34bot")
+
+SUPABASE_URL = "https://npdzxtnzjkdzwbpphduf.supabase.co"
+SUPABASE_KEY = "sb_publishable_-TVlChpvyWRZEweQ8wHe2g_WxQD5nql"
 
 PROJECT_KEYWORD_MAP = [
     ("eigen", "#EigenCloud"),
@@ -142,6 +146,79 @@ def init_db() -> None:
 
 def db_connect():
     return sqlite3.connect(DB_PATH)
+
+
+def _supabase_headers() -> dict:
+    return {
+        "Authorization": f"Bearer {SUPABASE_KEY}",
+        "apikey": SUPABASE_KEY,
+        "Content-Type": "application/json",
+    }
+
+
+def upsert_to_supabase(task_row: dict) -> None:
+    """SQLite todos -> Supabase tasks 동기화 (add 시 INSERT)."""
+    payload = {
+        "task": task_row.get("task"),
+        "assignee": task_row.get("assignee"),
+        "status": "Done" if task_row.get("done") else "To-Do",
+        "due_date": task_row.get("due_date"),
+    }
+    try:
+        resp = requests.post(
+            f"{SUPABASE_URL}/rest/v1/tasks",
+            headers={**_supabase_headers(), "Prefer": "return=representation"},
+            data=json.dumps(payload, ensure_ascii=False),
+            timeout=15,
+        )
+        if not resp.ok:
+            logger.warning("Supabase upsert(add) failed: %s %s", resp.status_code, resp.text)
+    except Exception as e:
+        logger.warning("Supabase upsert(add) exception: %s", e)
+
+
+def mark_done_in_supabase(task_row: dict) -> None:
+    """/done 시 Supabase tasks status='Done' 반영."""
+    task_text = task_row.get("task")
+    assignee = task_row.get("assignee")
+    due_date = task_row.get("due_date")
+    if not task_text:
+        return
+
+    try:
+        query = (
+            f"task=eq.{requests.utils.quote(task_text, safe='')}&"
+            f"assignee=eq.{requests.utils.quote(assignee or '', safe='')}&"
+            f"order=created_at.desc&limit=1"
+        )
+        resp = requests.get(
+            f"{SUPABASE_URL}/rest/v1/tasks?select=id,status&{query}",
+            headers=_supabase_headers(),
+            timeout=15,
+        )
+        if not resp.ok:
+            logger.warning("Supabase lookup(done) failed: %s %s", resp.status_code, resp.text)
+            return
+        rows = resp.json()
+        if not rows:
+            upsert_to_supabase(
+                {"task": task_text, "assignee": assignee, "due_date": due_date, "done": 1}
+            )
+            return
+
+        target_id = rows[0].get("id")
+        if target_id is None:
+            return
+        patch = requests.patch(
+            f"{SUPABASE_URL}/rest/v1/tasks?id=eq.{target_id}",
+            headers=_supabase_headers(),
+            data=json.dumps({"status": "Done"}, ensure_ascii=False),
+            timeout=15,
+        )
+        if not patch.ok:
+            logger.warning("Supabase update(done) failed: %s %s", patch.status_code, patch.text)
+    except Exception as e:
+        logger.warning("Supabase update(done) exception: %s", e)
 
 
 def refresh_google_access_token(token_data: dict) -> dict:
@@ -701,9 +778,20 @@ async def cmd_add(update: Update, context: ContextTypes.DEFAULT_TYPE):
             """,
             (chat.id, user.id, username, task, due, now.isoformat(), project),
         )
+        todo_id = cur.lastrowid
         conn.commit()
     finally:
         conn.close()
+
+    upsert_to_supabase(
+        {
+            "id": todo_id,
+            "task": task,
+            "assignee": username,
+            "due_date": due,
+            "done": 0,
+        }
+    )
 
     if due:
         await reply_and_delete(update, f"✅ 등록됨: {task} (마감 {datetime.strptime(due, '%Y-%m-%d').strftime('%m/%d')})")
@@ -745,6 +833,14 @@ async def cmd_done(update: Update, context: ContextTypes.DEFAULT_TYPE):
         conn.commit()
     finally:
         conn.close()
+
+    mark_done_in_supabase(
+        {
+            "task": target["task"],
+            "assignee": target["username"],
+            "due_date": target["due_date"],
+        }
+    )
 
     await reply_and_delete(update, f"✅ 완료 처리: {target['task']}")
     await refresh_live_todo(context.bot, update.effective_chat.id)
