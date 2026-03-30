@@ -38,16 +38,79 @@ if period:
 else:
     print("⚠️ event_period 없음 — 기간 체크 스킵, 계속 진행.")
 
-# ── 리더보드 쿼리 ─────────────────────────────────────────────
-rows = con.execute("""
-    SELECT ROW_NUMBER() OVER (ORDER BY points DESC, registered_at ASC) as rank,
-           username, first_name, points,
-           (SELECT COUNT(*) FROM users u2 WHERE u2.referrer_id = u1.user_id) as invite_count
-    FROM users u1
-    WHERE points > 0
-    ORDER BY points DESC
-""").fetchall()
+# ── 백업 시트에서 Eigen 이벤트 실제 참여자 전체 로드 ──────────
+sheet_entries = []  # (user_id, username, first_name, points, registered_at)
+try:
+    from google.oauth2.credentials import Credentials
+    from google.auth.transport.requests import Request
+    from googleapiclient.discovery import build as gbuild
+    GSHEETS_TOKEN    = '/Users/fireant/.openclaw/workspace/secrets/google-token.json'
+    GSHEETS_SHEET_ID = '1prtoKycManbOj-HoMnzZ68kl6VEEm3h5vvvTUzK6QHs'
+    GSHEETS_SCOPES   = ['https://www.googleapis.com/auth/spreadsheets']
+    gcreds = Credentials.from_authorized_user_file(GSHEETS_TOKEN, GSHEETS_SCOPES)
+    if gcreds.expired and gcreds.refresh_token:
+        gcreds.refresh(Request())
+    gsvc = gbuild('sheets', 'v4', credentials=gcreds)
+    gresult = gsvc.spreadsheets().values().get(
+        spreadsheetId=GSHEETS_SHEET_ID, range='Sheet1!A:J'
+    ).execute()
+    seen = set()
+    for r in gresult.get('values', [])[1:]:  # 헤더 제외
+        if len(r) < 2:
+            continue
+        try:
+            uid = int(r[1])
+        except Exception:
+            continue
+        if uid in seen:
+            continue  # 중복 제거 (포인트 높은 첫 행 우선)
+        seen.add(uid)
+        tg_handle = r[2].lstrip('@') if len(r) > 2 else ''
+        fname = r[3] if len(r) > 3 else ''
+        pts = int(r[8]) if len(r) > 8 and r[8] else 0
+        submitted_at = r[0] if r else ''
+        sheet_entries.append({
+            'user_id': uid,
+            'username': tg_handle,
+            'first_name': fname,
+            'points': pts,
+            'submitted_at': submitted_at,
+        })
+    print(f"📋 시트 참여 확인자: {len(sheet_entries)}명 (중복 제거)")
+except Exception as e:
+    print(f"⚠️ 시트 로드 실패: {e} — DB 기준으로 대체")
+
+# ── DB invite_count 계산 ──────────────────────────────────────
+db_invite = {r['referrer_id']: r['cnt'] for r in con.execute(
+    "SELECT referrer_id, COUNT(*) as cnt FROM users WHERE referrer_id IS NOT NULL GROUP BY referrer_id"
+).fetchall()}
 con.close()
+
+# ── 리더보드 생성 ─────────────────────────────────────────────
+if sheet_entries:
+    # 포인트 내림차순 정렬 → 랭크 부여
+    sheet_entries.sort(key=lambda x: (-x['points'], x['submitted_at']))
+    rows = []
+    for i, e in enumerate(sheet_entries):
+        rows.append({
+            'rank': i + 1,
+            'username': e['username'],
+            'first_name': e['first_name'],
+            'points': e['points'],
+            'invite_count': max(0, (e['points'] - 10) // 10),
+        })
+else:
+    # fallback: DB 전체
+    event_start = period["start_date"] if period else "1970-01-01"
+    db_rows = con.execute("""
+        SELECT ROW_NUMBER() OVER (ORDER BY points DESC, registered_at ASC) as rank,
+               username, first_name, points,
+               (SELECT COUNT(*) FROM users u2 WHERE u2.referrer_id = u1.user_id) as invite_count
+        FROM users u1
+        WHERE points > 0 AND registered_at >= ?
+        ORDER BY points DESC
+    """, (event_start,)).fetchall()
+    rows = [dict(r) for r in db_rows]
 
 total_points = sum(r["points"] for r in rows)
 
