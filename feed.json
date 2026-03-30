@@ -1,34 +1,75 @@
 {
-  "updated": "2026-03-29T13:59:48.641913+09:00",
-  "youtube": [],
+  "updated": "2026-03-30T18:54:20.938158+09:00",
+  "youtube": [
+    {
+      "title": "📌 불개미 주간 시황 - 비트코인 \"이것\" 때문에 폭등할겁니다.",
+      "url": "https://www.youtube.com/watch?v=xHCgSNKVyqU",
+      "thumbnail": "https://i.ytimg.com/vi/xHCgSNKVyqU/mqdefault.jpg",
+      "published": "2026-03-30T18:00:51+09:00"
+    },
+    {
+      "title": "[불개미 일일시황] 2026.03.28 (토)",
+      "url": "https://www.youtube.com/watch?v=OEZVYZv44lY",
+      "thumbnail": "https://i.ytimg.com/vi/OEZVYZv44lY/mqdefault.jpg",
+      "published": "2026-03-28T17:18:04+09:00"
+    },
+    {
+      "title": "긴급 비트코인 시황점검",
+      "url": "https://www.youtube.com/watch?v=mr21q3BPJn0",
+      "thumbnail": "https://i.ytimg.com/vi/mr21q3BPJn0/mqdefault.jpg",
+      "published": "2026-03-28T13:17:08+09:00"
+    },
+    {
+      "title": "[불개미 일일시황] 2026.03.27 (금)",
+      "url": "https://www.youtube.com/watch?v=y1FxiCRknV4",
+      "thumbnail": "https://i.ytimg.com/vi/y1FxiCRknV4/mqdefault.jpg",
+      "published": "2026-03-27T17:00:50+09:00"
+    },
+    {
+      "title": "[불개미 일일시황] 2026.03.26 (목)",
+      "url": "https://www.youtube.com/watch?v=hsd-0CtdUQc",
+      "thumbnail": "https://i.ytimg.com/vi/hsd-0CtdUQc/mqdefault.jpg",
+      "published": "2026-03-26T17:00:39+09:00"
+    }
+  ],
   "telegram": [
     {
-      "title": "지금까지 사고있었으면 꿋꿋하게 계속 사면 됩니다.",
-      "url": "https://t.me/fireantcrypto/40483",
-      "published": "2026-03-28T23:54:53+09:00"
+      "title": "🎉 Virtuals Protocol 활성화 이벤트  Virtuals에 제대로 참여할 타이밍입니다&#33;🧡💙  📌 참여 방법 1️⃣ Virtuals 한국 공지방과 커뮤니티에 모두 입장하기 2️⃣ Virtuals 공식…",
+      "url": "https://t.me/fireantcrypto/40493",
+      "published": "2026-03-30T16:36:08+09:00"
     },
     {
-      "title": "아직까지 안샀으면 지금이라도 사야하고",
-      "url": "https://t.me/fireantcrypto/40482",
-      "published": "2026-03-28T23:54:52+09:00"
+      "title": "🪙 비트코인아 KRW 보고 좀 배워라&#33;",
+      "url": "https://t.me/fireantcrypto/40492",
+      "published": "2026-03-30T16:34:59+09:00"
     },
     {
-      "title": "🟢 &#036;67,000 @bitcoin_price",
-      "url": "https://t.me/fireantcrypto/40481",
-      "published": "2026-03-28T22:40:40+09:00"
+      "title": "📌 불개미 일일시황 | 2026.03.29 (KST)  1️⃣ BTC ETH 유출입 • BTC: -&#036;225.48M (순유출) • ETH: -&#036;48.54M (순유출) • ETF 데이터는 마지막 거래일…",
+      "url": "https://t.me/fireantcrypto/40491",
+      "published": "2026-03-30T15:46:03+09:00"
     },
     {
-      "title": "🇺🇸🚀 백악관 공식 앱 출시  라이브 스트리밍, 실시간 업데이트 등 공식 정보를 가공 없이 직접 제공  이제 주요 정책·발언을 중간 해석 없이 바로 확인 가능  다운로드 ⬇️ 📲 App Store: https://a…",
-      "url": "https://t.me/fireantcrypto/40480",
-      "published": "2026-03-28T17:30:46+09:00"
+      "title": "📌 불개미 일일시황 | 2026.03.30 (KST)  1️⃣ BTC ETH 유출입 • BTC: -&#036;225.48M (순유출) • ETH: -&#036;48.54M (순유출) • ETF 데이터는 마지막 거래일…",
+      "url": "https://t.me/fireantcrypto/40490",
+      "published": "2026-03-30T15:29:24+09:00"
     },
     {
-      "title": "📌 불개미 일일시황 | 2026.03.28 (토)  1️⃣ BTC ETH 유출입 • BTC: -&#036;225.48M (순유출) • ETH: -&#036;48.54M (순유출) • ETF 데이터는 마지막 거래일 기…",
-      "url": "https://t.me/fireantcrypto/40479",
-      "published": "2026-03-28T15:30:04+09:00"
+      "title": "텔레 맛감",
+      "url": "https://t.me/fireantcrypto/40489",
+      "published": "2026-03-30T15:22:29+09:00"
     }
   ],
   "naver": [
+    {
+      "title": "[불개미 라이브] 2026년 3월 29일 (일)",
+      "url": "https://blog.naver.com/fireant_korea/224234657194?fromRss=true&trackingCode=rss",
+      "published": "2026-03-30T18:03:06+09:00"
+    },
+    {
+      "title": "[불개미 일일시황] 2026.03.29 (일)",
+      "url": "https://blog.naver.com/fireant_korea/224233392141?fromRss=true&trackingCode=rss",
+      "published": "2026-03-29T17:07:24+09:00"
+    },
     {
       "title": "[불개미 일일시황] 2026.03.28 (토)",
       "url": "https://blog.naver.com/fireant_korea/224232531999?fromRss=true&trackingCode=rss",
@@ -43,16 +84,6 @@
       "title": "[불개미 일일시황] 2026.03.26 (목)",
       "url": "https://blog.naver.com/fireant_korea/224230332170?fromRss=true&trackingCode=rss",
       "published": "2026-03-26T15:07:56+09:00"
-    },
-    {
-      "title": "✏️ 두번째 이벤트 준비하면서 Eigen 의 리브랜딩 방향에 대하여 살펴보는 중",
-      "url": "https://blog.naver.com/fireant_korea/224230309192?fromRss=true&trackingCode=rss",
-      "published": "2026-03-26T14:49:08+09:00"
-    },
-    {
-      "title": "Tao(비트텐서) 의 상승. 실력인가 행운인가",
-      "url": "https://blog.naver.com/fireant_korea/224230285560?fromRss=true&trackingCode=rss",
-      "published": "2026-03-26T14:29:56+09:00"
     }
   ]
 }
