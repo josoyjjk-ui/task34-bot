@@ -257,6 +257,11 @@ sessions_spawn(agentId: "chammo", task: "...", mode: "run")  // 참모
 sessions_spawn(agentId: "ops", task: "...", mode: "run")     // 공병
 ```
 
+**공병 task 필수 포함 사항:**
+1. 완료 기준(요망사항) 명시
+2. "작업 완료 후 `claude` 세션에서 Computer Use로 화면 직접 확인 후 스크린샷 첨부하여 보고" 명시
+3. 검증 타입(dashboard/bot/code) 명시 (작전장교 투입 기준)
+
 **프롬프트 참조:**
 - 참모: `agents/chammo-prompt.md` (task 앞에 내용 포함)
 - 공병: `agents/ops-prompt.md` (task 앞에 내용 포함)
