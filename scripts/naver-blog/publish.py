@@ -14,10 +14,10 @@ from playwright.async_api import async_playwright
 
 BLOG_ID = "fireant_korea"
 PASSWORD = "wnFhT9"
-LOG_NO_DELETE = "224233588152"
-IMAGE_PATH = "/tmp/openclaw/uploads/daily_blog_20260329_new.jpg"
-POST_TITLE = "📌 [불개미 일일시황] 2026.03.29 (일)"
-POST_TEXT = "📊 [불개미 일일시황] 2026.03.29\n\n📌 코인베이스 프리미엄\n-0.0034%\n\n📌 BTC ETF 자금 흐름\n-$225.48M (순유출)\n\n📌 ETH ETF 자금 흐름\n-$48.54M (순유출)\n\n📌 BTC 미결제약정 (24h)\n-0.12%\n\n📌 ETH 미결제약정 (24h)\n-0.72%\n\n📌 DAT 주간 순유입\n+$95.78M\n\nBTC·ETH ETF 동반 순유출로 기관 매수세 위축 확인. 미결제약정 소폭 감소하며 포지션 축소 흐름 지속."
+LOG_NO_DELETE = 224235865649
+IMAGE_PATH = "/tmp/openclaw/uploads/daily-report-20260331-correct.jpg"
+POST_TITLE = "📌 [불개미 일일시황] 2026.03.31 (월)"
+POST_TEXT = "📌 불개미 일일시황 | 2026.03.31 (KST)\n\n1️⃣ BTC ETH 유출입\n• BTC: +$69.44M (순유입)\n• ETH: +$4.96M (순유입)\n• ETF 데이터는 마지막 거래일 기준\n\n2️⃣ 미결제약정 추이 (24시간 기준)\n• BTC 24시간: -0.75%\n• ETH 24시간: +0.27%\n\n3️⃣ DAT 추이\n• WEEKLY NET INFLOW: $72.83K\n\n4️⃣ 코인베이스 프리미엄\n• 현재 지수: -0.0034%\n\n5️⃣ 요약\nBTC·ETH ETF 모두 소폭 순유입으로 전환됐으나 DAT 주간 유입이 $72.83K로 급감해 기관 매수세가 사실상 멈춘 상태다. CB 프리미엄 -0.0034%로 미국 프리미엄이 거의 소멸돼 있어 당분간 추세 전환보다는 관망 구도가 이어질 가능성이 높다."
 
 
 async def do_login(page):
@@ -69,14 +69,22 @@ async def find_se_frame(page):
 
 async def main():
     async with async_playwright() as p:
-        context = await p.chromium.launch_persistent_context(
-            user_data_dir="/Users/fireant/.openclaw/browser/openclaw/user-data",
-            executable_path="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-            headless=False,
-            args=["--no-first-run", "--no-default-browser-check", "--disable-blink-features=AutomationControlled"],
-            viewport={"width": 1280, "height": 900},
-        )
-        page = context.pages[0] if context.pages else await context.new_page()
+        # 기존 Chrome CDP 연결 시도 (port 18800)
+        try:
+            browser = await asyncio.wait_for(p.chromium.connect_over_cdp("http://localhost:18800"), timeout=10)
+            context = browser.contexts[0] if browser.contexts else await browser.new_context()
+            page = context.pages[0] if context.pages else await context.new_page()
+            print("[init] ✅ 기존 Chrome CDP 연결 성공")
+        except Exception as e:
+            print(f"[init] CDP 연결 실패: {e}, persistent context로 fallback")
+            context = await p.chromium.launch_persistent_context(
+                user_data_dir="/Users/fireant/.openclaw/browser/openclaw/user-data",
+                executable_path="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+                headless=True,
+                args=["--no-first-run", "--no-default-browser-check", "--disable-blink-features=AutomationControlled"],
+                viewport={"width": 1280, "height": 900},
+            )
+            page = context.pages[0] if context.pages else await context.new_page()
 
         # ── STEP 0: 로그인 ──
         print("[0] 로그인 확인...")
@@ -553,7 +561,11 @@ async def main():
             print(f"\n❓ logNo 확인 필요. URL: {cur}")
         
         await asyncio.sleep(2)
-        await context.close()
+        # CDP 연결 시 context.close() 생략 (기존 Chrome 세션 유지)
+        try:
+            await context.close()
+        except Exception:
+            pass
         print("[완료]")
 
 
