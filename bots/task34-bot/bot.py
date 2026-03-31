@@ -175,7 +175,7 @@ def _is_dashboard_thread(update: Update) -> bool:
 def _get_thread_id(update: Update) -> Optional[int]:
     """update.message가 None이어도 안전하게 thread_id 반환."""
     if update.message is not None:
-        return _get_thread_id(update)
+        return update.message.message_thread_id
     return None
 
 
