@@ -14,10 +14,10 @@ from playwright.async_api import async_playwright
 
 BLOG_ID = "fireant_korea"
 PASSWORD = "wnFhT9"
-LOG_NO_DELETE = 224235865649
+LOG_NO_DELETE = 224236031591
 IMAGE_PATH = "/tmp/openclaw/uploads/daily-report-20260331-correct.jpg"
 POST_TITLE = "📌 [불개미 일일시황] 2026.03.31 (월)"
-POST_TEXT = "📌 불개미 일일시황 | 2026.03.31 (KST)\n\n1️⃣ BTC ETH 유출입\n• BTC: +$69.44M (순유입)\n• ETH: +$4.96M (순유입)\n• ETF 데이터는 마지막 거래일 기준\n\n2️⃣ 미결제약정 추이 (24시간 기준)\n• BTC 24시간: -0.75%\n• ETH 24시간: +0.27%\n\n3️⃣ DAT 추이\n• WEEKLY NET INFLOW: $72.83K\n\n4️⃣ 코인베이스 프리미엄\n• 현재 지수: -0.0034%\n\n5️⃣ 요약\nBTC·ETH ETF 모두 소폭 순유입으로 전환됐으나 DAT 주간 유입이 $72.83K로 급감해 기관 매수세가 사실상 멈춘 상태다. CB 프리미엄 -0.0034%로 미국 프리미엄이 거의 소멸돼 있어 당분간 추세 전환보다는 관망 구도가 이어질 가능성이 높다."
+POST_TEXT = "불개미 일일시황 | 2026.03.31 (KST)\n\n[1] BTC ETH 유출입\n• BTC: +$69.44M (순유입)\n• ETH: +$4.96M (순유입)\n• ETF 데이터는 마지막 거래일 기준\n\n[2] 미결제약정 추이 (24시간 기준)\n• BTC 24시간: -0.75%\n• ETH 24시간: +0.27%\n\n[3] DAT 추이\n• WEEKLY NET INFLOW: $72.83K\n\n[4] 코인베이스 프리미엄\n• 현재 지수: -0.0034%\n\n[5] 요약\nBTC·ETH ETF 모두 소폭 순유입으로 전환됐으나 DAT 주간 유입이 $72.83K로 급감해 기관 매수세가 사실상 멈춘 상태다. CB 프리미엄 -0.0034%로 미국 프리미엄이 거의 소멸돼 있어 당분간 추세 전환보다는 관망 구도가 이어질 가능성이 높다."
 
 
 async def do_login(page):
@@ -282,9 +282,9 @@ async def main():
         )
         await asyncio.sleep(0.3)
 
-        # ── STEP 4: 이미지 업로드 ──
+        # ── STEP 4: 이미지 먼저 업로드 (이미지 위, 텍스트 아래 구조) ──
         print("[4] 이미지 업로드...")
-        
+
         # 사진 버튼 클릭 - 툴바 "사진" 버튼
         photo_clicked = False
         try:
@@ -385,62 +385,81 @@ async def main():
         """)
         print(f"[4] 컴포넌트: {comps}")
 
-        # ── STEP 5: 텍스트 삽입 ──
-        print("[5] 텍스트 삽입...")
-        await se_frame.evaluate(f"""
-            () => {{
-                const ed = window.SmartEditor._editors['{editor_key}'];
-                ed._editingService.insertTextCompAtLast();
-            }}
-        """)
-        await asyncio.sleep(0.3)
-        
-        # 줄별로 입력 - insertNewLine 대신 키보드 Enter 사용
-        lines = POST_TEXT.split('\n')
-        # 텍스트 컴포넌트에 포커스
-        await se_frame.evaluate(f"""
-            () => {{
-                const ed = window.SmartEditor._editors['{editor_key}'];
-                // 텍스트 컴포넌트 클릭해서 포커스
-                const doc = ed._documentService.getDocumentData().document;
-                const textComp = doc.components.find(c => c['@ctype'] === 'text');
-                if (textComp) {{
-                    // editingService로 텍스트 컴포넌트 선택
-                    try {{ ed._editingService.selectComponent(textComp.id || textComp['@id']); }} catch(e) {{}}
-                }}
-            }}
-        """)
-        await asyncio.sleep(0.2)
-        
-        # 전체 텍스트를 한 번에 write (줄바꿈 처리는 SE가 자동으로)
-        # 방법 1: 전체 텍스트 한 번에
+        # ── STEP 5: 텍스트 입력 (이미지 아래) ──
+        print("[5] 텍스트 입력 (이미지 아래)...")
+        # 이미지 업로드 후 마지막 텍스트 단락 클릭
+        await asyncio.sleep(1)
         try:
-            escaped_full = json.dumps(POST_TEXT)
-            await se_frame.evaluate(f"""
-                () => window.SmartEditor._editors['{editor_key}']._editingService.write({escaped_full})
-            """)
-            print("[5] 전체 텍스트 write 완료")
+            els = await se_frame.query_selector_all(".se-text-paragraph")
+            if els:
+                el = els[-1]
+                await el.scroll_into_view_if_needed()
+                await asyncio.sleep(0.2)
+                await el.click(force=True)
+                await asyncio.sleep(0.3)
+                print(f"[5] 마지막 텍스트 단락 클릭 (총 {len(els)}개)")
         except Exception as e:
-            print(f"[5] 전체 write 실패: {e}, 줄별로 입력 시도")
-            # 방법 2: 각 줄 입력 + keyboard Enter
-            await se_frame.evaluate(f"""
-                () => window.SmartEditor._editors['{editor_key}']._editingService.write({json.dumps(lines[0])})
-            """)
-            for line in lines[1:]:
+            print(f"[5] 단락 클릭 실패: {e}")
+        lines_post = POST_TEXT.split('\n')
+        for i, line in enumerate(lines_post):
+            if line:
+                await page.keyboard.type(line, delay=15)
+            if i < len(lines_post) - 1:
                 await page.keyboard.press("Enter")
-                await asyncio.sleep(0.05)
-                await page.keyboard.type(line, delay=5)
-                await asyncio.sleep(0.02)
+                await asyncio.sleep(0.04)
+        print(f"[5] 텍스트 입력 완료 ({len(lines_post)}줄)")
+        await asyncio.sleep(0.5)
 
-        # 글자색 수정
-        await se_frame.evaluate(f"""
+        # ── STEP 5b: 스타일 적용 (가운데정렬, 소제목 bold+크기, 요약 bold) ──
+        await asyncio.sleep(0.5)
+        style_result = await se_frame.evaluate(f"""
             () => {{
-                const ed = window.SmartEditor._editors['{editor_key}'];
-                const data = ed._documentService.getDocumentData();
-                const fixed = JSON.parse(JSON.stringify(data).replace(/"fontColor":"#ffffff"/g, '"fontColor":"#000000"'));
-                ed._documentService.setDocumentData(fixed);
+                try {{
+                    const ed = window.SmartEditor._editors['{editor_key}'];
+                    const data = ed._documentService.getDocumentData();
+                    const doc = data.document;
+                    const textComp = doc.components.find(c => c['@ctype'] === 'text');
+                    if (!textComp || !textComp.value) return 'NO_TEXT_COMP';
+
+                    // 소제목 패턴: [1] [2] [3] [4] [5]
+                    const isSubhead = (txt) => /^\[[1-5]\]/.test(txt.trim());
+                    // 요약 내용: [5] 이후 줄 (소제목 제외)
+                    let afterSummary = false;
+
+                    const paragraphs = Array.isArray(textComp.value) ? textComp.value : [];
+                    paragraphs.forEach(para => {{
+                        if (!para || !para.nodes) return;
+                        const text = para.nodes.map(n => n.value || '').join('');
+
+                        // 요약 섹션 진입 감지
+                        if (/^\[5\]/.test(text.trim())) afterSummary = true;
+
+                        // 단락 스타일: 가운데 정렬
+                        if (!para.style) para.style = {{'@ctype': 'paragraphStyle'}};
+                        para.style.align = 'center';
+
+                        para.nodes.forEach(node => {{
+                            if (!node.style) node.style = {{'@ctype': 'nodeStyle'}};
+                            // 흰색 폰트 수정
+                            if (node.style.fontColor === '#ffffff') node.style.fontColor = '#000000';
+
+                            if (isSubhead(text)) {{
+                                // 소제목: bold + 크기 확대(fs17)
+                                node.style.bold = true;
+                                node.style.fontSizeCode = 'fs17';
+                            }} else if (afterSummary && !/^\[5\]/.test(text.trim())) {{
+                                // 요약 내용: bold
+                                node.style.bold = true;
+                            }}
+                        }});
+                    }});
+
+                    ed._documentService.setDocumentData(data);
+                    return 'STYLED_OK';
+                }} catch(e) {{ return 'ERR: ' + e.message; }}
             }}
         """)
+        print(f"[5b] 스타일 적용: {style_result}")
         await asyncio.sleep(0.5)
 
         # 최종 확인

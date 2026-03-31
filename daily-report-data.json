@@ -1,11 +1,1 @@
-{
-  "date": "2026.03.30",
-  "day": "(월)",
-  "btc_etf": "-$225.48M",
-  "eth_etf": "-$48.54M",
-  "btc_oi": "-0.12%",
-  "eth_oi": "-0.72%",
-  "dat": "$95.78M",
-  "cb_premium": "-0.0034%",
-  "image_path": "/Users/fireant/.openclaw/workspace/daily-report-latest.png"
-}
+{"date": "2026.03.31", "day": "(화)", "btc_etf": "+$69.44M", "eth_etf": "+$4.96M", "btc_oi": "-0.75%", "eth_oi": "+0.27%", "dat": "$72.83K", "cb_premium": "-0.0034%", "image_path": "/Users/fireant/.openclaw/workspace/daily-report-latest.png"}
