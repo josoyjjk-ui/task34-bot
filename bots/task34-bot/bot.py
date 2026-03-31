@@ -168,8 +168,15 @@ def _is_dashboard_thread(update: Update) -> bool:
         update.effective_chat is not None
         and update.effective_chat.id == MAIN_CHAT_ID
         and update.message is not None
-        and update.message.message_thread_id == TODO_THREAD_ID
+        and _get_thread_id(update) == TODO_THREAD_ID
     )
+
+
+def _get_thread_id(update: Update) -> Optional[int]:
+    """update.message가 None이어도 안전하게 thread_id 반환."""
+    if update.message is not None:
+        return _get_thread_id(update)
+    return None
 
 
 def dashboard_find_client_by_keyword(keyword: str) -> Optional[dict]:
@@ -434,6 +441,75 @@ def calendar_list_events(start: datetime, end: datetime) -> List[dict]:
     )
     resp.raise_for_status()
     return resp.json().get("items", [])
+
+
+def calendar_sync_to_supabase(days_ahead: int = 30) -> int:
+    """Google Calendar에서 앞으로 days_ahead일치 이벤트를 Supabase events 테이블에 동기화.
+    id는 UUID 타입이므로 Google event_id 사용 불가 → summary+start_time 기반 중복 체크 후 insert.
+    """
+    now = datetime.now(tz=KST)
+    start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    end = start + timedelta(days=days_ahead)
+    events = calendar_list_events(start, end)
+    if not events:
+        return 0
+
+    # 기존 Supabase events 조회 → 중복 키(summary|start_time) 세트
+    try:
+        existing_resp = requests.get(
+            f"{SUPABASE_URL}/rest/v1/events?select=summary,start_time&order=start_time.asc",
+            headers=_dashboard_headers(),
+            timeout=15,
+        )
+        existing = existing_resp.json() if existing_resp.ok else []
+        existing_keys = set(f"{e['summary']}|{str(e['start_time'])[:19]}" for e in existing)
+    except Exception as e:
+        logger.warning("calendar_sync: existing fetch failed: %s", e)
+        existing_keys = set()
+
+    inserted = 0
+    for ev in events:
+        summary = ev.get("summary", "")
+        start_dt = ev.get("start", {}).get("dateTime") or ev.get("start", {}).get("date", "")
+        end_dt = ev.get("end", {}).get("dateTime") or ev.get("end", {}).get("date", "")
+        if start_dt and "T" in start_dt:
+            start_dt = start_dt[:19]
+        if end_dt and "T" in end_dt:
+            end_dt = end_dt[:19]
+
+        key = f"{summary}|{start_dt}"
+        if key in existing_keys:
+            continue  # 이미 있음
+
+        meet_link = None
+        for ep in ev.get("conferenceData", {}).get("entryPoints", []):
+            if ep.get("entryPointType") == "video":
+                meet_link = ep.get("uri")
+                break
+        organizer_email = ev.get("organizer", {}).get("email", "")
+        payload = {
+            "summary": summary,
+            "start_time": start_dt,
+            "end_time": end_dt,
+            "calendar_email": organizer_email,
+            "meet_link": meet_link,
+            "description": ev.get("description", ""),
+        }
+        try:
+            resp = requests.post(
+                f"{SUPABASE_URL}/rest/v1/events",
+                headers={**_dashboard_headers()},
+                data=json.dumps(payload, ensure_ascii=False),
+                timeout=15,
+            )
+            if resp.ok or resp.status_code in (200, 201):
+                inserted += 1
+                existing_keys.add(key)  # 동일 배치에서 중복 방지
+            else:
+                logger.warning("calendar_sync insert failed: %s %s", resp.status_code, resp.text[:200])
+        except Exception as e:
+            logger.warning("calendar_sync exception: %s", e)
+    return inserted
 
 
 def map_email(email: str) -> Optional[str]:
@@ -891,14 +967,14 @@ async def reply_and_delete(update, text: str, delay: int = 30) -> None:
     t.add_done_callback(_bg_tasks.discard)
 
 async def cmd_remind(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_chat.id == MAIN_CHAT_ID and update.message.message_thread_id != TODO_THREAD_ID:
+    if update.effective_chat.id == MAIN_CHAT_ID and _get_thread_id(update) != TODO_THREAD_ID:
         return
     """즉시 미완료 업무 현황 갱신"""
     await refresh_live_todo(context.bot, update.effective_chat.id)
 
 
 async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_chat.id == MAIN_CHAT_ID and update.message.message_thread_id != TODO_THREAD_ID:
+    if update.effective_chat.id == MAIN_CHAT_ID and _get_thread_id(update) != TODO_THREAD_ID:
         return
     chat = update.effective_chat
     activate_chat(chat.id, chat.title or chat.full_name or str(chat.id))
@@ -906,7 +982,7 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_today(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_chat.id == MAIN_CHAT_ID and update.message.message_thread_id != TODO_THREAD_ID:
+    if update.effective_chat.id == MAIN_CHAT_ID and _get_thread_id(update) != TODO_THREAD_ID:
         return
     now = datetime.now(tz=KST)
     start = now.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -916,7 +992,7 @@ async def cmd_today(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_week(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_chat.id == MAIN_CHAT_ID and update.message.message_thread_id != TODO_THREAD_ID:
+    if update.effective_chat.id == MAIN_CHAT_ID and _get_thread_id(update) != TODO_THREAD_ID:
         return
     now = datetime.now(tz=KST)
     start = now.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -926,7 +1002,7 @@ async def cmd_week(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_map(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_chat.id == MAIN_CHAT_ID and update.message.message_thread_id != TODO_THREAD_ID:
+    if update.effective_chat.id == MAIN_CHAT_ID and _get_thread_id(update) != TODO_THREAD_ID:
         return
     if len(context.args) != 2:
         await reply_and_delete(update, "사용법: /map 이메일 @텔레그램아이디")
@@ -942,7 +1018,7 @@ async def cmd_map(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_add(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_chat.id == MAIN_CHAT_ID and update.message.message_thread_id != TODO_THREAD_ID:
+    if update.effective_chat.id == MAIN_CHAT_ID and _get_thread_id(update) != TODO_THREAD_ID:
         return
     now = datetime.now(tz=KST)
     task, due = split_task_and_due(context.args, now)
@@ -989,7 +1065,7 @@ async def cmd_add(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_list(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_chat.id == MAIN_CHAT_ID and update.message.message_thread_id != TODO_THREAD_ID:
+    if update.effective_chat.id == MAIN_CHAT_ID and _get_thread_id(update) != TODO_THREAD_ID:
         return
     now = datetime.now(tz=KST)
     rows = get_user_open_todos(update.effective_chat.id, update.effective_user.id)
@@ -998,7 +1074,7 @@ async def cmd_list(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_done(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_chat.id == MAIN_CHAT_ID and update.message.message_thread_id != TODO_THREAD_ID:
+    if update.effective_chat.id == MAIN_CHAT_ID and _get_thread_id(update) != TODO_THREAD_ID:
         return
     idx = parse_index_arg(context.args)
     if idx is None:
@@ -1035,7 +1111,7 @@ async def cmd_done(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_del(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_chat.id == MAIN_CHAT_ID and update.message.message_thread_id != TODO_THREAD_ID:
+    if update.effective_chat.id == MAIN_CHAT_ID and _get_thread_id(update) != TODO_THREAD_ID:
         return
     idx = parse_index_arg(context.args)
     if idx is None:
@@ -1066,7 +1142,7 @@ async def cmd_del(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_due(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_chat.id == MAIN_CHAT_ID and update.message.message_thread_id != TODO_THREAD_ID:
+    if update.effective_chat.id == MAIN_CHAT_ID and _get_thread_id(update) != TODO_THREAD_ID:
         return
     if len(context.args) < 2:
         await reply_and_delete(update, "사용법: /due 번호 마감일\n마감일 형식: YYYY-MM-DD | MM/DD | 오늘 | 내일 | 없음")
@@ -1118,8 +1194,7 @@ async def cmd_due(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_proj(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not _is_dashboard_thread(update):
-        return
+    # /proj는 어느 스레드/DM에서도 작동 (TODO 스레드 제한 없음)
     if len(context.args) < 3:
         await reply_and_delete(update, "사용법: /proj 프로젝트명 기준일 서비스명")
         return
@@ -1143,8 +1218,7 @@ async def cmd_proj(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_deal(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not _is_dashboard_thread(update):
-        return
+    # /deal는 어느 스레드/DM에서도 작동
     if len(context.args) < 1:
         await reply_and_delete(update, "사용법: /deal 딜명 [on|off|done]")
         return
@@ -1184,8 +1258,7 @@ async def cmd_deal(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_projlist(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not _is_dashboard_thread(update):
-        return
+    # /projlist는 어느 스레드/DM에서도 작동
 
     clients = dashboard_list_by_category("진행중")
     if not clients:
@@ -1198,8 +1271,7 @@ async def cmd_projlist(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_deallist(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not _is_dashboard_thread(update):
-        return
+    # /deallist는 어느 스레드/DM에서도 작동
 
     clients = dashboard_list_by_category("논의중")
     if not clients:
@@ -1212,7 +1284,7 @@ async def cmd_deallist(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_chat.id == MAIN_CHAT_ID and update.message.message_thread_id != TODO_THREAD_ID:
+    if update.effective_chat.id == MAIN_CHAT_ID and _get_thread_id(update) != TODO_THREAD_ID:
         return
 
     chat_id = update.effective_chat.id
@@ -1277,7 +1349,7 @@ async def cmd_stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_report(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_chat.id == MAIN_CHAT_ID and update.message.message_thread_id != TODO_THREAD_ID:
+    if update.effective_chat.id == MAIN_CHAT_ID and _get_thread_id(update) != TODO_THREAD_ID:
         return
 
     chat_id = update.effective_chat.id
@@ -1371,6 +1443,21 @@ async def post_init(app: Application) -> None:
         interval=timedelta(hours=1),
         first=next_hour,
         name="todo-reminder-hourly",
+    )
+
+    # 캘린더 → Supabase 동기화: 매 30분마다
+    async def sync_calendar_job(context):
+        try:
+            n = calendar_sync_to_supabase(days_ahead=30)
+            logger.info("calendar_sync_to_supabase: %d events upserted", n)
+        except Exception as e:
+            logger.warning("calendar_sync_to_supabase failed: %s", e)
+
+    jq.run_repeating(
+        callback=sync_calendar_job,
+        interval=timedelta(minutes=30),
+        first=timedelta(seconds=10),  # 시작 직후 바로 한 번 실행
+        name="calendar-sync",
     )
 
     app.bot_data["jobqueue_initialized"] = True
