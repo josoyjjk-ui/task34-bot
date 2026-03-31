@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-31T19:02:47.365660+09:00",
+  "updated": "2026-03-31T20:26:04.596308+09:00",
   "youtube": [
     {
       "title": "[불개미 일일시황] 2026.03.31 (화)",
@@ -34,6 +34,11 @@
   ],
   "telegram": [
     {
+      "title": "에효 비트가 이러니까 기운이 안나네",
+      "url": "https://t.me/fireantcrypto/40533",
+      "published": "2026-03-31T19:03:07+09:00"
+    },
+    {
       "title": "🔴 &#036;66,000 @bitcoin_price",
       "url": "https://t.me/fireantcrypto/40532",
       "published": "2026-03-31T18:58:51+09:00"
@@ -52,14 +57,19 @@
       "title": "지금 재매이햄이 환율에 얼마나 예민한데 지금 스테이블코인으로 미래를 예측해버리네 ㅋㅋㅋㅋㅋ",
       "url": "https://t.me/fireantcrypto/40529",
       "published": "2026-03-31T17:48:14+09:00"
-    },
-    {
-      "title": "📌 스테이블 코인 USDS 가 스테이블하지 않습니다.   우리 환율의 미래를 보여주는거야?",
-      "url": "https://t.me/fireantcrypto/40528",
-      "published": "2026-03-31T17:45:45+09:00"
     }
   ],
   "naver": [
+    {
+      "title": "[불개미 일일시황] 2026.03.31 (월)",
+      "url": "https://blog.naver.com/fireant_korea/224236035266?fromRss=true&trackingCode=rss",
+      "published": "2026-03-31T19:13:27+09:00"
+    },
+    {
+      "title": "[불개미 일일시황] 2026.03.31 (월)",
+      "url": "https://blog.naver.com/fireant_korea/224236031591?fromRss=true&trackingCode=rss",
+      "published": "2026-03-31T19:09:37+09:00"
+    },
     {
       "title": "[불개미 일일시황] 202불개미 일일시황 | 2026.03.31 (KST)6.03.31 (월)",
       "url": "https://blog.naver.com/fireant_korea/224236024420?fromRss=true&trackingCode=rss",
@@ -74,16 +84,6 @@
       "title": "불개미 일일시황 | 2026.03.31 (KST)",
       "url": "https://blog.naver.com/fireant_korea/224236005645?fromRss=true&trackingCode=rss",
       "published": "2026-03-31T18:42:41+09:00"
-    },
-    {
-      "title": "[불개미 일일시황] 2026.03.31 (월)",
-      "url": "https://blog.naver.com/fireant_korea/224236001428?fromRss=true&trackingCode=rss",
-      "published": "2026-03-31T18:38:28+09:00"
-    },
-    {
-      "title": "[불개미 일일시황] 2026.03.31 (월)",
-      "url": "https://blog.naver.com/fireant_korea/224235991230?fromRss=true&trackingCode=rss",
-      "published": "2026-03-31T18:28:30+09:00"
     }
   ]
 }
