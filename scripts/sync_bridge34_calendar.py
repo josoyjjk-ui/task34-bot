@@ -70,9 +70,21 @@ def fetch_events(days_ahead=7):
             })
     return all_events
 
+def deduplicate(events):
+    """summary + start_time(분 단위) 기준으로 중복 제거 — 첫 번째만 유지"""
+    seen = {}
+    result = []
+    for e in events:
+        key = (e['summary'].strip(), e['start_time'][:16])
+        if key not in seen:
+            seen[key] = True
+            result.append(e)
+    return result
+
 def upsert_events(events):
     if not events:
         return 0
+    events = deduplicate(events)
     payload = json.dumps(events).encode()
     req = urllib.request.Request(
         f'{SUPABASE_URL}/rest/v1/events',
