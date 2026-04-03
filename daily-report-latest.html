@@ -3,95 +3,89 @@
 <head>
 <meta charset="UTF-8">
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     width: 1200px;
-    height: 700px;
-    background-color: #1a4a1a;
-    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    height: 675px;
+    background-color: #0e1f0e;
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    padding: 24px 28px 24px 28px;
+    padding: 20px 24px 20px 24px;
   }
   .title-row {
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 20px;
-  }
-  .logo {
-    position: absolute;
-    left: 0;
-    font-size: 42px;
-    line-height: 1;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding: 0 4px;
   }
   .title-text {
-    font-size: 68px;
+    font-size: 66px;
     font-weight: 900;
     color: #FFE600;
     letter-spacing: -1px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    line-height: 1;
   }
   .date-text {
-    position: absolute;
-    right: 0;
-    bottom: 6px;
-    font-size: 26px;
-    color: #ffffff;
-    font-weight: 600;
+    font-size: 34px;
+    color: #FFE600;
+    font-weight: 700;
+    letter-spacing: 0;
   }
   .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 14px;
+    gap: 12px;
     flex: 1;
   }
   .box {
-    background-color: #0f3a0f;
-    border: 3px solid #2d6a2d;
-    border-radius: 10px;
+    background-color: #0a1e0a;
+    border: 3px solid #5aaa5a;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    padding: 18px 28px;
+    align-items: center;
+    padding: 16px 24px;
+    text-align: center;
   }
   .box-header {
-    font-size: 34px;
-    font-weight: 800;
+    font-size: 36px;
+    font-weight: 900;
     color: #FFE600;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     letter-spacing: -0.5px;
+    line-height: 1.2;
   }
   .box-sub {
     font-size: 16px;
     color: #aaaaaa;
     margin-bottom: 10px;
-    letter-spacing: 0;
   }
   .data-line {
-    font-size: 30px;
-    font-weight: 700;
-    line-height: 1.5;
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.55;
+    letter-spacing: -0.5px;
   }
-  .red { color: #FF4444; }
-  .green { color: #44FF44; }
+  .red { color: #FF3333; }
+  .green { color: #44EE44; }
   .white { color: #ffffff; }
-  .center-box {
-    align-items: center;
-    text-align: center;
+  .dat-line {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
   }
-  .center-box .box-header { text-align: center; }
-  .center-box .data-line { text-align: center; }
 </style>
 </head>
 <body>
   <div class="title-row">
-    <div class="logo">🔥🐜</div>
     <div class="title-text">불개미 일일시황</div>
-    <div class="date-text">2026.03.31 (KST)</div>
+    <div class="date-text">2026.04.03 (금)</div>
   </div>
 
   <div class="grid">
@@ -99,27 +93,33 @@
     <div class="box">
       <div class="box-header">BTC ETH ETF 유출입</div>
       <div class="box-sub">ETF 데이터는 마지막 거래일 기준</div>
-      <div class="data-line green">BTC (+$69.44M) ↑</div>
-      <div class="data-line green">ETH (+$4.96M) ↑</div>
+      <div class="data-line green">BTC (+$8.99M)</div>
+      <div class="data-line red">ETH (-$71.17M)</div>
     </div>
 
     <!-- TOP RIGHT: OI -->
-    <div class="box center-box">
+    <div class="box">
       <div class="box-header">미결제약정 추이</div>
-      <div class="data-line red">BTC 24시간 : -0.75% ↓</div>
-      <div class="data-line green">ETH 24시간 : +0.27% ↑</div>
+      <div class="data-line">
+        <span style="color:#ffffff;">BTC 24시간 : </span><span class="green">+1.11%</span>
+      </div>
+      <div class="data-line">
+        <span style="color:#ffffff;">ETH 24시간 : </span><span class="green">+0.11%</span>
+      </div>
     </div>
 
     <!-- BOTTOM LEFT: DAT -->
-    <div class="box center-box">
+    <div class="box">
       <div class="box-header">DAT 추이</div>
-      <div class="data-line white">WEEKLY NET INFLOW : $72.83K</div>
+      <div class="dat-line white">WEEKLY NET INFLOW : $72.83K</div>
     </div>
 
     <!-- BOTTOM RIGHT: CB Premium -->
-    <div class="box center-box">
+    <div class="box">
       <div class="box-header">코인베이스 프리미엄</div>
-      <div class="data-line red">현재 지수 : -0.0034%</div>
+      <div class="data-line">
+        <span style="color:#ffffff;">현재 지수 : </span><span class="green">+0.0508%</span>
+      </div>
     </div>
   </div>
 </body>

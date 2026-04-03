@@ -14,10 +14,29 @@ from playwright.async_api import async_playwright
 
 BLOG_ID = "fireant_korea"
 PASSWORD = "wnFhT9"
-LOG_NO_DELETE = 224236031591
-IMAGE_PATH = "/tmp/openclaw/uploads/daily-report-20260331-correct.jpg"
-POST_TITLE = "📌 [불개미 일일시황] 2026.03.31 (월)"
-POST_TEXT = "불개미 일일시황 | 2026.03.31 (KST)\n\n[1] BTC ETH 유출입\n• BTC: +$69.44M (순유입)\n• ETH: +$4.96M (순유입)\n• ETF 데이터는 마지막 거래일 기준\n\n[2] 미결제약정 추이 (24시간 기준)\n• BTC 24시간: -0.75%\n• ETH 24시간: +0.27%\n\n[3] DAT 추이\n• WEEKLY NET INFLOW: $72.83K\n\n[4] 코인베이스 프리미엄\n• 현재 지수: -0.0034%\n\n[5] 요약\nBTC·ETH ETF 모두 소폭 순유입으로 전환됐으나 DAT 주간 유입이 $72.83K로 급감해 기관 매수세가 사실상 멈춘 상태다. CB 프리미엄 -0.0034%로 미국 프리미엄이 거의 소멸돼 있어 당분간 추세 전환보다는 관망 구도가 이어질 가능성이 높다."
+LOG_NO_DELETE = None
+IMAGE_PATH = "/tmp/openclaw/uploads/daily_blog_20260403.png"
+POST_TITLE = "📌 [불개미 일일시황] 2026.04.03 (금)"
+POST_TEXT = """📌 불개미 일일시황 | 2026.04.03 (KST)
+
+1️⃣ BTC ETH 유출입
+• BTC: +$8.99M (순유입)
+• ETH: -$71.17M (순유출)
+• ETF 데이터는 마지막 거래일 기준
+
+2️⃣ 미결제약정 추이 (24시간 기준)
+• BTC 24시간: -3.85%
+• ETH 24시간: -9.84%
+
+3️⃣ DAT 추이
+• WEEKLY NET INFLOW: $72.83K
+
+4️⃣ 코인베이스 프리미엄
+• 현재 지수: +0.0508%
+
+5️⃣ 요약
+BTC ETF는 소폭 순유입을 기록했지만 ETH ETF는 큰 폭 순유출이 발생해 자금 흐름이 엇갈렸습니다.
+미결제약정은 BTC·ETH 모두 24시간 기준 하락해 레버리지 포지션이 정리되는 흐름이며, 코인베이스 프리미엄은 플러스권을 유지했습니다."""
 
 
 async def do_login(page):
