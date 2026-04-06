@@ -829,6 +829,38 @@ async def reward_receive(update: Update, context: ContextTypes.DEFAULT_TYPE):
             (bithumb_wallet, user_id)
         )
 
+    # Google Sheets K열 업데이트 (비동기 스레드)
+    try:
+        def update_reward_sheet():
+            try:
+                TOKEN = '/Users/fireant/.openclaw/workspace/secrets/google-bridge34-token.json'
+                SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+                SHEET_ID = GSHEETS_SHEET_ID
+                creds = Credentials.from_authorized_user_file(TOKEN, SCOPES)
+                if creds.expired and creds.refresh_token:
+                    creds.refresh(Request())
+                service = gbuild('sheets', 'v4', credentials=creds)
+                sheet_name = GSHEETS_RANGE.split('!')[0]
+                result = service.spreadsheets().values().get(
+                    spreadsheetId=SHEET_ID, range=f'{sheet_name}!B:B'
+                ).execute()
+                values = result.get('values', [])
+                for i, row in enumerate(values):
+                    if row and row[0] == str(user_id):
+                        # K열 (11번째) 업데이트
+                        service.spreadsheets().values().update(
+                            spreadsheetId=SHEET_ID,
+                            range=f'{sheet_name}!K{i+1}',
+                            valueInputOption='RAW',
+                            body={'values': [[bithumb_wallet]]}
+                        ).execute()
+                        break
+            except Exception as e:
+                logging.getLogger(__name__).error(f"Sheets bithumb_wallet 업데이트 오류: {e}")
+        threading.Thread(target=update_reward_sheet, daemon=True).start()
+    except Exception:
+        pass
+
     await update.message.reply_text(
         f"✅ 빗썸 Eigen 입금주소가 등록되었습니다!\n\n"
         f"📋 등록된 주소: `{bithumb_wallet}`\n\n"
