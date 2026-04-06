@@ -808,12 +808,11 @@ async def cmd_reward(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         f"🪙 *Eigen Cloud 리워드 수령 주소 입력*\n\n"
         f"현재 등록된 주소: `{current}`\n\n"
-        "빗썸 거래소의 **Eigen 코인 입금 주소**를 입력해주세요.\n\n"
+        "빗썸 거래소의 **Eigen 코인 입금 주소**를 제출해주세요.\n\n"
         "📌 입력 방법:\n"
         "1. 빗썸 앱 → 입금 → Eigen 검색\n"
         "2. 입금 주소 복사 후 여기에 붙여넣기\n\n"
-        "⚠️ 반드시 빗썸 거래소의 Eigen 입금 주소를 입력하세요.\n"
-        "개인 지갑 주소로 보내면 수령이 불가합니다.",
+        "✅ 빗썸 Eigen 입금 주소를 그대로 붙여넣기 해주시면 됩니다!",
         parse_mode="Markdown"
     )
     return REWARD_INPUT
