@@ -23,7 +23,7 @@ try:
 except ImportError:
     GSHEETS_AVAILABLE = False
 
-GSHEETS_TOKEN   = '/Users/fireant/.openclaw/workspace/secrets/google-token.json'
+GSHEETS_TOKEN   = '/Users/fireant/.openclaw/workspace/secrets/google-bridge34-token.json'
 GSHEETS_SCOPES  = ['https://www.googleapis.com/auth/spreadsheets']
 GSHEETS_SHEET_ID = '1prtoKycManbOj-HoMnzZ68kl6VEEm3h5vvvTUzK6QHs'
 GSHEETS_RANGE    = 'Sheet1!A:J'
