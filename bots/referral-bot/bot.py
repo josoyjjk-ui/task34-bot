@@ -148,6 +148,7 @@ INF_REALNAME = 14  # 빗썸 실명 입력 상태
 INF_WALLET   = 15  # EVM 지갑주소 입력 상태
 INF_EDIT_CONFIRM = 20  # 수정 확인 대기 상태
 WALLET_INPUT = 21      # /wallet 커맨드 상태
+REWARD_INPUT = 22      # /reward 커맨드 상태
 
 # ── DB ───────────────────────────────────────────────────────────────────────
 @contextmanager
@@ -212,6 +213,11 @@ def init_db():
             conn.execute("ALTER TABLE user_info ADD COLUMN wallet TEXT")
         except Exception:
             pass  # 이미 존재하면 무시
+        # bithumb_wallet 컬럼 추가 (이미 있으면 무시)
+        try:
+            conn.execute("ALTER TABLE user_info ADD COLUMN bithumb_wallet TEXT")
+        except Exception:
+            pass
     logger.info("DB 초기화 완료: %s", DB_PATH)
 
 
@@ -779,6 +785,60 @@ async def wallet_receive(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ConversationHandler.END
 
 
+async def cmd_reward(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """빗썸 Eigen 코인 입금주소 수집 (/reward 명령어)"""
+    if update.effective_chat.type != "private":
+        return ConversationHandler.END
+
+    user_id = update.effective_user.id
+
+    # user_info 등록 여부 확인
+    with get_db() as conn:
+        existing = conn.execute(
+            "SELECT bithumb_wallet FROM user_info WHERE user_id=? AND agreed=1", (user_id,)
+        ).fetchone()
+
+    if not existing:
+        await update.message.reply_text(
+            "⚠️ 먼저 /inform 으로 정보를 제출해주세요.",
+        )
+        return ConversationHandler.END
+
+    current = existing['bithumb_wallet'] or '미입력'
+    await update.message.reply_text(
+        f"🪙 *Eigen Cloud 리워드 수령 주소 입력*\n\n"
+        f"현재 등록된 주소: `{current}`\n\n"
+        "빗썸 거래소의 **Eigen 코인 입금 주소**를 입력해주세요.\n\n"
+        "📌 입력 방법:\n"
+        "1. 빗썸 앱 → 입금 → Eigen 검색\n"
+        "2. 입금 주소 복사 후 여기에 붙여넣기\n\n"
+        "⚠️ 반드시 빗썸 거래소의 Eigen 입금 주소를 입력하세요.\n"
+        "개인 지갑 주소로 보내면 수령이 불가합니다.",
+        parse_mode="Markdown"
+    )
+    return REWARD_INPUT
+
+
+async def reward_receive(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """빗썸 Eigen 입금주소 저장"""
+    bithumb_wallet = update.message.text.strip()
+    user_id = update.effective_user.id
+
+    with get_db() as conn:
+        conn.execute(
+            "UPDATE user_info SET bithumb_wallet=? WHERE user_id=?",
+            (bithumb_wallet, user_id)
+        )
+
+    await update.message.reply_text(
+        f"✅ 빗썸 Eigen 입금주소가 등록되었습니다!\n\n"
+        f"📋 등록된 주소: `{bithumb_wallet}`\n\n"
+        "주소가 잘못된 경우 /reward 로 다시 입력할 수 있습니다.",
+        parse_mode="Markdown"
+    )
+    return ConversationHandler.END
+
+
 async def cmd_export_inform(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """관리자 전용: /export_inform — 정보 수집 결과 CSV 다운로드"""
     if update.effective_user.id != ADMIN_ID:
@@ -836,6 +896,34 @@ async def cmd_points(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         f"🏆 {user.first_name}님의 포인트\n"
         f"현재 포인트: {row['points']}점"
+    )
+
+
+async def cmd_myinfo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.effective_chat.type != "private":
+        return
+
+    user_id = update.effective_user.id
+    with get_db() as conn:
+        info = conn.execute(
+            "SELECT email, telegram_id, phone, real_name, wallet, bithumb_wallet, submitted_at FROM user_info WHERE user_id=? AND agreed=1",
+            (user_id,)
+        ).fetchone()
+
+    if not info:
+        await update.message.reply_text("⚠️ 아직 제출된 정보가 없습니다. /inform 으로 먼저 정보를 제출해주세요.")
+        return
+
+    await update.message.reply_text(
+        "📋 *내 정보 조회*\n\n"
+        f"📧 이메일: {info['email']}\n"
+        f"💬 텔레그램: {info['telegram_id']}\n"
+        f"📱 휴대전화: {info['phone']}\n"
+        f"👤 빗썸 실명: {info['real_name'] or '-'}\n"
+        f"💎 EVM 지갑: {info['wallet'] or '미입력'}\n"
+        f"🪙 빗썸 Eigen 입금주소: {info['bithumb_wallet'] or '미입력'}\n"
+        f"🕒 제출일시: {info['submitted_at']}",
+        parse_mode="Markdown"
     )
 
 
@@ -901,15 +989,21 @@ async def cmd_leaderboard(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def cmd_export(update: Update, context: ContextTypes.DEFAULT_TYPE):
     with get_db() as conn:
         rows = conn.execute(
-            "SELECT user_id, username, first_name, points, referrer_id, registered_at FROM users ORDER BY points DESC"
+            """
+            SELECT u.user_id, u.username, u.first_name, u.points, u.referrer_id, u.registered_at,
+                   i.bithumb_wallet
+            FROM users u
+            LEFT JOIN user_info i ON i.user_id = u.user_id
+            ORDER BY u.points DESC
+            """
         ).fetchall()
 
     buf = io.StringIO()
     writer = csv.writer(buf)
-    writer.writerow(["user_id", "username", "first_name", "points", "referrer_id", "registered_at"])
+    writer.writerow(["user_id", "username", "first_name", "points", "referrer_id", "registered_at", "빗썸Eigen주소"])
     for row in rows:
         writer.writerow([row["user_id"], row["username"], row["first_name"],
-                         row["points"], row["referrer_id"], row["registered_at"]])
+                         row["points"], row["referrer_id"], row["registered_at"], row["bithumb_wallet"] or ""])
 
     buf.seek(0)
     filename = f"referral_export_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
@@ -1183,9 +1277,22 @@ def main():
     )
     app.add_handler(wallet_conv)
 
+    # /reward ConversationHandler
+    reward_conv = ConversationHandler(
+        entry_points=[CommandHandler("reward", cmd_reward)],
+        states={
+            REWARD_INPUT: [MessageHandler(filters.TEXT & ~filters.COMMAND, reward_receive)],
+        },
+        fallbacks=[CommandHandler("cancel", lambda u, c: ConversationHandler.END)],
+        per_user=True,
+        per_chat=True,
+    )
+    app.add_handler(reward_conv)
+
     # 유저 명령어
     app.add_handler(CommandHandler("points", cmd_points))
     app.add_handler(CommandHandler("setreferrer", cmd_setreferrer))
+    app.add_handler(CommandHandler("myinfo", cmd_myinfo))
     app.add_handler(CommandHandler("rank", cmd_rank))
 
     # 관리자 명령어
