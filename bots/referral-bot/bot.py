@@ -17,6 +17,7 @@ from contextlib import contextmanager
 # Google Sheets 연동
 try:
     from google.oauth2.credentials import Credentials
+    from google.oauth2 import service_account
     from google.auth.transport.requests import Request
     from googleapiclient.discovery import build as gbuild
     GSHEETS_AVAILABLE = True
@@ -24,9 +25,34 @@ except ImportError:
     GSHEETS_AVAILABLE = False
 
 GSHEETS_TOKEN   = '/Users/fireant/.openclaw/workspace/secrets/google-bridge34-token.json'
+GSHEETS_SERVICE_ACCOUNT = '/Users/fireant/.openclaw/workspace/secrets/fireant-workspace-sa.json'
 GSHEETS_SCOPES  = ['https://www.googleapis.com/auth/spreadsheets']
 GSHEETS_SHEET_ID = '1prtoKycManbOj-HoMnzZ68kl6VEEm3h5vvvTUzK6QHs'
 GSHEETS_RANGE    = 'Sheet1!A:J'
+
+def build_sheets_service():
+    """가능하면 서비스계정 우선, 실패 시 OAuth 토큰 사용"""
+    last_error = None
+
+    if GSHEETS_AVAILABLE and os.path.exists(GSHEETS_SERVICE_ACCOUNT):
+        try:
+            creds = service_account.Credentials.from_service_account_file(
+                GSHEETS_SERVICE_ACCOUNT, scopes=GSHEETS_SCOPES
+            )
+            return gbuild('sheets', 'v4', credentials=creds, cache_discovery=False)
+        except Exception as e:
+            last_error = e
+
+    try:
+        creds = Credentials.from_authorized_user_file(GSHEETS_TOKEN, GSHEETS_SCOPES)
+        if creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        return gbuild('sheets', 'v4', credentials=creds, cache_discovery=False)
+    except Exception as e:
+        if last_error:
+            logging.getLogger(__name__).error(f"Sheets 서비스계정/OAuth 모두 실패: SA={last_error}, OAuth={e}")
+        raise
+
 
 def append_to_sheet(row: list):
     """Google Sheets에 행 추가 (비동기 스레드로 실행)"""
@@ -34,10 +60,7 @@ def append_to_sheet(row: list):
         return
     def _write():
         try:
-            creds = Credentials.from_authorized_user_file(GSHEETS_TOKEN, GSHEETS_SCOPES)
-            if creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-            service = gbuild('sheets', 'v4', credentials=creds)
+            service = build_sheets_service()
             service.spreadsheets().values().append(
                 spreadsheetId=GSHEETS_SHEET_ID,
                 range=GSHEETS_RANGE,
@@ -54,11 +77,7 @@ def delete_from_sheet(user_id: int):
     if not GSHEETS_AVAILABLE:
         return
     try:
-        token_path = GSHEETS_TOKEN
-        creds = Credentials.from_authorized_user_file(token_path, GSHEETS_SCOPES)
-        if creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        service = gbuild('sheets', 'v4', credentials=creds)
+        service = build_sheets_service()
 
         # 시트명 파싱 (GSHEETS_RANGE에서 '!' 앞부분)
         sheet_name = GSHEETS_RANGE.split('!')[0]
@@ -751,10 +770,7 @@ async def wallet_receive(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 SHEET_ID = GSHEETS_SHEET_ID
                 TOKEN = GSHEETS_TOKEN
                 SCOPES = GSHEETS_SCOPES
-                creds = Credentials.from_authorized_user_file(TOKEN, SCOPES)
-                if creds.expired and creds.refresh_token:
-                    creds.refresh(Request())
-                service = gbuild('sheets', 'v4', credentials=creds)
+                service = build_sheets_service()
                 sheet_name = GSHEETS_RANGE.split('!')[0]
                 result = service.spreadsheets().values().get(
                     spreadsheetId=SHEET_ID, range=f'{sheet_name}!B:B'
@@ -836,10 +852,7 @@ async def reward_receive(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 TOKEN = '/Users/fireant/.openclaw/workspace/secrets/google-bridge34-token.json'
                 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
                 SHEET_ID = GSHEETS_SHEET_ID
-                creds = Credentials.from_authorized_user_file(TOKEN, SCOPES)
-                if creds.expired and creds.refresh_token:
-                    creds.refresh(Request())
-                service = gbuild('sheets', 'v4', credentials=creds)
+                service = build_sheets_service()
                 sheet_name = GSHEETS_RANGE.split('!')[0]
                 result = service.spreadsheets().values().get(
                     spreadsheetId=SHEET_ID, range=f'{sheet_name}!B:B'
