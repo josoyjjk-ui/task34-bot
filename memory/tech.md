@@ -37,14 +37,20 @@
 - 상태: 미해결 (OpenClaw upstream 이슈)
 - 대응: 중요 편집은 python 스크립트로 처리해 Edit 도구 실패 최소화
 
-## 에이전트 모델 설정 (2026-03-23 확정)
-- 딸수 (main): `anthropic/claude-sonnet-4-6`
-- 참모 (chammo): `anthropic/claude-sonnet-4-6`
-- 공병 (ops): `openai-codex/gpt-5.3-codex`
-- 실제 테스트로 확인 완료
+## 에이전트 모델 설정 (2026-04-08 23:37 KST 확정 — 실 테스트 검증)
+- 딸수 (main): `anthropic/claude-sonnet-4-6` (fallback: `openai-codex/gpt-5.4`)
+- 참모 (chammo): `google/gemini-3-pro-preview`
+- 공병 (ops): `openai-codex/gpt-5.4`
+- 작전장교 (inspector): `anthropic/claude-opus-4-6`
+- 실제 서브에이전트 spawn 테스트로 검증 완료, 게이트웨이 재시작 적용
 
 ## Google 이미지 생성 키 교체 시 주의사항 (2026-03-30)
 - auth-profiles.json 키 교체 후 게이트웨이 SIGUSR1 재시작으로는 런타임 캐시 미갱신
 - image_generate 툴이 구 키를 계속 사용 → "API key expired" 반복 오류
 - **해결**: 키 교체 후 반드시 cold restart (stop → start) 또는 API 직접 호출로 우회
 - Google API 직접 호출: `gemini-3.1-flash-image-preview:generateContent` + `responseModalities: ["IMAGE","TEXT"]`
+
+## OAuth 인증 및 백그라운드 프로세스 (2026-04-08)
+- **금지**: 에이전트 환경에서 OAuth 인증 시 `run_local_server` 사용을 절대 금지합니다 (콜백 서버 유지 중 세션 끊김 발생).
+- **권장**: 무조건 인증 코드를 직접 복사해서 입력받는 OOB(수동 코드 복사) 방식으로 고정합니다.
+- **규칙**: 백그라운드 대기가 필요한 작업 시 턴(Turn)을 종료하고 대기하지 않습니다. 내 턴 안에서 `process poll`로 끝까지 대기하며, 30초가 넘어가면 반드시 `message` 툴로 중간보고를 발송합니다.
