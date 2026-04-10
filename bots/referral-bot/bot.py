@@ -871,9 +871,9 @@ async def cmd_reward(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     current = (existing['bithumb_wallet'] if existing else None) or '미입력'
     await update.message.reply_text(
-        f"🪙 *빗썸 Eigen 지갑주소를 입력하세요.*\n\n"
+        f"🪙 빗썸 Eigen 지갑주소를 입력하세요.\n\n"
         f"현재 등록된 주소: `{current}`\n\n"
-        "빗썸 거래소의 **Eigen 코인 입금 주소**를 붙여넣기 해주세요.",
+        "새로 입력이 가능하며, 빗썸 거래소의 Eigen 코인 입금 주소를 붙여넣기 해주세요.",
         parse_mode="Markdown"
     )
     return REWARD_INPUT
