@@ -1,9 +1,35 @@
 {
   "date": "2026-04-10",
-  "BTC_ETF": "+$358.1M",
-  "ETH_ETF": "+$85.2M",
-  "BTC_OI_24h": "+3.58%",
-  "ETH_OI_24h": "-1.93%",
-  "DAT_WEEKLY_NET_INFLOW": "+$224M",
-  "Coinbase_Premium": "+0.0192%"
+  "collected_at": "2026-04-10T20:31:58.979876+09:00",
+  "BTC_ETF": "N/A",
+  "ETH_ETF": "N/A",
+  "BTC_OI_24h": "N/A",
+  "ETH_OI_24h": "N/A",
+  "DAT_WEEKLY_NET_INFLOW": "N/A",
+  "Coinbase_Premium": "+0.011%",
+  "sources": {
+    "BTC_ETF": null,
+    "ETH_ETF": null,
+    "BTC_OI": null,
+    "ETH_OI": null,
+    "DAT": null,
+    "CB_PREM": {
+      "value": "+0.011%",
+      "source": "starchild",
+      "data_date": "2026-04-08",
+      "fetched_at": "2026-04-10T20:31:59.253153+09:00"
+    }
+  },
+  "validation": {
+    "all_same_period": true,
+    "stale_sources": [],
+    "failed_sources": [
+      "BTC_ETF",
+      "ETH_ETF",
+      "BTC_OI",
+      "ETH_OI",
+      "DAT"
+    ],
+    "status": "partial"
+  }
 }
