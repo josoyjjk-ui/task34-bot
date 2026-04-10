@@ -1,11 +1,22 @@
-## 시스템 업데이트 (2026-04-10)
-- 모델 정책 확정: 딸수(zai/glm-5.1), 참모(google/gemini-3.1-flash-lite-preview), 공병(openai-codex/gpt-5.3-codex), 작전장교(anthropic/claude-opus-4-6)
-- gemini-2.5-flash: TPM 한도 초과로 fallback에서 제거, 사용 금지
-- 크론잡: payload.model 하드코딩 금지, agent defaults 따름
-- 크론잡 배치: 콘텐츠→chammo, 인프라→ops, 모니터링→inspector, 나머지→main
-- sessions_spawn: 모델 오버라이드 금지, agentId만 지정
-- web_search: Gemini 기반 동작 중
-- auth-profiles: ZAI/Anthropic/Google 키 등록 완료
+## 최종 아키텍처 (2026-04-11)
+
+### 에이전트 체제
+- **유일 에이전트**: 딸수(main) 1명만 존재
+- **삭제됨**: ops(공병), chammo(참모), inspector(작전장교) — 전부 없음
+
+### 업무 처리 규칙 (절대)
+- 해병님 지시 → 딸수 → **harness_execute** → 완료
+- 간단한 질문만 직접 답변
+- **sessions_spawn 사용 금지** (에이전트 없음)
+- **harness_execute 우회 금지**
+- **직접 도구 호출로 작업 처리 금지**
+
+### 하네스 내부 별칭
+- [공병] = 코딩 Worker (GLM-5.1, 파일생성/코드실행)
+- [참모] = 리서치 Worker (Gemini Flash, 웹검색/분석)
+- 작전장교 = 1st Reviewer (Codex 5.3)
+- 정보장교 = 2nd Reviewer (Gemini Pro)
+- Memory V3 = 자동 컨텍스트 (port 3457)
 
 ## Problem-Solving State
 - **Goal**: 일일시황 데이터 수집 및 이미지 생성, 보고서 작성
