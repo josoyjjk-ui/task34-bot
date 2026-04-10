@@ -1,48 +1,48 @@
 {
   "date": "2026-04-10",
-  "collected_at": "2026-04-10T20:47:23.288716+09:00",
-  "BTC_ETF": "-$159.10M",
-  "ETH_ETF": "-$64.70M",
-  "BTC_OI_24h": "+2.32%",
-  "ETH_OI_24h": "+3.5%",
+  "collected_at": "2026-04-10T22:42:49.213641+09:00",
+  "BTC_ETF": "+$358M",
+  "ETH_ETF": "+$85.19M",
+  "BTC_OI_24h": "+2.60%",
+  "ETH_OI_24h": "+0.40%",
   "DAT_WEEKLY_NET_INFLOW": "+$224M",
-  "Coinbase_Premium": "+0.011%",
+  "Coinbase_Premium": "-0.0301%",
   "sources": {
     "BTC_ETF": {
-      "value": "-$159.10M",
+      "value": "+$358M",
       "source": "sosovalue",
-      "data_date": "2026-04-08",
-      "fetched_at": "2026-04-10T20:47:23.288716+09:00"
+      "data_date": "2026-04-10",
+      "fetched_at": "2026-04-10T22:42:49.213641+09:00"
     },
     "ETH_ETF": {
-      "value": "-$64.70M",
+      "value": "+$85.19M",
       "source": "sosovalue",
-      "data_date": "2026-04-08",
-      "fetched_at": "2026-04-10T20:47:23.288716+09:00"
+      "data_date": "2026-04-10",
+      "fetched_at": "2026-04-10T22:42:49.213641+09:00"
     },
     "BTC_OI_24h": {
-      "value": "+2.32%",
+      "value": "+2.60%",
       "source": "coinglass",
-      "data_date": "2026-04-08",
-      "fetched_at": "2026-04-10T20:47:23.288716+09:00"
+      "data_date": "2026-04-10",
+      "fetched_at": "2026-04-10T22:42:49.213641+09:00"
     },
     "ETH_OI_24h": {
-      "value": "+3.5%",
+      "value": "+0.40%",
       "source": "coinglass",
-      "data_date": "2026-04-08",
-      "fetched_at": "2026-04-10T20:47:23.288716+09:00"
+      "data_date": "2026-04-10",
+      "fetched_at": "2026-04-10T22:42:49.213641+09:00"
     },
     "DAT_WEEKLY_NET_INFLOW": {
       "value": "+$224M",
       "source": "coinglass",
-      "data_date": "2026-04-08",
-      "fetched_at": "2026-04-10T20:47:23.288716+09:00"
+      "data_date": "2026-04-10",
+      "fetched_at": "2026-04-10T22:42:49.213641+09:00"
     },
     "Coinbase_Premium": {
-      "value": "+0.011%",
+      "value": "-0.0301%",
       "source": "starchild",
-      "data_date": "2026-04-08",
-      "fetched_at": "2026-04-10T20:47:23.288716+09:00"
+      "data_date": "2026-04-10",
+      "fetched_at": "2026-04-10T22:42:49.213641+09:00"
     }
   },
   "validation": {
