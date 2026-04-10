@@ -2,11 +2,13 @@
 """
 Referral Bot - 텔레그램 채널 친구초대 이벤트 봇
 Python 3 + python-telegram-bot v20+ (async)
+이벤트 격리 지원 (events 테이블 기반)
 """
 
 import os
 import csv
 import io
+import json
 import logging
 import sqlite3
 import subprocess
@@ -54,15 +56,27 @@ def build_sheets_service():
         raise
 
 
-def append_to_sheet(row: list):
+def get_sheets_id(event_id: int = None) -> str:
+    """이벤트별 sheets_id 로드. 없으면 기본값 사용."""
+    if event_id:
+        with get_db() as conn:
+            row = conn.execute("SELECT sheets_id FROM events WHERE id=?", (event_id,)).fetchone()
+            if row and row["sheets_id"]:
+                return row["sheets_id"]
+    return GSHEETS_SHEET_ID
+
+
+def append_to_sheet(row: list, event_id: int = None):
     """Google Sheets에 행 추가 (비동기 스레드로 실행)"""
     if not GSHEETS_AVAILABLE:
         return
+    sheet_id = get_sheets_id(event_id)
+
     def _write():
         try:
             service = build_sheets_service()
             service.spreadsheets().values().append(
-                spreadsheetId=GSHEETS_SHEET_ID,
+                spreadsheetId=sheet_id,
                 range=GSHEETS_RANGE,
                 valueInputOption='USER_ENTERED',
                 insertDataOption='INSERT_ROWS',
@@ -72,33 +86,26 @@ def append_to_sheet(row: list):
             logging.getLogger(__name__).error(f"Sheets 기록 실패: {e}")
     threading.Thread(target=_write, daemon=True).start()
 
-def delete_from_sheet(user_id: int):
+def delete_from_sheet(user_id: int, event_id: int = None):
     """Sheets에서 user_id가 일치하는 행 삭제 (B열 = user_id)"""
     if not GSHEETS_AVAILABLE:
         return
+    sheet_id = get_sheets_id(event_id)
     try:
         service = build_sheets_service()
-
-        # 시트명 파싱 (GSHEETS_RANGE에서 '!' 앞부분)
         sheet_name = GSHEETS_RANGE.split('!')[0]
-
-        # 전체 데이터 읽기 (A:B)
         result = service.spreadsheets().values().get(
-            spreadsheetId=GSHEETS_SHEET_ID,
+            spreadsheetId=sheet_id,
             range=f'{sheet_name}!A:B'
         ).execute()
         values = result.get('values', [])
-
-        # user_id 매칭 행 찾기 (B열 = index 1)
         rows_to_delete = []
         for i, row in enumerate(values):
             if len(row) > 1 and row[1] == str(user_id):
                 rows_to_delete.append(i)
-
-        # 뒤에서부터 삭제 (인덱스 밀림 방지)
         for row_idx in reversed(rows_to_delete):
             service.spreadsheets().batchUpdate(
-                spreadsheetId=GSHEETS_SHEET_ID,
+                spreadsheetId=sheet_id,
                 body={
                     'requests': [{
                         'deleteDimension': {
@@ -163,11 +170,11 @@ INF_EMAIL    = 10
 INF_TG       = 11
 INF_PHONE    = 12
 INF_AGREE    = 13
-INF_REALNAME = 14  # 빗썸 실명 입력 상태
-INF_WALLET   = 15  # EVM 지갑주소 입력 상태
-INF_EDIT_CONFIRM = 20  # 수정 확인 대기 상태
-WALLET_INPUT = 21      # /wallet 커맨드 상태
-REWARD_INPUT = 22      # /reward 커맨드 상태
+INF_REALNAME = 14
+INF_WALLET   = 15
+INF_EDIT_CONFIRM = 20
+WALLET_INPUT = 21
+REWARD_INPUT = 22
 
 # ── DB ───────────────────────────────────────────────────────────────────────
 @contextmanager
@@ -184,23 +191,38 @@ def get_db():
         conn.close()
 
 
+def get_active_event_id() -> int:
+    """현재 활성 이벤트 ID 반환. 없으면 1."""
+    with get_db() as conn:
+        row = conn.execute("SELECT id FROM events WHERE is_active=1 ORDER BY id DESC LIMIT 1").fetchone()
+    return row["id"] if row else 1
+
+
+def get_active_event():
+    """현재 활성 이벤트 전체 정보 반환."""
+    with get_db() as conn:
+        return conn.execute("SELECT * FROM events WHERE is_active=1 ORDER BY id DESC LIMIT 1").fetchone()
+
+
 def init_db():
     with get_db() as conn:
         conn.executescript("""
-            CREATE TABLE IF NOT EXISTS users (
-                user_id     INTEGER PRIMARY KEY,
-                username    TEXT,
-                first_name  TEXT,
-                points      INTEGER DEFAULT 0,
-                referrer_id INTEGER,
-                ever_registered INTEGER DEFAULT 0,
-                registered_at TEXT DEFAULT (datetime('now', 'localtime')),
-                FOREIGN KEY (referrer_id) REFERENCES users(user_id)
+            CREATE TABLE IF NOT EXISTS events (
+                id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                name        TEXT NOT NULL,
+                start_date  TEXT,
+                end_date    TEXT,
+                channels    TEXT,
+                welcome_msg TEXT,
+                sheets_id   TEXT,
+                is_active   INTEGER DEFAULT 0,
+                created_at  TEXT DEFAULT (datetime('now','localtime'))
             );
 
             CREATE TABLE IF NOT EXISTS channels (
                 channel_id  INTEGER PRIMARY KEY,
                 channel_name TEXT,
+                event_id    INTEGER REFERENCES events(id) DEFAULT 1,
                 added_at    TEXT DEFAULT (datetime('now', 'localtime'))
             );
 
@@ -212,106 +234,142 @@ def init_db():
 
             INSERT OR IGNORE INTO event_period (id, start_date, end_date)
             VALUES (1, NULL, NULL);
-
-            CREATE TABLE IF NOT EXISTS user_info (
-                user_id     INTEGER PRIMARY KEY,
-                email       TEXT,
-                telegram_id TEXT,
-                phone       TEXT,
-                agreed      INTEGER DEFAULT 0,
-                submitted_at TEXT DEFAULT (datetime('now', 'localtime'))
-            );
         """)
-        # real_name 컬럼 추가 (이미 있으면 무시)
-        try:
-            conn.execute("ALTER TABLE user_info ADD COLUMN real_name TEXT")
-        except sqlite3.OperationalError:
-            pass  # 이미 존재
-        # wallet 컬럼 추가 (이미 있으면 무시)
-        try:
-            conn.execute("ALTER TABLE user_info ADD COLUMN wallet TEXT")
-        except Exception:
-            pass  # 이미 존재하면 무시
-        # bithumb_wallet 컬럼 추가 (이미 있으면 무시)
-        try:
-            conn.execute("ALTER TABLE user_info ADD COLUMN bithumb_wallet TEXT")
-        except Exception:
-            pass
+
+        # users 테이블 — 이미 마이그레이션된 스키마면 건드리지 않음
+        conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='users'")
+        users_exists = conn.fetchone()
+        if not users_exists:
+            conn.executescript("""
+                CREATE TABLE users (
+                    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id     INTEGER NOT NULL,
+                    event_id    INTEGER NOT NULL DEFAULT 1 REFERENCES events(id),
+                    username    TEXT,
+                    first_name  TEXT,
+                    points      INTEGER DEFAULT 0,
+                    referrer_id INTEGER,
+                    ever_registered INTEGER DEFAULT 0,
+                    registered_at TEXT DEFAULT (datetime('now', 'localtime')),
+                    UNIQUE(user_id, event_id)
+                );
+            """)
+
+        # user_info 테이블
+        conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='user_info'")
+        ui_exists = conn.fetchone()
+        if not ui_exists:
+            conn.executescript("""
+                CREATE TABLE user_info (
+                    user_id     INTEGER NOT NULL,
+                    event_id    INTEGER NOT NULL DEFAULT 1 REFERENCES events(id),
+                    email       TEXT,
+                    telegram_id TEXT,
+                    phone       TEXT,
+                    agreed      INTEGER DEFAULT 0,
+                    submitted_at TEXT DEFAULT (datetime('now', 'localtime')),
+                    real_name   TEXT,
+                    wallet      TEXT,
+                    bithumb_wallet TEXT,
+                    PRIMARY KEY (user_id, event_id)
+                );
+            """)
+
     logger.info("DB 초기화 완료: %s", DB_PATH)
 
 
 # ── 헬퍼 ────────────────────────────────────────────────────────────────────
 def is_event_active() -> bool:
-    with get_db() as conn:
-        row = conn.execute("SELECT start_date, end_date FROM event_period WHERE id=1").fetchone()
-    if not row or (row["start_date"] is None and row["end_date"] is None):
-        return True  # 기간 미설정 = 상시 운영
+    event = get_active_event()
+    if not event:
+        return True
+    if event["start_date"] is None and event["end_date"] is None:
+        return True
     now = datetime.now().strftime("%Y-%m-%d")
-    start = row["start_date"] or "0000-00-00"
-    end   = row["end_date"]   or "9999-12-31"
+    start = event["start_date"] or "0000-00-00"
+    end   = event["end_date"]   or "9999-12-31"
     return start <= now <= end
 
 
-def get_user(user_id: int):
+def get_user(user_id: int, event_id: int = None):
+    if event_id is None:
+        event_id = get_active_event_id()
     with get_db() as conn:
-        return conn.execute("SELECT * FROM users WHERE user_id=?", (user_id,)).fetchone()
+        return conn.execute(
+            "SELECT * FROM users WHERE user_id=? AND event_id=?",
+            (user_id, event_id)
+        ).fetchone()
 
 
 def register_user(user_id: int, username: str, first_name: str) -> bool:
-    """새 유저 등록. 이미 있으면 False."""
+    """새 유저 등록. 이미 해당 이벤트에 등록됐으면 False."""
+    event_id = get_active_event_id()
     with get_db() as conn:
-        existing = conn.execute("SELECT user_id, ever_registered FROM users WHERE user_id=?", (user_id,)).fetchone()
+        existing = conn.execute(
+            "SELECT id, ever_registered FROM users WHERE user_id=? AND event_id=?",
+            (user_id, event_id)
+        ).fetchone()
         if existing:
             if existing["ever_registered"] == 1:
-                return False  # 이미 등록 완료 (재입장 어뷰징 차단)
-            # 레코드 있으나 미완료 → 업데이트
+                return False
             conn.execute(
-                "UPDATE users SET username=?, first_name=?, points=10, ever_registered=1 WHERE user_id=?",
-                (username, first_name, user_id)
+                "UPDATE users SET username=?, first_name=?, points=10, ever_registered=1 WHERE id=?",
+                (username, first_name, existing["id"])
             )
             return True
         conn.execute(
-            "INSERT INTO users (user_id, username, first_name, points, ever_registered) VALUES (?,?,?,10,1)",
-            (user_id, username, first_name)
+            "INSERT INTO users (user_id, event_id, username, first_name, points, ever_registered) VALUES (?,?,?,?,10,1)",
+            (user_id, event_id, username, first_name)
         )
     return True
 
 
-def set_referrer(user_id: int, referrer_input: str) -> tuple[bool, str, int]:
-    """초대자 설정. referrer_input은 @username 문자열.
-    반환: (성공여부, 메시지, 초대자_user_id)"""
+def set_referrer(user_id: int, referrer_input: str) -> tuple:
+    """초대자 설정. 같은 이벤트 내에서만."""
+    event_id = get_active_event_id()
     username_clean = referrer_input.lstrip("@").strip().lower()
     with get_db() as conn:
-        user = conn.execute("SELECT referrer_id FROM users WHERE user_id=?", (user_id,)).fetchone()
+        user = conn.execute(
+            "SELECT id, referrer_id FROM users WHERE user_id=? AND event_id=?",
+            (user_id, event_id)
+        ).fetchone()
         if not user:
             return False, "먼저 /start로 등록해주세요.", 0
         if user["referrer_id"] is not None:
             return False, "이미 초대자가 등록되어 있습니다.", 0
         referrer = conn.execute(
-            "SELECT user_id, first_name, points FROM users WHERE LOWER(username)=?", (username_clean,)
+            "SELECT user_id, first_name, points FROM users WHERE LOWER(username)=? AND event_id=?",
+            (username_clean, event_id)
         ).fetchone()
         if not referrer:
-            return False, f"@{username_clean} 유저를 찾을 수 없습니다.\n상대방도 먼저 봇에서 /start를 눌러야 합니다.", 0
+            return False, f"@{username_clean} 유저를 찾을 수 없습니다.\n상대방도 먼저 봇에서 /start 를 눌러야 합니다.", 0
         if referrer["user_id"] == user_id:
             return False, "자기 자신을 초대자로 등록할 수 없습니다.", 0
-        conn.execute("UPDATE users SET referrer_id=? WHERE user_id=?", (referrer["user_id"], user_id))
-        conn.execute("UPDATE users SET points = points + 10 WHERE user_id=?", (referrer["user_id"],))  # 초대자 +10
-        conn.execute("UPDATE users SET points = points + 10 WHERE user_id=?", (user_id,))              # 피초대자 +10
+        conn.execute("UPDATE users SET referrer_id=? WHERE id=?", (referrer["user_id"], user["id"]))
+        conn.execute("UPDATE users SET points = points + 10 WHERE user_id=? AND event_id=?", (referrer["user_id"], event_id))
+        conn.execute("UPDATE users SET points = points + 10 WHERE user_id=? AND event_id=?", (user_id, event_id))
         new_points = referrer["points"] + 10
     return True, referrer["first_name"], referrer["user_id"], new_points
 
 
-def get_leaderboard(limit: int = 10):
+def get_leaderboard(limit: int = 10, event_id: int = None):
+    if event_id is None:
+        event_id = get_active_event_id()
     with get_db() as conn:
         return conn.execute(
-            "SELECT user_id, username, first_name, points FROM users ORDER BY points DESC LIMIT ?",
-            (limit,)
+            "SELECT user_id, username, first_name, points FROM users WHERE event_id=? ORDER BY points DESC LIMIT ?",
+            (event_id, limit)
         ).fetchall()
 
 
-def get_all_channels():
+def get_all_channels(event_id: int = None):
+    if event_id is None:
+        event_id = get_active_event_id()
     with get_db() as conn:
-        return conn.execute("SELECT channel_id, channel_name FROM channels").fetchall()
+        return conn.execute(
+            "SELECT channel_id, channel_name FROM channels WHERE event_id=?",
+            (event_id,)
+        ).fetchall()
 
 
 # ── 유저 명령어 ──────────────────────────────────────────────────────────────
@@ -320,21 +378,26 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not user:
         return
 
-    # 그룹챗에서는 무응답
     if update.effective_chat.type != "private":
         return
 
-    # 이벤트 공지 — 항상 먼저 표시
-    await update.message.reply_text(
-        "📣 현재 진행중인 이벤트는 🧩 Eigen Cloud 한국 커뮤니티 릴레이 입장이벤트입니다!\n\n"
-        "✅ 아래 채널에 모두 입장해 주세요!\n\n"
-        "👉 EigenCloud 한국 공지채널: https://t.me/EigenCloudKorea\n"
-        "👉 EigenCloud 한국 커뮤니티: https://t.me/EigenCloud_KR_Community\n"
-        "👉 불개미 채널: https://t.me/fireantcrypto\n"
-        "👉 불개미 대화방: https://t.me/fireantgroup\n\n"
-        "4개 채널 입장 후 아래 절차를 따라주세요!",
-        disable_web_page_preview=True
-    )
+    event_id = get_active_event_id()
+    event = get_active_event()
+
+    # 이벤트 공지 — events.welcome_msg 또는 기본 메시지
+    if event and event["welcome_msg"]:
+        welcome = event["welcome_msg"]
+    else:
+        welcome = (
+            "📣 현재 진행중인 이벤트는 🧩 Eigen Cloud 한국 커뮤니티 릴레이 입장이벤트입니다!\n\n"
+            "✅ 아래 채널에 모두 입장해 주세요!\n\n"
+            "👉 EigenCloud 한국 공지채널: https://t.me/EigenCloudKorea\n"
+            "👉 EigenCloud 한국 커뮤니티: https://t.me/EigenCloud_KR_Community\n"
+            "👉 불개미 채널: https://t.me/fireantcrypto\n"
+            "👉 불개미 대화방: https://t.me/fireantgroup\n\n"
+            "4개 채널 입장 후 아래 절차를 따라주세요!"
+        )
+    await update.message.reply_text(welcome, disable_web_page_preview=True)
 
     is_new = register_user(user.id, user.username or "", user.first_name or "")
 
@@ -356,20 +419,18 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return WAITING_REFERRER
     else:
-        # 이미 등록된 유저 — user_info 제출 여부 확인
         with get_db() as conn:
             info = conn.execute(
-                "SELECT user_id FROM user_info WHERE user_id=? AND agreed=1", (user.id,)
+                "SELECT user_id FROM user_info WHERE user_id=? AND event_id=? AND agreed=1",
+                (user.id, event_id)
             ).fetchone()
 
         if info:
-            # 정보도 이미 제출함
             await update.message.reply_text(
                 f"이미 등록된 유저입니다, {user.first_name}님!\n"
                 f"/points 로 포인트를 확인하세요."
             )
         else:
-            # 등록은 됐지만 정보 미제출
             await update.message.reply_text(
                 f"이미 등록된 유저입니다, {user.first_name}님!\n\n"
                 f"📋 아직 당첨자 정보를 제출하지 않으셨습니다.\n"
@@ -401,7 +462,6 @@ async def receive_referrer_id(update: Update, context: ContextTypes.DEFAULT_TYPE
         await update.message.reply_text(
             f"✅ {msg}님을 초대자로 등록했습니다!\n💰 나에게 +10포인트, 초대자에게도 +10포인트 지급됐습니다."
         )
-        # 초대자에게 알림 DM
         try:
             await context.bot.send_message(
                 chat_id=referrer_uid,
@@ -413,11 +473,10 @@ async def receive_referrer_id(update: Update, context: ContextTypes.DEFAULT_TYPE
                 )
             )
         except Exception:
-            pass  # 초대자가 봇을 시작 안 했을 경우 무시
+            pass
     else:
         await update.message.reply_text(f"❌ {msg}")
 
-    # 초대자 등록 완료 후 → 당첨자 정보 수집 시작
     await update.message.reply_text(
         "📋 *당첨자 정보 입력을 시작합니다!*\n\n"
         "리워드 지급을 위해 아래 정보를 순서대로 입력해주세요.\n\n"
@@ -434,7 +493,6 @@ async def cmd_skip(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("초대자 없이 등록했습니다.")
 
-    # 초대자 없이 등록 후 → 당첨자 정보 수집 시작
     await update.message.reply_text(
         "📋 *당첨자 정보 입력을 시작합니다!*\n\n"
         "리워드 지급을 위해 아래 정보를 순서대로 입력해주세요.\n\n"
@@ -449,7 +507,6 @@ async def cmd_setreferrer(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_chat.type != "private":
         return
 
-    """기존 등록 유저도 초대자를 나중에 입력할 수 있는 명령어. /setreferrer @username"""
     user = update.effective_user
     args = context.args
     if not args:
@@ -497,11 +554,12 @@ async def cmd_inform(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return ConversationHandler.END
 
     user_id = update.effective_user.id
+    event_id = get_active_event_id()
 
-    # 이미 제출한 경우 완료 메시지 재발송
     with get_db() as conn:
         existing = conn.execute(
-            "SELECT email, telegram_id, phone, real_name, wallet FROM user_info WHERE user_id=?", (user_id,)
+            "SELECT email, telegram_id, phone, real_name, wallet FROM user_info WHERE user_id=? AND event_id=?",
+            (user_id, event_id)
         ).fetchone()
     if existing:
         real_name = existing['real_name'] or "-"
@@ -611,6 +669,7 @@ async def inf_agree_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
     query = update.callback_query
     await query.answer()
     user_id = query.from_user.id
+    event_id = get_active_event_id()
 
     if query.data == "inf_agree_no":
         await query.edit_message_text("❌ 개인정보 수집에 동의하지 않아 정보 입력이 취소되었습니다.")
@@ -624,27 +683,31 @@ async def inf_agree_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
     inserted = False
     with get_db() as conn:
-        # 이미 제출 여부 재확인 (동시 요청 방지)
-        existing = conn.execute("SELECT user_id FROM user_info WHERE user_id=?", (user_id,)).fetchone()
+        existing = conn.execute(
+            "SELECT user_id FROM user_info WHERE user_id=? AND event_id=?",
+            (user_id, event_id)
+        ).fetchone()
         if not existing:
             conn.execute(
-                "INSERT INTO user_info (user_id, email, telegram_id, phone, real_name, wallet, agreed) VALUES (?,?,?,?,?,?,1)",
-                (user_id, email, tg, phone, real_name, wallet)
+                "INSERT INTO user_info (user_id, event_id, email, telegram_id, phone, real_name, wallet, agreed) VALUES (?,?,?,?,?,?,?,1)",
+                (user_id, event_id, email, tg, phone, real_name, wallet)
             )
             inserted = True
-        # 포인트 및 순위 조회
-        user_row = conn.execute("SELECT points FROM users WHERE user_id=?", (user_id,)).fetchone()
+        user_row = conn.execute(
+            "SELECT points FROM users WHERE user_id=? AND event_id=?",
+            (user_id, event_id)
+        ).fetchone()
         points = user_row["points"] if user_row else 0
         rank_row = conn.execute(
-            "SELECT COUNT(*)+1 as rank FROM users WHERE points > ?", (points,)
+            "SELECT COUNT(*)+1 as rank FROM users WHERE points > ? AND event_id=?",
+            (points, event_id)
         ).fetchone()
         rank = rank_row["rank"] if rank_row else "-"
 
-    # Google Sheets에 기록 (신규 제출 시에만) — 실패해도 메시지 전송은 반드시 진행
     if inserted:
         try:
             now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            append_to_sheet([now_str, str(user_id), tg, query.from_user.first_name or "", email, phone, real_name, wallet, points, rank])
+            append_to_sheet([now_str, str(user_id), tg, query.from_user.first_name or "", email, phone, real_name, wallet, points, rank], event_id)
         except Exception as e:
             logging.getLogger(__name__).error(f"Sheets 기록 예외: {e}")
 
@@ -665,7 +728,6 @@ async def inf_agree_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
     try:
         await query.edit_message_text(completion_text, parse_mode="Markdown", reply_markup=edit_keyboard)
     except Exception:
-        # edit_message_text 실패 시 (메시지 없거나 타임아웃 등) send_message로 fallback
         await query.get_bot().send_message(
             chat_id=user_id,
             text=completion_text,
@@ -676,7 +738,6 @@ async def inf_agree_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
 
 async def inf_edit_request_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """수정 버튼 클릭 → 확인 절차"""
     query = update.callback_query
     await query.answer()
 
@@ -693,21 +754,18 @@ async def inf_edit_request_callback(update: Update, context: ContextTypes.DEFAUL
 
 
 async def inf_edit_confirm_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """삭제 후 재제출 확인 — inform_conv의 entry_point로 등록"""
     query = update.callback_query
     await query.answer()
     user_id = query.from_user.id
+    event_id = get_active_event_id()
 
-    # DB에서 삭제
     with get_db() as conn:
-        conn.execute("DELETE FROM user_info WHERE user_id=?", (user_id,))
+        conn.execute("DELETE FROM user_info WHERE user_id=? AND event_id=?", (user_id, event_id))
 
-    # Google Sheets에서도 삭제 (스레드로)
-    threading.Thread(target=delete_from_sheet, args=(user_id,), daemon=True).start()
+    threading.Thread(target=delete_from_sheet, args=(user_id, event_id), daemon=True).start()
 
     await query.edit_message_text("🗑️ 기존 정보가 삭제되었습니다. 다시 입력을 시작합니다.")
 
-    # 정보 입력 플로우 재시작
     context.user_data.clear()
     await context.bot.send_message(
         chat_id=user_id,
@@ -723,21 +781,23 @@ async def inf_edit_confirm_callback(update: Update, context: ContextTypes.DEFAUL
 
 
 async def inf_edit_cancel_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """수정 취소"""
     query = update.callback_query
     await query.answer()
     await query.edit_message_text("❌ 수정이 취소되었습니다.")
 
 
 async def cmd_wallet(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """EVM 지갑주소 입력/수정"""
     if update.effective_chat.type != "private":
         return ConversationHandler.END
 
     user_id = update.effective_user.id
+    event_id = get_active_event_id()
 
     with get_db() as conn:
-        existing = conn.execute("SELECT wallet FROM user_info WHERE user_id=? AND agreed=1", (user_id,)).fetchone()
+        existing = conn.execute(
+            "SELECT wallet FROM user_info WHERE user_id=? AND event_id=? AND agreed=1",
+            (user_id, event_id)
+        ).fetchone()
 
     if not existing:
         await update.message.reply_text("먼저 /inform 으로 정보를 제출해주세요.")
@@ -756,31 +816,27 @@ async def cmd_wallet(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def wallet_receive(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """지갑주소 저장"""
     wallet = update.message.text.strip()
     user_id = update.effective_user.id
+    event_id = get_active_event_id()
+    sheet_id = get_sheets_id(event_id)
 
     with get_db() as conn:
-        conn.execute("UPDATE user_info SET wallet=? WHERE user_id=?", (wallet, user_id))
+        conn.execute("UPDATE user_info SET wallet=? WHERE user_id=? AND event_id=?", (wallet, user_id, event_id))
 
-    # Google Sheets 업데이트 (비동기 스레드)
     try:
         def update_sheet():
             try:
-                SHEET_ID = GSHEETS_SHEET_ID
-                TOKEN = GSHEETS_TOKEN
-                SCOPES = GSHEETS_SCOPES
                 service = build_sheets_service()
                 sheet_name = GSHEETS_RANGE.split('!')[0]
                 result = service.spreadsheets().values().get(
-                    spreadsheetId=SHEET_ID, range=f'{sheet_name}!B:B'
+                    spreadsheetId=sheet_id, range=f'{sheet_name}!B:B'
                 ).execute()
                 values = result.get('values', [])
                 for i, row in enumerate(values):
                     if row and row[0] == str(user_id):
-                        # H열 (8번째, 1-based) 업데이트
                         service.spreadsheets().values().update(
-                            spreadsheetId=SHEET_ID,
+                            spreadsheetId=sheet_id,
                             range=f'{sheet_name}!H{i+1}',
                             valueInputOption='RAW',
                             body={'values': [[wallet]]}
@@ -802,22 +858,20 @@ async def wallet_receive(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_reward(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """빗썸 Eigen 코인 입금주소 수집 (/reward 명령어)"""
     if update.effective_chat.type != "private":
         return ConversationHandler.END
 
     user_id = update.effective_user.id
+    event_id = get_active_event_id()
 
-    # user_info 등록 여부 확인
     with get_db() as conn:
         existing = conn.execute(
-            "SELECT bithumb_wallet FROM user_info WHERE user_id=? AND agreed=1", (user_id,)
+            "SELECT bithumb_wallet FROM user_info WHERE user_id=? AND event_id=? AND agreed=1",
+            (user_id, event_id)
         ).fetchone()
 
     if not existing:
-        await update.message.reply_text(
-            "⚠️ 먼저 /inform 으로 정보를 제출해주세요.",
-        )
+        await update.message.reply_text("⚠️ 먼저 /inform 으로 정보를 제출해주세요.")
         return ConversationHandler.END
 
     current = existing['bithumb_wallet'] or '미입력'
@@ -835,34 +889,30 @@ async def cmd_reward(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def reward_receive(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """빗썸 Eigen 입금주소 저장"""
     bithumb_wallet = update.message.text.strip()
     user_id = update.effective_user.id
+    event_id = get_active_event_id()
+    sheet_id = get_sheets_id(event_id)
 
     with get_db() as conn:
         conn.execute(
-            "UPDATE user_info SET bithumb_wallet=? WHERE user_id=?",
-            (bithumb_wallet, user_id)
+            "UPDATE user_info SET bithumb_wallet=? WHERE user_id=? AND event_id=?",
+            (bithumb_wallet, user_id, event_id)
         )
 
-    # Google Sheets K열 업데이트 (비동기 스레드)
     try:
         def update_reward_sheet():
             try:
-                TOKEN = '/Users/fireant/.openclaw/workspace/secrets/google-bridge34-token.json'
-                SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-                SHEET_ID = GSHEETS_SHEET_ID
                 service = build_sheets_service()
                 sheet_name = GSHEETS_RANGE.split('!')[0]
                 result = service.spreadsheets().values().get(
-                    spreadsheetId=SHEET_ID, range=f'{sheet_name}!B:B'
+                    spreadsheetId=sheet_id, range=f'{sheet_name}!B:B'
                 ).execute()
                 values = result.get('values', [])
                 for i, row in enumerate(values):
                     if row and row[0] == str(user_id):
-                        # K열 (11번째) 업데이트
                         service.spreadsheets().values().update(
-                            spreadsheetId=SHEET_ID,
+                            spreadsheetId=sheet_id,
                             range=f'{sheet_name}!K{i+1}',
                             valueInputOption='RAW',
                             body={'values': [[bithumb_wallet]]}
@@ -884,20 +934,20 @@ async def reward_receive(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def cmd_export_inform(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """관리자 전용: /export_inform — 정보 수집 결과 CSV 다운로드"""
     if update.effective_user.id != ADMIN_ID:
         return
+    event_id = get_active_event_id()
 
     with get_db() as conn:
         rows = conn.execute("""
             SELECT u.username, u.first_name, i.telegram_id, i.email, i.phone, i.real_name, i.wallet, i.submitted_at,
                    u.points,
-                   (SELECT COUNT(*) FROM users u2 WHERE u2.referrer_id = u.user_id) as invite_count
+                   (SELECT COUNT(*) FROM users u2 WHERE u2.referrer_id = u.user_id AND u2.event_id = ?) as invite_count
             FROM user_info i
-            JOIN users u ON u.user_id = i.user_id
-            WHERE i.agreed = 1
+            JOIN users u ON u.user_id = i.user_id AND u.event_id = i.event_id
+            WHERE i.agreed = 1 AND i.event_id = ?
             ORDER BY u.points DESC
-        """).fetchall()
+        """, (event_id, event_id)).fetchall()
 
     if not rows:
         await update.message.reply_text("제출된 정보가 없습니다.")
@@ -914,18 +964,18 @@ async def cmd_export_inform(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_document(
         document=buf.getvalue().encode("utf-8-sig"),
         filename="eigencloud_inform.csv",
-        caption=f"📋 정보 제출 현황 — 총 {len(rows)}명"
+        caption=f"📋 정보 제출 현황 — 총 {len(rows)}명 (이벤트 ID: {event_id})"
     )
 
 
 async def cmd_inform_count(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """관리자: 정보 제출 현황 간단 확인"""
     if update.effective_user.id != ADMIN_ID:
         return
+    event_id = get_active_event_id()
     with get_db() as conn:
-        total = conn.execute("SELECT COUNT(*) as c FROM users WHERE ever_registered=1").fetchone()["c"]
-        submitted = conn.execute("SELECT COUNT(*) as c FROM user_info WHERE agreed=1").fetchone()["c"]
-    await update.message.reply_text(f"📊 정보 제출 현황\n전체 등록자: {total}명\n제출 완료: {submitted}명\n미제출: {total - submitted}명")
+        total = conn.execute("SELECT COUNT(*) as c FROM users WHERE ever_registered=1 AND event_id=?", (event_id,)).fetchone()["c"]
+        submitted = conn.execute("SELECT COUNT(*) as c FROM user_info WHERE agreed=1 AND event_id=?", (event_id,)).fetchone()["c"]
+    await update.message.reply_text(f"📊 정보 제출 현황 (이벤트 ID: {event_id})\n전체 등록자: {total}명\n제출 완료: {submitted}명\n미제출: {total - submitted}명")
 
 
 async def cmd_points(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -948,10 +998,11 @@ async def cmd_myinfo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     user_id = update.effective_user.id
+    event_id = get_active_event_id()
     with get_db() as conn:
         info = conn.execute(
-            "SELECT email, telegram_id, phone, real_name, wallet, bithumb_wallet, submitted_at FROM user_info WHERE user_id=? AND agreed=1",
-            (user_id,)
+            "SELECT email, telegram_id, phone, real_name, wallet, bithumb_wallet, submitted_at FROM user_info WHERE user_id=? AND event_id=? AND agreed=1",
+            (user_id, event_id)
         ).fetchone()
 
     if not info:
@@ -1003,6 +1054,8 @@ def admin_only(func):
 
 @admin_only
 async def cmd_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    event = get_active_event()
+    event_name = event["name"] if event else "없음"
     keyboard = [
         [InlineKeyboardButton("📊 리더보드", callback_data="admin_leaderboard"),
          InlineKeyboardButton("📤 CSV 내보내기", callback_data="admin_export")],
@@ -1011,7 +1064,7 @@ async def cmd_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("🔴 포인트 초기화", callback_data="admin_reset")],
     ]
     await update.message.reply_text(
-        "🛠 관리자 메뉴",
+        f"🛠 관리자 메뉴\n📍 활성 이벤트: {event_name} (ID: {get_active_event_id()})",
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
 
@@ -1022,7 +1075,8 @@ async def cmd_leaderboard(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not board:
         await update.message.reply_text("등록된 유저가 없습니다.")
         return
-    lines = ["📊 전체 포인트 순위\n"]
+    event_id = get_active_event_id()
+    lines = [f"📊 전체 포인트 순위 (이벤트 ID: {event_id})\n"]
     for i, row in enumerate(board):
         name = row["first_name"] or row["username"] or str(row["user_id"])
         lines.append(f"{i+1}. {name} ({row['user_id']}) — {row['points']}점")
@@ -1031,15 +1085,17 @@ async def cmd_leaderboard(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 @admin_only
 async def cmd_export(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    event_id = get_active_event_id()
     with get_db() as conn:
         rows = conn.execute(
             """
             SELECT u.user_id, u.username, u.first_name, u.points, u.referrer_id, u.registered_at,
                    i.bithumb_wallet
             FROM users u
-            LEFT JOIN user_info i ON i.user_id = u.user_id
+            LEFT JOIN user_info i ON i.user_id = u.user_id AND i.event_id = u.event_id
+            WHERE u.event_id = ?
             ORDER BY u.points DESC
-            """
+            """, (event_id,)
         ).fetchall()
 
     buf = io.StringIO()
@@ -1050,11 +1106,11 @@ async def cmd_export(update: Update, context: ContextTypes.DEFAULT_TYPE):
                          row["points"], row["referrer_id"], row["registered_at"], row["bithumb_wallet"] or ""])
 
     buf.seek(0)
-    filename = f"referral_export_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+    filename = f"referral_export_{datetime.now().strftime('%Y%m%d_%H%M%S')}_event{event_id}.csv"
     await update.message.reply_document(
         document=buf.getvalue().encode("utf-8-sig"),
         filename=filename,
-        caption=f"총 {len(rows)}명 데이터"
+        caption=f"총 {len(rows)}명 데이터 (이벤트 ID: {event_id})"
     )
 
 
@@ -1069,12 +1125,13 @@ async def cmd_addchannel(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("채널 ID는 숫자여야 합니다.")
         return
 
+    event_id = get_active_event_id()
     with get_db() as conn:
         conn.execute(
-            "INSERT OR IGNORE INTO channels (channel_id) VALUES (?)",
-            (channel_id,)
+            "INSERT OR IGNORE INTO channels (channel_id, event_id) VALUES (?,?)",
+            (channel_id, event_id)
         )
-    await update.message.reply_text(f"✅ 채널 {channel_id} 추가됐습니다.")
+    await update.message.reply_text(f"✅ 채널 {channel_id} 추가됐습니다. (이벤트 ID: {event_id})")
 
 
 @admin_only
@@ -1095,12 +1152,13 @@ async def cmd_removechannel(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 @admin_only
 async def cmd_reset(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    event_id = get_active_event_id()
     keyboard = [
         [InlineKeyboardButton("⚠️ 정말 초기화", callback_data="confirm_reset"),
          InlineKeyboardButton("❌ 취소", callback_data="cancel_reset")]
     ]
     await update.message.reply_text(
-        "⚠️ 모든 유저 포인트를 초기화합니다. 계속하시겠습니까?",
+        f"⚠️ 이벤트 ID {event_id}의 모든 유저 포인트를 초기화합니다. 계속하시겠습니까?",
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
 
@@ -1111,12 +1169,116 @@ async def cmd_setperiod(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("사용법: /setperiod <시작일 YYYY-MM-DD> <종료일 YYYY-MM-DD>")
         return
     start, end = context.args[0], context.args[1]
+    event_id = get_active_event_id()
     with get_db() as conn:
         conn.execute(
-            "UPDATE event_period SET start_date=?, end_date=? WHERE id=1",
-            (start, end)
+            "UPDATE events SET start_date=?, end_date=? WHERE id=?",
+            (start, end, event_id)
         )
-    await update.message.reply_text(f"✅ 이벤트 기간: {start} ~ {end}")
+    await update.message.reply_text(f"✅ 이벤트 기간: {start} ~ {end} (이벤트 ID: {event_id})")
+
+
+# ── 이벤트 관리 명령어 ──────────────────────────────────────────────────────
+@admin_only
+async def cmd_newevent(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """/newevent "이벤트명" 시작일 종료일"""
+    if len(context.args) < 3:
+        await update.message.reply_text('사용법: /newevent "이벤트명" 시작일 종료일\n예: /newevent "새 이벤트" 2026-05-01 2026-05-31')
+        return
+
+    name = context.args[0]
+    start = context.args[1]
+    end = context.args[2]
+
+    with get_db() as conn:
+        # 기존 활성 이벤트 비활성화
+        conn.execute("UPDATE events SET is_active=0 WHERE is_active=1")
+        # 새 이벤트 생성
+        cursor = conn.execute(
+            "INSERT INTO events (name, start_date, end_date, is_active) VALUES (?,?,?,1)",
+            (name, start, end)
+        )
+        new_id = cursor.lastrowid
+
+    await update.message.reply_text(
+        f"✅ 새 이벤트 생성 완료!\n"
+        f"📌 ID: {new_id}\n"
+        f"📋 이름: {name}\n"
+        f"📅 기간: {start} ~ {end}\n\n"
+        f"/seteventmsg 로 환영 메시지를 설정하세요."
+    )
+
+
+@admin_only
+async def cmd_endevent(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """현재 활성 이벤트 종료"""
+    event_id = get_active_event_id()
+    with get_db() as conn:
+        conn.execute("UPDATE events SET is_active=0 WHERE id=?", (event_id,))
+    await update.message.reply_text(f"✅ 이벤트 ID {event_id} 가 종료되었습니다. (is_active=0)")
+
+
+@admin_only
+async def cmd_switchevent(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """/switchevent 이벤트ID"""
+    if not context.args:
+        await update.message.reply_text("사용법: /switchevent <이벤트ID>")
+        return
+    try:
+        target_id = int(context.args[0])
+    except ValueError:
+        await update.message.reply_text("이벤트 ID는 숫자여야 합니다.")
+        return
+
+    with get_db() as conn:
+        event = conn.execute("SELECT id, name FROM events WHERE id=?", (target_id,)).fetchone()
+        if not event:
+            await update.message.reply_text(f"❌ 이벤트 ID {target_id} 를 찾을 수 없습니다.")
+            return
+        conn.execute("UPDATE events SET is_active=0 WHERE is_active=1")
+        conn.execute("UPDATE events SET is_active=1 WHERE id=?", (target_id,))
+
+    await update.message.reply_text(f"✅ 활성 이벤트가 전환되었습니다.\n📌 ID: {target_id}\n📋 이름: {event['name']}")
+
+
+@admin_only
+async def cmd_eventlist(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """전체 이벤트 목록"""
+    with get_db() as conn:
+        rows = conn.execute("SELECT id, name, start_date, end_date, is_active, created_at FROM events ORDER BY id").fetchall()
+
+    if not rows:
+        await update.message.reply_text("등록된 이벤트가 없습니다.")
+        return
+
+    lines = ["📋 전체 이벤트 목록\n"]
+    for r in rows:
+        status = "🟢 활성" if r["is_active"] else "⚪ 비활성"
+        lines.append(
+            f"{status} ID:{r['id']} — {r['name']}\n"
+            f"   📅 {r['start_date'] or '?'} ~ {r['end_date'] or '?'} (생성: {r['created_at']})"
+        )
+    await update.message.reply_text("\n".join(lines))
+
+
+@admin_only
+async def cmd_seteventmsg(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """/seteventmsg 메시지내용 — 현재 활성 이벤트의 welcome_msg 수정"""
+    if not context.args:
+        await update.message.reply_text("사용법: /seteventmsg <환영 메시지>\n현재 메시지를 보려면 인자 없이 입력하세요.")
+        # Show current msg
+        event = get_active_event()
+        if event and event["welcome_msg"]:
+            await update.message.reply_text(f"현재 welcome_msg:\n\n{event['welcome_msg']}")
+        else:
+            await update.message.reply_text("현재 welcome_msg: (기본 메시지 사용 중)")
+        return
+
+    msg = " ".join(context.args)
+    event_id = get_active_event_id()
+    with get_db() as conn:
+        conn.execute("UPDATE events SET welcome_msg=? WHERE id=?", (msg, event_id))
+    await update.message.reply_text(f"✅ 이벤트 ID {event_id}의 환영 메시지가 업데이트되었습니다.")
 
 
 # ── 콜백 쿼리 ────────────────────────────────────────────────────────────────
@@ -1131,7 +1293,7 @@ async def callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if data == "admin_leaderboard":
         board = get_leaderboard(20)
-        lines = ["📊 전체 포인트 순위\n"]
+        lines = [f"📊 전체 포인트 순위 (이벤트 ID: {get_active_event_id()})\n"]
         for i, row in enumerate(board):
             name = row["first_name"] or row["username"] or str(row["user_id"])
             lines.append(f"{i+1}. {name} ({row['user_id']}) — {row['points']}점")
@@ -1151,27 +1313,28 @@ async def callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.edit_message_text("\n".join(lines))
 
     elif data == "admin_period":
-        with get_db() as conn:
-            row = conn.execute("SELECT start_date, end_date FROM event_period WHERE id=1").fetchone()
-        if row and row["start_date"]:
-            await query.edit_message_text(f"📅 이벤트 기간: {row['start_date']} ~ {row['end_date']}")
+        event = get_active_event()
+        if event and event["start_date"]:
+            await query.edit_message_text(f"📅 이벤트 기간: {event['start_date']} ~ {event['end_date']}")
         else:
             await query.edit_message_text("📅 이벤트 기간: 상시 운영 중\n변경: /setperiod YYYY-MM-DD YYYY-MM-DD")
 
     elif data == "admin_reset":
+        event_id = get_active_event_id()
         keyboard = [
             [InlineKeyboardButton("⚠️ 정말 초기화", callback_data="confirm_reset"),
              InlineKeyboardButton("❌ 취소", callback_data="cancel_reset")]
         ]
         await query.edit_message_text(
-            "⚠️ 모든 유저 포인트를 0으로 초기화합니다. 계속하시겠습니까?",
+            f"⚠️ 이벤트 ID {event_id}의 모든 유저 포인트를 0으로 초기화합니다. 계속하시겠습니까?",
             reply_markup=InlineKeyboardMarkup(keyboard)
         )
 
     elif data == "confirm_reset":
+        event_id = get_active_event_id()
         with get_db() as conn:
-            conn.execute("UPDATE users SET points=0, referrer_id=NULL")
-        await query.edit_message_text("✅ 포인트 초기화 완료.")
+            conn.execute("UPDATE users SET points=0, referrer_id=NULL WHERE event_id=?", (event_id,))
+        await query.edit_message_text(f"✅ 포인트 초기화 완료. (이벤트 ID: {event_id})")
 
     elif data == "cancel_reset":
         await query.edit_message_text("❌ 초기화 취소됐습니다.")
@@ -1183,11 +1346,12 @@ async def chat_member_handler(update: Update, context: ContextTypes.DEFAULT_TYPE
     if not result:
         return
 
-    # 등록된 채널인지 확인
     channel_id = result.chat.id
+    event_id = get_active_event_id()
     with get_db() as conn:
         registered = conn.execute(
-            "SELECT channel_id FROM channels WHERE channel_id=?", (channel_id,)
+            "SELECT channel_id FROM channels WHERE channel_id=? AND event_id=?",
+            (channel_id, event_id)
         ).fetchone()
     if not registered:
         return
@@ -1199,9 +1363,7 @@ async def chat_member_handler(update: Update, context: ContextTypes.DEFAULT_TYPE
     if target_user.is_bot:
         return
 
-    # 신규 입장 (was: not member → now: member)
     if old_status in ("left", "kicked", "restricted") and new_status == "member":
-        # 봇은 먼저 DM 불가 → 채널에 멘션 메시지로 안내 후 30초 뒤 자동 삭제
         try:
             mention = f'<a href="tg://user?id={target_user.id}">{target_user.first_name}</a>'
             bot_username = (await context.bot.get_me()).username
@@ -1215,7 +1377,6 @@ async def chat_member_handler(update: Update, context: ContextTypes.DEFAULT_TYPE
                 ),
                 parse_mode="HTML"
             )
-            # 30초 후 자동 삭제
             async def delete_later(chat_id, msg_id):
                 import asyncio
                 await asyncio.sleep(5)
@@ -1228,31 +1389,26 @@ async def chat_member_handler(update: Update, context: ContextTypes.DEFAULT_TYPE
         except Exception as e:
             logger.warning("채널 환영 메시지 실패 (user_id=%s): %s", target_user.id, e)
 
-    # 퇴장 / 강퇴 (was: member/admin → now: left/kicked)
     elif old_status in ("member", "administrator", "creator", "restricted") and new_status in ("left", "kicked"):
         user_id = target_user.id
         logger.info("채널 퇴장 감지 user_id=%s channel_id=%s", user_id, channel_id)
 
         with get_db() as conn:
             user_row = conn.execute(
-                "SELECT points, referrer_id FROM users WHERE user_id=?", (user_id,)
+                "SELECT id, points, referrer_id FROM users WHERE user_id=? AND event_id=?",
+                (user_id, event_id)
             ).fetchone()
 
             if user_row:
                 referrer_id = user_row["referrer_id"]
-
-                # 해당 유저 포인트 0 초기화
-                conn.execute("UPDATE users SET points=0 WHERE user_id=?", (user_id,))
-
-                # 초대자에게 지급됐던 10포인트 회수
+                conn.execute("UPDATE users SET points=0 WHERE id=?", (user_row["id"],))
                 if referrer_id:
                     conn.execute(
-                        "UPDATE users SET points = MAX(0, points - 10) WHERE user_id=?",
-                        (referrer_id,)
+                        "UPDATE users SET points = MAX(0, points - 10) WHERE user_id=? AND event_id=?",
+                        (referrer_id, event_id)
                     )
                     logger.info("초대자 포인트 회수 referrer_id=%s", referrer_id)
 
-        # 퇴장 유저에게 DM
         try:
             await context.bot.send_message(
                 chat_id=user_id,
@@ -1265,13 +1421,10 @@ async def chat_member_handler(update: Update, context: ContextTypes.DEFAULT_TYPE
 # ── 메인 ─────────────────────────────────────────────────────────────────────
 def main():
     init_db()
-    with get_db() as conn:
-        conn.execute("UPDATE event_period SET start_date='2026-03-21', end_date='2026-04-03' WHERE id=1")
     token = get_token()
 
     app = Application.builder().token(token).build()
 
-    # ConversationHandler: /start → 초대자 입력 → 당첨자 정보 수집
     conv = ConversationHandler(
         entry_points=[CommandHandler("start", cmd_start)],
         states={
@@ -1290,7 +1443,6 @@ def main():
     )
     app.add_handler(conv)
 
-    # /inform ConversationHandler (독립 - 기존 등록자 재진입용 + 수정 플로우)
     inform_conv = ConversationHandler(
         entry_points=[
             CommandHandler("inform", cmd_inform),
@@ -1309,7 +1461,6 @@ def main():
     )
     app.add_handler(inform_conv)
 
-    # /wallet ConversationHandler
     wallet_conv = ConversationHandler(
         entry_points=[CommandHandler("wallet", cmd_wallet)],
         states={
@@ -1321,7 +1472,6 @@ def main():
     )
     app.add_handler(wallet_conv)
 
-    # /reward ConversationHandler
     reward_conv = ConversationHandler(
         entry_points=[CommandHandler("reward", cmd_reward)],
         states={
@@ -1350,7 +1500,14 @@ def main():
     app.add_handler(CommandHandler("export_inform", cmd_export_inform))
     app.add_handler(CommandHandler("inform_count", cmd_inform_count))
 
-    # 정보 수정 관련 콜백 (inform_conv entry_point보다 먼저 등록)
+    # 이벤트 관리 명령어
+    app.add_handler(CommandHandler("newevent", cmd_newevent))
+    app.add_handler(CommandHandler("endevent", cmd_endevent))
+    app.add_handler(CommandHandler("switchevent", cmd_switchevent))
+    app.add_handler(CommandHandler("eventlist", cmd_eventlist))
+    app.add_handler(CommandHandler("seteventmsg", cmd_seteventmsg))
+
+    # 정보 수정 관련 콜백
     app.add_handler(CallbackQueryHandler(inf_edit_request_callback, pattern="^inf_edit_request$"))
     app.add_handler(CallbackQueryHandler(inf_edit_cancel_callback, pattern="^inf_edit_cancel$"))
 
@@ -1360,7 +1517,7 @@ def main():
     # 채널 멤버 변경 이벤트
     app.add_handler(ChatMemberHandler(chat_member_handler, ChatMemberHandler.CHAT_MEMBER))
 
-    logger.info("🤖 Referral Bot 시작!")
+    logger.info("🤖 Referral Bot 시작! (이벤트 격리 지원)")
     app.run_polling(allowed_updates=Update.ALL_TYPES, drop_pending_updates=True)
 
 
