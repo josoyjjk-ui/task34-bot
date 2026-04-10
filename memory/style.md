@@ -229,6 +229,11 @@ GUEST :
 
 레퍼런스: `/Users/fireant/.openclaw/media/inbound/file_307---9e0833ec-2522-4192-8c91-65670cb1f7c0.jpg`
 
+**생성 방법**: Gemini AI 이미지 생성 (image_generate 툴, model=google/gemini-2.0-flash-preview-image-generation)
+- 참조 이미지를 image 파라미터로 전달 + 프롬프트에 데이터 포함
+- PIL/Pillow 코드 생성 금지 — 반드시 AI 이미지 생성 사용
+- aspectRatio: 16:9
+
 ```
 칠판 4분할 구조:
 ┌────────────────────────────────────────────────┐
