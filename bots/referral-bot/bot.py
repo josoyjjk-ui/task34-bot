@@ -232,8 +232,7 @@ def init_db():
         """)
 
         # users 테이블 — 이미 마이그레이션된 스키마면 건드리지 않음
-        conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='users'")
-        users_exists = conn.fetchone()
+        users_exists = conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='users'").fetchone()
         if not users_exists:
             conn.executescript("""
                 CREATE TABLE users (
@@ -251,8 +250,7 @@ def init_db():
             """)
 
         # user_info 테이블
-        conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='user_info'")
-        ui_exists = conn.fetchone()
+        ui_exists = conn.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='user_info'").fetchone()
         if not ui_exists:
             conn.executescript("""
                 CREATE TABLE user_info (
