@@ -859,25 +859,23 @@ async def cmd_reward(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     event_id = get_active_event_id()
 
+    # user_info에 행이 없으면 자동 생성 (inform 없이도 reward 가능)
     with get_db() as conn:
         existing = conn.execute(
-            "SELECT bithumb_wallet FROM user_info WHERE user_id=? AND event_id=? AND agreed=1",
+            "SELECT bithumb_wallet FROM user_info WHERE user_id=? AND event_id=?",
             (user_id, event_id)
         ).fetchone()
+        if not existing:
+            conn.execute(
+                "INSERT OR IGNORE INTO user_info (user_id, event_id, agreed) VALUES (?, ?, 1)",
+                (user_id, event_id)
+            )
 
-    if not existing:
-        await update.message.reply_text("⚠️ 먼저 /inform 으로 정보를 제출해주세요.")
-        return ConversationHandler.END
-
-    current = existing['bithumb_wallet'] or '미입력'
+    current = (existing['bithumb_wallet'] if existing else None) or '미입력'
     await update.message.reply_text(
-        f"🪙 *리워드 수령 주소 입력*\n\n"
+        f"🪙 *빗썸 Eigen 지갑주소를 입력하세요.*\n\n"
         f"현재 등록된 주소: `{current}`\n\n"
-        "빗썸 거래소의 **Eigen 코인 입금 주소**를 제출해주세요.\n\n"
-        "📌 입력 방법:\n"
-        "1. 빗썸 앱 → 입금 → Eigen 검색\n"
-        "2. 입금 주소 복사 후 여기에 붙여넣기\n\n"
-        "✅ 빗썸 Eigen 입금 주소를 그대로 붙여넣기 해주시면 됩니다!",
+        "빗썸 거래소의 **Eigen 코인 입금 주소**를 붙여넣기 해주세요.",
         parse_mode="Markdown"
     )
     return REWARD_INPUT
@@ -920,9 +918,9 @@ async def reward_receive(update: Update, context: ContextTypes.DEFAULT_TYPE):
         pass
 
     await update.message.reply_text(
-        f"✅ 빗썸 Eigen 입금주소가 등록되었습니다!\n\n"
+        f"✅ 제출 완료!\n\n"
         f"📋 등록된 주소: `{bithumb_wallet}`\n\n"
-        "주소가 잘못된 경우 /reward 로 다시 입력할 수 있습니다.",
+        "수정이 필요하면 /reward 를 다시 입력하세요.",
         parse_mode="Markdown"
     )
     return ConversationHandler.END
