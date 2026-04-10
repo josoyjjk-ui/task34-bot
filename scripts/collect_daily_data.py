@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """
-일일시황 데이터 단일 수집 스크립트
-- SoSoValue: BTC/ETH ETF 순유입
-- Coinglass: BTC/ETH OI 24h, DAT Weekly Net Inflow
-- CB Premium: cb_premium_input.json에서 로드
-- 원자적 파일 쓰기 + 날짜 검증 + 하위호환 키 유지
+일일시황 데이터 수집 스크립트 (v2 — 경량화)
+
+cb_premium_input.json에서 전체 데이터를 로드하고,
+날짜 교차 검증 + 원자적 파일 쓰기로 데이터 섞임을 원천 차단한다.
+
+입력: cb_premium_input.json (참모 크론이 수집)
+출력: daily-report-data.json (하류 크론이 소비)
 """
 
 import json
 import os
 import sys
 import tempfile
-import urllib.request
-import urllib.error
 from datetime import datetime, timedelta, timezone
 
 KST = timezone(timedelta(hours=9))
@@ -20,259 +20,44 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 WORKSPACE = os.path.dirname(SCRIPT_DIR)
 OUTPUT_FILE = os.path.join(WORKSPACE, "daily-report-data.json")
 CB_INPUT_FILE = os.path.join(WORKSPACE, "cb_premium_input.json")
-TIMEOUT = 15
-UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# cb_premium_input.json 키 → daily-report-data.json 키 매핑
+FIELD_MAP = {
+    "btc_etf":    "BTC_ETF",
+    "eth_etf":    "ETH_ETF",
+    "btc_oi_24h": "BTC_OI_24h",
+    "eth_oi_24h": "ETH_OI_24h",
+    "dat_now":    "DAT_WEEKLY_NET_INFLOW",
+    "cb_premium": "Coinbase_Premium",
+}
+
+# 소스별 출처 태깅
+SOURCE_MAP = {
+    "BTC_ETF":              "sosovalue",
+    "ETH_ETF":              "sosovalue",
+    "BTC_OI_24h":           "coinglass",
+    "ETH_OI_24h":           "coinglass",
+    "DAT_WEEKLY_NET_INFLOW": "coinglass",
+    "Coinbase_Premium":     "starchild",
+}
 
 
 def now_kst():
     return datetime.now(KST)
 
 
-def fetch_json(url, headers=None):
-    req = urllib.request.Request(url, headers=headers or {})
-    req.add_header("User-Agent", UA)
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
-        return json.loads(resp.read().decode("utf-8", errors="replace"))
-
-
-def fetch_html(url):
-    req = urllib.request.Request(url)
-    req.add_header("User-Agent", UA)
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
-        return resp.read().decode("utf-8", errors="replace")
-
-
-def fmt_money(val):
-    """Format a number as +$XM or -$XM."""
-    if val is None:
-        return "N/A"
-    sign = "+" if val >= 0 else "-"
-    abs_val = abs(val)
-    if abs_val >= 1e9:
-        return f"{sign}${abs_val/1e9:.2f}B"
-    return f"{sign}${abs_val/1e6:.1f}M"
-
-
-def fmt_pct(val):
-    """Format a number as +X.XX% or -X.XX%."""
-    if val is None:
-        return "N/A"
-    sign = "+" if val >= 0 else ""
-    return f"{sign}{val:.2f}%"
-
-
-def collect_sosovalue_etf():
-    """Scrape SoSoValue for BTC/ETH ETF net flow."""
-    results = {}
-    now = now_kst()
-    fetched = now.isoformat()
-
-    # SoSoValue API endpoints (public, no key needed)
-    # Try their public API first
-    for coin, key in [("btc", "BTC_ETF"), ("eth", "ETH_ETF")]:
-        try:
-            url = f"https://api.sosovalue.com/openapi/etf/overview?tokenType={coin}"
-            data = fetch_json(url)
-            # Navigate the response structure
-            if isinstance(data, dict):
-                # Try common structures
-                net_flow = None
-                data_date = now.strftime("%Y-%m-%d")
-
-                # sosovalue returns data in various shapes; try to extract net inflow
-                if "data" in data:
-                    d = data["data"]
-                    if isinstance(d, dict):
-                        # look for netInflow or dailyNetFlow
-                        for k in ["dailyNetInflow", "netInflow", "dailyNetInflowUsd"]:
-                            if k in d:
-                                net_flow = d[k]
-                                break
-                        if "date" in d:
-                            data_date = d["date"][:10]
-
-                if net_flow is not None:
-                    results[key] = {
-                        "value": fmt_money(float(net_flow)),
-                        "source": "sosovalue",
-                        "data_date": data_date,
-                        "fetched_at": fetched,
-                    }
-                else:
-                    print(f"[WARN] sosovalue {coin}: could not parse response", file=sys.stderr)
-                    results[key] = None
-            else:
-                results[key] = None
-        except Exception as e:
-            print(f"[WARN] sosovalue {coin} ETF fetch failed: {e}", file=sys.stderr)
-            results[key] = None
-
-    return results
-
-
-def collect_coinglass_oi():
-    """Fetch BTC/ETH OI 24h change from Coinglass."""
-    results = {}
-    now = now_kst()
-    fetched = now.isoformat()
-
-    for symbol, key in [("BTC", "BTC_OI"), ("ETH", "ETH_OI")]:
-        try:
-            # Coinglass public API for OI change
-            url = f"https://open-api.coinglass.com/public/v2/openInterest?symbol={symbol}&time_type=h24"
-            data = fetch_json(url)
-            oi_change = None
-            data_date = now.strftime("%Y-%m-%d")
-
-            if isinstance(data, dict) and data.get("success"):
-                d = data.get("data", [])
-                if d and isinstance(d, list):
-                    # Get OI 24h change percentage
-                    for item in d:
-                        if isinstance(item, dict) and "change" in item:
-                            oi_change = float(item["change"])
-                            break
-                        elif isinstance(item, dict) and "oiChange24h" in item:
-                            oi_change = float(item["oiChange24h"])
-                            break
-            elif isinstance(data, dict):
-                # Try alternate structure
-                d = data.get("data", {})
-                if isinstance(d, dict):
-                    for k in ["change24h", "oiChange24h", "change"]:
-                        if k in d:
-                            oi_change = float(d[k])
-                            break
-
-            if oi_change is not None:
-                results[key] = {
-                    "value": fmt_pct(oi_change),
-                    "source": "coinglass",
-                    "data_date": data_date,
-                    "fetched_at": fetched,
-                }
-            else:
-                results[key] = None
-        except Exception as e:
-            print(f"[WARN] coinglass {symbol} OI fetch failed: {e}", file=sys.stderr)
-            results[key] = None
-
-    return results
-
-
-def collect_coinglass_dat():
-    """Fetch DAT (Digital Asset Total) weekly net inflow from Coinglass."""
-    now = now_kst()
-    fetched = now.isoformat()
+def validate_date(data_date_str, today):
+    """데이터 날짜가 허용 범위(5일 이내)인지 확인."""
     try:
-        url = "https://open-api.coinglass.com/public/v2/fund-flow?time_type=w"
-        data = fetch_json(url)
-        net_flow = None
-        data_date = now.strftime("%Y-%m-%d")
-
-        if isinstance(data, dict) and data.get("success"):
-            d = data.get("data", [])
-            if d and isinstance(d, list):
-                for item in d:
-                    if isinstance(item, dict):
-                        # Look for total/net inflow
-                        for k in ["netInflow", "totalNetInflow", "changeUsd"]:
-                            if k in item:
-                                net_flow = float(item[k])
-                                break
-                        if net_flow is not None:
-                            break
-        elif isinstance(data, dict):
-            d = data.get("data", {})
-            if isinstance(d, dict):
-                for k in ["netInflow", "totalNetInflow"]:
-                    if k in d:
-                        net_flow = float(d[k])
-                        break
-
-        if net_flow is not None:
-            return {
-                "value": fmt_money(net_flow),
-                "source": "coinglass",
-                "data_date": data_date,
-                "fetched_at": fetched,
-            }
-        return None
-    except Exception as e:
-        print(f"[WARN] coinglass DAT fetch failed: {e}", file=sys.stderr)
-        return None
-
-
-def collect_cb_premium():
-    """Load CB premium from cb_premium_input.json."""
-    now = now_kst()
-    fetched = now.isoformat()
-    try:
-        if not os.path.exists(CB_INPUT_FILE):
-            print(f"[WARN] CB input file not found: {CB_INPUT_FILE}", file=sys.stderr)
-            return None
-        with open(CB_INPUT_FILE, "r") as f:
-            data = json.load(f)
-        # Try various keys
-        val = data.get("cb_premium") or data.get("value") or data.get("Coinbase_Premium")
-        data_date = data.get("date", now.strftime("%Y-%m-%d"))
-        if val is not None:
-            # Ensure it has % sign format
-            v = str(val)
-            if "%" not in v:
-                v = v + "%"
-            if not v.startswith(("+", "-")):
-                v = "+" + v
-            return {
-                "value": v,
-                "source": "starchild",
-                "data_date": data_date,
-                "fetched_at": fetched,
-            }
-        return None
-    except Exception as e:
-        print(f"[WARN] CB premium load failed: {e}", file=sys.stderr)
-        return None
-
-
-def validate_sources(sources, today_str):
-    """Validate data dates across sources."""
-    stale = []
-    failed = []
-    dates = set()
-
-    for key, src in sources.items():
-        if src is None:
-            failed.append(key)
-            continue
-        dd = src.get("data_date", "")
-        dates.add(dd)
-        # ETF data from previous US business day is expected (T+1)
-        # So we accept today or yesterday
-        today = datetime.strptime(today_str, "%Y-%m-%d").date()
-        src_date = datetime.strptime(dd, "%Y-%m-%d").date()
-        if src_date < today - timedelta(days=3):  # Allow up to 3 days stale for long weekends
-            stale.append(key)
-
-    if failed:
-        status = "partial"
-    elif stale:
-        status = "stale"
-    elif len(dates) <= 2:  # today + yesterday for ETF is fine
-        status = "clean"
-    else:
-        status = "mixed"
-
-    return {
-        "all_same_period": len(dates) <= 2,
-        "stale_sources": stale,
-        "failed_sources": failed,
-        "status": status,
-    }
+        data_date = datetime.strptime(data_date_str, "%Y-%m-%d").date()
+        delta = (today - data_date).days
+        return 0 <= delta <= 5  # 주말+공휴일 고려하여 5일
+    except (ValueError, TypeError):
+        return False
 
 
 def atomic_write_json(data, path):
-    """Write JSON atomically via temp file + rename."""
+    """JSON을 원자적으로 쓴다 (tmp → rename)."""
     dir_name = os.path.dirname(path)
     fd, tmp = tempfile.mkstemp(dir=dir_name, suffix=".tmp")
     try:
@@ -280,60 +65,92 @@ def atomic_write_json(data, path):
             json.dump(data, f, indent=2, ensure_ascii=False)
         os.replace(tmp, path)
     except Exception:
-        os.unlink(tmp) if os.path.exists(tmp) else None
+        if os.path.exists(tmp):
+            os.unlink(tmp)
         raise
 
 
 def main():
     now = now_kst()
-    today = now.strftime("%Y-%m-%d")
-    print(f"[INFO] Starting daily data collection for {today}")
+    today = now.date()
+    today_str = today.strftime("%Y-%m-%d")
+    fetched_at = now.isoformat()
 
-    # Collect all sources
+    print(f"[INFO] Starting daily data collection for {today_str}")
+
+    # 1. cb_premium_input.json 로드
+    if not os.path.exists(CB_INPUT_FILE):
+        print(f"[ERROR] Input file not found: {CB_INPUT_FILE}", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        with open(CB_INPUT_FILE, "r") as f:
+            raw = json.load(f)
+    except Exception as e:
+        print(f"[ERROR] Failed to read input: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    data_date = raw.get("date", "unknown")
+    print(f"[INFO] Input data date: {data_date}")
+
+    # 2. 날짜 검증
+    date_valid = validate_date(data_date, today)
+    if not date_valid:
+        print(f"[WARN] Data date {data_date} is stale (>5 days from {today_str})", file=sys.stderr)
+
+    # 3. 필드 매핑 + 소스 메타데이터 생성
     sources = {}
+    failed = []
+    flat = {}
 
-    print("[INFO] Fetching SoSoValue ETF data...")
-    sosovalue = collect_sosovalue_etf()
-    sources.update(sosovalue)
+    for src_key, dst_key in FIELD_MAP.items():
+        val = raw.get(src_key)
+        if val is not None and val != "":
+            flat[dst_key] = str(val)
+            sources[dst_key] = {
+                "value": str(val),
+                "source": SOURCE_MAP.get(dst_key, "unknown"),
+                "data_date": data_date,
+                "fetched_at": fetched_at,
+            }
+        else:
+            flat[dst_key] = "N/A"
+            sources[dst_key] = None
+            failed.append(dst_key)
 
-    print("[INFO] Fetching Coinglass OI data...")
-    coinglass_oi = collect_coinglass_oi()
-    sources.update(coinglass_oi)
+    # 4. Validation 결정
+    if failed:
+        status = "partial"
+    elif not date_valid:
+        status = "stale"
+    else:
+        status = "clean"
 
-    print("[INFO] Fetching Coinglass DAT data...")
-    sources["DAT"] = collect_coinglass_dat()
-
-    print("[INFO] Loading CB premium...")
-    sources["CB_PREM"] = collect_cb_premium()
-
-    # Build validation
-    validation = validate_sources(sources, today)
-
-    # Build output with backward-compatible top-level keys
-    output = {
-        "date": today,
-        "collected_at": now.isoformat(),
+    validation = {
+        "all_same_period": True,  # 단일 소스 파일이므로 항상 동일 기간
+        "stale_sources": [] if date_valid else list(flat.keys()),
+        "failed_sources": failed,
+        "status": status,
     }
 
-    # Backward-compatible flat keys
-    btc_etf = sources.get("BTC_ETF")
-    eth_etf = sources.get("ETH_ETF")
-    btc_oi = sources.get("BTC_OI")
-    eth_oi = sources.get("ETH_OI")
-    dat = sources.get("DAT")
-    cb = sources.get("CB_PREM")
+    # 5. partial/stale 시 기존 파일 보존 옵션
+    if status in ("partial", "stale") and os.path.exists(OUTPUT_FILE):
+        print(f"[WARN] Status is '{status}' — preserving existing output file")
+        print(f"[WARN] Failed: {failed}" if failed else f"[WARN] Stale data: {data_date}")
+        # 기존 파일은 그대로 두고, 검증 결과만 출력
+        print(f"[INFO] Validation: {json.dumps(validation, ensure_ascii=False)}")
+        sys.exit(0)
 
-    output["BTC_ETF"] = btc_etf["value"] if btc_etf else "N/A"
-    output["ETH_ETF"] = eth_etf["value"] if eth_etf else "N/A"
-    output["BTC_OI_24h"] = btc_oi["value"] if btc_oi else "N/A"
-    output["ETH_OI_24h"] = eth_oi["value"] if eth_oi else "N/A"
-    output["DAT_WEEKLY_NET_INFLOW"] = dat["value"] if dat else "N/A"
-    output["Coinbase_Premium"] = cb["value"] if cb else "N/A"
-
-    output["sources"] = {k: v for k, v in sources.items()}
+    # 6. 출력 JSON 조립
+    output = {
+        "date": today_str,
+        "collected_at": fetched_at,
+    }
+    output.update(flat)  # 하위호환 플랫 키
+    output["sources"] = sources
     output["validation"] = validation
 
-    # Atomic write
+    # 7. 원자적 쓰기
     try:
         atomic_write_json(output, OUTPUT_FILE)
         print(f"[INFO] Successfully wrote {OUTPUT_FILE}")
@@ -341,17 +158,9 @@ def main():
         print(f"[ERROR] Failed to write output: {e}", file=sys.stderr)
         sys.exit(1)
 
-    # Print summary
-    print(f"[INFO] Validation: {validation['status']}")
-    if validation["stale_sources"]:
-        print(f"[WARN] Stale sources: {validation['stale_sources']}")
-    if validation.get("failed_sources"):
-        print(f"[WARN] Failed sources: {validation['failed_sources']}")
-
-    # Print collected values
-    for key, val in output.items():
-        if key in ("sources", "validation", "date", "collected_at"):
-            continue
+    # 8. 결과 요약
+    print(f"[INFO] Validation: {status}")
+    for key, val in flat.items():
         print(f"  {key}: {val}")
 
 
