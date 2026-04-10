@@ -15,3 +15,4 @@ _(What do they care about? What projects are they working on? What annoys them? 
 ---
 
 The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.
+- **응답 규칙 추가 (2026.04.05)**: 이전 결과물(보고서 등)을 수정/업데이트할 때는 해병님의 지시가 없더라도 자동으로 `message` 툴(`action=edit`)을 사용하여 기존 메시지를 덮어써서 채팅창과 컨텍스트를 깔끔하게 유지할 것.

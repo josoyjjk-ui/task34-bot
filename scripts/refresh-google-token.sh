@@ -42,7 +42,7 @@ try:
 
     if resp.status_code == 200 and result.get('access_token'):
         td['token'] = result['access_token']
-        td['expiry'] = (datetime.datetime.now(datetime.UTC) + datetime.timedelta(seconds=result.get('expires_in', 3600))).isoformat()
+        td['expiry'] = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(seconds=result.get('expires_in', 3600))).isoformat()
         # refresh_token은 새로 오면 교체, 없으면 기존 유지
         if result.get('refresh_token'):
             td['refresh_token'] = result['refresh_token']

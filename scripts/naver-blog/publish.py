@@ -15,28 +15,27 @@ from playwright.async_api import async_playwright
 BLOG_ID = "fireant_korea"
 PASSWORD = "wnFhT9"
 LOG_NO_DELETE = None
-IMAGE_PATH = "/tmp/openclaw/uploads/daily_blog_20260403.png"
-POST_TITLE = "📌 [불개미 일일시황] 2026.04.03 (금)"
-POST_TEXT = """📌 불개미 일일시황 | 2026.04.03 (KST)
+IMAGE_PATH = "/tmp/openclaw/uploads/daily_blog_20260409.png"
+POST_TITLE = "📌 [불개미 일일시황] 2026.04.09 (목)"
+POST_TEXT = """📌 불개미 일일시황 | 2026.04.09 (KST)
 
 1️⃣ BTC ETH 유출입
-• BTC: +$8.99M (순유입)
-• ETH: -$71.17M (순유출)
+• BTC: -$85.20M
+• ETH: +$13.84M
 • ETF 데이터는 마지막 거래일 기준
 
 2️⃣ 미결제약정 추이 (24시간 기준)
-• BTC 24시간: -3.85%
-• ETH 24시간: -9.84%
+• BTC 24시간: +3.49%
+• ETH 24시간: -2.21%
 
 3️⃣ DAT 추이
-• WEEKLY NET INFLOW: $72.83K
+• WEEKLY NET INFLOW: +$224M
 
 4️⃣ 코인베이스 프리미엄
-• 현재 지수: +0.0508%
+• 현재 지수: +0.0251%
 
 5️⃣ 요약
-BTC ETF는 소폭 순유입을 기록했지만 ETH ETF는 큰 폭 순유출이 발생해 자금 흐름이 엇갈렸습니다.
-미결제약정은 BTC·ETH 모두 24시간 기준 하락해 레버리지 포지션이 정리되는 흐름이며, 코인베이스 프리미엄은 플러스권을 유지했습니다."""
+BTC ETF는 $85.2M 순유출로 매도 압력이 이어지는 반면, ETH는 $13.84M 순유입으로 엇갈린 흐름. BTC 미결제약정 +3.49% 확대·DAT 위클리 $224M 순유입으로 기관 관심은 유지 중이며, 코인베이스 프리미엄 +0.025%로 소폭 매수 우위."""
 
 
 async def do_login(page):
@@ -130,113 +129,112 @@ async def main():
         else:
             print("[0] ✅ 이미 로그인됨")
 
-        # ── STEP 1: 기존 포스트 삭제 ──
-        print(f"\n[1] 포스트 {LOG_NO_DELETE} 삭제...")
-        await page.goto(f"https://blog.naver.com/{BLOG_ID}/{LOG_NO_DELETE}", wait_until="domcontentloaded")
-        await asyncio.sleep(3)
-        await page.screenshot(path="/tmp/openclaw/uploads/v3_delete_before.png")
+        # ── STEP 1: 기존 포스트 삭제 (선택) ──
+        if LOG_NO_DELETE:
+            print(f"\n[1] 포스트 {LOG_NO_DELETE} 삭제...")
+            await page.goto(f"https://blog.naver.com/{BLOG_ID}/{LOG_NO_DELETE}", wait_until="domcontentloaded")
+            await asyncio.sleep(3)
+            await page.screenshot(path="/tmp/openclaw/uploads/v3_delete_before.png")
 
-        # iframe에서 더보기 버튼 찾기
-        main_frame = page.frame("mainFrame")
-        target_frame = main_frame if main_frame else page
-        
-        # 더보기 버튼 - 여러 selector 시도
-        overflow_selectors = [
-            "._open_overflowmenu",
-            ".btn_more",
-            ".area_more button",
-            "button[aria-label*='더보기']",
-            ".post_btn_area button:last-child",
-        ]
-        
-        overflow_clicked = False
-        for sel in overflow_selectors:
-            try:
-                btn = await target_frame.query_selector(sel)
-                if btn:
-                    await btn.click()
-                    await asyncio.sleep(1)
-                    overflow_clicked = True
-                    print(f"[1] 더보기 클릭: {sel}")
-                    break
-            except:
-                pass
-        
-        if not overflow_clicked:
-            # JS로 텍스트 기반 탐색
-            result = await target_frame.evaluate("""
-                () => {
-                    const btns = document.querySelectorAll('button, [role="button"]');
-                    for (const b of btns) {
-                        const t = b.textContent?.trim();
-                        const cls = b.className || '';
-                        if (cls.includes('more') || cls.includes('overflow') || cls.includes('menu')) {
-                            b.click();
-                            return 'clicked: ' + cls.substring(0, 50);
-                        }
-                    }
-                    // ⋮ 또는 ... 텍스트
-                    for (const b of btns) {
-                        const t = b.textContent?.trim();
-                        if (t === '⋮' || t === '...' || t === '더보기') {
-                            b.click();
-                            return 'clicked text: ' + t;
-                        }
-                    }
-                    return 'not found';
-                }
-            """)
-            print(f"[1] JS 더보기: {result}")
-            if "clicked" in result:
-                overflow_clicked = True
-                await asyncio.sleep(1)
-        
-        await page.screenshot(path="/tmp/openclaw/uploads/v3_delete_menu.png")
-        
-        # 삭제 버튼
-        delete_selectors = [
-            ".btn_del._deletePost",
-            ".btn_del",
-            "button:has-text('삭제')",
-            "[data-action='delete']",
-        ]
-        
-        delete_clicked = False
-        for sel in delete_selectors:
-            try:
-                btn = await target_frame.query_selector(sel)
-                if btn:
-                    await btn.click()
-                    await asyncio.sleep(1)
-                    delete_clicked = True
-                    print(f"[1] 삭제 버튼 클릭: {sel}")
-                    break
-            except:
-                pass
-        
-        if delete_clicked:
-            await page.screenshot(path="/tmp/openclaw/uploads/v3_delete_confirm.png")
-            # 확인 다이얼로그
-            confirm_selectors = [
-                ".btn_confirm", "button:has-text('확인')", ".layer_confirm .btn_ok",
-                "[data-action='confirm']", ".modal button:last-child"
+            # iframe에서 더보기 버튼 찾기
+            main_frame = page.frame("mainFrame")
+            target_frame = main_frame if main_frame else page
+            
+            # 더보기 버튼 - 여러 selector 시도
+            overflow_selectors = [
+                "._open_overflowmenu",
+                ".btn_more",
+                ".area_more button",
+                "button[aria-label*='더보기']",
+                ".post_btn_area button:last-child",
             ]
-            for sel in confirm_selectors:
-                for f in [page, target_frame]:
-                    try:
-                        btn = await f.query_selector(sel)
-                        if btn:
-                            await btn.click()
-                            await asyncio.sleep(2)
-                            print(f"[1] ✅ 삭제 확인: {sel}")
-                            delete_clicked = True
-                            break
-                    except:
-                        pass
+            
+            overflow_clicked = False
+            for sel in overflow_selectors:
+                try:
+                    btn = await target_frame.query_selector(sel)
+                    if btn:
+                        await btn.click()
+                        await asyncio.sleep(1)
+                        overflow_clicked = True
+                        print(f"[1] 더보기 클릭: {sel}")
+                        break
+                except:
+                    pass
+            
+            if not overflow_clicked:
+                result = await target_frame.evaluate("""
+                    () => {
+                        const btns = document.querySelectorAll('button, [role="button"]');
+                        for (const b of btns) {
+                            const t = b.textContent?.trim();
+                            const cls = b.className || '';
+                            if (cls.includes('more') || cls.includes('overflow') || cls.includes('menu')) {
+                                b.click();
+                                return 'clicked: ' + cls.substring(0, 50);
+                            }
+                        }
+                        for (const b of btns) {
+                            const t = b.textContent?.trim();
+                            if (t === '⋮' || t === '...' || t === '더보기') {
+                                b.click();
+                                return 'clicked text: ' + t;
+                            }
+                        }
+                        return 'not found';
+                    }
+                """)
+                print(f"[1] JS 더보기: {result}")
+                if "clicked" in result:
+                    overflow_clicked = True
+                    await asyncio.sleep(1)
+            
+            await page.screenshot(path="/tmp/openclaw/uploads/v3_delete_menu.png")
+            
+            delete_selectors = [
+                ".btn_del._deletePost",
+                ".btn_del",
+                "button:has-text('삭제')",
+                "[data-action='delete']",
+            ]
+            
+            delete_clicked = False
+            for sel in delete_selectors:
+                try:
+                    btn = await target_frame.query_selector(sel)
+                    if btn:
+                        await btn.click()
+                        await asyncio.sleep(1)
+                        delete_clicked = True
+                        print(f"[1] 삭제 버튼 클릭: {sel}")
+                        break
+                except:
+                    pass
+            
+            if delete_clicked:
+                await page.screenshot(path="/tmp/openclaw/uploads/v3_delete_confirm.png")
+                confirm_selectors = [
+                    ".btn_confirm", "button:has-text('확인')", ".layer_confirm .btn_ok",
+                    "[data-action='confirm']", ".modal button:last-child"
+                ]
+                for sel in confirm_selectors:
+                    for f in [page, target_frame]:
+                        try:
+                            btn = await f.query_selector(sel)
+                            if btn:
+                                await btn.click()
+                                await asyncio.sleep(2)
+                                print(f"[1] ✅ 삭제 확인: {sel}")
+                                delete_clicked = True
+                                break
+                        except:
+                            pass
+            else:
+                print("[1] 삭제 버튼 없음 - 이미 삭제됐거나 버튼 변경됨")
+            
+            await page.screenshot(path="/tmp/openclaw/uploads/v3_delete_after.png")
         else:
-            print("[1] 삭제 버튼 없음 - 이미 삭제됐거나 버튼 변경됨")
-        
-        await page.screenshot(path="/tmp/openclaw/uploads/v3_delete_after.png")
+            print("\n[1] 삭제 생략 (LOG_NO_DELETE=None)")
 
         # ── STEP 2: 글쓰기 페이지로 이동 ──
         print("\n[2] 글쓰기 페이지 이동...")
@@ -404,81 +402,62 @@ async def main():
         """)
         print(f"[4] 컴포넌트: {comps}")
 
-        # ── STEP 5: 텍스트 입력 (이미지 아래) ──
-        print("[5] 텍스트 입력 (이미지 아래)...")
-        # 이미지 업로드 후 마지막 텍스트 단락 클릭
+        # ── STEP 5: setDocumentData 직접 주입 (서식 완전 적용) ──
+        print("[5] setDocumentData 직접 주입...")
         await asyncio.sleep(1)
-        try:
-            els = await se_frame.query_selector_all(".se-text-paragraph")
-            if els:
-                el = els[-1]
-                await el.scroll_into_view_if_needed()
-                await asyncio.sleep(0.2)
-                await el.click(force=True)
-                await asyncio.sleep(0.3)
-                print(f"[5] 마지막 텍스트 단락 클릭 (총 {len(els)}개)")
-        except Exception as e:
-            print(f"[5] 단락 클릭 실패: {e}")
-        lines_post = POST_TEXT.split('\n')
-        for i, line in enumerate(lines_post):
-            if line:
-                await page.keyboard.type(line, delay=15)
-            if i < len(lines_post) - 1:
-                await page.keyboard.press("Enter")
-                await asyncio.sleep(0.04)
-        print(f"[5] 텍스트 입력 완료 ({len(lines_post)}줄)")
-        await asyncio.sleep(0.5)
-
-        # ── STEP 5b: 스타일 적용 (가운데정렬, 소제목 bold+크기, 요약 bold) ──
-        await asyncio.sleep(0.5)
         style_result = await se_frame.evaluate(f"""
             () => {{
                 try {{
+                    const uid = () => 'SE-' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {{
+                        const r = Math.random()*16|0;
+                        return (c==='x' ? r : (r&0x3|0x8)).toString(16);
+                    }});
+                    const para = (text, align, style) => {{
+                        const node = {{id: uid(), value: text, '@ctype': 'textNode'}};
+                        if (style) node.style = Object.assign({{'@ctype': 'nodeStyle'}}, style);
+                        const p = {{id: uid(), nodes: [node], '@ctype': 'paragraph'}};
+                        if (align) p.style = {{align: align, '@ctype': 'paragraphStyle'}};
+                        return p;
+                    }};
                     const ed = window.SmartEditor._editors['{editor_key}'];
                     const data = ed._documentService.getDocumentData();
-                    const doc = data.document;
-                    const textComp = doc.components.find(c => c['@ctype'] === 'text');
-                    if (!textComp || !textComp.value) return 'NO_TEXT_COMP';
-
-                    // 소제목 패턴: [1] [2] [3] [4] [5]
-                    const isSubhead = (txt) => /^\[[1-5]\]/.test(txt.trim());
-                    // 요약 내용: [5] 이후 줄 (소제목 제외)
-                    let afterSummary = false;
-
-                    const paragraphs = Array.isArray(textComp.value) ? textComp.value : [];
-                    paragraphs.forEach(para => {{
-                        if (!para || !para.nodes) return;
-                        const text = para.nodes.map(n => n.value || '').join('');
-
-                        // 요약 섹션 진입 감지
-                        if (/^\[5\]/.test(text.trim())) afterSummary = true;
-
-                        // 단락 스타일: 가운데 정렬
-                        if (!para.style) para.style = {{'@ctype': 'paragraphStyle'}};
-                        para.style.align = 'center';
-
-                        para.nodes.forEach(node => {{
-                            if (!node.style) node.style = {{'@ctype': 'nodeStyle'}};
-                            // 흰색 폰트 수정
-                            if (node.style.fontColor === '#ffffff') node.style.fontColor = '#000000';
-
-                            if (isSubhead(text)) {{
-                                // 소제목: bold + 크기 확대(fs17)
-                                node.style.bold = true;
-                                node.style.fontSizeCode = 'fs17';
-                            }} else if (afterSummary && !/^\[5\]/.test(text.trim())) {{
-                                // 요약 내용: bold
-                                node.style.bold = true;
-                            }}
-                        }});
-                    }});
-
+                    const textComp = data.document.components.find(c => c['@ctype'] === 'text');
+                    if (!textComp) return 'NO_TEXT_COMP';
+                    const sHead = {{fontColor: '#000000', fontSizeCode: 'fs24', bold: true, '@ctype': 'nodeStyle'}};
+                    const sBody = {{fontColor: '#000000', fontSizeCode: 'fs15', '@ctype': 'nodeStyle'}};
+                    const sSumH = {{fontColor: '#000000', fontSizeCode: 'fs24', bold: true, backgroundColor: '#ffff00', '@ctype': 'nodeStyle'}};
+                    const sSumB = {{fontColor: '#000000', fontSizeCode: 'fs15', backgroundColor: '#ffff00', '@ctype': 'nodeStyle'}};
+                    const C = 'center';
+                    textComp.value = [
+                        para('\ud83d\udccc 불개미 일일시황 | 2026.04.09 (KST)', C, sBody),
+                        para('', C, sBody),
+                        para('1\ufe0f\u20e3 BTC ETH 유출입', C, sHead),
+                        para('\u2022 BTC: -$85.20M', C, sBody),
+                        para('\u2022 ETH: +$13.84M', C, sBody),
+                        para('\u2022 ETF 데이터는 마지막 거래일 기준', C, sBody),
+                        para('', C, sBody),
+                        para('2\ufe0f\u20e3 미결제약정 추이 (24시간 기준)', C, sHead),
+                        para('\u2022 BTC 24시간: +3.49%', C, sBody),
+                        para('\u2022 ETH 24시간: -2.21%', C, sBody),
+                        para('', C, sBody),
+                        para('3\ufe0f\u20e3 DAT 추이', C, sHead),
+                        para('\u2022 WEEKLY NET INFLOW: +$224M', C, sBody),
+                        para('', C, sBody),
+                        para('4\ufe0f\u20e3 코인베이스 프리미엄', C, sHead),
+                        para('\u2022 현재 지수: +0.0251%', C, sBody),
+                        para('', C, sBody),
+                        para('5\ufe0f\u20e3 요약', C, sSumH),
+                        para('BTC ETF는 $85.2M 순유출로 매도 압력이 이어지는 반면, ETH는 $13.84M 순유입으로 엇갈린 흐름. BTC 미결제약정 +3.49% 확대·DAT 위클리 $224M 순유입으로 기관 관심은 유지 중이며, 코인베이스 프리미엄 +0.025%로 소폭 매수 우위.', C, sSumB),
+                        para('', C, sBody),
+                        para('\ud83d\udd17 불개미 CRYPTO 바로가기', C, sBody),
+                        para('https://fireantcrypto.com/', C, sBody),
+                    ];
                     ed._documentService.setDocumentData(data);
                     return 'STYLED_OK';
                 }} catch(e) {{ return 'ERR: ' + e.message; }}
             }}
         """)
-        print(f"[5b] 스타일 적용: {style_result}")
+        print(f"[5] setDocumentData 결과: {style_result}")
         await asyncio.sleep(0.5)
 
         # 최종 확인
@@ -591,7 +570,7 @@ async def main():
         if "logNo=" in cur:
             new_logno = cur.split("logNo=")[-1].split("&")[0]
         
-        if new_logno and new_logno != LOG_NO_DELETE:
+        if new_logno and (LOG_NO_DELETE is None or str(new_logno) != str(LOG_NO_DELETE)):
             print(f"\n✅ 발행 완료!")
             print(f"   logNo: {new_logno}")
             print(f"   URL: https://blog.naver.com/{BLOG_ID}/{new_logno}")
