@@ -19,6 +19,13 @@
 ## 참고 채널/글 아카이브
 - Simon's Rabbit Crypt (@simon_rabbit_hole): METR 시간범위 분석 에세이 — AI 자율작업 14.5시간(Claude Opus 4.6), 배증주기 123일, R²=0.93, 신뢰구간 상단 98시간. 집사 비유(주인 잠든 사이 스스로 판단하는 존재), 끓는점 비유(99도→100도), 벤치마크 포화 경고, AI 자기개선 피드백루프 가능성. 문체: 숫자→직관적 비유→철학적 질문 순환, 긴 호흡의 에세이형.
 
+## 일일시황 자동화 (확정 2026-04-10)
+- 크론잡 플로우: 14:00 CB프리미엄/OI수집 → 14:55 데이터통합+이미지생성(참모) → 15:00 측션+전송(딸수)
+- 이미지: PIL 스크립트 `scripts/generate-daily-report-image.py` (칠판 스타일, 1408x768)
+- 데이터: `scripts/collect_cb_premium.py` (Binance+Coinbase API) + `scripts/collect_daily_data.py`
+- 측션 양식: 📌 불개미 일일시황 | 날짜, 1️⃣~5️⃣ 항목, 5️⃣ 요약 2문장
+- 작전장교 검증 필수 (PASS 후 전송)
+
 ## 불개미 로고
 - 경로: `/Users/fireant/.openclaw/workspace/assets/fireant-logo.jpg`
 - 용도: 이미지 생성/배너 작업 시 불개미 로고로 사용
