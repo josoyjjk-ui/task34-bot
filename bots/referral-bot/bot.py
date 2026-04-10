@@ -904,9 +904,9 @@ async def reward_receive(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     if row and row[0] == str(user_id):
                         service.spreadsheets().values().update(
                             spreadsheetId=sheet_id,
-                            range=f'{sheet_name}!K{i+1}',
+                            range=f'{sheet_name}!K{i+1}:L{i+1}',
                             valueInputOption='RAW',
-                            body={'values': [[bithumb_wallet]]}
+                            body={'values': [[bithumb_wallet, '신규수집']]}
                         ).execute()
                         break
             except Exception as e:
