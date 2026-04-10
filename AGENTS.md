@@ -58,14 +58,14 @@
 
 ---
 
-## 모델 정책 (2026-04-10 확정)
+## 모델 정책 (2026-04-11 개정)
 
-| 에이전트 | Primary 모델 | Provider | 용도 |
-|----------|-------------|----------|------|
-| **딸수 (main)** | zai/glm-5.1 | Z.ai Coding Plan | 기획·소통·일반 실행 |
-| **참모 (chammo)** | google/gemini-3.1-flash-lite-preview | Google | 리서치·콘텐츠·블로그 |
-| **공병 (ops)** | zai/glm-5.1 | Z.ai (공병용 별도 계정) | 코드·인프라·시스템 |
-| **작전장교 (inspector)** | openai-codex/gpt-5.3-codex | OpenAI Codex | 검증·감사·모니터링 |
+| 에이전트 | Primary | Fallback | 용도 |
+|----------|---------|----------|------|
+| **딸수 (main)** | zai/glm-5.1 | gemini-3-flash | 기획·소통·일반 실행 |
+| **참모 (chammo)** | gemini-flash-lite | gemini-3-flash | 리서치·콘텐츠·블로그 |
+| **공병 (ops)** | zai/glm-5.1 | gemini-3-flash | 코드·인프라·시스템 |
+| **작전장교 (inspector)** | zai/glm-5.1 | gemini-3-pro | 검증·감사·모니터링 |
 
 **모델 규칙:**
 - 크론잡 생성 시 `payload.model` 하드코딩 금지. agent defaults를 따른다.
