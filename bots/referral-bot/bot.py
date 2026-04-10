@@ -220,20 +220,15 @@ def init_db():
             );
 
             CREATE TABLE IF NOT EXISTS channels (
-                channel_id  INTEGER PRIMARY KEY,
+                id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                channel_id  INTEGER NOT NULL,
                 channel_name TEXT,
                 event_id    INTEGER REFERENCES events(id) DEFAULT 1,
-                added_at    TEXT DEFAULT (datetime('now', 'localtime'))
+                added_at    TEXT DEFAULT (datetime('now', 'localtime')),
+                UNIQUE(channel_id, event_id)
             );
 
-            CREATE TABLE IF NOT EXISTS event_period (
-                id          INTEGER PRIMARY KEY CHECK (id = 1),
-                start_date  TEXT,
-                end_date    TEXT
-            );
-
-            INSERT OR IGNORE INTO event_period (id, start_date, end_date)
-            VALUES (1, NULL, NULL);
+            -- event_period 레거시 테이블 제거됨 — events 테이블로 대체
         """)
 
         # users 테이블 — 이미 마이그레이션된 스키마면 건드리지 않음
@@ -876,7 +871,7 @@ async def cmd_reward(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     current = existing['bithumb_wallet'] or '미입력'
     await update.message.reply_text(
-        f"🪙 *Eigen Cloud 리워드 수령 주소 입력*\n\n"
+        f"🪙 *리워드 수령 주소 입력*\n\n"
         f"현재 등록된 주소: `{current}`\n\n"
         "빗썸 거래소의 **Eigen 코인 입금 주소**를 제출해주세요.\n\n"
         "📌 입력 방법:\n"
@@ -1145,9 +1140,10 @@ async def cmd_removechannel(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("채널 ID는 숫자여야 합니다.")
         return
 
+    event_id = get_active_event_id()
     with get_db() as conn:
-        conn.execute("DELETE FROM channels WHERE channel_id=?", (channel_id,))
-    await update.message.reply_text(f"✅ 채널 {channel_id} 제거됐습니다.")
+        conn.execute("DELETE FROM channels WHERE channel_id=? AND event_id=?", (channel_id, event_id))
+    await update.message.reply_text(f"✅ 채널 {channel_id} 제거됐습니다. (이벤트 ID: {event_id})")
 
 
 @admin_only
