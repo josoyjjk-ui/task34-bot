@@ -1,0 +1,2468 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-10T23:49:31.584Z",
+  "entries": {
+    "memory:memory/2026-03-11.md:73:90": {
+      "key": "memory:memory/2026-03-11.md:73:90",
+      "path": "memory/2026-03-11.md",
+      "startLine": 73,
+      "endLine": 90,
+      "source": "memory",
+      "snippet": "### 참모 모델 결정 (15:21 기준 미확정) - 해병님 확인: VS Code 재인증 목적 = 참모가 gpt-5.3-codex 쓰게 하려고 - 현실: 같은 계정 공유 구조상 VS Code 사용 시 토큰 충돌 → 재인증해도 금방 소진 - 제시한 옵션: 1. OpenClaw 전용 ChatGPT 계정 별도 생성 (근본 해결) 2. 참모 모델을 gemini로 확정 (안정성 우선) - **해병님 결정 대기 중** (아직 선택 안 함) ### SESSION-STATE 업데이트 필요 항목 - Billions 공지 3개 전송 대기 (Fireweek + AMA + 사전질문폼) — 여전히 대기 중 - fireantagent_bot 배포 대기 — 여전히 대기 중 ## 기술 메모 - Google OAuth 토큰: `/workspace/secrets/google-token.json` refresh_token으로 자동 갱신 가능 - gcloud auth 만료됨 (fireant@bridge34.com) — 재로그인 필요하지만 google-token.json으로 우회 가능 - Whisper 환경: `/workspace/whisper_env/` (torch + openai-whisper + moviepy) - 맥미니 일본/한국 구매 차이: 하드웨어 동일, 가격만 다름 (엔저 시 일본이 10-20% 저렴), 글로벌 워런티",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.870926022529602,
+      "maxScore": 0.5044247835874557,
+      "firstRecalledAt": "2026-04-07T10:08:07.360Z",
+      "lastRecalledAt": "2026-04-08T09:22:41.974Z",
+      "queryHashes": [
+        "e5e42780bfac",
+        "17b968853335",
+        "a964eb56241b",
+        "aca0ab1cf266",
+        "b1c12ba06c3e",
+        "065e12c44d43"
+      ],
+      "recallDays": [
+        "2026-04-07",
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "gpt-5.3-codex",
+        "session-state",
+        "fireantagent-bot",
+        "refresh-token으로",
+        "bridge34.com",
+        "google-token.json으로"
+      ]
+    },
+    "memory:memory/2026-03-11.md:39:61": {
+      "key": "memory:memory/2026-03-11.md:39:61",
+      "path": "memory/2026-03-11.md",
+      "startLine": 39,
+      "endLine": 61,
+      "source": "memory",
+      "snippet": "- 공병: 호출형 (코드는 파일 기반이라 맥락 누적 불필요) - 상태: 해병님 최종 승인 대기 → 구현 진행 예정 ## 오후 작업 (12:30~15:21) — 시스템 장애 대응 및 에이전트 복구 ### 장애 원인 분석 및 복구 (12:30~15:21) - 전날 밤 Gateway 다운 원인: openai-codex OAuth `refresh_token_reused` 반복 → config.json 손상 → Gateway abort - **3단계 연쇄 장애**: 참모 모델 오류 → OAuth 토큰 소진 → openclaw.json 파싱 실패 ### 에이전트 설정 변경 (확정) - chammo primary: `openai-codex/gpt-5.3-codex` (fallback: gemini-3-pro-preview, claude-opus-4-6) - ops: `anthropic/claude-sonnet-4-6` (변경 없음) - 딸수(main): `anthropic/claude-sonnet-4-6` (변경 없음) - openai-codex/gpt-5.4-codex → 존재하지 않는 모델 (설정에서 제거) - 메인 fallback에서 openai-codex 제거 (딸수는 Anthropic만 사용) ### OpenAI Codex 토큰 문제 해결 - 원인: VS Code Codex와 OpenClaw가 동일 ChatGPT 계정 공유 → r",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.985566538572311,
+      "maxScore": 0.5240677565336227,
+      "firstRecalledAt": "2026-04-07T10:08:07.360Z",
+      "lastRecalledAt": "2026-04-08T14:36:27.619Z",
+      "queryHashes": [
+        "e5e42780bfac",
+        "aca0ab1cf266",
+        "b1c12ba06c3e",
+        "ff6a885bcc04",
+        "a8b351755cc3",
+        "5415a16cd4ff"
+      ],
+      "recallDays": [
+        "2026-04-07",
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "gateway",
+        "gpt",
+        "openai",
+        "openai-codex",
+        "refresh-token-reused",
+        "config.json",
+        "openclaw.json",
+        "openai-codex/gpt-5.3-codex"
+      ]
+    },
+    "memory:memory/2026-04-04.md:1:40": {
+      "key": "memory:memory/2026-04-04.md:1:40",
+      "path": "memory/2026-04-04.md",
+      "startLine": 1,
+      "endLine": 40,
+      "source": "memory",
+      "snippet": "# 2026-04-04 메모리 ## 에이전트 모델 구성 변경 논의 ### 최종 확정 구성 (2026-04-04 19:15 KST) | 에이전트 | 모델 | |---------|------| | 딸수 (main) | `openai-codex/gpt-5.3-codex` | | 참모 (chammo) | `openai/gpt-4.1` | | 공병 (ops) | `openai-codex/gpt-5.3-codex` | | 작전장교 (inspector) | `openai-codex/gpt-5.3-codex` | - Anthropic 완전 제거 방향으로 결정 - 참모 gpt-4.1 이유: 글쓰기 품질 + OpenAI API 분산 - 딸수 codex 유지 이유: 도구 실행/조율 특화 ### 에이전트별 실제 사용 비율 (최근 30일) - 딸수: 55% (~$52) - 참모: 29% (~$27) - 공병: 10% (~$9) - 작전장교: 5% (~$4) - 합계: $92/월 ### 모델 비용 논의 결론 - gpt-4.1 + codex 올인 예상비용: $20~30/월 - Gemini 2.5 Pro 참모 대안 논의됨 (결국 gpt-4.1로 확정) - Anthropic Extra Usage 활성화 여부: 미결 (해병님 결정 필요) ## KAST × Movement 분석 ### 핵심 내용 - KAST: 스테이블코인 기반 글로벌 결제 플랫폼 (100",
+      "recallCount": 11,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 5.454963302612303,
+      "maxScore": 0.5367215424776077,
+      "firstRecalledAt": "2026-04-07T10:08:07.360Z",
+      "lastRecalledAt": "2026-04-10T06:09:16.352Z",
+      "queryHashes": [
+        "e5e42780bfac",
+        "17b968853335",
+        "a964eb56241b",
+        "aca0ab1cf266",
+        "12baba125e3b",
+        "b1c12ba06c3e",
+        "065e12c44d43",
+        "a8b351755cc3",
+        "5415a16cd4ff",
+        "975d868f3668",
+        "8b4df0cc2d83"
+      ],
+      "recallDays": [
+        "2026-04-07",
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "openai-codex/gpt-5.3-codex",
+        "openai/gpt-4.1",
+        "gpt-4.1",
+        "실행/조율",
+        "92/월",
+        "30/월"
+      ]
+    },
+    "memory:memory/2026-02-26.md:29:49": {
+      "key": "memory:memory/2026-02-26.md:29:49",
+      "path": "memory/2026-02-26.md",
+      "startLine": 29,
+      "endLine": 49,
+      "source": "memory",
+      "snippet": "- 수정 진행 중: 휴대전화번호·트위터·유튜브 닉네임·텔레그램 닉네임 설정까지 완료, 참여조건확인 체크박스 옵션 추가 중 abort - 예시 폼 ID: 1ogjAxMoOg69zcJdnRjKIR0Ad7AdR2z5FdXlnOpso130 ### Memory Search 이슈 - OpenAI embeddings API 키 401 오류로 memory_search 비활성화 - 새 키 Keychain 저장 완료: security add-generic-password 실행 - gateway config 재시작 없어 미반영 상태 지속 → **미해결** ### 기타 - Git 이메일 업데이트: josoyjjk@gmail.com (기존 임시값 교체) - Failover 순서 고정: Opus 4.6 → Sonnet 4.6(현재) → GPT-5.3 Codex → Grok-4 → Gemini 3 Pro Preview - 불개미 스타일 포스팅 학습 완료 (패턴 1~35) ## 미완료 작업 (다음 세션 이어받기) - [ ] Virtuals AMA 구글폼 예시 폼과 동일하게 수정 (휴대전화번호/트위터/유튜브/텔레그램/참여조건체크박스/AMA질문/지갑주소) - [ ] memory_search 기능 복구 (gateway config embeddings API 키 재적용 + 재시작) ## 추가 고정 스타일 (22:xx KST) - \"불개미 칠판 스타일\" 이미지",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.461433333158493,
+      "maxScore": 0.461433333158493,
+      "firstRecalledAt": "2026-04-07T10:08:07.360Z",
+      "lastRecalledAt": "2026-04-07T10:08:07.360Z",
+      "queryHashes": [
+        "e5e42780bfac"
+      ],
+      "recallDays": [
+        "2026-04-07"
+      ],
+      "conceptTags": [
+        "embedding",
+        "embeddings",
+        "failover",
+        "gateway",
+        "gpt",
+        "openai",
+        "memory-search",
+        "add-generic-password"
+      ]
+    },
+    "memory:memory/2026-03-12.md:55:78": {
+      "key": "memory:memory/2026-03-12.md:55:78",
+      "path": "memory/2026-03-12.md",
+      "startLine": 55,
+      "endLine": 78,
+      "source": "memory",
+      "snippet": "- **ever_registered 버그**: register_user 함수가 등록 시 ever_registered=1 세팅 안 함 → 수정 - 기존 4명 ever_registered=1 소급 적용 - /start 시 Billions 이벤트 공지 자동 표시 추가: - 📣 Billions 채널/대화방 링크: t.me/Billions_Korea, t.me/billions_Koreachat - 채널 환영 메시지 자동 삭제: 30초 → 5초 변경 - 이벤트명 placeholder: \"예: 메가이더 불개미 AMA 3월 21일 오후 8시\" - commit: d0f79d5 (ever_registered 수정), 5ea0ea8 (Billions 공지) ## 친구초대봇 초기화 (23:22 KST) - 유저 전체 삭제 (4명 → 0명) - 이벤트 기간 유지: 2026-03-12 ~ 2026-04-01 ## 대시보드 리더보드 페이지 신규 추가 (23:25~23:49 KST) - URL: https://josoyjjk-ui.github.io/fireant-dashboard/leaderboard/ - 구조: referral-bot DB → export_leaderboard.py → leaderboard.json → GitHub Pages - LaunchAgent: com.fireant.referral-leaderboard-sync (1시간 간격,",
+      "recallCount": 5,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.626597207784652,
+      "maxScore": 0.5507874101400375,
+      "firstRecalledAt": "2026-04-07T14:13:28.808Z",
+      "lastRecalledAt": "2026-04-10T07:54:11.089Z",
+      "queryHashes": [
+        "920cff78e90a",
+        "48b92c94face",
+        "917eabf77861",
+        "10cf3a8a1a3e",
+        "8ff02a5d2be1"
+      ],
+      "recallDays": [
+        "2026-04-07",
+        "2026-04-08",
+        "2026-04-09",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "ever-registered",
+        "register-user",
+        "채널/대화방",
+        "t.me/billions-korea",
+        "t.me/billions-koreachat",
+        "referral-bot",
+        "export-leaderboard.py",
+        "leaderboard.json"
+      ]
+    },
+    "memory:memory/2026-04-06.md:130:158": {
+      "key": "memory:memory/2026-04-06.md:130:158",
+      "path": "memory/2026-04-06.md",
+      "startLine": 130,
+      "endLine": 158,
+      "source": "memory",
+      "snippet": "- 유실된 8명: 모두 3/19 저녁 집중 가입 (22:01~23:29) - 결론: 부정 행위자 아님. DB 교체 과정에서 데이터 손실된 피해자 ## 친구초대봇 상태 - 2026-04-06 01:52 KST 기준 마감 처리 완료 - DB end_date: 2026-04-05로 업데이트 - LaunchAgent 언로드 + 프로세스 강제 종료 완료 (STOPPED 확인) - bot.log/launchd.log: 4월 3일분만 남아있음 (이전 로그는 롤오버로 소실) ## 이벤트 기간 봇 활동 통계 - 날짜별 신규 가입자 피크: - 3/29: 89명 (중간 급등) - 4/3: 115명 (마감일 폭발) - 이벤트 기간 친구초대 발생 건수: 235건 - 이벤트 기간 총 적립 포인트: 13,720pt ## 크립토 VC 투자 동향 (2023-2025) - 2023: 투자액 $107억 (2022년 대비 -68%), 밸류에이션 최저 - 2024: 투자액 $137억 (+28%), 초기단계 강세, 헤지펀드 평균 +25.4% - 2025: 투자액 $200억+ (사상 최대), Q4 단독 $85억, 헤지펀드 평균 +36% - 2025 핵심 섹터: 스테이블코인, RWA 토큰화, AI 인프라, 트레이딩 인프라 - 크립토 VC는 코인 시장보다 6~12개월 후행하는 경향 ## 불개미 해병님 건강검진 결과 (2024-04-30 기준) - **비타민",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.0339119106531143,
+      "maxScore": 0.5509723275899887,
+      "firstRecalledAt": "2026-04-07T14:13:28.808Z",
+      "lastRecalledAt": "2026-04-07T20:58:07.712Z",
+      "queryHashes": [
+        "920cff78e90a",
+        "48b92c94face"
+      ],
+      "recallDays": [
+        "2026-04-07",
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "3/19",
+        "end-date",
+        "2026-04-05로",
+        "bot.log/launchd.log",
+        "3/29",
+        "4/3",
+        "2023-2025",
+        "25.4"
+      ]
+    },
+    "memory:memory/2026-03-13.md:1:32": {
+      "key": "memory:memory/2026-03-13.md:1:32",
+      "path": "memory/2026-03-13.md",
+      "startLine": 1,
+      "endLine": 32,
+      "source": "memory",
+      "snippet": "# 2026-03-13 일일 로그 ## referral-bot 운영 - 봇 정상 작동 확인 (PID 37072, LaunchAgent com.fireant.referral-bot) - 총 등록 유저: 411명 (13일 오후 2시 기준) - TimedOut 에러 1건 (10:15 KST) — 자동 복구, 무시 가능 - 포인트 누락 소급: 코드 변경(01:00) 이전 등록자 중 referrer 설정했으나 +10pt 미지급된 20명 소급 처리 완료 - 전체 포인트 알림 발송: 성공 408 / 봇차단 3 / 실패 0 - 소급 알림 발송: 성공 19 / 실패 1 (일시 네트워크, 재확인 시 정상) ## referral-bot /start 메시지 업데이트 - 미션 채널 4개로 확장 (commit f353bd4): - Billions 공지채널: t.me/Billions_Korea - Billions 대화방: t.me/billions_Koreachat - 불개미 채널: t.me/fireantcrypto - 불개미 대화방: t.me/fireantgroup ## 대시보드 업데이트 - Billions 친구초대 이벤트 카드 추가 (불개미 주관 이벤트 섹션, commit 77445cf) - 기간: 3/13 ~ 3/22 - 버튼: @mate_ref_bot + 리더보드 링크 ## Billions AMA 스크립트 - 구글폼 응",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.022507131099701,
+      "maxScore": 0.5409275591373444,
+      "firstRecalledAt": "2026-04-07T14:13:28.808Z",
+      "lastRecalledAt": "2026-04-07T20:58:07.712Z",
+      "queryHashes": [
+        "920cff78e90a",
+        "48b92c94face"
+      ],
+      "recallDays": [
+        "2026-04-07",
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "네트워크",
+        "referral-bot",
+        "com.fireant.referral-bot",
+        "t.me/billions-korea",
+        "t.me/billions-koreachat",
+        "t.me/fireantcrypto",
+        "t.me/fireantgroup",
+        "3/13"
+      ]
+    },
+    "memory:memory/2026-03-12.md:40:58": {
+      "key": "memory:memory/2026-03-12.md:40:58",
+      "path": "memory/2026-03-12.md",
+      "startLine": 40,
+      "endLine": 58,
+      "source": "memory",
+      "snippet": "- 내용: 구글드라이브 업로드 → ffmpeg 컷편집 → GIF 변환 → 자막/BGM → 구글드라이브 업로드 → 완료 보고 (7단계) - ffmpeg 명령어 제거, 오픈클로 자연어 명령 예시만 남김 ## DWF Ventures KRW 스테이블코인 리포트 포스트 작성 - 원문: https://x.com/DWFVentures/status/2032003732008026369 - 핵심: 한국 1,800만 디지털 자산 보유자, Circle/Tether/네이버/Kaia 진입 중, 규제 통과 타이밍이 핵심 - 불개미 스타일 포스트 제작 완료 ## 리워드 신청 폼 순서 변경 (20:36 KST) - 순서: 연락처 → 텔레그램 → 이메일 → 트위터 → 이벤트명 → 지갑주소 → 당첨상품 - 오류신청 안내 문구 추가: \"쿠포니봇 운영시간 중 제출된 오류만 유효\" - 오류신고 버튼: (CS봇) 삭제 + winners/#tab-apply로 직접 연결 - 신청 유형 선택 추가: 쿠포니봇 오류 신청 / 당첨자 리워드 신청 버튼 ## referral-bot 버그 수정 및 개선 (20:14~20:33 KST) - **ever_registered 버그**: register_user 함수가 등록 시 ever_registered=1 세팅 안 함 → 수정 - 기존 4명 ever_registered=1 소급 적용 - /start 시 Billions 이벤트 공지 자동",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.0070157781243323,
+      "maxScore": 0.530343110859394,
+      "firstRecalledAt": "2026-04-07T14:13:28.808Z",
+      "lastRecalledAt": "2026-04-07T20:58:07.712Z",
+      "queryHashes": [
+        "920cff78e90a",
+        "48b92c94face"
+      ],
+      "recallDays": [
+        "2026-04-07",
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "자막/bgm",
+        "circle/tether/네이버/kaia",
+        "tab-apply로",
+        "referral-bot",
+        "ever-registered",
+        "register-user",
+        "내용",
+        "구글드라이브"
+      ]
+    },
+    "memory:memory/2026-03-23.md:65:74": {
+      "key": "memory:memory/2026-03-23.md:65:74",
+      "path": "memory/2026-03-23.md",
+      "startLine": 65,
+      "endLine": 74,
+      "source": "memory",
+      "snippet": "- bridge34.com 캘린더 추가 완료 - 이벤트 링크: https://www.google.com/calendar/event?eid=bXZhZW42b3ZvNWpzM2s2dmdqZTI1cHFsNzggZmlyZWFudEBicmlkZ2UzNC5jb20 ### CB 프리미엄 수신 - 2026-03-23 값: -0.03% (cb_premium_input.json 저장) ### 이벤트 페이지 추가 요청 (미완료) - 해병님이 https://t.me/fireantcrypto/40352 이벤트 추가 요청 - 텔레그램 링크 내용 로드 불가 → 이벤트 정보 직접 입력 대기 중",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.47340050041675563,
+      "maxScore": 0.47340050041675563,
+      "firstRecalledAt": "2026-04-07T14:13:28.808Z",
+      "lastRecalledAt": "2026-04-07T14:13:28.808Z",
+      "queryHashes": [
+        "920cff78e90a"
+      ],
+      "recallDays": [
+        "2026-04-07"
+      ],
+      "conceptTags": [
+        "bridge34.com",
+        "www.google.com/calendar/event",
+        "0.03",
+        "cb-premium-input.json",
+        "t.me/fireantcrypto/40352",
+        "bridge34",
+        "com",
+        "캘린더"
+      ]
+    },
+    "memory:memory/2026-03-04.md:44:61": {
+      "key": "memory:memory/2026-03-04.md:44:61",
+      "path": "memory/2026-03-04.md",
+      "startLine": 44,
+      "endLine": 61,
+      "source": "memory",
+      "snippet": "- Git commit: `c39462e` — \"fix: RPC 최종 최적화 - drpc.org 전체 체인 적용, publicnode 제거\" ### 코인베이스 프리미엄 조회 (21:22 KST) - Coinbase $70,782 / Binance $70,790 → 프리미엄 **-0.0106%** (실질 중립) - Coinglass Coinbase Premium 페이지 → PRO 전용으로 이동(404), 직접 계산으로 대체 ## 미해결 / 다음 세션 인계 - wallet-monitor stderr에 여전히 `eth.llamarpc.com` 403 에러 출력됨 - 원인: providers.js가 config 로드 후 RPC를 캐싱하거나 fallback 로직에 버그 있을 가능성 - 확인 필요: `src/providers.js` 코드 검토 후 llamarpc 하드코딩 여부 파악 - Alchemy 무료 API 키: 해병님 직접 가입 필요 (hCaptcha) → https://dashboard.alchemy.com/signup ## 요식업 AI 활용 정리 - 해병님이 요식업 검토 중 - 핵심 절감 포인트: 식재료 발주 자동화 (폐기율 15→5%), 고객 응대 봇, 매출 리포트 자동화 - 딸수가 직접 할 수 있는 것: 크론 발주서 생성, TG 매출 리포트, SNS 캡션 자동 생성, 리뷰 모니터링",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.4846364602446556,
+      "maxScore": 0.5259346529841422,
+      "firstRecalledAt": "2026-04-07T17:12:37.391Z",
+      "lastRecalledAt": "2026-04-10T05:49:35.433Z",
+      "queryHashes": [
+        "17b968853335",
+        "bd64d3c74599",
+        "50e247b787ce"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "drpc.org",
+        "0.0106",
+        "wallet-monitor",
+        "eth.llamarpc.com",
+        "providers.js가",
+        "src/providers.js",
+        "dashboard.alchemy.com/signup",
+        "git"
+      ]
+    },
+    "memory:memory/2026-03-23.md:44:71": {
+      "key": "memory:memory/2026-03-23.md:44:71",
+      "path": "memory/2026-03-23.md",
+      "startLine": 44,
+      "endLine": 71,
+      "source": "memory",
+      "snippet": "- 현재 Claude Max $100 플랜 → 실사용 월 $15 수준 → 플랜 축소 가능 - 결론: API 직접 과금이 최저비용, Claude.ai 안 쓰면 Max 해지 권고 ### past-events Billions 리더보드 수정 - 원인: past-events/index.html이 Eigen Cloud leaderboard.json을 로드 - 조치: billions-leaderboard.json 생성 (Billions DB에서 100명 추출), fetch 경로 교체 - commit `05ed741` (공병), git push 완료 - Billions 상위: 1위 불개미 2540pt(253명), 2위 camaro 850pt, 3위 코생 570pt ### 불개미 게시판 정기 코인시장 분석 스케줄 변경 - 롱폼 화요일 → 월요일로 이동 (commit `32654bf`) - 롱폼 → 라이브 요약으로 명칭 변경 (commit `ebbd1e4`) - 월요일: 주간 시황 + 라이브 요약 / 화요일: 일일 시황만 ### DEGEN(Base) 대출 조사 - Morpho/Aave/Moonwell/Compound 모두 DEGEN 대출 마켓 없음 (전수 확인) - 유일 옵션: Teller Protocol P2P (유동성 불안정) - 결론: 실질적 대출 불가 ### XPLA 미팅 캘린더 추가 - 2026-03-27(금) 12:00~13:00 K",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.4753179997205734,
+      "maxScore": 0.5122403413057327,
+      "firstRecalledAt": "2026-04-07T17:12:37.391Z",
+      "lastRecalledAt": "2026-04-08T09:22:41.974Z",
+      "queryHashes": [
+        "17b968853335",
+        "ff6a885bcc04",
+        "065e12c44d43"
+      ],
+      "recallDays": [
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "claude.ai",
+        "past-events",
+        "past-events/index.html이",
+        "leaderboard.json을",
+        "billions-leaderboard.json",
+        "morpho/aave/moonwell/compound",
+        "현재",
+        "claude"
+      ]
+    },
+    "memory:memory/2026-02-28.md:178:210": {
+      "key": "memory:memory/2026-02-28.md:178:210",
+      "path": "memory/2026-02-28.md",
+      "startLine": 178,
+      "endLine": 210,
+      "source": "memory",
+      "snippet": "- 마지막 이용 가능일: 2027. 1. 18. (연간, 기결제 기간까지 유지) - 이후 ₩129,000/년 청구 없음 - 결제 수단: 국민-1813 - 방법: CDP WebSocket 자동화 (티빙과 동일 방식) ### 오늘 해지 총 정리 | 서비스 | 마지막 이용일 | 절약 | |--------|------------|------| | ~~TVING~~ 광고형 스탠다드 | 2026.3.28 | ₩5,500/월 | | ~~스픽~~ 연간 사용권 | 2027.1.18 | ₩129,000/년 | | ~~Gleam Pro~~ | 2026.3.27 | $59/월 | --- ## 불개미 매매 원칙 (확정 저장 23:45 KST) ### 대원칙 - 가장 어렵고 복잡한 것을 가장 쉽게 - 한 달에 딱 한 번만 트레이딩할 수 있다면, 지금 할 것인가? ### 핵심 규칙 1. 투입시드는 수익이 나도 늘어나면 안됨 2. 방향을 기다리고 진입하는 게 아니라, 방향이 나오면 진입 3. 평소에는 진입시드 총 1천불 이상 투입 금지 ### 방법론 - 레버리지: 시작 x5, 최대 x8 - 첫 진입: 시드의 20% - 진입 기준 (24시간 내 직전고점 대비): - -3.5% 하락시 매수 포지션 1차진입 - +4.5% 상승시 매도 포지션 1차진입 - 최초 진입 후 가격기준 0.5% 하락시 물타기 시작 - $100 하락시 시드기준 2%씩 물타기 ($",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.47683424055576323,
+      "maxScore": 0.47683424055576323,
+      "firstRecalledAt": "2026-04-07T17:12:37.391Z",
+      "lastRecalledAt": "2026-04-07T17:12:37.391Z",
+      "queryHashes": [
+        "17b968853335"
+      ],
+      "recallDays": [
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "000/년",
+        "국민-1813",
+        "2026.3.28",
+        "500/월",
+        "2027.1.18",
+        "2026.3.27",
+        "59/월",
+        "3.5"
+      ]
+    },
+    "memory:memory/2026-03-30.md:52:77": {
+      "key": "memory:memory/2026-03-30.md:52:77",
+      "path": "memory/2026-03-30.md",
+      "startLine": 52,
+      "endLine": 77,
+      "source": "memory",
+      "snippet": "- Realized Price: ~$38~42K → MVRV Z-Score ~0.8~1.2 (중립) - 채굴자 항복 임계: $45~50K 이하 - 200주 MA: ~$35~40K (약세장 바닥 구간과 일치) - 분할매수 구간: $60~67K(1차), $50~55K(2차), $38~45K(3차) - 5차 반감기(2028.04) 선반영 시작: 2027년 1월~7월 ## 미완료 이슈 - 네이버 블로그 포스트 `224233588152` 이미지 교체 재발행 (캡차 차단) - 이월 포스트 삭제: `224229399904`, `224229382917`, `224229438593` - @mate_ref_bot 관리자 승격 (해병님 직접) - Fireflies Google Calendar 연동 (해병님 OAuth) - xAI API 키 갱신 (console.x.ai) ## Bridge34 비즈니스 전략 피드백 - \"한국에서 필요한 것을 해주는 파트너\" 문구 + 성과 수치 포트폴리오화 권장 - 월간 리포트: 영문 LinkedIn + 해외 프로젝트 직접 발송이 BD 효과 - 코인같이투자: 공식 파트너 계약보다 비공식 협력 유지가 레퓨 리스크 최소화 ## 에이전트 모델 구성 | 에이전트 | Primary | Fallback | |---------|---------|---------| | 딸수 (main) | claude-sonnet-4-6 | gem",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.9241683304309842,
+      "maxScore": 0.5055303663015366,
+      "firstRecalledAt": "2026-04-07T17:12:37.391Z",
+      "lastRecalledAt": "2026-04-10T11:17:23.873Z",
+      "queryHashes": [
+        "17b968853335",
+        "a964eb56241b",
+        "065e12c44d43",
+        "3312234dbd08"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "z-score",
+        "0.8",
+        "1.2",
+        "2028.04",
+        "mate-ref-bot",
+        "console.x.ai",
+        "claude-sonnet-4-6",
+        "realized"
+      ]
+    },
+    "memory:memory/2026-02-26.md:46:67": {
+      "key": "memory:memory/2026-02-26.md:46:67",
+      "path": "memory/2026-02-26.md",
+      "startLine": 46,
+      "endLine": 67,
+      "source": "memory",
+      "snippet": "## 추가 고정 스타일 (22:xx KST) - \"불개미 칠판 스타일\" 이미지 템플릿 레퍼런스 확정. - 고정 요소: 빨간 불개미 캐릭터, 칠판 프레임/구도, 분필 느낌의 타이포그래피. - 가변 요소: 칠판 내부 텍스트/수치만 변경. - 향후 사용자가 \"불개미 칠판 스타일\" 요청 시 이 레퍼런스를 기본 템플릿으로 사용. ## 불개미 해병님 관찰 - 초기 요구사항 모호 → 결과 보고 반복 수정하는 패턴 (폰트 4회 수정) - 직관적 품질 판단 빠름, 위임력 탁월 - 작업 완료 전 다음 요청 던지는 경향 → 미완 작업 누적 주의 - abort 후 재시작 방식 선호 (불만 직접 표현보다) ## 불개미 해병님 종합 성격 분석 (전체 대화 기반, 03:41 KST 추가) ### 핵심 프로필 - 10년차 크립토 커리어 (2016년 시작) - 카카오톡방 3명 → 텔레그램 38,500명 커뮤니티 빌더 - MBTI 예측: ENTJ / IQ 예측: 125~135 ### 장점 - **구조적 사고**: 대시보드·지갑봇·Notion아카이빙·ETF루틴·AI failover 체계 등 인프라 설계자형 - **AI 실전 도입 최전선**: 딸수를 업무 파이프라인에 완전 통합 (일반 KOL 대비 1~2년 앞섬)",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.0866404101252556,
+      "maxScore": 0.5451211735606193,
+      "firstRecalledAt": "2026-04-07T17:31:25.252Z",
+      "lastRecalledAt": "2026-04-09T19:59:49.685Z",
+      "queryHashes": [
+        "ee1bb94aad54",
+        "ba3bf3662278"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "failover",
+        "프레임/구도",
+        "텍스트/수치만",
+        "추가",
+        "고정",
+        "스타일",
+        "kst",
+        "불개미"
+      ]
+    },
+    "memory:memory/2026-03-01.md:1:26": {
+      "key": "memory:memory/2026-03-01.md:1:26",
+      "path": "memory/2026-03-01.md",
+      "startLine": 1,
+      "endLine": 26,
+      "source": "memory",
+      "snippet": "# 2026-03-01 일일 로그 ## Orderly Network 계획서 → Google Docs 삽입 시도 ### 목표 `/Users/fireant/.openclaw/workspace/orderly_activity_plan.md` 내용을 Google Docs에 삽입 ### 시도 경과 - Google Docs ID: `1qmvLbzAVpcYqQDj4xxufRUWOmh2nAm-JtOm7ZSHPVU4` - 기존 탭 (target ID: `845B3AF7946AEFE272492DB21A4A5C1E`) - CDP `Input.insertText`, `Input.dispatchKeyEvent` Cmd+V → 구글독스 캔버스 에디터에 효과 없음 - REST API (`docs.googleapis.com/v1/documents/:id/batchUpdate`) → 401 UNAUTHENTICATED (쿠키 불충분) - gcloud: 인증된 계정 없음 (미로그인) - Keychain에 Google 크리덴셜 없음 ### 현재 진행 중 (세션 끊김 직전 상태) - Apps Script 기존 프로젝트(`1YyEJKe3RrxzGxT-lRSpctVUde2t8irphKeGgrWdZEh3HJTSI9igmuaLm`) 에디터 열기 - `createOrderlyDoc()` 함수 코드 삽입 완료 (line ~60~123) - Ctrl+S 저장 완료 - 함수 실",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.294316784552665,
+      "maxScore": 0.7743819664040521,
+      "firstRecalledAt": "2026-04-07T18:14:12.039Z",
+      "lastRecalledAt": "2026-04-10T15:04:53.679Z",
+      "queryHashes": [
+        "af85411ea0ef",
+        "e68d89e20f90"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "network",
+        "users/fireant",
+        "input.inserttext",
+        "input.dispatchkeyevent",
+        "docs.googleapis.com/v1/documents",
+        "id/batchupdate",
+        "일일",
+        "로그"
+      ]
+    },
+    "memory:memory/2026-03-01.md:71:98": {
+      "key": "memory:memory/2026-03-01.md:71:98",
+      "path": "memory/2026-03-01.md",
+      "startLine": 71,
+      "endLine": 98,
+      "source": "memory",
+      "snippet": "- 스코프: documents, drive, spreadsheets, presentations, forms.body, forms.responses.readonly, gmail.readonly - 인증 스크립트: `secrets/google_auth.py` (포트 9753) - 서비스 계정: `secrets/fireant-workspace-sa.json` (fireantagent@fireant-workspace.iam.gserviceaccount.com) - Keychain: `google-sa-fireant-workspace` ### Google APIs 활성화 완료 (fireant-workspace, project #792432921141) - Docs API ✅ / Drive API ✅ / Sheets API ✅ / Slides API ✅ / Forms API ✅ ### Orderly 계획서 → Google Docs 삽입 완료 - 영문 변환 후 삽입 완료 - Doc ID: `1qmvLbzAVpcYqQDj4xxufRUWOmh2nAm-JtOm7ZSHPVU4` - 제목: \"Orderly Network Korea Community Activity Plan\" - 헤딩 12개 스타일 적용 ### Billions Network AMA 설정 - 구글폼 ID: `19jPjxg4VmSPUaSckwiAW2iZ5zGzJp_s_zl6nNLxdRZc",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.0118314653635023,
+      "maxScore": 0.5083583265542984,
+      "firstRecalledAt": "2026-04-07T18:14:12.039Z",
+      "lastRecalledAt": "2026-04-10T15:04:53.679Z",
+      "queryHashes": [
+        "af85411ea0ef",
+        "e68d89e20f90"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "network",
+        "forms.body",
+        "forms.responses.readonly",
+        "gmail.readonly",
+        "secrets/google-auth.py",
+        "google-sa-fireant-workspace",
+        "fireant-workspace",
+        "스코프"
+      ]
+    },
+    "memory:memory/2026-02-27.md:43:51": {
+      "key": "memory:memory/2026-02-27.md:43:51",
+      "path": "memory/2026-02-27.md",
+      "startLine": 43,
+      "endLine": 51,
+      "source": "memory",
+      "snippet": "- Google Docs 공유 권한 = 해병님이 직접 관리 (딸수 자동화 불필요) - Sentient 예산 최종안 = 25,000 USDT (10k 운영 + 10k 리워드 + 5k 세금) - 썸네일 작업 방식: Pillow 직접 조작 (numpy 미설치 환경) ## 기술 메모 - numpy 미설치: PIL 픽셀 루프 방식으로 대체 - 파일 업로드 경로: `/tmp/openclaw/uploads/` (OpenClaw 업로드 샌드박스) - Google Docs iframe execCommand: bodyLen=0 → 입력 실패 확인, txt 업로드 방식 시도 중",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5055429458618164,
+      "maxScore": 0.5055429458618164,
+      "firstRecalledAt": "2026-04-07T18:14:12.039Z",
+      "lastRecalledAt": "2026-04-07T18:14:12.039Z",
+      "queryHashes": [
+        "af85411ea0ef"
+      ],
+      "recallDays": [
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "tmp/openclaw/uploads",
+        "google",
+        "docs",
+        "공유",
+        "권한",
+        "해병님이",
+        "직접",
+        "관리"
+      ]
+    },
+    "memory:memory/2026-03-18.md:12:26": {
+      "key": "memory:memory/2026-03-18.md:12:26",
+      "path": "memory/2026-03-18.md",
+      "startLine": 12,
+      "endLine": 26,
+      "source": "memory",
+      "snippet": "- DAT: BTC+ETH 24h/72h 증감률 - Coinbase Premium: 24h/72h 증감률 - [ops] 시안 생성 파일 이력: fireant_chalkboard_4in1_mock.png → fireant_chalkboard_4in1_v2.png → fireant_chalkboard_4in1_v3_dat_eth.png → fireant_chalkboard_titles_v4.png → fireant_chalkboard_v5_with_date.png → fireant_chalkboard_v6_etf_note.png - [preference] 불개미 해병님 확정: 매일 15:00 KST에 '불개미 일일시황'을 이미지+텍스트 한 메시지로 전송. 텍스트 양식 고정: 1) BTC ETH 유출입 (BTC/ETH 값 + ETF 마지막 거래일 주석) 2) 미결제약정 추이 (BTC/ETH 24h·72h) 3) DAT 매수량 추이 (24h·72h) 4) 코인베이스 프리미엄 (현재 지수 + 24h 증감률 + 72h 증감률) + 마무리 코멘트 2문장. - [cron] 현재 15:00 자동 리포트 잡: daily-chalk-main-event (jobId: b1da835d-255b-497b-84a4-f914c62b7ee9), systemEvent 기반. - [critical_preference] 불개미 해병님 지시:",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.994354988634586,
+      "maxScore": 0.5303708150982857,
+      "firstRecalledAt": "2026-04-07T20:39:10.821Z",
+      "lastRecalledAt": "2026-04-10T13:13:16.478Z",
+      "queryHashes": [
+        "8e08dd5389f6",
+        "48b92c94face",
+        "f1b095979b81",
+        "7eb4da2363ad",
+        "10cf3a8a1a3e",
+        "0ed693d948a6"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "24h/72h",
+        "fireant-chalkboard-4in1-mock.png",
+        "fireant-chalkboard-4in1-v2.png",
+        "fireant-chalkboard-titles-v4.png",
+        "btc/eth",
+        "daily-chalk-main-event",
+        "critical-preference",
+        "dat"
+      ]
+    },
+    "memory:memory/2026-03-14.md:81:105": {
+      "key": "memory:memory/2026-03-14.md:81:105",
+      "path": "memory/2026-03-14.md",
+      "startLine": 81,
+      "endLine": 105,
+      "source": "memory",
+      "snippet": "- ㅋㅋ/구어체/됩니다체 금지 - 해병님이 가볍게 대화해도 군기 유지 - memory/style.md 및 SQLite DB에 저장 완료 ## 불개미 게시판 피드 섹션 추가 (2026-03-14 22:33 공병 완료) - URL: https://fireantcrypto.com - 유튜브 채널 ID: UCIf165OxaJWen5QbbETQcEw - 텔레그램: t.me/fireantcrypto - 네이버 블로그: blog.naver.com/fireantcrypto - feed.json 생성, RSS 파싱 스크립트 작성 완료 - GitHub Actions workflow 미완료 (gh 토큰 workflow scope 없음) → 해결: `gh auth refresh --hostname github.com --scopes workflow` 후 push → 또는 GitHub 웹 UI에서 `.github/workflows/fetch-feed.yml` 직접 생성 - 파일 위치: `/Users/fireant/.openclaw/workspace/fireant-dashboard/.github/workflows/fetch-feed.yml` ## 최근 3일 입금 내역 조회 결과 (2026-03-14 22:30) - 03/14 03:53 KST: IN 950 USDC · Arbitrum · 지갑-1bbe - 03/12 15:19 KST: IN 1 M",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4920998811721801,
+      "maxScore": 0.4920998811721801,
+      "firstRecalledAt": "2026-04-07T20:39:10.821Z",
+      "lastRecalledAt": "2026-04-07T20:39:10.821Z",
+      "queryHashes": [
+        "8e08dd5389f6"
+      ],
+      "recallDays": [
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "ᄏᄏ/구어체/됩니다체",
+        "memory/style.md",
+        "fireantcrypto.com",
+        "t.me/fireantcrypto",
+        "blog.naver.com/fireantcrypto",
+        "feed.json",
+        "github.com",
+        "github/workflows/fetch-feed.yml"
+      ]
+    },
+    "memory:memory/2026-03-03.md:1:25": {
+      "key": "memory:memory/2026-03-03.md:1:25",
+      "path": "memory/2026-03-03.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-03-03 일일 로그 ## ETF 포스팅 & 이미지 생성 이슈 해결 ### 문제 - `gemini-3-pro-image-preview` 모델 전 세계적 503 과부하 (preview 용량 한계) - nano-banana-pro 스킬 스크립트가 해당 모델에 하드코딩되어 ETF 이미지 생성 실패 - ETF 크론 에이전트가 \"전송합니다\" 선언만 하고 message 툴 미실행 ### 해결 - nano-banana-pro 스크립트 모델 교체: `gemini-3-pro-image-preview` → `gemini-3.1-flash-image-preview` - ETF 크론 에이전트 모델 교체: `google/gemini-3-pro-preview` → `google/gemini-3.1-pro-preview` (3/26 deprecated 예정) - ETF 크론 프롬프트 강화: \"전송합니다 선언만 하고 끝내는 것은 실패\" 명시, Step 6 (캡션 단독 전송) 제거 - ETF 이미지 생성 방식: 배경은 `gemini-2.5-flash-image`로 생성, 수치는 Pillow로 오버레이 (수치 오류 방지) - 이미지 편집(-i 플래그) 시 `gemini-3.1-flash-image-preview` 사용 확인 ### 수동 전송 - 3/1 ETF 데이터 (BTC -28M / ETH -43M) 오늘 수동 전송 완료 (messageId:",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.0063322991132737,
+      "maxScore": 0.5133146733045578,
+      "firstRecalledAt": "2026-04-07T20:54:50.564Z",
+      "lastRecalledAt": "2026-04-10T12:53:48.183Z",
+      "queryHashes": [
+        "c79df3e7396a",
+        "939dec39b548"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "gemini-3-pro-image-preview",
+        "nano-banana-pro",
+        "gemini-3.1-flash-image-preview",
+        "google/gemini-3-pro-preview",
+        "google/gemini-3.1-pro-preview",
+        "3/26",
+        "gemini-2.5-flash-image",
+        "3/1"
+      ]
+    },
+    "memory:memory/2026-02-22.md:30:52": {
+      "key": "memory:memory/2026-02-22.md:30:52",
+      "path": "memory/2026-02-22.md",
+      "startLine": 30,
+      "endLine": 52,
+      "source": "memory",
+      "snippet": "- 포스트 39766 \"불개미가 2016년에 코인을 접했을 때보다 더한 센세이션, AI Agent\" 추가 - GitHub Pages 배포 완료 ### 지갑 모니터링 봇 구축 - 경로: /Users/fireant/.openclaw/workspace/wallet-monitor - Node.js 기반, 6개 EVM 체인 (ETH/ARB/BSC/OP/Base/Polygon) - 모니터링 지갑 4개 (모두 개인용 지갑): - 0x9ca1dbd27d9064047e732c6bc103f07844518cd9 - 0x308588ed2430b10159fc55234f38a525ad129bbe - 0x6a6acf8c4d423b24c5503db60d7152e7ab352ce4 - 0x168d8b164bc37820c3cb9e49b6e8b788b3d9366b - 알림 조건: $300 이상 입출금 - 알림 채널: 별도 텔레그램 봇 @fireant_wallet_track_bot (봇토큰: 8590572213) - 딸수봇으로는 지갑 알림 보내지 않기로 결정 - LaunchAgent 등록 완료 (com.fireant.wallet-monitor.plist) - config.json에 라벨 지원 (개인용 지갑/고래지갑/컨트랙트 등) - Base/Polygon 무료 RPC 불안정 → Alchemy 추가 권장 ## 2026-02-22 20:00~23:58 KS",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5407366856932639,
+      "maxScore": 0.5407366856932639,
+      "firstRecalledAt": "2026-04-07T20:58:07.712Z",
+      "lastRecalledAt": "2026-04-07T20:58:07.712Z",
+      "queryHashes": [
+        "48b92c94face"
+      ],
+      "recallDays": [
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "users/fireant",
+        "node.js",
+        "eth/arb/bsc/op/base/polygon",
+        "fireant-wallet-track-bot",
+        "com.fireant.wallet-monitor.plist",
+        "config.json에",
+        "지갑/고래지갑/컨트랙트",
+        "base/polygon"
+      ]
+    },
+    "memory:memory/2026-04-06.md:193:211": {
+      "key": "memory:memory/2026-04-06.md:193:211",
+      "path": "memory/2026-04-06.md",
+      "startLine": 193,
+      "endLine": 211,
+      "source": "memory",
+      "snippet": "- 중앙에 \"뭣?! Eigen 코인을 사면\\n원금을 돌려준다고?!\" 삽입 - 추가 요청: 불개미 크립토가 Eigen Cloud 코인을 소중히 바라보는 형태의 새 배너 - 문구: \"뭣?! 코인을 가지고있으면 원금을 돌려준다고?!\" - 불개미 로고 파일: `/Users/fireant/.openclaw/workspace/assets/fireant-logo.png` (또는 유사 경로) - 진행 중 (이미지 생성 방식) ## 친구초대봇 /wallet 기능 — Eigen 코인 빗썸 입금주소 수집 (2026-04-06) - **목적**: Eigen Cloud 이벤트 당첨자에게 Eigen 코인 지급 위한 빗썸 입금주소 수집 - **방법**: 친구초대봇 `/wallet` 명령어 활용 - **현황**: `/wallet` 명령어 이미 존재 (EVM 지갑 수집 목적), DB wallet 컬럼 있음 - **변경 필요**: 안내 문구를 \"빗썸 Eigen 코인 입금주소\" 기준으로 수정 - **미결 질문**: 사용 권한 제한 여부 (당첨자만 vs 전체 /inform 제출자) - 해병님 답변 대기 중 - 봇 토큰: `8715030972:AAEaCj5zaNsB6OhwBhXwg6gZ0KM8ibXOpW0` - DB 경로: `/Users/fireant/.openclaw/workspace/bots/referral-bot/referral.db` - 1",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.5590742558240889,
+      "maxScore": 0.5373986899852752,
+      "firstRecalledAt": "2026-04-07T20:58:07.712Z",
+      "lastRecalledAt": "2026-04-10T23:49:31.584Z",
+      "queryHashes": [
+        "48b92c94face",
+        "583deff5fe39",
+        "be0f4e81e7ce"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "users/fireant",
+        "중앙에",
+        "eigen",
+        "코인을",
+        "사면",
+        "원금을",
+        "돌려준다고",
+        "삽입"
+      ]
+    },
+    "memory:memory/2026-04-06.md:174:195": {
+      "key": "memory:memory/2026-04-06.md:174:195",
+      "path": "memory/2026-04-06.md",
+      "startLine": 174,
+      "endLine": 195,
+      "source": "memory",
+      "snippet": "- 3~4개월 후 재검 필요 ## 불개미 게시판 당첨자 조회 페이지 작업 (2026-04-06) - URL: https://josoyjjk-ui.github.io/fireant-dashboard/winners/ - **Eigen Cloud 친구초대 이벤트 당첨자 1,380명 추가 완료** - winners.json 총 건수: 1,734건 (Ethgas 354 + Eigen 1,380) - Eigen 데이터 형식: event, telegram, reward, points, rank 필드 포함 - 검색 시 Eigen 당첨자 카드에 \"🏅 포인트: XXX점\" 조건부 표시 - Ethgas 기존 데이터 완전 보존 (포인트 미표시) - 커밋 SHA: 1d76b7c2 (feat(winners): add Eigen referral winners with points/rank) - 작전장교 검증: PASS ## Eigen Cloud 배너 제작 (2026-04-06 오후) - 원본 배너: `/Users/fireant/.openclaw/media/inbound/file_282---f486abc9-af32-47fc-b1d6-d029046ff7d2.jpg` - Eigen Cloud 로고 이미지: `/Users/fireant/.openclaw/media/inbound/file_283---2a651942-5e06-4038-b810-998bfd8aad36",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.1103414833545684,
+      "maxScore": 0.5416589051485061,
+      "firstRecalledAt": "2026-04-07T20:58:07.712Z",
+      "lastRecalledAt": "2026-04-10T07:54:11.089Z",
+      "queryHashes": [
+        "48b92c94face",
+        "583deff5fe39",
+        "10cf3a8a1a3e",
+        "8ff02a5d2be1"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "winners.json",
+        "points/rank",
+        "users/fireant",
+        "openclaw/media/inbound/file-282",
+        "openclaw/media/inbound/file-283",
+        "개월",
+        "재검",
+        "필요"
+      ]
+    },
+    "memory:memory/2026-02-21.md:36:57": {
+      "key": "memory:memory/2026-02-21.md:36:57",
+      "path": "memory/2026-02-21.md",
+      "startLine": 36,
+      "endLine": 57,
+      "source": "memory",
+      "snippet": "- [x] 인사이트 운영 규칙 변경: 자동수집 아니고 불개미 해병님이 링크 주면 최신순 3개 유지 - [x] 불개미스타일 포스트 작성: 대법원 관세 위헌 판결 + Mar-a-Lago 서밋 - [x] AI Agent 에세이 문법/오탈자 교정 - [x] AI Agent 배너 제작 (여러 버전 반복, 최종: 불개미 로고 메인 + 로봇 보조 + \"크립토 이후 두번째 기회 AI\") - [x] 불개미 TODO 게시판 제작 (비밀번호 잠금 + localStorage, 아직 미배포) ## 대기 중 예약 작업 - [ ] 2026-02-21 07:45 KST — 트럼프 연설 내용 자동 검색 → 포스트 작성 (HEARTBEAT.md에 등록됨) ## 보안 원칙 확인 - 브라우저 저장 결제정보(카드번호) 접근/삭제 요청 → 거절. 금융정보는 사용자만 관리. ## 불개미 해병님 추가 정보 - 2016년부터 코인 시작 (10년차) - 커뮤니티 회원 약 38,500명 (카톡방 3명에서 시작) - 가족(친누나 등)에게 AI 적응 리소스 지원 약속 (2026 설) - MBTI 예측: ENTJ, IQ 예측: 125~135 (구조적 사고+패턴 인식+멀티태스킹 기반) ## 배너 파일 위치 - 최종 배너: /Users/fireant/.openclaw/workspace/ai-agent-banner-v4-logo-main.html → v7.png - TODO 앱: /U",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5355060711503028,
+      "maxScore": 0.5355060711503028,
+      "firstRecalledAt": "2026-04-07T20:58:07.712Z",
+      "lastRecalledAt": "2026-04-07T20:58:07.712Z",
+      "queryHashes": [
+        "48b92c94face"
+      ],
+      "recallDays": [
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "mar-a-lago",
+        "문법/오탈자",
+        "heartbeat.md에",
+        "접근/삭제",
+        "users/fireant",
+        "v7.png",
+        "인사이트",
+        "운영"
+      ]
+    },
+    "memory:memory/2026-03-20.md:1:26": {
+      "key": "memory:memory/2026-03-20.md:1:26",
+      "path": "memory/2026-03-20.md",
+      "startLine": 1,
+      "endLine": 26,
+      "source": "memory",
+      "snippet": "# 2026-03-20 일일 로그 ## 완료 작업 ### Fireflies 해지/환불 메일 재발송 - 1차 발송 오류: 본문에 구독 계정을 `josoyjjk@gmail.com`으로 잘못 기재 - 수정 후 재발송: `fireant@bridge34.com` → `support@fireflies.ai` - **fireant@bridge34.com이 구독 계정이자 발송 계정** (중요 교훈) - 메시지 ID: 19d094f32f1b16dd (해지), 19d094f36f6068db (환불) - OAuth 토큰: `secrets/google-bridge34-token.json` 사용 (갱신됨) ### 친구초대 봇 브로드캐스트 - 대상: mate_ref_bot DB 유저 2,187~2,192명 - 메시지: \"불개미 x Billions 친구초대 보상 수령 안내 (22일까지)\" - 1차 공병 실패: 잘못된 토큰(`fireantagent_bot`) 사용 → 성공 1명 - 2차 딸수 직접 실행 + 공병 재실행 병렬 → 일부 중복 발송 가능성 - 최종 결과: 총 2,192명 | 성공 2,106 | 차단 11 | 실패 75 - 교훈: 공병 위임 시 토큰 키체인 명령 정확히 명시 필수 (`-a \"referral-bot\"` 파라미터) ### 코인베이스 프리미엄 - 수신: -0.015% (14:02 KST) - 저장: `cb_premium_input.js",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5306145831942558,
+      "maxScore": 0.5306145831942558,
+      "firstRecalledAt": "2026-04-07T20:58:07.712Z",
+      "lastRecalledAt": "2026-04-07T20:58:07.712Z",
+      "queryHashes": [
+        "48b92c94face"
+      ],
+      "recallDays": [
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "해지/환불",
+        "gmail.com",
+        "bridge34.com",
+        "fireflies.ai",
+        "bridge34.com이",
+        "mate-ref-bot",
+        "fireantagent-bot",
+        "referral-bot"
+      ]
+    },
+    "memory:memory/2026-03-20.md:44:70": {
+      "key": "memory:memory/2026-03-20.md:44:70",
+      "path": "memory/2026-03-20.md",
+      "startLine": 44,
+      "endLine": 70,
+      "source": "memory",
+      "snippet": "- 오늘 생성본(로고+4박스 대칭+AI 칠판 스타일)이 표준 레퍼런스로 확정 - 매일 15시 크론잡(`daily-chalk-main-event`)이 이 양식으로 자동 생성 - 크론잡 변경 불필요 (스크립트/레퍼런스 이미 교체됨) ## 기술 교훈 ### 공병 위임 시 토큰 주의 - 키체인에 동일 서비스명(`telegram-bot-token`)으로 여러 계정 존재 - 공병에 위임 시 `-a \"referral-bot\"` 어카운트 파라미터 필수 명시 - 기본 토큰: `fireantagent_bot` (캠페인봇), referral용: `mate_ref_bot` (8715030972) ### 딸수+공병 병렬 실행 위험 - 같은 작업을 딸수 직접 + 공병 동시 실행 시 중복 발송 위험 - 공병 완료 신호 받은 후 딸수 실행 중단 또는 처음부터 하나만 실행 ### AI 이미지 숫자 정확도 - Grok이 달러 기호+숫자 조합(\"-$90.19M\")에서 앞자리 누락하는 버그 있음 - 프롬프트에 \"숫자 정확도 최우선 규칙\" 섹션 삽입으로 해결 ## 에이전트 상태 - 참모(chammo): 정상 작동 확인 - 공병(ops): 정상 작동 확인 (토큰 이슈 해결됨) - 친구초대 봇(mate_ref_bot, 8715030972): 정상 - 캠페인봇(fireantagent_bot, 8184331170): 별도 운영 중 ## Eigen Cloud 메모 -",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.5269388407468796,
+      "maxScore": 0.516596207022667,
+      "firstRecalledAt": "2026-04-07T20:59:34.819Z",
+      "lastRecalledAt": "2026-04-10T12:53:48.183Z",
+      "queryHashes": [
+        "12baba125e3b",
+        "f1b095979b81",
+        "939dec39b548"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "daily-chalk-main-event",
+        "스크립트/레퍼런스",
+        "telegram-bot-token",
+        "referral-bot",
+        "fireantagent-bot",
+        "mate-ref-bot",
+        "90.19m",
+        "오늘"
+      ]
+    },
+    "memory:memory/2026-03-31.md:26:39": {
+      "key": "memory:memory/2026-03-31.md:26:39",
+      "path": "memory/2026-03-31.md",
+      "startLine": 26,
+      "endLine": 39,
+      "source": "memory",
+      "snippet": "5. Orderly 같은 trading infra는 이 흐름에서 어떤 위치를 차지한다고 보시나요? / Where do you see trading infrastructure like Orderly fitting in this broader trend? 6. 앞으로 가치가 더 커질 쪽은 user-facing app일까요, 아니면 밑단의 인프라 레이어일까요? / Which side do you think will gain more value going forward — user-facing apps, or the underlying infrastructure layer? - 추가 요청: 깨진 양식(글자체, 글씨 색깔) 수정, 질문번호 Bold, 본문 일반 텍스트 - 차단 원인: bridge34 OAuth 만료. 해병님 직접 로그인 필요 ## 에이전트 모델 위임 테이블 변경사항 - 구글 API 작업 (폼/슬라이드/드라이브/닥스/시트/Gmail): **공병 → 딸수 직접 (Gemini CLI)** - 이 변경은 AGENTS.md에도 반영 완료 ## @fireant Telegram 크론잡 오류 - 일부 크론잡이 `@fireant` 핸들로 메시지 전송 시도 → `chat not found` 오류 - 수신자를 `477743685` (chat_id)로 변경 필요 - 어떤 크론잡인지 아직 확인 안 됨",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4922736376523971,
+      "maxScore": 0.4922736376523971,
+      "firstRecalledAt": "2026-04-07T20:59:34.819Z",
+      "lastRecalledAt": "2026-04-07T20:59:34.819Z",
+      "queryHashes": [
+        "12baba125e3b"
+      ],
+      "recallDays": [
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "user-facing",
+        "폼/슬라이드/드라이브/닥스/시트/gmail",
+        "agents.md에도",
+        "chat-id",
+        "orderly",
+        "같은",
+        "trading",
+        "infra"
+      ]
+    },
+    "memory:memory/2026-03-26.md:37:54": {
+      "key": "memory:memory/2026-03-26.md:37:54",
+      "path": "memory/2026-03-26.md",
+      "startLine": 37,
+      "endLine": 54,
+      "source": "memory",
+      "snippet": "## TAO(비트텐서) 상승 분석 포스트 발행 - 네이버 블로그 발행 완료: logNo 224229780098 - URL: https://blog.naver.com/fireant_korea/224229780098 - 제목: \"TAO(비트텐서)의 상승. 실력인가 행운인가\" - 배너: v6 (다크 navy/black + 상승 초록 차트 + 불개미 로고 + 흰색 TAO T) - 텍스트 오탈자 수정 필요 항목: \"칬찬\"→\"칭찬\", \"뛭쳐있고\"→\"뭉쳐있고\", \"숲이다\"→\"숏이다\" ## 크론잡 현황 (2026-03-26 기준) - codex-openai-auto-reauth-d5 (5f0ec8d7): 매일 01:00, D-5 감지 시 브라우저 자동 재인증 - codex-token-refresh (80093d06): 매일 09:00, scripts/refresh_codex_token.py 실행 - OpenAI 토큰 만료 모니터링 (ba0f64be): 매일 09:00, 7일 이하 시 텔레그램 알림 (현재 error 상태) - daily-cb-premium-ask (0cebaf36): 매일 14:00, Starchild CB 프리미엄 자동 수집 - daily-chalk-main-event (b1da835d): 매일 15:00, 일일시황 이미지 생성 + 전송 - dashboard-daily-report-refresh-17 (2afd3ff4): 매일",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.590562991797924,
+      "maxScore": 0.5542519524693489,
+      "firstRecalledAt": "2026-04-07T22:04:33.032Z",
+      "lastRecalledAt": "2026-04-10T08:27:33.802Z",
+      "queryHashes": [
+        "f1b095979b81",
+        "9da95aeb1415",
+        "448e38e65665"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "openai",
+        "navy/black",
+        "codex-openai-auto-reauth-d5",
+        "d-5",
+        "codex-token-refresh",
+        "scripts/refresh-codex-token.py",
+        "daily-cb-premium-ask",
+        "daily-chalk-main-event"
+      ]
+    },
+    "memory:memory/2026-03-29.md:187:204": {
+      "key": "memory:memory/2026-03-29.md:187:204",
+      "path": "memory/2026-03-29.md",
+      "startLine": 187,
+      "endLine": 204,
+      "source": "memory",
+      "snippet": "- 브라우저에서 발행 API 네트워크 캡처 시도 → POST 요청 캡처 실패 #### 차기 시도 경로 1. 발행 시 SE가 호출하는 API(PostWrite/PostModify) 직접 curl로 재현 2. `_imageUploader._uploadImages` / `_updateImageCompPhases` 직접 호출 3. SE 에디터 완전 재로드 후 `openFileDialog` 훅 + `uploadImagesFromFiles` 재시도 ### 크론잡 업데이트 완료 - `daily-chalk-main-event` (b1da835d): `gen_daily_report_html.py` 사용 - `daily-cb-premium-ask` (0cebaf36): `sessionTarget=isolated` ### Google Calendar 등록 - 4월 7일 오후 1시 — 디지털에셋 박상혁 기자 점심식사 ### AGENTS.md 업데이트 - 절대 규칙 #0 (완료보고 최우선) 추가 — git commit `adfd19a` - 절대 규칙 #1 (해병님 작업 떠넘기기 금지, 최소 3회 시도) 추가 — git commit `65e751de`",
+      "recallCount": 5,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.6160298243165014,
+      "maxScore": 0.5407833009958267,
+      "firstRecalledAt": "2026-04-07T22:04:33.032Z",
+      "lastRecalledAt": "2026-04-10T13:13:16.478Z",
+      "queryHashes": [
+        "f1b095979b81",
+        "930dde5b3e4b",
+        "448e38e65665",
+        "939dec39b548",
+        "0ed693d948a6"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "네트워크",
+        "postwrite/postmodify",
+        "daily-chalk-main-event",
+        "gen-daily-report-html.py",
+        "daily-cb-premium-ask",
+        "agents.md",
+        "브라우저에서",
+        "발행"
+      ]
+    },
+    "memory:memory/2026-04-03.md:1:35": {
+      "key": "memory:memory/2026-04-03.md:1:35",
+      "path": "memory/2026-04-03.md",
+      "startLine": 1,
+      "endLine": 35,
+      "source": "memory",
+      "snippet": "# 2026-04-03 일일 메모리 ## 일일시황 크론잡 (15:00 KST) - 크론잡 ID: `b1da835d-255b-497b-84a4-f914c62b7ee9` - 정상 실행 완료 (15:05 이미지 생성, delivered) - 이미지 경로: `/Users/fireant/.openclaw/workspace/daily-report-latest.png` ## 2026-04-03 지수 수집 결과 | 지표 | 값 | 비고 | |------|-----|------| | CB 프리미엄 | +0.0508% | 실데이터 (Starchild 확인: +0.0498% ✅) | | BTC ETF Daily Net Inflow | -$173.73M | 전일 fallback (SoSoValue 4/3 기준) | | ETH ETF Daily Net Inflow | -$7.10M | 전일 fallback (SoSoValue 4/3 기준) | | BTC OI 24h | -3.85% | 전일 fallback | | ETH OI 24h | -9.84% | 전일 fallback | | DAT Weekly Net Inflow | $72.83K | 전일 fallback | ## 이중점검 결과 (15:30 KST) - Starchild 쿼리로 교차검증 완료 - ETF 수치: Starchild도 4/3 미보고 → 4/2 기준값만 접근 가능 - OI: 시간차(15:",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.5459667921066285,
+      "maxScore": 0.5204399198293685,
+      "firstRecalledAt": "2026-04-07T22:04:33.032Z",
+      "lastRecalledAt": "2026-04-10T12:53:48.183Z",
+      "queryHashes": [
+        "f1b095979b81",
+        "bd64d3c74599",
+        "939dec39b548"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "users/fireant",
+        "0.0508",
+        "0.0498",
+        "173.73m",
+        "4/3",
+        "7.10m",
+        "3.85",
+        "9.84"
+      ]
+    },
+    "memory:memory/2026-03-18.md:1:15": {
+      "key": "memory:memory/2026-03-18.md:1:15",
+      "path": "memory/2026-03-18.md",
+      "startLine": 1,
+      "endLine": 15,
+      "source": "memory",
+      "snippet": "- [cron] 15:00 KST 데일리 리포트 크론을 단일 잡으로 통합함. 기존 개별 잡(btc-oi-change-trend-3pm, btc-dat-buy-change-trend-3pm, coinbase-premium-change-trend-3pm) 제거, 기존 ETF 잡(eabef07d-5ecd-48b6-ae88-3afd236f59d6)을 통합형으로 업데이트. - [cron] 통합 잡 이름: daily-fireant-chalk-4in1, 스케줄: cron \"0 15 * * *\" (Asia/Seoul), 대상 전송: telegram 477743685. - [design] 리포트 이미지 고정 요구사항 확정: 1) 전체 칠판 배경 사용 2) 불개미 로고/캐릭터는 좌상단만 노출 3) 우상단 타이틀 \"불개미 일일시황\" + 옆에 소형 날짜(YYYY.MM.DD (KST)) 4) 섹션 타이틀 문구 고정: \"BTC ETF ETF 유출입\", \"미결제약정 추이\", \"DAT 추이\", \"코인베이스 프리미엄\" 5) ETF 섹션 타이틀 아래 소형 주석 고정: \"(ETF 데이터는 마지막 거래일 기준)\" - [data_scope] 데이터 표시 범위 확정: - ETF: BTC+ETH 동시 표기 - OI: BTC+ETH 24h/72h 증감률 - DAT: BTC+ETH 24h/72h 증감률 - Coinbase Premium: 24h/",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.037946382164955,
+      "maxScore": 0.5245501399040222,
+      "firstRecalledAt": "2026-04-07T22:04:33.032Z",
+      "lastRecalledAt": "2026-04-10T12:53:48.183Z",
+      "queryHashes": [
+        "f1b095979b81",
+        "939dec39b548"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "btc-oi-change-trend-3pm",
+        "btc-dat-buy-change-trend-3pm",
+        "daily-fireant-chalk-4in1",
+        "asia/seoul",
+        "로고/캐릭터는",
+        "yyyy.mm.dd",
+        "data-scope",
+        "24h/72h"
+      ]
+    },
+    "memory:memory/2026-04-03.md:26:58": {
+      "key": "memory:memory/2026-04-03.md:26:58",
+      "path": "memory/2026-04-03.md",
+      "startLine": 26,
+      "endLine": 58,
+      "source": "memory",
+      "snippet": "- 잔액: $74.51 크레딧 (3/26 기준, 일부 소모됨) - 탭: DB4165... (로그인 유지 중) ## 브라우저 CDP 이슈 - Chrome CDP 포트: 18800 (pid 2438) - 타임아웃 반복 원인 미해결 - snapshot/screenshot 자주 실패 → fallback 정책 유지 ## 파일 참조 - CB 프리미엄 입력: `cb_premium_input.json` - CB 히스토리: `cb_premium_history.json` - 블로그 데이터: `daily-report-data.json` # 2026-04-03 일일 메모리 ## 일일시황 크론잡 (15:00 KST) - 크론잡 ID: `b1da835d-255b-497b-84a4-f914c62b7ee9` - 정상 실행 완료 (15:05 이미지 생성, delivered) - 이미지 경로: `/Users/fireant/.openclaw/workspace/daily-report-latest.png` ## 2026-04-03 지수 수집 결과 | 지표 | 값 | 비고 | |------|-----|------| | CB 프리미엄 | +0.0508% | 실데이터 (Starchild 확인: +0.0498% ✅) | | BTC ETF Daily Net Inflow | -$173.73M | 전일 fallback (SoSoValue 4/3 기준) | | ETH ETF D",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.021351334452629,
+      "maxScore": 0.5153154283761978,
+      "firstRecalledAt": "2026-04-07T22:04:33.032Z",
+      "lastRecalledAt": "2026-04-08T11:15:53.354Z",
+      "queryHashes": [
+        "f1b095979b81",
+        "bd64d3c74599"
+      ],
+      "recallDays": [
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "74.51",
+        "3/26",
+        "snapshot/screenshot",
+        "cb-premium-input.json",
+        "cb-premium-history.json",
+        "daily-report-data.json",
+        "users/fireant",
+        "0.0508"
+      ]
+    },
+    "memory:memory/2026-04-01.md:19:42": {
+      "key": "memory:memory/2026-04-01.md:19:42",
+      "path": "memory/2026-04-01.md",
+      "startLine": 19,
+      "endLine": 42,
+      "source": "memory",
+      "snippet": "- https://t.me/fireantcrypto/40554 링크 → \"불개미게시판 - 불개미주관 이벤트\" 카테고리 게시 미완료 - \"불개미게시판\"이 네이버 블로그 카테고리인지, 텔레그램 포럼인지 확인 필요 - 해병님이 채널/그룹 ID 제공 안 함 → 다음 세션에서 확인 필요 ## 핵심 결정 - **일일시황 HTML 디자인 파라미터**: - body background: `#0e1f0e` - box background: `#0a1e0a` - box border: `3px solid #5aaa5a` - 제목: `66px` / 날짜: `34px` - box-header: `36px` / data-line: `38px` / dat-line: `32px` - **일일시황 크론잡**: `2afd3ff4-5865-4965-bf54-3a1fe501bb56` (schedule: `30 16 * * *` KST) - 별도 크론잡: `b1da835d-255b-497b-84a4-f914c62b7ee9` (schedule: `0 15 * * *` KST) — 일일 보고용 - **에이전트 모델 설정**: - 딸수(main): `anthropic/claude-sonnet-4-6` - 공병(ops): `gpt-5.3-codex` - 참모(chammo): `claude-sonnet-4-6` - 작전장교(inspect",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.017305701971054,
+      "maxScore": 0.5133653879165649,
+      "firstRecalledAt": "2026-04-07T22:04:33.032Z",
+      "lastRecalledAt": "2026-04-10T08:59:14.710Z",
+      "queryHashes": [
+        "f1b095979b81",
+        "950942b3d2e8"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "gpt",
+        "t.me/fireantcrypto/40554",
+        "채널/그룹",
+        "box-header",
+        "data-line",
+        "dat-line",
+        "anthropic/claude-sonnet-4-6",
+        "gpt-5.3-codex"
+      ]
+    },
+    "memory:memory/2026-04-01.md:1:22": {
+      "key": "memory:memory/2026-04-01.md:1:22",
+      "path": "memory/2026-04-01.md",
+      "startLine": 1,
+      "endLine": 22,
+      "source": "memory",
+      "snippet": "# 2026-04-01 일일 메모리 ## 완료 작업 - 딸수(Main) 모델: `anthropic/claude-sonnet-4-6`으로 변경 완료 - typingMode: `instant`으로 변경 완료 - 코인 과세 리서치 + 방송 스크립트 작성 완료 - 유사투자자문업 개인 등록 절차 확인 - 보안 감사 완료 (0 critical, 3 warn) - 파일 정리: 미디어 94개 삭제, 워크스페이스 커밋 완료 - 일일시황 수동 생성 및 텔레그램 전송 완료 (2026.04.01) - 일일시황 HTML 템플릿 재제작 및 디자인 수정 2라운드 반영 완료 (messageId: 16217) - 크론잡(15:00 KST) 새 이미지 양식 적용 완료 - 네이버 블로그 일일시황 자동발행 완료 (chammo 참모) - Aligned Layer 에어드랍 기준 포스트 요약 작성 완료 - ZK 영지식증명 + 양자저항암호 설명 제공 - Everything 거래수수료 이벤트 포스트 발행 시도 (chammo 타임아웃 → 직접 처리 주장, 실제 확인 필요) ## 미확인/미완료 - https://t.me/fireantcrypto/40554 링크 → \"불개미게시판 - 불개미주관 이벤트\" 카테고리 게시 미완료 - \"불개미게시판\"이 네이버 블로그 카테고리인지, 텔레그램 포럼인지 확인 필요 - 해병님이 채널/그룹 ID 제공 안 함 → 다음 세션에서 확인 필요",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.5853362470865249,
+      "maxScore": 0.5581508547067642,
+      "firstRecalledAt": "2026-04-08T09:17:16.331Z",
+      "lastRecalledAt": "2026-04-10T08:59:14.710Z",
+      "queryHashes": [
+        "ff6a885bcc04",
+        "930dde5b3e4b",
+        "950942b3d2e8"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "anthropic/claude-sonnet-4-6",
+        "2026.04.01",
+        "미확인/미완료",
+        "t.me/fireantcrypto/40554",
+        "채널/그룹",
+        "일일",
+        "메모리",
+        "완료"
+      ]
+    },
+    "memory:memory/2026-03-23.md:20:48": {
+      "key": "memory:memory/2026-03-23.md:20:48",
+      "path": "memory/2026-03-23.md",
+      "startLine": 20,
+      "endLine": 48,
+      "source": "memory",
+      "snippet": "- 발송 내용: 기프티콘 클레임 안내 + https://t.me/fireantcrypto/40337 링크 - 해병님 chat_id(477743685)는 user_info 테이블에 없어서 별도 직접 발송함 ## 결정/선호사항 - OBS + Restream 조합 문의 (라이브 방송 세팅 관련 검토 중 가능성) - 두유 맛있게 먹는 법 질문 → 새벽 5시에 두유 드심 (작업 후) ## 기술 메모 - Gmail 브로드캐스트 스크립트: `/tmp/billions_claim_broadcast.py` - CB 프리미엄 입력 파일: `/Users/fireant/.openclaw/workspace/cb_premium_input.json` - gen_daily_report.py 인자: `BTC_ETF ETH_ETF BTC_OI_24H ETH_OI_24H DAT_NOW CB_PREMIUM DATE` --- ## 오후 세션 추가 작업 (2026-03-23 오후) ### 에이전트 모델 테스트 완료 - 참모(chammo): anthropic/claude-sonnet-4-6 ✅ - 공병(ops): openai-codex/gpt-5.3-codex ✅ - memory/tech.md + SQLite DB(id:229)에 고정값 기록 완료, commit `12eab93` ### CodexBar 사용량 분석 - Claude: 최근 7일 ~$0.02 / 최근",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.9736562132835387,
+      "maxScore": 0.5077648133039474,
+      "firstRecalledAt": "2026-04-08T09:17:16.331Z",
+      "lastRecalledAt": "2026-04-08T09:22:41.974Z",
+      "queryHashes": [
+        "ff6a885bcc04",
+        "065e12c44d43"
+      ],
+      "recallDays": [
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "t.me/fireantcrypto/40337",
+        "chat-id",
+        "user-info",
+        "결정/선호사항",
+        "tmp/billions-claim-broadcast.py",
+        "users/fireant"
+      ]
+    },
+    "memory:memory/2026-02-20.md:1:25": {
+      "key": "memory:memory/2026-02-20.md:1:25",
+      "path": "memory/2026-02-20.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-02-20 일일 로그 ## 진행 중 - **이벤트 대시보드**: 불개미 CRYPTO 가이드북 기반 웹앱 빌드 예정 (coding-agent 스폰 직전) - 3 이벤트: Merlin Chain 테스트넷 에어드랍(12/31), Fight.id AMA(12/23), Soon 후디 기브어웨이(12/25) - 3 투자의견 링크 - 모바일 퍼스트, 레드/파이어 테마 - coding-agent skill 사용 (pty:true, workdir 필수) ## 기술 메모 - Codex CLI v0.104.0 설치 완료 (uv via brew) - openai-codex OAuth 토큰: OpenClaw 라우팅 전용, 직접 API 호출 불가 - Gemini API 키 빌링 활성화됨 - 텔레그램 스크래핑: 747/~3500+ 포스트 저장 (data_fireantcrypto_1y.tsv), 체크포인트 기반 재실행 필요 - X 스크래핑: 403 차단 (로그인 필요) ## 스타일 학습 - 28개 포워딩 학습 패턴 MEMORY.md에 저장 완료 - 패턴 범위: ETF 데이터 프레이밍, 딜 구조 해부, VC 분석, 컨퍼런스 인사이트, 파트너십 해석, 도구 소개, 자기반성, 번역 교정, 커뮤니티 사례, 긴급 CTA, 면책 마감, 다크유머 등 ## 완료 - 딸수 로고 v3 (팔각모) 텔레그램 봇 프로필 사진 설정 - Opus 4.6",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.9977955967187881,
+      "maxScore": 0.5004369586706161,
+      "firstRecalledAt": "2026-04-08T09:17:16.331Z",
+      "lastRecalledAt": "2026-04-10T13:13:16.478Z",
+      "queryHashes": [
+        "ff6a885bcc04",
+        "0ed693d948a6"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "openai",
+        "coding-agent",
+        "12/31",
+        "fight.id",
+        "12/23",
+        "12/25",
+        "레드/파이어",
+        "v0.104.0"
+      ]
+    },
+    "memory:memory/2026-03-26.md:19:41": {
+      "key": "memory:memory/2026-03-26.md:19:41",
+      "path": "memory/2026-03-26.md",
+      "startLine": 19,
+      "endLine": 41,
+      "source": "memory",
+      "snippet": "- 계정: fireant@bridge34.com (Google Calendar API 직접 호출) ## Starchild 계정 전환 (01:41~01:53 KST) - 기존 계정 → josoyjjk@gmail.com 으로 로그아웃 후 재로그인 - 인증코드 434090 입력 완료, 로그인 성공 - 잔액: $74.51 크레딧 - 어제 스레드 \"Crypto ETF & OI Data Request\" 재접근 - CB 프리미엄 쿼리 전송 결과: **-0.0494%** (2026-03-26 01:53 KST 기준) ## OpenAI Codex 토큰 재인증 (09:30~09:32 KST) - 기존 refresh_token 재사용 오류(refresh_token_reused)로 갱신 실패 - 브라우저 OAuth 방식으로 전환: `codex auth login` PTY 실행 - OAuth URL → 브라우저에서 fireant@bridge34.com Google 계정 선택 → Continue 클릭 - `Successfully logged in` 확인 (process: grand-sable, code 0) - 재인증 완료 시각: 2026-03-26 09:32 KST - 인증 계정: fireant@bridge34.com (bridge34.com Google Workspace) - 크론 `5f0ec8d7` (codex-openai-auto-reauth-d5",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.49948625266551966,
+      "maxScore": 0.49948625266551966,
+      "firstRecalledAt": "2026-04-08T09:17:16.331Z",
+      "lastRecalledAt": "2026-04-08T09:17:16.331Z",
+      "queryHashes": [
+        "ff6a885bcc04"
+      ],
+      "recallDays": [
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "openai",
+        "bridge34.com",
+        "gmail.com",
+        "74.51",
+        "0.0494",
+        "refresh-token",
+        "refresh-token-reused",
+        "grand-sable"
+      ]
+    },
+    "memory:memory/2026-03-29.md:127:161": {
+      "key": "memory:memory/2026-03-29.md:127:161",
+      "path": "memory/2026-03-29.md",
+      "startLine": 127,
+      "endLine": 161,
+      "source": "memory",
+      "snippet": "## CB 프리미엄 / 시황 데이터 (14:00 KST) ### 수집된 값 - CB 프리미엄: `-0.0034%` (2026-03-29) - BTC ETF: -$225.48M (순유출) - ETH ETF: -$48.54M (순유출) - BTC 미결제약정 24시간: -0.14% - ETH 미결제약정 24시간: -0.09% - DAT 주간 순유입: $95.78M ### 시황 텍스트 발행 - \"BTC·ETH ETF 동반 순유출로 기관 매수세 위축 확인. 미결제약정 소폭 감소하며 포지션 축소 흐름 지속.\" ### 파일 - `cb_premium_input.json` 저장 완료 --- ## 일일시황 이미지 생성 + 네이버 블로그 발행 (17:00~20:38 KST) ### HTML+Chrome headless 이미지 생성 - `gen_daily_report_html.py` 완성 및 git 커밋 (`26cc80f8`) - 최종 이미지: `/Users/fireant/.openclaw/workspace/daily-report-latest.png` (1200x700) - 데이터 수정: BTC OI -0.14%→**-0.12%**, ETH OI -0.09%→**-0.72%** (setDocumentData로 정정) - 블로그 이미지용: `/tmp/openclaw/uploads/daily_blog_20260329.png` ### 네이버 블로그",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.5713389307260512,
+      "maxScore": 0.5455536872148513,
+      "firstRecalledAt": "2026-04-08T11:15:53.354Z",
+      "lastRecalledAt": "2026-04-10T08:27:33.802Z",
+      "queryHashes": [
+        "bd64d3c74599",
+        "8ff846b749f2",
+        "448e38e65665"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "0.0034",
+        "225.48m",
+        "48.54m",
+        "0.14",
+        "0.09",
+        "95.78m",
+        "cb-premium-input.json",
+        "gen-daily-report-html.py"
+      ]
+    },
+    "memory:memory/2026-03-20.md:21:50": {
+      "key": "memory:memory/2026-03-20.md:21:50",
+      "path": "memory/2026-03-20.md",
+      "startLine": 21,
+      "endLine": 50,
+      "source": "memory",
+      "snippet": "- 수신: -0.015% (14:02 KST) - 저장: `cb_premium_input.json` ### 일일시황 이미지 개선 확정 - 문제: AI 이미지 생성 시 숫자 잘림(\"-$90.19M\" → \"-.19M\") - 해결: 프롬프트 앞에 숫자 정확도 최우선 규칙 추가 + overlay_logo 활성화 - 로고: `assets/fireant-logo-nobg2.png` 좌상단 합성 (높이 90px, 여백 12px) - 레퍼런스 이미지 교체: `assets/daily-chalk-reference.jpg` → 오늘 최종본 - 스크립트: `gen_daily_report.py` (로고+숫자 정확도 확정 버전) - Git: `dd5a97f` 커밋 완료 ### 불개미 게시판 이미지 업데이트 - `daily-report-latest.png` → `fireant-dashboard/assets/daily-report-latest.jpg` 교체 - Git: `9b97ea9` push 완료 ### BSB 이벤트 포스팅 - 고팍스 블록스트릿(BSB) 입금왕/데일리 거래왕 이벤트 소개 - 불개미 스타일 [B]형 포스팅 참모 작성 - 발행: https://t.me/fireantcrypto/40312 ## 결정사항 ### 일일시황 이미지 양식 확정 - 오늘 생성본(로고+4박스 대칭+AI 칠판 스타일)이 표준 레퍼런스로 확정 - 매일 15시 크론잡(`",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5079994231462478,
+      "maxScore": 0.5079994231462478,
+      "firstRecalledAt": "2026-04-08T11:15:53.354Z",
+      "lastRecalledAt": "2026-04-08T11:15:53.354Z",
+      "queryHashes": [
+        "bd64d3c74599"
+      ],
+      "recallDays": [
+        "2026-04-08"
+      ],
+      "conceptTags": [
+        "0.015",
+        "cb-premium-input.json",
+        "90.19m",
+        "overlay-logo",
+        "assets/fireant-logo-nobg2.png",
+        "assets/daily-chalk-reference.jpg",
+        "gen-daily-report.py",
+        "daily-report-latest.png"
+      ]
+    },
+    "memory:memory/2026-03-25.md:1:25": {
+      "key": "memory:memory/2026-03-25.md:1:25",
+      "path": "memory/2026-03-25.md",
+      "startLine": 1,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "# 2026-03-25 일일 메모리 ## 주요 완료 작업 ### kr-exchange 한국거래소 이벤트 페이지 신설 및 완성 - 경로: `/kr-exchange/` (exchange-events에서 변경) - 거래소 5개 섹션: 가나다순 — 고팍스 → 빗썸 → 업비트 → 코빗 → 코인원 - 안내 문구: \"* 가나다 순서로 배치하였습니다.\" - 거래소 로고: `kr-exchange/logos/{upbit,bithumb,coinone,gopax,korbit}.jpg` (24x24px, border-radius 6px) - 이벤트 카드 7개 등록 (업비트 Tron Week / 코인원 RLUSD 2개 / 고팍스 SPACE+DEGEN+BSB) - 종료 이벤트(빗썸 CYS) 제거 - 실시간 카운트다운 타이머: `.ev-timer` + `data-end` 속성, 24시간 이내 시 빨간색(urgent) - 다크/라이트 테마 시스템 (data-theme 기반, localStorage fa-theme 저장) - 최신 커밋: `ff486fd` → `a618ea8` → `4833bf6` → `f833f4f` ### 게시판 전체 네비게이션 통일 - 전체 7개 페이지(index/feed/events/indicators/leaderboard/past-events/winners) nav max-width 720px 통일 - `.nav-inner` 래퍼 추가",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.9269781172275542,
+      "maxScore": 0.4787892460823059,
+      "firstRecalledAt": "2026-04-08T14:04:36.743Z",
+      "lastRecalledAt": "2026-04-10T05:49:35.433Z",
+      "queryHashes": [
+        "7eb4da2363ad",
+        "50e247b787ce"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "kr-exchange",
+        "exchange-events에서",
+        "kr-exchange/logos",
+        "border-radius",
+        "ev-timer",
+        "data-end",
+        "다크/라이트",
+        "data-theme"
+      ]
+    },
+    "memory:memory/2026-04-06.md:110:136": {
+      "key": "memory:memory/2026-04-06.md:110:136",
+      "path": "memory/2026-04-06.md",
+      "startLine": 110,
+      "endLine": 136,
+      "source": "memory",
+      "snippet": "- 검색 시 Eigen 당첨자 카드에 \"🏅 포인트: XXX점\" 조건부 표시 - Ethgas 기존 데이터 완전 보존 (포인트 미표시) - 커밋 SHA: 1d76b7c2 (feat(winners): add Eigen referral winners with points/rank) - 작전장교 검증: PASS # 2026-04-06 일일 메모리 ## Eigen 이벤트 리더보드 관련 - Eigen 친구초대 이벤트 기간: 2026-03-21 ~ 2026-04-03 - 구글 폼 제출자: 1,380명 - 현재 DB 총 유저: 2,497명 (이벤트 전 유저 포함) - 이벤트 기간 신규 가입자(DB 기준): 542명 - 날아간 기록: DB 교체 과정에서 상당수 유실 (1,500명 예상 대비 542명만 남음) - 복구 방법: 구글 폼 시트 기준으로 리더보드 최종 확정이 현실적 ## @liberator09 (해방선, 진석규) 사건 - 구글 폼 제출 점수: 280pt (26명 초대 수준으로 기입) - 3/21 백업 DB 기준 초대 수: 26명 (포인트 280pt) → 팩트 일치 - 현재 DB 초대 수: 18명 (8명 유실) → DB 오류 피해자였음 - 유실된 8명: 모두 3/19 저녁 집중 가입 (22:01~23:29) - 결론: 부정 행위자 아님. DB 교체 과정에서 데이터 손실된 피해자 ## 친구초대봇 상태 - 2026-04-06 01:52",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.0381642818450927,
+      "maxScore": 0.5272402673959732,
+      "firstRecalledAt": "2026-04-08T14:22:24.779Z",
+      "lastRecalledAt": "2026-04-10T23:49:31.584Z",
+      "queryHashes": [
+        "583deff5fe39",
+        "be0f4e81e7ce"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "백업",
+        "points/rank",
+        "3/21",
+        "3/19",
+        "검색",
+        "eigen",
+        "당첨자",
+        "카드에"
+      ]
+    },
+    "memory:memory/2026-04-06.md:24:50": {
+      "key": "memory:memory/2026-04-06.md:24:50",
+      "path": "memory/2026-04-06.md",
+      "startLine": 24,
+      "endLine": 50,
+      "source": "memory",
+      "snippet": "- LaunchAgent 언로드 + 프로세스 강제 종료 완료 (STOPPED 확인) - bot.log/launchd.log: 4월 3일분만 남아있음 (이전 로그는 롤오버로 소실) ## 이벤트 기간 봇 활동 통계 - 날짜별 신규 가입자 피크: - 3/29: 89명 (중간 급등) - 4/3: 115명 (마감일 폭발) - 이벤트 기간 친구초대 발생 건수: 235건 - 이벤트 기간 총 적립 포인트: 13,720pt ## 크립토 VC 투자 동향 (2023-2025) - 2023: 투자액 $107억 (2022년 대비 -68%), 밸류에이션 최저 - 2024: 투자액 $137억 (+28%), 초기단계 강세, 헤지펀드 평균 +25.4% - 2025: 투자액 $200억+ (사상 최대), Q4 단독 $85억, 헤지펀드 평균 +36% - 2025 핵심 섹터: 스테이블코인, RWA 토큰화, AI 인프라, 트레이딩 인프라 - 크립토 VC는 코인 시장보다 6~12개월 후행하는 경향 # 2026-04-06 일일 메모리 ## Eigen 이벤트 리더보드 관련 - Eigen 친구초대 이벤트 기간: 2026-03-21 ~ 2026-04-03 - 구글 폼 제출자: 1,380명 - 현재 DB 총 유저: 2,497명 (이벤트 전 유저 포함) - 이벤트 기간 신규 가입자(DB 기준): 542명 - 날아간 기록: DB 교체 과정에서 상당수 유실 (1,500명",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.018382641673088,
+      "maxScore": 0.5202891737222671,
+      "firstRecalledAt": "2026-04-08T14:22:24.779Z",
+      "lastRecalledAt": "2026-04-10T23:49:31.584Z",
+      "queryHashes": [
+        "583deff5fe39",
+        "be0f4e81e7ce"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "bot.log/launchd.log",
+        "3/29",
+        "4/3",
+        "2023-2025",
+        "25.4",
+        "launchagent",
+        "언로드",
+        "프로세스"
+      ]
+    },
+    "memory:memory/2026-04-06.md:46:73": {
+      "key": "memory:memory/2026-04-06.md:46:73",
+      "path": "memory/2026-04-06.md",
+      "startLine": 46,
+      "endLine": 73,
+      "source": "memory",
+      "snippet": "- Eigen 친구초대 이벤트 기간: 2026-03-21 ~ 2026-04-03 - 구글 폼 제출자: 1,380명 - 현재 DB 총 유저: 2,497명 (이벤트 전 유저 포함) - 이벤트 기간 신규 가입자(DB 기준): 542명 - 날아간 기록: DB 교체 과정에서 상당수 유실 (1,500명 예상 대비 542명만 남음) - 복구 방법: 구글 폼 시트 기준으로 리더보드 최종 확정이 현실적 ## @liberator09 (해방선, 진석규) 사건 - 구글 폼 제출 점수: 280pt (26명 초대 수준으로 기입) - 3/21 백업 DB 기준 초대 수: 26명 (포인트 280pt) → 팩트 일치 - 현재 DB 초대 수: 18명 (8명 유실) → DB 오류 피해자였음 - 유실된 8명: 모두 3/19 저녁 집중 가입 (22:01~23:29) - 결론: 부정 행위자 아님. DB 교체 과정에서 데이터 손실된 피해자 ## 친구초대봇 상태 - 2026-04-06 01:52 KST 기준 마감 처리 완료 - DB end_date: 2026-04-05로 업데이트 - LaunchAgent 언로드 + 프로세스 강제 종료 완료 (STOPPED 확인) - bot.log/launchd.log: 4월 3일분만 남아있음 (이전 로그는 롤오버로 소실) ## 이벤트 기간 봇 활동 통계 - 날짜별 신규 가입자 피크: - 3/29: 89명 (중간 급등) - 4/",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.0204591870307922,
+      "maxScore": 0.5322745114564895,
+      "firstRecalledAt": "2026-04-08T14:22:24.779Z",
+      "lastRecalledAt": "2026-04-10T23:49:31.584Z",
+      "queryHashes": [
+        "583deff5fe39",
+        "be0f4e81e7ce"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "백업",
+        "3/21",
+        "3/19",
+        "end-date",
+        "2026-04-05로",
+        "bot.log/launchd.log",
+        "3/29",
+        "eigen"
+      ]
+    },
+    "memory:memory/2026-04-08.md:1:9": {
+      "key": "memory:memory/2026-04-08.md:1:9",
+      "path": "memory/2026-04-08.md",
+      "startLine": 1,
+      "endLine": 9,
+      "source": "memory",
+      "snippet": "## 2026-04-08 추가 메모 - 해병님이 메인 기본 모델과 main primary를 `openai/gpt-5.4`로 등록하라고 지시했고, 그렇게 보고됨. - 에이전트 테스트 결과 보고된 사용 모델: main=`openai/gpt-5.4`, ops=`openai-codex/gpt-5.3-codex`, chammo=`google/gemini-3-pro-preview`, inspector=`openai-codex/gpt-5.4`. - 15시 일일시황 작업에서 해병님은 데이터가 일부 틀려도 강제 생성 후 결과물을 우선 가져오라고 요구함. - 일일시황 재작성 시 해병님 최신 지시: DAT는 SoSoValue 7d 값을 주간값으로 간주, CB Premium은 `+0.034%`로 반영. - 이미지 양식 관련 최신 지시: 기존 템플릿은 칠판형, 이미지 내 요약 섹션은 제거. - 해병님 작업 규율 재강조: \"내가 시키면 즉시 수행한다, 다음부터 하는 건 없어\". - 해병님이 z.ai 사용 가능 여부를 물었고, 현재 OpenClaw 구조상 `plugins.entries.zai`는 지원되지만 z.ai API 키 미등록 상태라 아직 사용 불가하다고 확인됨.",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.044002306461334,
+      "maxScore": 0.5264391601085663,
+      "firstRecalledAt": "2026-04-08T14:32:25.062Z",
+      "lastRecalledAt": "2026-04-10T06:09:16.352Z",
+      "queryHashes": [
+        "a8b351755cc3",
+        "5415a16cd4ff",
+        "975d868f3668",
+        "8b4df0cc2d83"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "openai/gpt-5.4",
+        "openai-codex/gpt-5.3-codex",
+        "google/gemini-3-pro-preview",
+        "openai-codex/gpt-5.4",
+        "0.034",
+        "z.ai"
+      ]
+    },
+    "memory:memory/2026-03-20.md:64:73": {
+      "key": "memory:memory/2026-03-20.md:64:73",
+      "path": "memory/2026-03-20.md",
+      "startLine": 64,
+      "endLine": 73,
+      "source": "memory",
+      "snippet": "- 참모(chammo): 정상 작동 확인 - 공병(ops): 정상 작동 확인 (토큰 이슈 해결됨) - 친구초대 봇(mate_ref_bot, 8715030972): 정상 - 캠페인봇(fireantagent_bot, 8184331170): 별도 운영 중 ## Eigen Cloud 메모 - AWS: 범용 클라우드, OpenClaw 셋팅에 적합 - Eigen Cloud: 검증 가능한 AI 컴퓨팅 특화 (EigenLayer 생태계) - Phala Network(PHA): 프라이버시 특화 AI 컴퓨팅, Polkadot→ETH L2 전환 완료(2025.11)",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.02269167304039,
+      "maxScore": 0.5114563822746276,
+      "firstRecalledAt": "2026-04-08T14:32:25.062Z",
+      "lastRecalledAt": "2026-04-10T23:49:31.584Z",
+      "queryHashes": [
+        "a8b351755cc3",
+        "be0f4e81e7ce"
+      ],
+      "recallDays": [
+        "2026-04-08",
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "network",
+        "mate-ref-bot",
+        "fireantagent-bot",
+        "2025.11",
+        "참모",
+        "chammo",
+        "정상",
+        "작동"
+      ]
+    },
+    "memory:memory/2026-03-12.md:72:80": {
+      "key": "memory:memory/2026-03-12.md:72:80",
+      "path": "memory/2026-03-12.md",
+      "startLine": 72,
+      "endLine": 80,
+      "source": "memory",
+      "snippet": "- 리더보드 제목: \"불개미 Crypto 리더보드\" - 이벤트명 표시 칸 추가 (기본값: 친구초대 이벤트) - 대시보드 nav에 🏆 리더보드 링크 추가 - 주황 참여 안내 박스 삭제 - commits: 5955c61, a30cae7, bed03e3, 1987dac ## 당첨자/리워드 페이지 기타 수정 - 쿠포니봇 이벤트명: \"Everything AMA 이벤트 당첨자 및 질문선정자\" (원복, d99c8d8 revert)",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.6655627578496932,
+      "maxScore": 0.584304417669773,
+      "firstRecalledAt": "2026-04-09T07:28:44.933Z",
+      "lastRecalledAt": "2026-04-10T07:54:11.089Z",
+      "queryHashes": [
+        "917eabf77861",
+        "10cf3a8a1a3e",
+        "8ff02a5d2be1"
+      ],
+      "recallDays": [
+        "2026-04-09",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "당첨자/리워드",
+        "리더보드",
+        "제목",
+        "불개미",
+        "crypto",
+        "이벤트명",
+        "표시",
+        "추가"
+      ]
+    },
+    "memory:memory/2026-02-21.md:24:38": {
+      "key": "memory:memory/2026-02-21.md:24:38",
+      "path": "memory/2026-02-21.md",
+      "startLine": 24,
+      "endLine": 38,
+      "source": "memory",
+      "snippet": "- [x] GitHub Pages 배포 완료 → https://josoyjjk-ui.github.io/fireant-dashboard/ - [x] 커스텀 도메인 연결 → fireantcrypto.com (Cloudflare, $10.46/년, 만료 2027-02-21) - Cloudflare 계정: josoyjjk@gmail.com, Zone ID: 02661af28773dac0582a6d15d9fd0c1a - DNS: A x 4 (185.199.108~111.153) + CNAME www → josoyjjk-ui.github.io - HTTPS 인증서 자동 발급 대기 중 - [x] Google Form 설명란 업데이트 — OpenClaw 브라우저로 직접 편집 완료 - [x] 대시보드 이벤트 카드 기본 포맷 확정: 제목/일정/카운트다운(종료시점)/총보상+인원/참여링크/응모폼(있으면) - [x] 대시보드 헤더: \"불개미 CRYPTO 게시판\"으로 변경 - [x] 채널 링크 고정: TG채널/TG대화방/트위터/유튜브 (변경 지시 전까지 고정) - [x] Block Street AMA 카드 업데이트: Hedy, 2/25, NFT50+스타벅스400명 - [x] Block Street Fireweek 카드 업데이트: 2/23~27, NFT100+200만원 상품권 - [x] 인사이트 섹션: 실제 TG 포스트 3개 반영 (백악관 스테이블코",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.5716511353850362,
+      "maxScore": 0.5305895075201987,
+      "firstRecalledAt": "2026-04-09T07:28:44.933Z",
+      "lastRecalledAt": "2026-04-10T07:54:11.089Z",
+      "queryHashes": [
+        "917eabf77861",
+        "10cf3a8a1a3e",
+        "8ff02a5d2be1"
+      ],
+      "recallDays": [
+        "2026-04-09",
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "fireantcrypto.com",
+        "10.46/년",
+        "gmail.com",
+        "185.199.108",
+        "111.153",
+        "josoyjjk-ui.github.io",
+        "제목/일정/카운트다운",
+        "인원/참여링크/응모폼"
+      ]
+    },
+    "memory:memory/2026-03-29.md:1:26": {
+      "key": "memory:memory/2026-03-29.md:1:26",
+      "path": "memory/2026-03-29.md",
+      "startLine": 1,
+      "endLine": 26,
+      "source": "memory",
+      "snippet": "# 2026-03-29 메모리 로그 ## 세션 활동 요약 ### D3 × Bridge34 계약 역제안 문장 완성 - 구조: 기본 $150K (월 $50K×3개월) + 성과 인센티브 최대 $150K = 총 최대 $300K - 토큰 보상 없음 (stablecoin only) - 월별 KPI: 추천 지갑 300/300/400개, 거래량 $1.2M/$1.2M/$1.6M, LP/TVL $150K/$150K/$200K - 비례 지급 방식 + 초과 달성 조항 포함 - 영문 역제안 문장 작성 완료 (Mark Trang 수신용) ### 뉴스 리서치 수행 - 이번 주(3/24~28) 미국 매크로 × 크립토 뉴스 정리 (CoinDesk 기반, 8개 항목) - 이번 주 한국 코인 뉴스 정리 (TokenPost 기반, 8개 항목) - 이번 주 글로벌 정책 뉴스 정리 (TokenPost 정책 섹션, 7개 항목) - 한국 국내 크립토 정책 뉴스는 이번 주 별도 보도 없음 확인 ### 주요 뉴스 포인트 (3/24~28) **미국 매크로:** - 나스닥 공식 조정(-10%) 진입, BTC $67K 아래 롱 $3억 청산 - 10년물 국채금리 4.5% 근접 (1년 최고치) - 우크라이나 러시아 오일 루트 차단 → 인플레 우려 - Morgan Stanley BTC ETF 신청 (수수료 0.14% 최저) - 비트코인 ETF 하루 $1.71억 순유출 (3주 최대)",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7547191740512169,
+      "maxScore": 0.7547191740512169,
+      "firstRecalledAt": "2026-04-10T05:49:35.433Z",
+      "lastRecalledAt": "2026-04-10T05:49:35.433Z",
+      "queryHashes": [
+        "50e247b787ce"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "300/300/400개",
+        "1.2m",
+        "1.6m",
+        "lp/tvl",
+        "3/24",
+        "4.5",
+        "0.14",
+        "1.71억"
+      ]
+    },
+    "memory:memory/2026-03-29.md:22:53": {
+      "key": "memory:memory/2026-03-29.md:22:53",
+      "path": "memory/2026-03-29.md",
+      "startLine": 22,
+      "endLine": 53,
+      "source": "memory",
+      "snippet": "- 우크라이나 러시아 오일 루트 차단 → 인플레 우려 - Morgan Stanley BTC ETF 신청 (수수료 0.14% 최저) - 비트코인 ETF 하루 $1.71억 순유출 (3주 최대) - 채굴사 AI 전환 가속 (BEP $80K vs BTC $70K) - 데이비드 색스 크립토 차르 종료 → PCAST 이동 - Kraken 연준 계좌 민주당 문제 제기 **한국/글로벌 정책:** - Kraken 연준 결제망 접근 미 의회 정조준 - CLARITY 법안 디파이 KYC 의무 갈등 - 캐나다 암호화폐 정치자금 전면 금지 법안 - 테더 KPMG 독립 감사 (미국 시장 복귀 신호) - 호주 바이낸스 ~150억 원 벌금 - 브라질 압수 암호화폐 경찰 재원 전환 ## 기술 이슈 - Gemini API 키 만료 (web_search 불가) — 갱신 필요 - 한국 뉴스 사이트 web_fetch 렌더링 미지원 → 브라우저 evaluate 방식으로 우회 ## 미결 항목 (이월) - D3 × Bridge34 계약: Mark Trang에게 역제안 전달 대기 - 네이버 블로그 3건 삭제 (`224229399904`, `224229382917`, `224229438593`) - xAI API 키 갱신 (console.x.ai) - @mate_ref_bot 관리자 승격 (해병님 직접) - Fireflies Google Calendar 연동 (해병님 OAu",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.486713033914566,
+      "maxScore": 0.486713033914566,
+      "firstRecalledAt": "2026-04-10T05:49:35.433Z",
+      "lastRecalledAt": "2026-04-10T05:49:35.433Z",
+      "queryHashes": [
+        "50e247b787ce"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "0.14",
+        "1.71억",
+        "한국/글로벌",
+        "web-search",
+        "web-fetch",
+        "console.x.ai",
+        "mate-ref-bot",
+        "우크라이나"
+      ]
+    },
+    "memory:memory/2026-02-22.md:70:92": {
+      "key": "memory:memory/2026-02-22.md:70:92",
+      "path": "memory/2026-02-22.md",
+      "startLine": 70,
+      "endLine": 92,
+      "source": "memory",
+      "snippet": "- \"딸수\"가 인터넷 은어로 자위 빈도를 뜻하는 단어임이 발견됨 - 원래 의도: 해병대 은어로 \"후임병\" (기수 낮은 병사) - Namu Wiki 해병대/은어 페이지 404, 해병대 공식 용어로는 확인 불가 - 사용자에게 보고 완료, 이름 변경 여부 대기 중 ### Codex OAuth 만료 예정 - 약 9일 후 만료 (2026-03-03 전후) ### YieldFi 출금 이슈 - YieldFi (yield.fi) 볼트 출금 버튼 비활성화 건 - OpenEden Jeremy 확인: YieldFi 인도팀 시차로 프론트엔드 버튼 활성화 깜빡함, 자금 안전, 당일 해결 예정 - YieldFi 팀: 인도 벵갈루루 기반, CEO Shailesh Gupta, 11~50명 규모 ### ETF 포스트 완료 - 14:30 KST ETF 유출입 현황 포스트 발송 완료 (BTC $88.04M 순유입, ETH $17.21K 순유입) ### 리서치 메모 - 크립토 시총 ATH ~$3.9T (~5,700조원), 현재 ~$2.4T (~3,500조원) - 코스피 ~2,300조원, 코스닥 ~400조원 - Tether 지분: Devasini 47%, Ardoino ~20%, van der Velde 10-15%, Hoegner ~15%, Cantor Fitzgerald 5% - 두나무 2024 매출 1.73조원 (수수료 97%+, 국내 97%+) - 빗썸 2",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.48022648692131037,
+      "maxScore": 0.48022648692131037,
+      "firstRecalledAt": "2026-04-10T05:49:35.433Z",
+      "lastRecalledAt": "2026-04-10T05:49:35.433Z",
+      "queryHashes": [
+        "50e247b787ce"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "해병대/은어",
+        "yield.fi",
+        "88.04m",
+        "17.21k",
+        "3.9t",
+        "2.4t",
+        "10-15",
+        "1.73조원"
+      ]
+    },
+    "memory:memory/2026-02-22.md:50:74": {
+      "key": "memory:memory/2026-02-22.md:50:74",
+      "path": "memory/2026-02-22.md",
+      "startLine": 50,
+      "endLine": 74,
+      "source": "memory",
+      "snippet": "- 논쟁 주제: 한국 암호화폐 산업의 글로벌 경쟁력과 해외 자본 유치 - 팩트체크: DSRV 매출 100억, 95%+ 해외 고객 / 해외 VC 투자유치 사례 존재 / Tether≠미국정부 육성 - 결론: 세부 사실 6:4 Dimple 우세, 거시 관점(기회 상실) 불개미 해병님 valid - 한국 크립토 글로벌 점유율: 2017 33% 피크 → 2024 ~8% (출처: TokenPost Research) ### 대시보드 인사이트 업데이트 - 포스트 39785 \"크립토 시총 5,700조 vs 코스피+코스닥 2,700조\" 추가 (GitHub push 완료) - 현재 인사이트 3개: 39785, 39766, 39759 ### KiteAI 리서치 - Founder: Chi Zhang (UC Berkeley, LinkedIn: chizhangucb) - Co-founder: Scott Shi - Website: gokite.ai ### 라즈베리파이 5 + 트레이딩 AI 검토 - RPi5 가격: 2GB $50 ~ 16GB $120 - 트레이딩 AI 아키텍처 제안: Freqtrade(24/7) + LLM 분석 레이어 + 딸수 리포팅 - 사용자 관심 표명, 아직 미착수 ### \"딸수\" 이름 이슈 발견 - \"딸수\"가 인터넷 은어로 자위 빈도를 뜻하는 단어임이 발견됨 - 원래 의도: 해병대 은어로 \"후임병\" (기수 낮은 병사) - Namu Wi",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.9847356140613555,
+      "maxScore": 0.5069401323795318,
+      "firstRecalledAt": "2026-04-10T05:49:35.433Z",
+      "lastRecalledAt": "2026-04-10T11:17:23.873Z",
+      "queryHashes": [
+        "50e247b787ce",
+        "3312234dbd08"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "co-founder",
+        "gokite.ai",
+        "24/7",
+        "논쟁",
+        "주제",
+        "한국",
+        "암호화폐",
+        "산업의"
+      ]
+    },
+    "memory:memory/2026-04-10.md:15:26": {
+      "key": "memory:memory/2026-04-10.md:15:26",
+      "path": "memory/2026-04-10.md",
+      "startLine": 15,
+      "endLine": 26,
+      "source": "memory",
+      "snippet": "- **모든 에이전트/서브 에이전트 모델 사용 현황 확인**: - **딸수 (Main)**: `anthropic/claude-sonnet-4-6` 대신 `google/gemini-2.5-flash` 사용 (앤트로픽 결제/과부하 문제로 폴백). - **공병 (Ops)**: `openai-codex/gpt-5.3-codex` 사용 (정상). - **참모 (Research & Content)**: `google/gemini-3.1-flash-lite-preview` 사용 (정상). - **작전장교 (Inspector)**: `anthropic/claude-opus-4-6` 대신 `google/gemini-2.5-flash` 사용 (앤트로픽 결제/과부하 문제로 폴백). - **`web_search` API 키 설정**: `web_search` (brave) 사용을 위한 Brave Search API 키 설정은 대화형으로 진행되어야 하므로 사용자에게 직접 설정 필요성을 안내함. - **텔레그램 그룹 메시지 설정**: `config.patch` 명령 오류로 인해 설정 보류 중이며, 100시간 후 재확인을 위한 크론잡(`telegram-group-message-reconfirm`)이 정상 등록됨. - **Anthropic Billing Alert Hiding**: `gateway config.patch`를 통한",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.008268654346466,
+      "maxScore": 0.522981721162796,
+      "firstRecalledAt": "2026-04-10T05:52:24.005Z",
+      "lastRecalledAt": "2026-04-10T06:09:16.352Z",
+      "queryHashes": [
+        "975d868f3668",
+        "8b4df0cc2d83"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "gateway",
+        "gpt",
+        "openai",
+        "에이전트/서브",
+        "anthropic/claude-sonnet-4-6",
+        "google/gemini-2.5-flash",
+        "결제/과부하",
+        "openai-codex/gpt-5.3-codex"
+      ]
+    },
+    "memory:memory/2026-04-10.md:11:17": {
+      "key": "memory:memory/2026-04-10.md:11:17",
+      "path": "memory/2026-04-10.md",
+      "startLine": 11,
+      "endLine": 17,
+      "source": "memory",
+      "snippet": "- **앤트로픽 모델 사용 불가 원인 분석 및 해결 방안 제안**: 공병이 앤트로픽 `sonnet` 모델 사용 불가 원인을 분석하고 해결 방안을 제안함. `anthropic:default: disabled:billing` 경고는 실제 결제 문제보다는 앤트로픽 서비스의 일시적 과부하(`Overloaded`)로 인한 시스템의 임시 사용 제한으로 판단됨. 해결 방안으로 서비스 상태 모니터링 및 쿨다운 시간 경과 후 재시도, 필요시 `auth.profiles` 캐시 초기화 제안. - **`agent-to-agent` 정책 활성화 시도 및 결과**: `agent-to-agent` 정책을 활성화하기 위해 `gateway config.patch` 명령을 여러 차례 시도했으나, 초기에는 `Unrecognized key` 오류가 발생하여 실패함. 이후 공병에게 위임하여 `tools` 섹션에 `agentToAgent: {\"enabled\": true}`를 추가하는 방식으로 재시도, Gateway 재시작이 예약되며 **성공적으로 정책이 적용됨을 확인.** - **모든 에이전트/서브 에이전트 모델 사용 현황 확인**: - **딸수 (Main)**: `anthropic/claude-sonnet-4-6` 대신 `google/gemini-2.5-flash` 사용 (앤트로픽 결제/과부하 문제로 폴백). - **공병 (Ops)**: `openai-",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5140336275100708,
+      "maxScore": 0.5140336275100708,
+      "firstRecalledAt": "2026-04-10T06:09:16.352Z",
+      "lastRecalledAt": "2026-04-10T06:09:16.352Z",
+      "queryHashes": [
+        "8b4df0cc2d83"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "gateway",
+        "openai",
+        "auth.profiles",
+        "agent-to-agent",
+        "config.patch",
+        "에이전트/서브",
+        "anthropic/claude-sonnet-4-6",
+        "google/gemini-2.5-flash"
+      ]
+    },
+    "memory:memory/2026-03-25.md:140:169": {
+      "key": "memory:memory/2026-03-25.md:140:169",
+      "path": "memory/2026-03-25.md",
+      "startLine": 140,
+      "endLine": 169,
+      "source": "memory",
+      "snippet": "- 올바른 순서(이미지 → 텍스트) 글 재발행 필요 (참모에 이관 예정) ### 핵심 식별자 (네이버) - targetId: `702932C1785470F934337B42EE186833` - 에디터 키: `blogpc001` - SmartEditor API: `window.SmartEditor._editors['blogpc001']` - 발행된 글: logNo `224229362818` (제목 \"메랑\", 이미지 있음, 텍스트 미확인) - 불완전 글: logNo `224229352605`, `224229359057`, `224229271417`, `224229280240` --- ## 추가 작업 (18:40~20:06) ### 네이버 블로그 \"메랑\" 최종 발행 - 참모(chammo)에 이관 후 발행 완료 - logNo: `224229382917`, URL: https://blog.naver.com/fireant_korea/224229382917 - 구성: 제목 \"메랑\" + 이미지(RLUSD Coinone) + 본문 \"동해물과밳두산 스쿠로\" 정상 노출 ### 잘못 발행된 글 6개 일괄 삭제 (참모 처리) - 삭제 완료: 224229362818, 224229379777, 224229352605, 224229359057, 224229271417, 224229280240 - 결과: 시장 분석 카테고리 7개 → 1개 (메랑만 남음),",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2.066108192503452,
+      "maxScore": 0.5318776503205299,
+      "firstRecalledAt": "2026-04-10T08:15:57.512Z",
+      "lastRecalledAt": "2026-04-10T08:59:33.875Z",
+      "queryHashes": [
+        "9da95aeb1415",
+        "8ff846b749f2",
+        "32afbfc44bdc",
+        "be3a31fc18da"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "window.smarteditor",
+        "올바른",
+        "순서",
+        "이미지",
+        "텍스트",
+        "재발행",
+        "필요",
+        "참모에"
+      ]
+    },
+    "memory:memory/2026-03-25.md:106:123": {
+      "key": "memory:memory/2026-03-25.md:106:123",
+      "path": "memory/2026-03-25.md",
+      "startLine": 106,
+      "endLine": 123,
+      "source": "memory",
+      "snippet": "- **네이버 에디터**: CDP insertText 외 모든 방법 불가, 이미지 삽입이 포커스를 리셋하므로 이미지 먼저 삽입 필수 --- ## 추가 작업 (18:00~18:40) ### 네이버 블로그 발행 (openclaw 브라우저 직접 로그인 시도) - openclaw 브라우저에 NID_AUT 쿠키 없음 → 네이버 로그인 페이지로 리다이렉트 - 해병님이 로그인해놨다고 했으나 Chrome 브라우저와 openclaw 브라우저는 별개 세션 - openclaw 브라우저에서 네이버 로그인 페이지 열어 해병님 직접 로그인 요청 - 해병님이 직접 로그인 후 SmartEditor JS API(`window.SmartEditor._editors['blogpc001']`) 사용: - `_documentService.setDocumentTitle('메랑')` → 제목 성공 - `browser upload` + `input[type=file]` → merang.jpg 이미지 삽입 성공 - `_editingService.insertTextCompAtLast()` + `_editingService.write('동해물과밳두산 스쿠로')` → 텍스트 삽입 성공 - 발행 버튼 `.confirm_btn__WEaBq` 클릭 → **logNo=224229362818 발행 성공** - 발행 URL: `https://blog.naver.com/fir",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.5417778819799421,
+      "maxScore": 0.522313106060028,
+      "firstRecalledAt": "2026-04-10T08:15:57.512Z",
+      "lastRecalledAt": "2026-04-10T08:59:33.875Z",
+      "queryHashes": [
+        "9da95aeb1415",
+        "8ff846b749f2",
+        "be3a31fc18da"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "nid-aut",
+        "window.smarteditor",
+        "documentservice.setdocumenttitle",
+        "merang.jpg",
+        "editingservice.write",
+        "confirm-btn",
+        "blog.naver.com/fir",
+        "네이버"
+      ]
+    },
+    "memory:memory/2026-03-25.md:121:146": {
+      "key": "memory:memory/2026-03-25.md:121:146",
+      "path": "memory/2026-03-25.md",
+      "startLine": 121,
+      "endLine": 146,
+      "source": "memory",
+      "snippet": "- 발행 URL: `https://blog.naver.com/fireant_korea/224229362818` - contentLength=4360 (이전 실패 글보다 크게 본문 포함) - **단, 스크린샷 확인 결과**: 이미지만 있고 텍스트 \"동해물과밳두산 스쿠로\" 미노출 → `write()` 미반영 가능성 - 작업 중단됨 (해병님이 abort) ### YouTube 썸네일 추출 - URL: `https://youtu.be/q4-y4-UPyaA` - 방법: `curl \"https://img.youtube.com/vi/q4-y4-UPyaA/maxresdefault.jpg\"` → 다운로드 후 텔레그램 전송 - 완료: `/tmp/openclaw/uploads/yt_thumb.jpg` → message 전송 성공 ### 참모(chammo) 모델 변경 - 변경 전: `anthropic/claude-sonnet-4-6` - 변경 후: `anthropic/claude-opus-4-6` (fallback: sonnet → gemini) - config.patch 적용, SIGUSR1 재시작 완료 - 네이버 블로그 작업을 참모에 이관 예정 ### 현재 미완료 - 네이버 블로그: logNo=224229362818 본문 텍스트 확인 필요 - 불완전 글 logNo=224229352605, 224229359057, 224229271417, 2242",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.0312171310186384,
+      "maxScore": 0.5193195253610611,
+      "firstRecalledAt": "2026-04-10T08:15:57.512Z",
+      "lastRecalledAt": "2026-04-10T08:59:33.875Z",
+      "queryHashes": [
+        "9da95aeb1415",
+        "be3a31fc18da"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "youtu.be/q4-y4-upyaa",
+        "anthropic/claude-sonnet-4-6",
+        "anthropic/claude-opus-4-6",
+        "config.patch",
+        "발행",
+        "url",
+        "https",
+        "blog.naver.com"
+      ]
+    },
+    "memory:memory/2026-03-25.md:187:206": {
+      "key": "memory:memory/2026-03-25.md:187:206",
+      "path": "memory/2026-03-25.md",
+      "startLine": 187,
+      "endLine": 206,
+      "source": "memory",
+      "snippet": "- 기존 4개 글 분석: https://blog.naver.com/fireant_korea/224229139141 外 3개 - 제목 패턴: `📌 [불개미 일일시황] YYYY.MM.DD (요일)` - 구조: 이미지 → 1️⃣~4️⃣ 데이터 → 🟰 코멘트 → 🔗 링크 → 태그 - 카테고리: 일일 시황 - 오늘(2026.03.25) 일일시황은 이미 발행 완료: logNo `224229139141` ### 일일시황 양식 테스트 발행 (임의 데이터) - 참모 발행 완료, logNo: `224229438593` - URL: https://blog.naver.com/PostView.naver?blogId=fireant_korea&logNo=224229438593 - 제목: 📌 [불개미 일일시황] 2026.03.25 (수) - 테스트 ### 일일시황 2026.02.26 발행 진행 중 - 참모(chammo) 서브에이전트: `agent:chammo:subagent:27e80d0b-8d9c-4306-9302-8598f4806ece` - 이미지: `/tmp/openclaw/uploads/daily_20260226.jpg` - 내용: BTC -$616.67M, ETH -$116.18M, BTC OI +12.26%, ETH OI +14.19%, DAT $195.78M, CB -0.014%, 코멘트 \"살려살려주세요\" - 완료 여부: 미확인 (진행 중",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3.1573011100292203,
+      "maxScore": 0.5411662057042121,
+      "firstRecalledAt": "2026-04-10T08:15:57.512Z",
+      "lastRecalledAt": "2026-04-10T08:59:21.706Z",
+      "queryHashes": [
+        "9da95aeb1415",
+        "930dde5b3e4b",
+        "8ff846b749f2",
+        "448e38e65665",
+        "950942b3d2e8",
+        "32afbfc44bdc"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "yyyy.mm.dd",
+        "2026.03.25",
+        "blog.naver.com/postview.naver",
+        "fireant-korea",
+        "2026.02.26",
+        "616.67m",
+        "116.18m",
+        "12.26"
+      ]
+    },
+    "memory:memory/2026-03-25.md:60:79": {
+      "key": "memory:memory/2026-03-25.md:60:79",
+      "path": "memory/2026-03-25.md",
+      "startLine": 60,
+      "endLine": 79,
+      "source": "memory",
+      "snippet": "- 커밋: `c0181f2`, status=\"fallback\", reason=\"starchild_disabled\" ### 네이버 블로그 발행 시도 (fireant_korea / \"메랑\") - 목표: 제목 \"메랑\", 본문 \"동해물과밳두산 스쿠로\", 이미지(RLUSD Coinone)를 **이미지 → 텍스트 순서**로 발행 - 이미지 원본: `/Users/fireant/.openclaw/media/inbound/file_232---90973ed9-b839-445e-ab5f-c010530f16f6.jpg` - 업로드 경로: `/tmp/openclaw/uploads/merang.jpg` - **발행 완료된 글 (순서 잘못됨)**: - logNo=224229280240 (이미지 있으나 텍스트 없음) - logNo=224229271417 (빈 글) - 원인: 네이버 스마트에디터 ONE = CDP insertText만 유효, DOM 직접 조작 불가 - 이미지 → 텍스트 순서 강제 필요 (사진 버튼 클릭이 포커스 리셋) ### 쿠키 복호화 시도 (Chrome Profile 1 → openclaw 브라우저) - Chrome Cookies DB: `~/Library/Application Support/Google/Chrome/Profile 1/Cookies` - v10 암호화 확인: NAC, NID_AUT, NID_SES 암호화된 값 추출 완",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.0098683863878248,
+      "maxScore": 0.5058869540691375,
+      "firstRecalledAt": "2026-04-10T08:15:57.512Z",
+      "lastRecalledAt": "2026-04-10T08:59:33.875Z",
+      "queryHashes": [
+        "9da95aeb1415",
+        "be3a31fc18da"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "starchild-disabled",
+        "fireant-korea",
+        "users/fireant",
+        "openclaw/media/inbound/file-232",
+        "tmp/openclaw/uploads/merang.jpg",
+        "library/application",
+        "support/google/chrome/profile",
+        "1/cookies"
+      ]
+    },
+    "memory:memory/2026-04-09.md:1:27": {
+      "key": "memory:memory/2026-04-09.md:1:27",
+      "path": "memory/2026-04-09.md",
+      "startLine": 1,
+      "endLine": 27,
+      "source": "memory",
+      "snippet": "# 2026-04-09 일일 메모리 ## 에이전트 모델 설정 (확정) - main: `anthropic/claude-sonnet-4-6` (fallback: `openai-codex/gpt-5.4`) - ops: `openai-codex/gpt-5.4` - chammo: `google/gemini-3-pro-preview` (유지) - inspector: `anthropic/claude-opus-4-6` (유지) - 변경 커밋: `61daf934` (memory/tech.md 업데이트 포함) ## Eigen 지갑주소 미제출자 알림 발송 (2026-04-08) - 대상: 401명 (agreed=1, bithumb_wallet IS NULL) - 결과: 성공 396, 차단 5, 실패 0 - 마감 문구: \"4월 8일 새벽 1시\" - 로그: `/Users/fireant/.openclaw/workspace/bots/referral-bot/send_reward_notice_20260408_0120.log` ## 네이버 블로그 일일시황 발행 (2026-04-08) - 최종 logNo: `224245843134` - URL: https://blog.naver.com/fireant_korea/224245843134 - 서식: 소제목 fs24+bold, 5️⃣ 요약 노란 하이라이트(#ffff00), 이미지 최상단 - 작전장교 검증: PASS (4",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.5690266385674474,
+      "maxScore": 0.5473480269312858,
+      "firstRecalledAt": "2026-04-10T08:16:03.386Z",
+      "lastRecalledAt": "2026-04-10T08:59:14.710Z",
+      "queryHashes": [
+        "930dde5b3e4b",
+        "8ff846b749f2",
+        "950942b3d2e8"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "anthropic/claude-sonnet-4-6",
+        "openai-codex/gpt-5.4",
+        "google/gemini-3-pro-preview",
+        "anthropic/claude-opus-4-6",
+        "memory/tech.md",
+        "bithumb-wallet"
+      ]
+    },
+    "memory:memory/2026-04-10.md:1:12": {
+      "key": "memory:memory/2026-04-10.md:1:12",
+      "path": "memory/2026-04-10.md",
+      "startLine": 1,
+      "endLine": 12,
+      "source": "memory",
+      "snippet": "## 2026-04-10 주요 업무 - 15시 자동 리포트 마감 강제 수행 및 텔레그램 전송 (메시지 ID: 20558). - 각 에이전트(딸수, 참모, 공병, 작전장교)별 현재 사용 모델 확인 (Sonnet, Gemini-flash, Codex, Opus). - 각 에이전트별 thinking 설정 변경 (딸수: off, 참모: medium, 공병: medium, 작전장교: high). - `subinium` GitHub 레포 분석 및 11개 항목에 대한 상세 리스크/리워드, 업무 연관성 분석 보고. - `agf` 아키텍처 분석 기반 OpenClaw 세션 운영 개선 제안 (AGENTS.md 반영 완료). - `ddududdudu` 아키텍처 분석 기반 AGENTS.md 및 서브 에이전트 프롬프트 개선 제안 (AGENTS.md 반영 완료). ### 2026년 04월 10일 (금) 주요 활동 및 기억 - **앤트로픽 모델 사용 불가 원인 분석 및 해결 방안 제안**: 공병이 앤트로픽 `sonnet` 모델 사용 불가 원인을 분석하고 해결 방안을 제안함. `anthropic:default: disabled:billing` 경고는 실제 결제 문제보다는 앤트로픽 서비스의 일시적 과부하(`Overloaded`)로 인한 시스템의 임시 사용 제한으로 판단됨. 해결 방안으로 서비스 상태 모니터링 및 쿨다운 시간 경과 후 재시도, 필요시 `auth.p",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.543485152721405,
+      "maxScore": 0.543485152721405,
+      "firstRecalledAt": "2026-04-10T08:16:03.386Z",
+      "lastRecalledAt": "2026-04-10T08:16:03.386Z",
+      "queryHashes": [
+        "930dde5b3e4b"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "gemini-flash",
+        "리스크/리워드",
+        "agents.md",
+        "auth.p",
+        "주요",
+        "업무",
+        "자동",
+        "리포트"
+      ]
+    },
+    "memory:memory/2026-03-10.md:1:21": {
+      "key": "memory:memory/2026-03-10.md:1:21",
+      "path": "memory/2026-03-10.md",
+      "startLine": 1,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "# 2026-03-10 일일 로그 ## 완료 작업 - [x] Everything AMA 스크립트 생성 (새 Docs: `12hlfLziPEVo1GEmjbhTq0VO3Lj9rreGE4EdeqxDry_Y`) - 사전질문 시트(`1Nwv85iHmT6b0hEiNiPQxBis4woGoCGsDSes78TX7A9U`)에서 100명+ 응답 중 7개 선별 - 선정 질문자: @kibok87, @ox5678, @onforworld44, @Bongdidi, @parkinhwan, @parkgwangeun, @maplejoa - Sahara AI 양식 그대로 적용 (포맷 검증 완료, split run 0) - 이전 포맷 깨진 문서(`1SLmQ0mo81-v_RdKqN13pW4hcmnlCI9jSyH9TvKvKkAY`) 삭제 - [x] KGeN 프로젝트 브리핑 — Verified Distribution Layer, POGE 검증 시스템 설명 - [x] 블록스트릿 AMA 리캡 캠페인 구글폼 생성 (`1kKP8OXstjmmdKWPsDMG2GJsH5zNO_rz0mWEujFNnch0`) - 항목: 텔레그램ID, 트위터ID, 게시물링크1(필수), 게시물링크2(선택), 이메일, 휴대폰, 개인정보동의 - 휴대폰 description 삭제 (해병님 지시) - 보상: 5만원x10 + 1만원x50 + 스타벅스x100, 마감 3/20 - [x] 불개미 게",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5387984007596969,
+      "maxScore": 0.5387984007596969,
+      "firstRecalledAt": "2026-04-10T08:16:03.386Z",
+      "lastRecalledAt": "2026-04-10T08:16:03.386Z",
+      "queryHashes": [
+        "930dde5b3e4b"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "3/20",
+        "일일",
+        "로그",
+        "완료",
+        "작업",
+        "everything",
+        "ama",
+        "스크립트"
+      ]
+    },
+    "memory:memory/2026-03-15.md:1:33": {
+      "key": "memory:memory/2026-03-15.md:1:33",
+      "path": "memory/2026-03-15.md",
+      "startLine": 1,
+      "endLine": 33,
+      "source": "memory",
+      "snippet": "# 2026-03-15 일일 로그 ## Telegram 폴더 자동 분류 작업 (진행 중, 01:22 KST) ### 인증 완료 - Telethon User API 인증 성공: `@fireantico` (불개미 Fireant) - 세션 파일: `/Users/fireant/.openclaw/workspace/secrets/tg-user-session.session` - api_id: 37468103 (Keychain: telegram-user-api-id) - api_hash: Keychain 저장 완료 (telegram-user-api-hash) - 전화번호: Keychain 저장 완료 (telegram-user-phone) - 2FA 있음 (인증 시 password 콜백 필요) ### 수집 결과 - 최근 2주 대화 총 842개 (핀 10개 포함) - 핀 고정 10개 (건드리지 않음): Bridgelabs 업무채널, 불개미 트레이딩 채널-프라이빗, 불개미 트레이딩 그룹-프라이빗, hello World, 불개미 시황+뻘글+살려줘, 불개미 CRYPTO 대화방, 불개미 CRYPTO, ddalsu(딸수), 불개미 지갑알림(개인 및 고래), 불개미 Fireant(theo acc) ### 폴더 구조 (해병님 지시) 1. All Chats (기본, 수정 안 함) 2. Personal 3. 클라이언트 직접소통 (영문) 4. 클라이언",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5087566167116165,
+      "maxScore": 0.5087566167116165,
+      "firstRecalledAt": "2026-04-10T08:19:25.278Z",
+      "lastRecalledAt": "2026-04-10T08:19:25.278Z",
+      "queryHashes": [
+        "c50e5063ce49"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "users/fireant",
+        "api-id",
+        "telegram-user-api-id",
+        "api-hash",
+        "telegram-user-api-hash",
+        "telegram-user-phone",
+        "채널-프라이빗",
+        "그룹-프라이빗"
+      ]
+    },
+    "memory:memory/2026-03-30.md:1:32": {
+      "key": "memory:memory/2026-03-30.md:1:32",
+      "path": "memory/2026-03-30.md",
+      "startLine": 1,
+      "endLine": 32,
+      "source": "memory",
+      "snippet": "# 2026-03-30 일일 메모리 ## 완료된 작업 ### 네이버 블로그 (2026.03.29 일일시황) - 기존 포스트 `224233392141` 삭제 - 새 포스트 발행 완료 → logNo: `224233588152` - Playwright 스크립트: `/Users/fireant/.openclaw/workspace/scripts/naver-blog/publish.py` - 로그인 방법: `#log\\.login` 버튼 클릭 - BASE64 이미지 업로드 (`_uploadImageByBASE64`) 동작 확인 - 캡차 발생으로 자동화 재시도 차단됨 (미완료 이슈) ### fireantcrypto.com 이미지 교체 - `assets/daily-report-20260329.jpg` + `daily-report-latest.jpg` 교체 → commit `1072a233` - CDN cache-control max-age=600 (10분 대기 필요) ### events/index.html 퀵링크 - 🏦 한국거래소 버튼 복구 → commit `27c63bbd` - nav가 아닌 events/index.html 퀵링크 그리드에만 유지 ### GEMINI_API_KEY 수정 - `GEMINI_API_KEY` 만료 → `GOOGLE_API_KEY` 값으로 교체 후 게이트웨이 재시작 - `GOOGLE_API_KEY` (유효): 앞 3",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4960392653942108,
+      "maxScore": 0.4960392653942108,
+      "firstRecalledAt": "2026-04-10T08:19:30.829Z",
+      "lastRecalledAt": "2026-04-10T08:19:30.829Z",
+      "queryHashes": [
+        "9947425e2ea1"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "게이트웨이",
+        "2026.03.29",
+        "users/fireant",
+        "fireantcrypto.com",
+        "assets/daily-report-20260329.jpg",
+        "daily-report-latest.jpg",
+        "cache-control",
+        "max-age"
+      ]
+    },
+    "memory:memory/2026-03-25.md:164:192": {
+      "key": "memory:memory/2026-03-25.md:164:192",
+      "path": "memory/2026-03-25.md",
+      "startLine": 164,
+      "endLine": 192,
+      "source": "memory",
+      "snippet": "- 핵심 절차 확정: 1. 이미지 먼저 (사진 버튼 클릭 → file input upload) 2. 텍스트 삽입 (`insertTextCompAtLast()` + `write()`) 3. 글자색 수정 (`setDocumentData()` #ffffff → #000000) 4. 발행 (`.confirm_btn__WEaBq`) - HTML/CSS 수정 경로: 공병(ops)에만 위임 - AGENTS.md, chammo-prompt.md 업데이트 완료 ### 네이버 블로그 테스트 발행 (가나다라 훈민정음) - 참모 발행 완료, logNo: `224229399904` - URL: https://blog.naver.com/fireant_korea/224229399904 - 이미지: OKX \"NEW X LAUNCH / NOW LIVE ON BOOST\" - 스킬 정상 작동 확인 ### 리더보드 fireantico 제거 (공병 처리) - 이유: 불개미는 이벤트 주관자 → 포인트 제외 - fireantico 3140p 제거, total_points 29930 → 26790 - 새 1위: bananakorea (270p) - export_leaderboard.py에 `EXCLUDED_USERNAMES = {\"fireantico\"}` 추가 (영구 제외) - 커밋: `bfd95d8` (dashboard repo) - HTML 내 firea",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.519091323018074,
+      "maxScore": 0.5076980978250504,
+      "firstRecalledAt": "2026-04-10T08:27:29.555Z",
+      "lastRecalledAt": "2026-04-10T08:59:33.875Z",
+      "queryHashes": [
+        "8ff846b749f2",
+        "32afbfc44bdc",
+        "be3a31fc18da"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "confirm-btn",
+        "html/css",
+        "agents.md",
+        "chammo-prompt.md",
+        "total-points",
+        "export-leaderboard.py에",
+        "excluded-usernames",
+        "핵심"
+      ]
+    },
+    "memory:memory/2026-04-09.md:25:49": {
+      "key": "memory:memory/2026-04-09.md:25:49",
+      "path": "memory/2026-04-09.md",
+      "startLine": 25,
+      "endLine": 49,
+      "source": "memory",
+      "snippet": "- write() 타이핑 방식은 서식(bold/fontSize/backgroundColor) 미적용 → 사용 금지 - publish.py STEP 5/5b: 타이핑 후 스타일 수정 방식은 실패 확인 - 소제목 노드 스타일: `{fontColor: '#000000', fontSizeCode: 'fs24', bold: true, '@ctype': 'nodeStyle'}` - 요약 하이라이트: `backgroundColor: '#ffff00'` 노드 스타일에 추가 - publish.py 경로: `/Users/fireant/.openclaw/workspace/scripts/naver-blog/publish.py` - publish_run.py 경로: `/Users/fireant/.openclaw/workspace/scripts/naver-blog/publish_run.py` ## 크론잡 강제 수행 결과 (2026-04-08) - Bridge34 캘린더 동기화: 완료 (11개 반영, 27개 조회) - daily-chalk-chammo-prep (14:55): 완료 - daily-chalk-main-event (15:00): 완료 - CB 프리미엄 수집: fallback 처리 (Starchild 접근 불가) - memory-db-backup: 재시도 결과 미확인 - daily-naver-blog-post (17:00): 완료 ## openc",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5378799885511398,
+      "maxScore": 0.5378799885511398,
+      "firstRecalledAt": "2026-04-10T08:27:33.802Z",
+      "lastRecalledAt": "2026-04-10T08:27:33.802Z",
+      "queryHashes": [
+        "448e38e65665"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "backup",
+        "bold/fontsize/backgroundcolor",
+        "publish.py",
+        "5/5b",
+        "users/fireant",
+        "publish-run.py",
+        "daily-chalk-chammo-prep",
+        "daily-chalk-main-event"
+      ]
+    },
+    "memory:memory/2026-03-25.md:89:112": {
+      "key": "memory:memory/2026-03-25.md:89:112",
+      "path": "memory/2026-03-25.md",
+      "startLine": 89,
+      "endLine": 112,
+      "source": "memory",
+      "snippet": "- `--no-auto-focus` 사용 시 새 탭이 열리거나 엉뚱한 위치에 입력됨 ### 미해결 사항 - logNo=224229280240, 224229271417 두 잘못된 글 삭제 필요 - 올바른 순서(이미지 → 텍스트)로 새 글 발행 필요 - **근본 해결책**: Chrome을 remote debugging 모드로 재시작 (`--remote-debugging-port=9222`) - Chrome 완전 종료 후: `/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port=9222 &` - 재시작 후 로그인 세션은 쿠키에 유지됨 ### naver-blog 스킬 - 생성 경로: `/Users/fireant/.openclaw/workspace/skills/naver-blog/SKILL.md` - 커밋: `873552d` - CDP insertText 방식, 이미지 → 텍스트 순서 강제 등 핵심 제약 문서화 ## 핵심 교훈 - **Peekaboo**: iframe 구조 페이지는 element ID 탐지 불가, 좌표 기반 클릭도 창 좌표계 혼선으로 불안정 - **Chrome remote debugging**: 기존 실행 중인 Chrome에 나중에 추가 불가 → 처음부터 플래그로 실행해야 함 - **네이버 에디터**: CDP in",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.0160917222499846,
+      "maxScore": 0.5150869518518447,
+      "firstRecalledAt": "2026-04-10T08:59:21.706Z",
+      "lastRecalledAt": "2026-04-10T08:59:33.875Z",
+      "queryHashes": [
+        "32afbfc44bdc",
+        "be3a31fc18da"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "no-auto-focus",
+        "remote-debugging-port",
+        "applications/google",
+        "chrome.app/contents/macos/google",
+        "naver-blog",
+        "users/fireant",
+        "auto",
+        "focus"
+      ]
+    },
+    "memory:memory/2026-03-30.md:26:58": {
+      "key": "memory:memory/2026-03-30.md:26:58",
+      "path": "memory/2026-03-30.md",
+      "startLine": 26,
+      "endLine": 58,
+      "source": "memory",
+      "snippet": "## 비트코인 가격 전망 보고서 (작전장교) ### 수정된 전제 데이터 (CoinGecko API 실시간 확인) - 현재가: $66,327 - **ATH: $126,080 (2025년 10월 6일)** ← 이전 $109K 오류 수정 - ATH 대비 하락: -47.4% - 공포탐욕지수: **9 (극단적 공포)** - 4차 반감기(2024.04) → ATH(2025.10): 18개월, 상승배율 2.0x ### 사이클 분석 핵심 - 반감기→ATH 소요기간: 17~18개월로 수렴 (4회 연속) - 상승배율 체감: 93x → 30x → 8.6x → 2.0x - 현재 위치: ATH 이후 5.8개월, -47.4% - 판단: **약세장 초입 55% vs Mid-cycle 조정 45%** ### 가격 전망 요약 (기본 시나리오) | 기간 | 약세 | 기본 | 강세 | |------|------|------|------| | 3M (2026.06) | $42~48K | $58~68K | $78~90K | | 6M (2026.09) | $32~40K | $55~72K | $95~115K | | 9M (2026.12) | $28~35K | $65~80K | $110~135K | | 12M (2027.03) | $30~38K | $75~95K | $130~160K | | 24M (2028.03) | $55~75K | $115~150K | $250~35",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.511027529835701,
+      "maxScore": 0.511027529835701,
+      "firstRecalledAt": "2026-04-10T11:17:23.873Z",
+      "lastRecalledAt": "2026-04-10T11:17:23.873Z",
+      "queryHashes": [
+        "3312234dbd08"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "47.4",
+        "2024.04",
+        "2025.10",
+        "2.0x",
+        "8.6x",
+        "5.8개월",
+        "mid-cycle",
+        "2026.06"
+      ]
+    },
+    "memory:memory/2026-03-01.md:21:54": {
+      "key": "memory:memory/2026-03-01.md:21:54",
+      "path": "memory/2026-03-01.md",
+      "startLine": 21,
+      "endLine": 54,
+      "source": "memory",
+      "snippet": "- **다음 단계**: \"고급\" → \"josoyjjk@gmail.com의 앱으로 이동(안전하지 않음)\" 클릭 → 권한 허용 → 함수 재실행 - Apps Script 탭 target ID: `7B68FD5E7AFE3515DE71C604E68A6766` - OAuth 경고 탭 target ID: `3969D69B16369D6C7B5430D3E8C7D472` ### 다음 재개 시 처리 1. `3969D69B16369D6C7B5430D3E8C7D472` 탭에서 \"고급\" 클릭 → 이동 링크 클릭 2. 또는 새로 실행 시 다시 나타나는 동의 팝업에서 동일하게 처리 3. 권한 허용 후 `createOrderlyDoc()` 재실행 → 구글독스에 내용 자동 삽입 --- ## 컴팩션 직전 세션 Summary 핵심 인계 ### ETF 크론 - Job ID: `eabef07d-5ecd-48b6-ae88-3afd236f59d6` (매일 15:00 KST) - 레퍼런스: `/Users/fireant/.openclaw/workspace/fireant-chalk-reference.jpg` - 출력: `/Users/fireant/.openclaw/workspace/etf_daily_chalk.png` ### 봇 - 스크립트: `/Users/fireant/.openclaw/workspace/fireantagent_bot.py` - tmux: `bot-v4`",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5096762806177139,
+      "maxScore": 0.5096762806177139,
+      "firstRecalledAt": "2026-04-10T11:17:23.873Z",
+      "lastRecalledAt": "2026-04-10T11:17:23.873Z",
+      "queryHashes": [
+        "3312234dbd08"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "gmail.com의",
+        "users/fireant",
+        "bot-v4",
+        "다음",
+        "단계",
+        "고급",
+        "josoyjjk",
+        "gmail.com"
+      ]
+    },
+    "memory:memory/2026-04-06.md:1:30": {
+      "key": "memory:memory/2026-04-06.md:1:30",
+      "path": "memory/2026-04-06.md",
+      "startLine": 1,
+      "endLine": 30,
+      "source": "memory",
+      "snippet": "# 2026-04-06 일일 메모리 ## Eigen 이벤트 리더보드 관련 - Eigen 친구초대 이벤트 기간: 2026-03-21 ~ 2026-04-03 - 구글 폼 제출자: 1,380명 - 현재 DB 총 유저: 2,497명 (이벤트 전 유저 포함) - 이벤트 기간 신규 가입자(DB 기준): 542명 - 날아간 기록: DB 교체 과정에서 상당수 유실 (1,500명 예상 대비 542명만 남음) - 복구 방법: 구글 폼 시트 기준으로 리더보드 최종 확정이 현실적 ## @liberator09 (해방선, 진석규) 사건 - 구글 폼 제출 점수: 280pt (26명 초대 수준으로 기입) - 3/21 백업 DB 기준 초대 수: 26명 (포인트 280pt) → 팩트 일치 - 현재 DB 초대 수: 18명 (8명 유실) → DB 오류 피해자였음 - 유실된 8명: 모두 3/19 저녁 집중 가입 (22:01~23:29) - 결론: 부정 행위자 아님. DB 교체 과정에서 데이터 손실된 피해자 ## 친구초대봇 상태 - 2026-04-06 01:52 KST 기준 마감 처리 완료 - DB end_date: 2026-04-05로 업데이트 - LaunchAgent 언로드 + 프로세스 강제 종료 완료 (STOPPED 확인) - bot.log/launchd.log: 4월 3일분만 남아있음 (이전 로그는 롤오버로 소실) ## 이벤트 기간 봇 활동 통계 -",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1.0232464462518691,
+      "maxScore": 0.5160660713911056,
+      "firstRecalledAt": "2026-04-10T13:13:16.478Z",
+      "lastRecalledAt": "2026-04-10T23:49:31.584Z",
+      "queryHashes": [
+        "0ed693d948a6",
+        "be0f4e81e7ce"
+      ],
+      "recallDays": [
+        "2026-04-10",
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "백업",
+        "3/21",
+        "3/19",
+        "end-date",
+        "2026-04-05로",
+        "bot.log/launchd.log",
+        "일일",
+        "메모리"
+      ]
+    },
+    "memory:memory/2026-02-21.md:1:27": {
+      "key": "memory:memory/2026-02-21.md:1:27",
+      "path": "memory/2026-02-21.md",
+      "startLine": 1,
+      "endLine": 27,
+      "source": "memory",
+      "snippet": "# 2026-02-21 일일 로그 ## 세션 상태 (컴팩션 시점) - Gateway pairing 이슈 미해결: `openclaw browser start` → \"pairing required\" on ws://127.0.0.1:18789 - Gateway pid 79163 실행 중이나 unreachable, auth token mode 사용 중 - Anthropic auth profile cooldown 상태였음 - Active session lock pid 58298 (alive) ## 미완료 작업 - [ ] Gateway pairing 해결 → `openclaw devices` / `openclaw pairing approve --channel telegram` 시도 필요 - [ ] Google Form 설명란에 AMA 공지 내용 추가 (브라우저 자동화 필요) - [ ] Dashboard 배포 (GitHub Pages / Vercel / Netlify) - [ ] Dashboard에 Block Street AMA + Fireweek 카드 추가 - [ ] Telegram 1년치 스크랩 재개 (현재 747/~3500+ posts) - [ ] OpenAI Codex OAuth 갱신 (~10일 내 만료) ## 참고 - Codex CLI v0.104.0 설치 완료 - OpenClaw Chrome extension 설치됨 (unpack",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.49976661205291745,
+      "maxScore": 0.49976661205291745,
+      "firstRecalledAt": "2026-04-10T13:13:16.478Z",
+      "lastRecalledAt": "2026-04-10T13:13:16.478Z",
+      "queryHashes": [
+        "0ed693d948a6"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "gateway",
+        "openai",
+        "127.0.0.1",
+        "v0.104.0",
+        "일일",
+        "로그",
+        "세션",
+        "상태"
+      ]
+    },
+    "memory:memory/2026-03-12.md:1:29": {
+      "key": "memory:memory/2026-03-12.md:1:29",
+      "path": "memory/2026-03-12.md",
+      "startLine": 1,
+      "endLine": 29,
+      "source": "memory",
+      "snippet": "# 2026-03-12 일일 로그 ## ETF 데일리 포스팅 이슈 및 수정 ### 원인 분석 - 15:00 KST 크론 실행 시 Farside 3/11 데이터 행이 존재했지만 모든 펀드 값이 \"-\" (대시), Total=0.0으로 표시됨 - JS 미로드 상태에서 데이터를 읽어서 \"3월 10일 미업데이트\"로 오판 → 3/10 자료 사용 - 불개미 해병님 직접 확인: 크론 실행 당시 Farside에 데이터가 있었음 ### 수정 내용 - 크론 프롬프트 업데이트: 펀드 값 전부 \"-\" or Total=0.0이면 최대 3회 재시도 (10→20→30초 간격) - 3회 실패 시 web_search 보완 + 캡션에 주석 표시 - 재시도 횟수 결과 보고에 명시 ### 3/11 실제 데이터 (web_search 수집) - BTC ETF: IBIT +$115.5M, FBTC +$15.4M, GBTC -$16.0M, HODL -$4.5M, 나머지 $0 → 총 **+$110.4M** - ETH ETF: FETH +$19.1M, ETHA +$18.9M, ETH Mini (Grayscale) +$19.1M → 총 **+$57.1M** - 크론 수동 재실행하여 최신 데이터로 이미지 제작 및 전송 ## 쿠포니봇 온라인 전환 - 2026-03-12 16:07~20:00 KST - commit: f40a7e4 ## bridge34 내부 업무 고도화 회의 정",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5408227920532226,
+      "maxScore": 0.5408227920532226,
+      "firstRecalledAt": "2026-04-10T13:46:37.256Z",
+      "lastRecalledAt": "2026-04-10T13:46:37.256Z",
+      "queryHashes": [
+        "d8f40cc2b367"
+      ],
+      "recallDays": [
+        "2026-04-10"
+      ],
+      "conceptTags": [
+        "3/11",
+        "0.0으로",
+        "3/10",
+        "0.0이면",
+        "web-search",
+        "115.5m",
+        "15.4m",
+        "16.0m"
+      ]
+    },
+    "memory:memory/2026-03-31.md:1:22": {
+      "key": "memory:memory/2026-03-31.md:1:22",
+      "path": "memory/2026-03-31.md",
+      "startLine": 1,
+      "endLine": 22,
+      "source": "memory",
+      "snippet": "# 2026-03-31 일일 메모리 ## Google API 키 이슈 - `GEMINI_API_KEY` 만료 재발생 (2026-03-31 새벽) - 유효 키: `GOOGLE_API_KEY` (`AIzaSyAMVLV1l3wvHIJ12qOJMhJnS63ZeA7aHbw`) - 만료 키: `AIzaSyAMVLV1l3wvHIJ12qOJMhJnS6NTF2LFxDs` - 교체 완료 + 게이트웨이 재시작 ## Google Workspace 작업 경로 확정 (2026-03-31 03:38) - **결정**: Google Docs/Sheets/Forms/Slides/Gmail 작업은 모두 **Gemini CLI** 사용 (공병 금지) - AGENTS.md 위임 테이블 업데이트 완료 - 이유: 공병(Codex) Google Workspace 작업 반복 실패, 타임아웃 ## google-bridge34-token.json 만료 - `fireant@bridge34.com` OAuth refresh_token → `invalid_grant` (폐기됨) - 재인증 필요: 비밀번호 또는 해병님 직접 로그인 후 OAuth flow - 오픈클로 브라우저도 Google 미로그인 상태 ## Orderly Network AMA 구글닥스 작업 (미완료) - 문서: https://docs.google.com/document/d/158Gz2nQISCKcR1EmJbRn3",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.9782887876033782,
+      "maxScore": 0.4964715808629989,
+      "firstRecalledAt": "2026-04-10T15:04:53.679Z",
+      "lastRecalledAt": "2026-04-10T23:17:07.384Z",
+      "queryHashes": [
+        "e68d89e20f90",
+        "4fc266adb812"
+      ],
+      "recallDays": [
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "network",
+        "게이트웨이",
+        "gemini-api-key",
+        "google-api-key",
+        "docs/sheets/forms/slides/gmail",
+        "agents.md",
+        "google-bridge34-token.json",
+        "bridge34.com"
+      ]
+    },
+    "memory:memory/2026-02-28.md:156:185": {
+      "key": "memory:memory/2026-02-28.md:156:185",
+      "path": "memory/2026-02-28.md",
+      "startLine": 156,
+      "endLine": 185,
+      "source": "memory",
+      "snippet": "- **Supersede 임계값**: 코사인 유사도 0.85 이상 → 구버전 자동 비활성화 - **WAL**: mem add → 저장 먼저 → 응답 나중 (SESSION-STATE.md 병행) - **백업 크론**: 매일 자정, 7일 보관 (job ID: 856a790f) - **AGENTS.md 업데이트**: 메모리 검색 3단계 (SQLite → 키워드 파일 → OpenClaw 내장) - Git 커밋: 21913b3 ### mem 명령어 (매 세션 필수) ```bash mem add \"텍스트\" category tags # WAL 저장 (supersede 자동) mem search \"쿼리\" [category] # 하이브리드 검색 mem stats # DB 통계 ``` ### 티빙 구독 해지 (23:36 KST) - **TVING 광고형 스탠다드 해지 완료** (Google Play 경유) - 마지막 이용 가능일: 2026. 3. 28. (기결제 기간까지 유지) - 이후 ₩5,500/월 청구 없음 - 결제 수단: 신한-6638 - 방법: CDP WebSocket → 직접 클릭 자동화 (브라우저 act 타임아웃 우회) ### 스픽 (Speak) 구독 해지 (23:40 KST) - **스픽 연간 사용권 해지 완료** (Google Play 경유) - 마지막 이용 가능일: 2027.",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4888645768165588,
+      "maxScore": 0.4888645768165588,
+      "firstRecalledAt": "2026-04-10T23:17:07.384Z",
+      "lastRecalledAt": "2026-04-10T23:17:07.384Z",
+      "queryHashes": [
+        "4fc266adb812"
+      ],
+      "recallDays": [
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "백업",
+        "0.85",
+        "session-state.md",
+        "agents.md",
+        "500/월",
+        "신한-6638",
+        "supersede",
+        "임계값"
+      ]
+    },
+    "memory:memory/2026-02-28.md:139:161": {
+      "key": "memory:memory/2026-02-28.md:139:161",
+      "path": "memory/2026-02-28.md",
+      "startLine": 139,
+      "endLine": 161,
+      "source": "memory",
+      "snippet": "- **실제 39949**: 러시아-우크라이나 분석 포스트 - 태그 변경: \"불개미주관\" → \"Social 캠페인\" - Git 커밋: f6b2515 → c73770c ### 이미지 생성 ✅ - `armageddon_banner.png` — 아마겟돈 배너, 이란/이스라엘/미국 국기, 폭발 배경 - `nuclear_banner.png` — 핵전쟁 배너, 버섯구름/방사능/미사일, 이란/이스라엘/미국 국기 - 생성 도구: nano-banana-pro (Gemini 3 Pro), 2K 해상도 ### SQLite + bge-m3 영구 메모리 시스템 구축 ✅ (핵심) - **스택**: SQLite + Ollama bge-m3 + BM25 + RRF + WAL + Cosine Supersede - **경로**: `/workspace/memory-system/memory.js` (~400줄 JS) - **DB**: `/workspace/memory-system/memories.db` - **Ollama**: brew install, v0.17.4, brew services 상시 실행 - **bge-m3**: 1.2GB, 한국어 다국어 임베딩 (qwen 대비 한국어 우수) - **마이그레이션**: 기존 memory/*.md 214개 임포트, 45개 자동 supersede - **검색 속도**: 콜드스타트 14초 → 웜업 후 114~183ms (목표",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4835271298885345,
+      "maxScore": 0.4835271298885345,
+      "firstRecalledAt": "2026-04-10T23:17:07.384Z",
+      "lastRecalledAt": "2026-04-10T23:17:07.384Z",
+      "queryHashes": [
+        "4fc266adb812"
+      ],
+      "recallDays": [
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "러시아-우크라이나",
+        "armageddon-banner.png",
+        "이란/이스라엘/미국",
+        "nuclear-banner.png",
+        "버섯구름/방사능/미사일",
+        "nano-banana-pro",
+        "bge-m3",
+        "v0.17.4"
+      ]
+    },
+    "memory:memory/2026-03-05.md:1:21": {
+      "key": "memory:memory/2026-03-05.md:1:21",
+      "path": "memory/2026-03-05.md",
+      "startLine": 1,
+      "endLine": 21,
+      "source": "memory",
+      "snippet": "# 2026-03-05 일일 메모리 로그 ## Sahara AI AMA 사전질문 폼 구글시트 연결 - Form ID: `1K9Qps3VtgGUX4B2UlIJv12hz8nMi9deJuVYXa0KdyyI` - 폼 제목: \"불개미 x Sahara AI AMA 사전질문 폼\" - 응답 수: 57개 (2026-03-05 기준) - 신규 연결 스프레드시트 ID: `150fa0YIMTj2Pv6vMAifIEWto2CEjicrUFFAbwiWWGoQ` - 스프레드시트 URL: https://docs.google.com/spreadsheets/d/150fa0YIMTj2Pv6vMAifIEWto2CEjicrUFFAbwiWWGoQ/edit?gid=1945033157 - 비고: 폼에 연결된 시트 없어 브라우저로 직접 신규 시트 생성 (Forms API로 조회 시 None 반환) ## wallet-monitor 안정화 완료 - PID 56866 (2026-03-05 05:47 이후 정상 가동) - ETH 가격 Binance API로 교체, price unknown 시 알림 차단 - OP/Base RPC: op.drpc.org 제거 → nodies/subquery 교체 ## Codex OAuth 자동갱신 크론 등록 - Job ID: `80093d06-9e94-4071-a8d8-3ccb274a708d` - 스케줄: 매일 09:00 KST - 스크립트: `/Use",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.481863123178482,
+      "maxScore": 0.481863123178482,
+      "firstRecalledAt": "2026-04-10T23:17:07.384Z",
+      "lastRecalledAt": "2026-04-10T23:17:07.384Z",
+      "queryHashes": [
+        "4fc266adb812"
+      ],
+      "recallDays": [
+        "2026-04-11"
+      ],
+      "conceptTags": [
+        "wallet-monitor",
+        "op/base",
+        "op.drpc.org",
+        "nodies/subquery",
+        "일일",
+        "메모리",
+        "로그",
+        "sahara"
+      ]
+    }
+  }
+}

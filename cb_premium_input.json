@@ -3,16 +3,16 @@
   "status": "collected",
   "btc_etf": "+$358M",
   "eth_etf": "+$85.19M",
-  "btc_oi_24h": "+2.60%",
-  "eth_oi_24h": "+0.40%",
+  "btc_oi_24h": "+3.20%",
+  "eth_oi_24h": "+0.59%",
   "dat_now": "+$224M",
-  "cb_premium": "-0.0301%",
-  "value": "-0.0301%",
+  "cb_premium": "+0.0082%",
+  "value": "+0.0082%",
   "cb_premium_detail": {
-    "coinbase_btc_usd": 71981.89,
-    "binance_btc_usdt": 72003.57,
-    "premium_pct": -0.0301,
-    "fetched_at": "2026-04-10T22:42:44.267772+09:00"
+    "coinbase_btc_usd": 72963.37,
+    "binance_btc_usdt": 72957.36,
+    "premium_pct": 0.0082,
+    "fetched_at": "2026-04-10T23:52:41.977777+09:00"
   },
   "sources": {
     "btc_etf": "web_search (financefeeds, bitbo.io) — 4/9 US trading day",

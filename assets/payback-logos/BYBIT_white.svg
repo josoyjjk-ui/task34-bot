@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/common-static/frontend-web/final-page/assets/favicon-BExuPU2V.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buy &amp; Sell Bitcoin, Ether | Cryptocurrency Exchange</title>
+    <script
+      src="/common-static/infra-static/by-vendors/by-vendors.latest.js"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // Set title dynamically after window.ByVendors loads
+      window.addEventListener("DOMContentLoaded", function () {
+        if (window.ByVendors && window.ByVendors.byMetas) {
+          const brandName =
+            window.ByVendors.byMetas.BRAND_NAME_FIRST_CHAR_UPPER;
+          if (brandName) {
+            document.title =
+              "Buy & Sell Bitcoin, Ether | Cryptocurrency Exchange | " +
+              brandName;
+          }
+        }
+
+        // Set logo dynamically based on REGULATED_SITE_HOSTS
+        if (window.ByVendors && window.ByVendors.byEnv) {
+          const logoImg = document.getElementById("logoimg");
+          if (logoImg) {
+            const isUSA = window.ByVendors.byEnv.REGULATED_SITE_HOSTS === "USA";
+            const basePath = "/common-static/frontend-web/final-page/";
+            logoImg.src = isUSA
+              ? basePath + "logo_usa.svg"
+              : basePath + "logo.svg";
+          }
+        }
+      });
+    </script>
+    <script
+      src="/common-static/infra-static/monitor/monitor.latest.js?id=248&t=10"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="/common-static/infra-static/data-core/version/data-core.latest.min.js?t=10"
+      crossorigin="anonymous"
+    ></script>
+
+    <script type="module" crossorigin src="/common-static/frontend-web/final-page/assets/_4xx-Czb1sI4x.js" integrity="sha512-/JZRiJnNpC294FcOO3JVihvK4TjuiXgbjSiRAHFxqat6AHA4Vjd2Ok0LxEWpi02FrSpyhJzD1WgbXoIfsEiRCA=="></script>
+    <link rel="modulepreload" crossorigin href="/common-static/frontend-web/final-page/assets/App-Y7uXzTRp.js">
+    <link rel="stylesheet" crossorigin href="/common-static/frontend-web/final-page/assets/App-C7VicUR6.css" integrity="sha512-lpW/QN7H7k6SNPYTjEqFhHYk5uwboAmEuMQP/4dLssIAFwQin2kGIJHVXzFoP1casLw50wDutSSQcI9UykOuZg==">
+  </head>
+  <body>
+    <div class="full-screen">
+      <header id="uniframe-header">
+        <a href="/">
+          <img id="logoimg" style="width: 56px; height: 22px" />
+        </a>
+      </header>
+      <div id="root"></div>
+    </div>
+  </body>
+</html>
