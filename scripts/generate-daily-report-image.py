@@ -180,7 +180,10 @@ def build_image(args):
 
 def parse_args():
     p = argparse.ArgumentParser(description='불개미 일일시황 칠판 이미지 생성')
-    p.add_argument('--date', default=datetime.now().strftime('%Y.%m.%d (%a)'))
+    days_kr = ['월','화','수','목','금','토','일']
+    now = datetime.now()
+    default_date = f"{now.strftime('%Y.%m.%d')} ({days_kr[now.weekday()]})"
+    p.add_argument('--date', default=default_date)
     p.add_argument('--btc-etf', dest='btc_etf', default='+$358.1M')
     p.add_argument('--eth-etf', dest='eth_etf', default='+$85.2M')
     p.add_argument('--btc-oi', dest='btc_oi', default='+3.58%')
