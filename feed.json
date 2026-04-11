@@ -1,6 +1,37 @@
 {
-  "updated": "2026-04-11T15:56:46.599568+09:00",
-  "youtube": [],
+  "updated": "2026-04-11T16:50:07.907206+09:00",
+  "youtube": [
+    {
+      "title": "[불개미 일일시황] 2026.04.10 (금)",
+      "url": "https://www.youtube.com/watch?v=X9ZE3qwa5JY",
+      "thumbnail": "https://i.ytimg.com/vi/X9ZE3qwa5JY/mqdefault.jpg",
+      "published": "2026-04-10T17:38:03+09:00"
+    },
+    {
+      "title": "[불개미 일일시황] 2026.04.09 (목)",
+      "url": "https://www.youtube.com/watch?v=JtoPVeLcT10",
+      "thumbnail": "https://i.ytimg.com/vi/JtoPVeLcT10/mqdefault.jpg",
+      "published": "2026-04-09T17:00:29+09:00"
+    },
+    {
+      "title": "[불개미 일일시황] 2026.04.08 (수)",
+      "url": "https://www.youtube.com/watch?v=Z7Hyeuo7mJE",
+      "thumbnail": "https://i.ytimg.com/vi/Z7Hyeuo7mJE/mqdefault.jpg",
+      "published": "2026-04-08T17:15:15+09:00"
+    },
+    {
+      "title": "[불개미 일일시황] 2026.04.07 (화)",
+      "url": "https://www.youtube.com/watch?v=NTBQ2Z_VbFM",
+      "thumbnail": "https://i.ytimg.com/vi/NTBQ2Z_VbFM/mqdefault.jpg",
+      "published": "2026-04-07T17:07:32+09:00"
+    },
+    {
+      "title": "📌 불개미 주간 시황 - 비트코인 세금이 시행되면 안되는 이유",
+      "url": "https://www.youtube.com/watch?v=iD1dxuyS9Js",
+      "thumbnail": "https://i.ytimg.com/vi/iD1dxuyS9Js/mqdefault.jpg",
+      "published": "2026-04-06T18:00:53+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "📌 불개미 일일시황 | 2026.04.11 (토)  1️⃣ BTC ETH 유출입 • BTC: +&#036;240.4M (순유입) • ETH: +&#036;64.9M (순유입) • ETF 데이터는 마지막 거래일 기준 …",
