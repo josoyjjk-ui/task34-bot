@@ -4,16 +4,17 @@
 #
 # 이 스크립트는 git push 실패를 방지하기 위해
 # push 전에 반드시 git pull --rebase origin main을 수행합니다.
+# rebase가 실패하면 push하지 않고 non-zero로 종료합니다.
 
 set -euo pipefail
 
-REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 BRANCH="main"
 REMOTE="origin"
 
-cd "$REPO_DIR"
+cd "$SCRIPT_DIR"
 
-echo "[safe-push] Repository: $REPO_DIR"
+echo "[safe-push] Repository: $SCRIPT_DIR"
 echo "[safe-push] Branch: $BRANCH"
 
 # 1. 변경사항이 있으면 commit
@@ -29,7 +30,11 @@ fi
 
 # 2. pull --rebase (핵심 재발방지 로직)
 echo "[safe-push] Pulling with rebase from $REMOTE/$BRANCH..."
-git pull --rebase "$REMOTE" "$BRANCH"
+if ! git pull --rebase "$REMOTE" "$BRANCH"; then
+    echo "[safe-push] ❌ Rebase FAILED! Aborting rebase and exiting without push."
+    git rebase --abort 2>/dev/null || true
+    exit 1
+fi
 
 # 3. push
 echo "[safe-push] Pushing to $REMOTE/$BRANCH..."
