@@ -3,6 +3,31 @@ __pycache__/
 *.pyc
 node_modules/
 .DS_Store
+secrets/
+
+# Internal ops
+AGENTS.md
+memory/
+scripts/ops/
 *.log
-secrets/
-secrets/
+debug_*
+error_report_*
+DELAY_REPORT.md
+SYSTEM_REPAIR_REPORT.md
+TECHNICAL_REASON.md
+CAUSE_ANALYSIS.md
+render_*.py
+generate_*.py
+*_banner_*
+*_masterpiece_*
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+credentials/
+auth.json
+
+# BFG reports
+..bfg-report/
