@@ -1,6 +1,12 @@
 {
-  "updated": "2026-04-13T17:27:15.907841+09:00",
+  "updated": "2026-04-13T19:14:16.967152+09:00",
   "youtube": [
+    {
+      "title": "장기 하락 추세 돌파, 상승 시작인가?",
+      "url": "https://www.youtube.com/watch?v=R_KmZgX3ZHQ",
+      "thumbnail": "https://i.ytimg.com/vi/R_KmZgX3ZHQ/mqdefault.jpg",
+      "published": "2026-04-13T18:00:29+09:00"
+    },
     {
       "title": "비트코인 장기 하락추세 돌파, 상승 시작?",
       "url": "https://www.youtube.com/watch?v=QtqRqMhK9fc",
@@ -24,15 +30,19 @@
       "url": "https://www.youtube.com/watch?v=JtoPVeLcT10",
       "thumbnail": "https://i.ytimg.com/vi/JtoPVeLcT10/mqdefault.jpg",
       "published": "2026-04-09T17:00:29+09:00"
-    },
-    {
-      "title": "[불개미 일일시황] 2026.04.08 (수)",
-      "url": "https://www.youtube.com/watch?v=Z7Hyeuo7mJE",
-      "thumbnail": "https://i.ytimg.com/vi/Z7Hyeuo7mJE/mqdefault.jpg",
-      "published": "2026-04-08T17:15:15+09:00"
     }
   ],
   "telegram": [
+    {
+      "title": "Circle 밋업에 와있슴다",
+      "url": "https://t.me/fireantcrypto/40770",
+      "published": "2026-04-13T18:55:34+09:00"
+    },
+    {
+      "title": "과거에는 떡상하는 코인을 보며 희망을 가졌다면, 지금은 현타를 맞는다...",
+      "url": "https://t.me/fireantcrypto/40769",
+      "published": "2026-04-13T17:30:17+09:00"
+    },
     {
       "title": "📌 고팍스가 야락장 딸깍 멘징이벤트를 진행합니다.  &quot;야락장 딸각 멘징 이벤트&quot; ㅋㅋㅋㅋㅋㅋ 고팍스에도 불개미가 한명있나...? 워딩이 상당히 비슷한데 아무튼 요약하면 야락장에 매매도 안되고, 에드…",
       "url": "https://t.me/fireantcrypto/40768",
@@ -47,19 +57,14 @@
       "title": "📌 RaveDao와 함께하는 불개미 커뮤니티 특별 캠페인  RaveDao는 음악과 블록체인 기술을 결합하여 음악가, 팬, 기술전문가들을 연결하는 커뮤니티 프로젝트입니다.   ✔️ RaveDao 특별 캠페인 참여 방법…",
       "url": "https://t.me/fireantcrypto/40766",
       "published": "2026-04-13T16:16:28+09:00"
-    },
-    {
-      "title": "📌 Eigen Cloud가 한국에서 밋업을 진행합니다.   🗓 일정 : 4월 14일 화요일  🚩 장소 : 승인받으시면 보임  루마 페이지는 여기요   저도 여기서 간단하게 AI와 Blockchain 관련 세션을 할 …",
-      "url": "https://t.me/fireantcrypto/40765",
-      "published": "2026-04-13T15:35:55+09:00"
-    },
-    {
-      "title": "📌 불개미 일일시황 | 2026.04.13 (월)  1️⃣ BTC ETH 유출입 • BTC: +&#036;358M (순유입) • ETH: +&#036;85.19M (순유입) • ETF 데이터는 마지막 거래일 기준  …",
-      "url": "https://t.me/fireantcrypto/40764",
-      "published": "2026-04-13T15:14:57+09:00"
     }
   ],
   "naver": [
+    {
+      "title": "[260412] 장기 하락 추세 돌파, 상승 시작인가?",
+      "url": "https://blog.naver.com/fireant_korea/224250815353?fromRss=true&trackingCode=rss",
+      "published": "2026-04-13T18:00:00+09:00"
+    },
     {
       "title": "데이터로 읽는 지금 코인시장의 위치",
       "url": "https://blog.naver.com/fireant_korea/224250616380?fromRss=true&trackingCode=rss",
@@ -79,11 +84,6 @@
       "title": "[불개미 일일시황] 2026.04.10 (금)",
       "url": "https://blog.naver.com/fireant_korea/224248011279?fromRss=true&trackingCode=rss",
       "published": "2026-04-10T18:12:14+09:00"
-    },
-    {
-      "title": "[불개미 일일시황] 2026.04.10 (금)",
-      "url": "https://blog.naver.com/fireant_korea/224247965226?fromRss=true&trackingCode=rss",
-      "published": "2026-04-10T17:31:05+09:00"
     }
   ]
 }
