@@ -1,6 +1,12 @@
 {
-  "updated": "2026-04-14T18:00:27.727085+09:00",
+  "updated": "2026-04-14T19:43:50.437959+09:00",
   "youtube": [
+    {
+      "title": "[불개미 일일시황] 2026.04.14 (화)",
+      "url": "https://www.youtube.com/watch?v=m6avnvOsxno",
+      "thumbnail": "https://i.ytimg.com/vi/m6avnvOsxno/mqdefault.jpg",
+      "published": "2026-04-14T18:34:12+09:00"
+    },
     {
       "title": "장기 하락 추세 돌파, 상승 시작인가?",
       "url": "https://www.youtube.com/watch?v=R_KmZgX3ZHQ",
@@ -24,15 +30,14 @@
       "url": "https://www.youtube.com/watch?v=X9ZE3qwa5JY",
       "thumbnail": "https://i.ytimg.com/vi/X9ZE3qwa5JY/mqdefault.jpg",
       "published": "2026-04-10T17:38:03+09:00"
-    },
-    {
-      "title": "[불개미 일일시황] 2026.04.09 (목)",
-      "url": "https://www.youtube.com/watch?v=JtoPVeLcT10",
-      "thumbnail": "https://i.ytimg.com/vi/JtoPVeLcT10/mqdefault.jpg",
-      "published": "2026-04-09T17:00:29+09:00"
     }
   ],
   "telegram": [
+    {
+      "title": "Agentic by Eigen 오프라인 이벤트&#33;🎉  드디어 당일&#33;  지금부터 깜짝 선착 이벤트가 진행됩니다.  10명 선착 10만원 40명 선착 5만원 📅 일정: 4월 14일 화요일 🕕 시간: 오후 6…",
+      "url": "https://t.me/fireantcrypto/40789",
+      "published": "2026-04-14T18:15:35+09:00"
+    },
     {
       "title": "📌 불개미 일일시황 | 2026.04.14 (화)  1️⃣ BTC ETH 유출입 • BTC: -&#036;291.0M (순유출) • ETH: +&#036;5.04M (순유입) • ETF 데이터는 마지막 거래일(4/1…",
       "url": "https://t.me/fireantcrypto/40788",
@@ -52,11 +57,6 @@
       "title": "오 요새 잠잠하다 했는데 2차전 시작하나요?",
       "url": "https://t.me/fireantcrypto/40785",
       "published": "2026-04-14T16:49:43+09:00"
-    },
-    {
-      "title": "업비트 공지 자마(ZAMA) 신규 거래지원 안내 (KRW, BTC, USDT 마켓)",
-      "url": "https://t.me/fireantcrypto/40784",
-      "published": "2026-04-14T16:49:32+09:00"
     }
   ],
   "naver": [
