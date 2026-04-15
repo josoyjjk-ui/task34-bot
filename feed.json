@@ -1,6 +1,12 @@
 {
-  "updated": "2026-04-15T16:55:22.940239+09:00",
+  "updated": "2026-04-15T18:15:26.203640+09:00",
   "youtube": [
+    {
+      "title": "[불개미 일일시황] 2026.04.15 (수)",
+      "url": "https://www.youtube.com/watch?v=hetFwoGKUDI",
+      "thumbnail": "https://i.ytimg.com/vi/hetFwoGKUDI/mqdefault.jpg",
+      "published": "2026-04-15T17:00:48+09:00"
+    },
     {
       "title": "[불개미 일일시황] 2026.04.14 (화)",
       "url": "https://www.youtube.com/watch?v=m6avnvOsxno",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=P4JMgOet9q4",
       "thumbnail": "https://i.ytimg.com/vi/P4JMgOet9q4/mqdefault.jpg",
       "published": "2026-04-11T17:11:55+09:00"
-    },
-    {
-      "title": "[불개미 일일시황] 2026.04.10 (금)",
-      "url": "https://www.youtube.com/watch?v=X9ZE3qwa5JY",
-      "thumbnail": "https://i.ytimg.com/vi/X9ZE3qwa5JY/mqdefault.jpg",
-      "published": "2026-04-10T17:38:03+09:00"
     }
   ],
   "telegram": [
@@ -61,6 +61,11 @@
   ],
   "naver": [
     {
+      "title": "[불개미 일일시황] 2026.04.15 (수)",
+      "url": "https://blog.naver.com/fireant_korea/224253444814?fromRss=true&trackingCode=rss",
+      "published": "2026-04-15T17:07:04+09:00"
+    },
+    {
       "title": "[260412] 장기 하락 추세 돌파, 상승 시작인가?",
       "url": "https://blog.naver.com/fireant_korea/224250815353?fromRss=true&trackingCode=rss",
       "published": "2026-04-13T18:00:00+09:00"
@@ -79,11 +84,6 @@
       "title": "[불개미 일일시황] 2026.04.11 (토)",
       "url": "https://blog.naver.com/fireant_korea/224248904219?fromRss=true&trackingCode=rss",
       "published": "2026-04-11T17:42:34+09:00"
-    },
-    {
-      "title": "[불개미 일일시황] 2026.04.10 (금)",
-      "url": "https://blog.naver.com/fireant_korea/224248011279?fromRss=true&trackingCode=rss",
-      "published": "2026-04-10T18:12:14+09:00"
     }
   ]
 }
