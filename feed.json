@@ -1,7 +1,43 @@
 {
-  "updated": "2026-04-15T14:58:18.925265+09:00",
-  "youtube": [],
+  "updated": "2026-04-15T16:55:22.940239+09:00",
+  "youtube": [
+    {
+      "title": "[불개미 일일시황] 2026.04.14 (화)",
+      "url": "https://www.youtube.com/watch?v=m6avnvOsxno",
+      "thumbnail": "https://i.ytimg.com/vi/m6avnvOsxno/mqdefault.jpg",
+      "published": "2026-04-14T18:34:12+09:00"
+    },
+    {
+      "title": "장기 하락 추세 돌파, 상승 시작인가?",
+      "url": "https://www.youtube.com/watch?v=R_KmZgX3ZHQ",
+      "thumbnail": "https://i.ytimg.com/vi/R_KmZgX3ZHQ/mqdefault.jpg",
+      "published": "2026-04-13T18:00:29+09:00"
+    },
+    {
+      "title": "비트코인 장기 하락추세 돌파, 상승 시작?",
+      "url": "https://www.youtube.com/watch?v=QtqRqMhK9fc",
+      "thumbnail": "https://i.ytimg.com/vi/QtqRqMhK9fc/mqdefault.jpg",
+      "published": "2026-04-13T10:15:44+09:00"
+    },
+    {
+      "title": "[불개미 일일시황] 2026.04.11 (토)",
+      "url": "https://www.youtube.com/watch?v=P4JMgOet9q4",
+      "thumbnail": "https://i.ytimg.com/vi/P4JMgOet9q4/mqdefault.jpg",
+      "published": "2026-04-11T17:11:55+09:00"
+    },
+    {
+      "title": "[불개미 일일시황] 2026.04.10 (금)",
+      "url": "https://www.youtube.com/watch?v=X9ZE3qwa5JY",
+      "thumbnail": "https://i.ytimg.com/vi/X9ZE3qwa5JY/mqdefault.jpg",
+      "published": "2026-04-10T17:38:03+09:00"
+    }
+  ],
   "telegram": [
+    {
+      "title": "📌 불개미 일일시황 | 2026.04.15 (수)   1️⃣ BTC·ETH ETF 유출입 (4/14 기준) • BTC: +&#036;411M (순유입) ← 4/13 -&#036;291M에서 강반등 • ETH: +&#…",
+      "url": "https://t.me/fireantcrypto/40796",
+      "published": "2026-04-15T15:42:16+09:00"
+    },
     {
       "title": "https://www.youtube.com/live/hCByLBRCdvs?si=KjxK-Sxm70LBicz5",
       "url": "https://t.me/fireantcrypto/40795",
@@ -21,11 +57,6 @@
       "title": "🔴 &#036;75,000 @bitcoin_price",
       "url": "https://t.me/fireantcrypto/40792",
       "published": "2026-04-15T00:00:52+09:00"
-    },
-    {
-      "title": "🟢 &#036;76,000 @bitcoin_price",
-      "url": "https://t.me/fireantcrypto/40790",
-      "published": "2026-04-14T23:32:06+09:00"
     }
   ],
   "naver": [
