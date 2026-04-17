@@ -7,14 +7,14 @@
 """
 from __future__ import annotations
 
-import argparse, json, random, math
+import argparse, random, math
 from datetime import datetime
 from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 W, H = 1408, 768
-OUT_PATH = Path(__file__).resolve().parent.parent / 'daily-report-latest.png'
+OUT_PATH = Path('/Users/fireant/.openclaw/workspace/daily-report-latest.png')
 
 # ── Fonts ──────────────────────────────────────────────────────────
 # ChalkboardSE는 한글 glyph 없음 (두부 렌더링) → AppleSDGothicNeo 사용
@@ -179,31 +179,17 @@ def build_image(args):
 
 
 def parse_args():
-    json_path = Path(__file__).resolve().parent.parent / 'daily-report-data.json'
-    try:
-        jd = json.load(open(json_path))
-        defaults = {
-            'btc_etf': jd.get('BTC_ETF', '+$0M'),
-            'eth_etf': jd.get('ETH_ETF', '+$0M'),
-            'btc_oi': jd.get('BTC_OI_24h', '+0%'),
-            'eth_oi': jd.get('ETH_OI_24h', '+0%'),
-            'dat': jd.get('DAT_WEEKLY_NET_INFLOW', '+$0'),
-            'cb': jd.get('Coinbase_Premium', '+0%'),
-        }
-    except:
-        defaults = {}
-
     p = argparse.ArgumentParser(description='불개미 일일시황 칠판 이미지 생성')
     days_kr = ['월','화','수','목','금','토','일']
     now = datetime.now()
     default_date = f"{now.strftime('%Y.%m.%d')} ({days_kr[now.weekday()]})"
     p.add_argument('--date', default=default_date)
-    p.add_argument('--btc-etf', dest='btc_etf', default=defaults.get('btc_etf', '+$0M'))
-    p.add_argument('--eth-etf', dest='eth_etf', default=defaults.get('eth_etf', '+$0M'))
-    p.add_argument('--btc-oi', dest='btc_oi', default=defaults.get('btc_oi', '+0%'))
-    p.add_argument('--eth-oi', dest='eth_oi', default=defaults.get('eth_oi', '+0%'))
-    p.add_argument('--dat', default=defaults.get('dat', '+$0'))
-    p.add_argument('--cb', default=defaults.get('cb', '+0%'))
+    p.add_argument('--btc-etf', dest='btc_etf', default='+$358.1M')
+    p.add_argument('--eth-etf', dest='eth_etf', default='+$85.2M')
+    p.add_argument('--btc-oi', dest='btc_oi', default='+3.58%')
+    p.add_argument('--eth-oi', dest='eth_oi', default='-1.93%')
+    p.add_argument('--dat', default='+$224M')
+    p.add_argument('--cb', default='+0.0192%')
     return p.parse_args()
 
 

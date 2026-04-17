@@ -1,8 +1,0 @@
-chrome_launch: 성공
-cdp_connect: 실패 - Handshake status 403 Forbidden -+-+- {'content-length': '241', 'content-type': 'text/html'} -+-+- b'Rejected an incoming WebSocket connection from the http://127.0.0.1:18800 origin. Use the command line flag --remote-allow-origins=http://127.0.0.1:18800 to allow connections from this origin or --remote-allow-origins=* to allow all origins.'
-page_load: 미확인
-screenshot: 미확인
-login_state: 미확인
-login_evidence: 
-navigation: 미확인
-navigation_evidence: 
