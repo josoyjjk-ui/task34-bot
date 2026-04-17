@@ -1,0 +1,5 @@
+# Farside ETF Total Net Flow — 2026-04-13 (latest available trading day)
+# Fetched: 2026-04-14
+# Source: Farside.co.uk (via web_search due to Cloudflare protection)
+btc_total_net_flow=-291.0
+eth_total_net_flow=9.44

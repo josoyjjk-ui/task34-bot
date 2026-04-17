@@ -1,0 +1,14 @@
+=== 실행 결과 보고서 ===
+명령: /usr/bin/python3 /Users/fireant/.openclaw/workspace/scripts/collect_cb_premium.py
+
+--- stdout ---
+[INFO] CB Premium: +0.0349% (Coinbase $74,684.96, Binance $74,658.92)
+[INFO] BTC OI 24h: -1.96%
+[INFO] ETH OI 24h: -5.88%
+[INFO] 저장 완료: /Users/fireant/.openclaw/workspace/cb_premium_input.json
+
+--- stderr ---
+(출력 없음)
+
+--- Exit Code ---
+0

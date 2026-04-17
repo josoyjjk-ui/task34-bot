@@ -1,0 +1,11 @@
+스크립트 실행 결과
+
+실행 명령: /usr/bin/python3 /Users/fireant/.openclaw/workspace/scripts/collect_cb_premium.py
+종료 코드: 0 (정상 종료)
+
+출력:
+[INFO] CB Premium: +0.0235% (Coinbase $74,688.43, Binance $74,670.87)
+[INFO] BTC OI 24h: -1.96%
+[INFO] ETH OI 24h: -5.88%
+[INFO] 저장 완료: /Users/fireant/.openclaw/workspace/cb_premium_input.json
+EXIT_CODE=0

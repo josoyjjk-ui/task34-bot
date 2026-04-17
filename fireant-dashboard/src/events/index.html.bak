@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 불개미 CRYPTO — 이벤트</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap');
+  @import url('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/style.css');
+
+  :root, [data-theme="dark"] {
+    --bg: #08080f;
+    --surface: rgba(255,255,255,0.04);
+    --surface-hover: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,68,68,0.4);
+    --red: #FF3B3B;
+    --orange: #FF6B35;
+    --gold: #FFD740;
+    --blue: #5B8DEF;
+    --green: #4ADE80;
+    --text: #E8E8ED;
+    --text-dim: #6B6B80;
+    --text-muted: #3E3E50;
+    --glow-red: rgba(255,59,59,0.15);
+    --glow-orange: rgba(255,107,53,0.12);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --nav-bg: rgba(8,8,15,0.85);
+    --particle-opacity: 1;
+    --ambient-opacity: 1;
+  }
+
+  [data-theme="light"] {
+    --bg: #F5F5F7;
+    --surface: rgba(0,0,0,0.03);
+    --surface-hover: rgba(0,0,0,0.06);
+    --border: rgba(0,0,0,0.08);
+    --border-hover: rgba(255,68,68,0.3);
+    --red: #E02020;
+    --orange: #E85D2A;
+    --gold: #D4A017;
+    --blue: #3B6FD4;
+    --green: #22A855;
+    --text: #1A1A2E;
+    --text-dim: #5A5A72;
+    --text-muted: #9E9EB5;
+    --glow-red: rgba(224,32,32,0.08);
+    --glow-orange: rgba(232,93,42,0.06);
+    --nav-bg: rgba(245,245,247,0.9);
+    --particle-opacity: 0.3;
+    --ambient-opacity: 0.4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Geist', 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.4s, color 0.4s;
+  }
+
+  canvas#particles {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0; pointer-events: none;
+    opacity: var(--particle-opacity);
+    transition: opacity 0.4s;
+  }
+
+  .ambient {
+    position: fixed; top: -200px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(255,59,59,0.08) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+    opacity: var(--ambient-opacity);
+    transition: opacity 0.4s;
+  }
+
+  .wrap {
+    position: relative; z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+  }
+
+  /* NAV */
+  .nav {
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px 0;
+    position: sticky; top: 0; z-index: 10;
+    background: var(--nav-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { display: flex; align-items: center; width: 100%; max-width: 720px; position: relative; }
+  .nav-links { display: flex; gap: 8px; align-items: center; position: absolute; left: 50%; transform: translateX(-50%); flex-wrap: nowrap; white-space: nowrap; }
+  .nav-links a {
+    color: var(--text-dim); text-decoration: none;
+    font-size: 1.00rem; font-weight: 600;
+    padding: 6px 10px; border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); background: var(--surface); }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 40px 0 28px;
+  }
+  .hero h1 {
+    font-size: 1.7rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--red), var(--orange));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+  }
+  .hero .tagline {
+    color: var(--text-dim); font-size: 0.85rem;
+    margin-top: 8px;
+  }
+
+  /* SEARCH & FILTER */
+  .controls {
+    display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;
+  }
+  .search-box {
+    flex: 1; min-width: 200px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 10px 16px;
+    color: var(--text); font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s;
+  }
+  .search-box:focus { border-color: var(--red); }
+  .filter-tabs {
+    display: flex; gap: 4px; background: var(--surface);
+    padding: 4px; border-radius: 12px; border: 1px solid var(--border);
+  }
+  .filter-btn {
+    padding: 6px 14px; border-radius: 8px; border: none;
+    background: transparent; color: var(--text-dim);
+    font-size: 0.85rem; font-weight: 600; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn.active {
+    background: var(--red); color: #fff;
+  }
+
+  /* SECTION */
+  .section { margin-top: 12px; }
+  .section-head {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 14px;
+  }
+  .section-head h2 {
+    font-size: 1rem; font-weight: 800; color: var(--text);
+  }
+  .section-head .count {
+    font-size: 0.7rem; font-weight: 700;
+    color: var(--red); background: var(--glow-red);
+    padding: 2px 8px; border-radius: 6px;
+  }
+
+  /* EVENT CARD */
+  .ev-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex; flex-direction: column;
+  }
+  .ev-card:hover {
+    border-color: var(--border-hover);
+    background: var(--surface-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 40px rgba(255,59,59,0.08);
+  }
+  .ev-card .status-dot {
+    position: absolute; top: 20px; right: 20px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px rgba(74,222,128,0.5);
+    animation: pulse 2s infinite;
+  }
+  .ev-card .status-dot.ended { background: var(--text-muted); box-shadow: none; animation: none; }
+  .ev-card .status-dot.soon { background: var(--gold); box-shadow: 0 0 8px rgba(255,215,64,0.5); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .ev-tags { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+  .ev-tag {
+    display: inline-block;
+    font-size: 0.68rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 3px 10px; border-radius: 6px;
+    background: var(--surface-hover); color: var(--text-dim);
+  }
+  .ev-tag.ama { background: rgba(91,141,239,0.15); color: var(--blue); }
+  .ev-tag.fireweek { background: var(--glow-red); color: var(--red); }
+  .ev-tag.event { background: rgba(255,215,64,0.12); color: var(--gold); }
+  .ev-tag.airdrop { background: rgba(74,222,128,0.12); color: var(--green); }
+
+  .ev-title {
+    font-size: 1.1rem; font-weight: 800;
+    color: var(--text); line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .ev-title a { color: inherit; text-decoration: none; }
+  .ev-title a:hover { color: var(--orange); }
+
+  .ev-meta {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-bottom: 12px;
+  }
+  .ev-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 0.73rem; font-weight: 600;
+    padding: 4px 10px; border-radius: 6px;
+    background: rgba(255,255,255,0.05);
+    color: var(--text-dim);
+  }
+  .ev-badge.reward { color: var(--gold); background: rgba(255,215,64,0.1); }
+
+  .ev-countdown {
+    font-family: 'Geist', monospace;
+    font-size: 0.85rem; font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+
+  .ev-desc {
+    font-size: 0.88rem; color: var(--text-dim);
+    line-height: 1.6; margin-bottom: 16px;
+    white-space: pre-wrap;
+  }
+
+  .ev-btns { display: flex; gap: 8px; margin-top: auto; }
+  .ev-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 10px 22px;
+    background: linear-gradient(135deg, var(--red), var(--orange));
+    color: #fff; text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem; font-weight: 700;
+    transition: all 0.2s;
+    border: none; cursor: pointer;
+  }
+  .ev-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(255,59,59,0.3);
+  }
+  .ev-btn-outline {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 10px 22px;
+    background: transparent;
+    color: var(--text-dim);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem; font-weight: 700;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .ev-btn-outline:hover { border-color: var(--red); color: var(--text); }
+
+  .theme-toggle {
+    position: fixed; bottom: 24px; left: 24px;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--text); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 100;
+  }
+
+  .footer {
+    text-align: center; margin-top: 60px; padding-top: 30px;
+    border-top: 1px solid var(--border);
+  }
+  .footer p { font-size: 0.75rem; color: var(--text-muted); }
+
+  @media (max-width: 600px) {
+    .nav-links a { font-size: 0.8rem; padding: 4px 8px; }
+    .ev-btns { flex-direction: column; }
+    .ev-btn, .ev-btn-outline { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="ambient"></div>
+
+<button class="theme-toggle" id="themeToggle">🌙</button>
+
+<div class="wrap">
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="nav-links">
+        <a href="/">불개미 Crypto</a>
+        <a href="/feed/">분석</a>
+        <a href="/events/" style="color:var(--text); font-weight:800;">이벤트</a>
+        <a href="/indicators/">지표</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>📌 EVENT</h1>
+    <p class="tagline">불개미 커뮤니티 전용 혜택 및 외부 이벤트</p>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <input type="text" id="searchInput" class="search-box" placeholder="이벤트 검색...">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">전체</button>
+      <button class="filter-btn" data-filter="live">진행중</button>
+      <button class="filter-btn" data-filter="ended">종료됨</button>
+    </div>
+  </div>
+
+  <!-- EVENT LIST -->
+  <div class="section">
+    <div class="section-head">
+      <h2 id="sectionTitle">전체 이벤트</h2>
+      <span class="count" id="eventCount">0</span>
+    </div>
+    <div id="eventList">
+      <!-- 동적 로드 -->
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>© 2026 불개미 CRYPTO · Built with 🔥</p>
+  </div>
+</div>
+
+<script>
+let allEvents = [];
+let currentFilter = 'all';
+
+async function init() {
+  try {
+    const res = await fetch('../events.json');
+    allEvents = await res.json();
+    render();
+  } catch (e) {
+    console.error('Failed to load events:', e);
+  }
+}
+
+function render() {
+  const container = document.getElementById('eventList');
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const now = Date.now();
+
+  const filtered = allEvents.filter(ev => {
+    const matchSearch = ev.title.toLowerCase().includes(search) || (ev.description && ev.description.toLowerCase().includes(search));
+    const isEnded = new Date(ev.endDate).getTime() < now;
+    
+    if (currentFilter === 'live') return matchSearch && !isEnded;
+    if (currentFilter === 'ended') return matchSearch && isEnded;
+    return matchSearch;
+  });
+
+  document.getElementById('eventCount').textContent = filtered.length;
+  container.innerHTML = filtered.map(ev => {
+    const isEnded = new Date(ev.endDate).getTime() < now;
+    const statusClass = isEnded ? 'ended' : 'live';
+    
+    return `
+      <div class="ev-card">
+        <div class="status-dot ${statusClass}"></div>
+        <div class="ev-tags">
+          ${(ev.tags || []).map(t => `<span class="ev-tag ${t.toLowerCase()}">${t}</span>`).join('')}
+        </div>
+        <div class="ev-title">
+          <a href="${ev.link}" target="_blank">${ev.title}</a>
+        </div>
+        <div class="ev-meta">
+          <span class="ev-badge">🗓 ${ev.date}</span>
+          ${ev.reward ? `<span class="ev-badge reward">🎁 ${ev.reward}</span>` : ''}
+        </div>
+        ${!isEnded ? `<div class="ev-countdown" data-end="${ev.endDate}">⏰ 남은 시간 계산 중...</div>` : '<div class="ev-countdown ended">🔴 종료된 이벤트</div>'}
+        <div class="ev-desc">${ev.description || ''}</div>
+        <div class="ev-btns">
+          <a href="${ev.link}" target="_blank" class="ev-btn">📌 공지 보기</a>
+          ${ev.formLink ? `<a href="${ev.formLink}" target="_blank" class="ev-btn-outline">📋 참여 폼</a>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  updateCountdowns();
+}
+
+function updateCountdowns() {
+  const now = Date.now();
+  document.querySelectorAll('[data-end]').forEach(el => {
+    const end = new Date(el.dataset.end).getTime();
+    const diff = end - now;
+    if (diff <= 0) { el.textContent = '🔴 종료됨'; el.classList.add('ended'); return; }
+    
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    
+    let txt = '⏰ ';
+    if (d > 0) txt += `${d}일 ${h}시간 ${m}분`;
+    else if (h > 0) txt += `${h}시간 ${m}분 ${s}초`;
+    else txt += `${m}분 ${s}초`;
+    el.textContent = txt;
+  });
+}
+
+document.getElementById('searchInput').oninput = render;
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelector('.filter-btn.active').classList.remove('active');
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    render();
+  };
+});
+
+// THEME
+const themeBtn = document.getElementById('themeToggle');
+const html = document.documentElement;
+themeBtn.onclick = () => {
+  const isLight = html.getAttribute('data-theme') === 'light';
+  html.setAttribute('data-theme', isLight ? 'dark' : 'light');
+  themeBtn.textContent = isLight ? '🌙' : '☀️';
+  localStorage.setItem('fa-theme', isLight ? 'dark' : 'light');
+};
+if (localStorage.getItem('fa-theme') === 'light') {
+  html.setAttribute('data-theme', 'light');
+  themeBtn.textContent = '☀️';
+}
+
+// PARTICLES (simple)
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let w, h;
+function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+window.onresize = resize; resize();
+let pts = Array(40).fill().map(() => ({ x: Math.random()*w, y: Math.random()*h, vy: -Math.random()*1.5-0.5, r: Math.random()*2 }));
+function anim() {
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle = html.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.1)' : 'rgba(255,59,59,0.2)';
+  pts.forEach(p => {
+    p.y += p.vy; if (p.y < -10) p.y = h+10;
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7); ctx.fill();
+  });
+  requestAnimationFrame(anim);
+}
+anim();
+setInterval(updateCountdowns, 1000);
+init();
+</script>
+</body>
+</html>

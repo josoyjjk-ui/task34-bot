@@ -1,25 +1,26 @@
 {
-  "date": "2026-04-10",
-  "status": "collected",
-  "btc_etf": "+$358M",
-  "eth_etf": "+$85.19M",
-  "btc_oi_24h": "+3.20%",
-  "eth_oi_24h": "+0.59%",
-  "dat_now": "+$224M",
-  "cb_premium": "+0.0082%",
-  "value": "+0.0082%",
+  "date": "2026-04-17",
+  "btc_etf": "+$ 411.40M",
+  "eth_etf": "+$ 53.10M",
+  "btc_oi": "+1.52%",
+  "eth_oi": "+3.50%",
+  "value": "+0.0187%",
+  "premium_pct": "+0.0228%",
+  "cb_premium": "+0.0187%",
+  "btc_oi_24h": "-1.96%",
+  "eth_oi_24h": "-5.88%",
   "cb_premium_detail": {
-    "coinbase_btc_usd": 72963.37,
-    "binance_btc_usdt": 72957.36,
-    "premium_pct": 0.0082,
-    "fetched_at": "2026-04-10T23:52:41.977777+09:00"
+    "coinbase_btc_usd": 74660.16,
+    "binance_btc_usdt": 74646.19,
+    "premium_pct": 0.0187,
+    "fetched_at": "2026-04-17T14:59:02.552365+09:00"
   },
-  "sources": {
-    "btc_etf": "web_search (financefeeds, bitbo.io) — 4/9 US trading day",
-    "eth_etf": "web_search (SoSoValue via panewslab) — 4/9 US trading day",
-    "btc_oi_24h": "Binance Futures API realtime",
-    "eth_oi_24h": "Binance Futures API realtime",
-    "dat_now": "CoinShares weekly report (4/7)",
-    "cb_premium": "Binance+Coinbase spot API"
-  }
+  "status": "collected",
+  "btc_etf_as_of": "2026-04-14",
+  "eth_etf_as_of": "2026-04-14",
+  "etf_dat_last_run": "2026-04-17T16:23:00.276835+09:00",
+  "etf_dat_last_success": "2026-04-16T02:03:47.682465+09:00",
+  "cb_premium_as_of": "2026-04-17",
+  "btc_oi_24h_as_of": "2026-04-17",
+  "eth_oi_24h_as_of": "2026-04-17"
 }

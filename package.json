@@ -1,5 +1,24 @@
 {
   "dependencies": {
+    "googleapis": "^171.4.0",
     "playwright": "^1.58.2"
-  }
+  },
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "capture_screenshot.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "/Users/fireant/.openclaw/workspace"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
 }

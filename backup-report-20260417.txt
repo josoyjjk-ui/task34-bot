@@ -1,0 +1,32 @@
+✅ memories DB 백업 생성, 7일 이상 된 백업 정리, 통계 리포트 완료
+
+요약:
+1. memories.db.bak.20260417 백업 파일을 신규 생성하고 SHA256 해시로 원본과 동일함을 확인했습니다.
+2. 7일 이상 된 백업 파일이 없어 삭제 대상 없음 — 기존 백업 4개(20260412, 20260413, 20260416, 20260417) 모두 유지되었습니다.
+3. 원본 memories.db는 4.6MB 크기로 수정일 변경 없이 온전히 보존되었습니다.
+
+변경 파일:
+- memories.db.bak.20260417 — 신규 생성 (4.6MB, SHA256 동일)
+
+실행한 테스트:
+- ls -lh 전체 파일 목록 출력 — 원본 DB + 백업 4개 + shm/wal 확인
+- find -mtime +7 -delete — 0개 삭제 (모두 7일 이내)
+- shasum -a 256 — 원본과 백업 해시 일치 (a6950bce64297f148ee772f38dd94535cb698a27cd56848f6004b361b318767f)
+
+경고: 없음. 모든 백업이 최근 7일 이내라 정리된 파일은 없습니다.
+
+=== Memory DB Stats ===
+-rw-------@ 1 fireant  staff   4.6M Apr 11 13:10 memories.db
+-rw-------@  1 fireant  staff    32K Apr 15 00:20 memories.db-shm
+-rw-------@  1 fireant  staff     0B Apr 11 13:10 memories.db-wal
+-rw-------@  1 fireant  staff   4.6M Apr 12 17:09 memories.db.bak.20260412
+-rw-------@  1 fireant  staff   4.6M Apr 13 00:01 memories.db.bak.20260413
+-rw-------@  1 fireant  staff   4.6M Apr 16 00:01 memories.db.bak.20260416
+-rw-------@  1 fireant  staff   4.6M Apr 17 00:02 memories.db.bak.20260417
+
+=== Backup count ===
+4
+
+=== Integrity Check ===
+Original DB SHA256:  a6950bce64297f148ee772f38dd94535cb698a27cd56848f6004b361b318767f
+Today's Backup SHA256: a6950bce64297f148ee772f38dd94535cb698a27cd56848f6004b361b318767f

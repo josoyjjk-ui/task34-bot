@@ -1,53 +1,60 @@
 {
-  "date": "2026-04-10",
-  "collected_at": "2026-04-10T23:52:46.175277+09:00",
-  "BTC_ETF": "+$358M",
-  "ETH_ETF": "+$85.19M",
-  "BTC_OI_24h": "+3.20%",
+  "date": "2026-04-17",
+  "collected_at": "2026-04-17T15:30:00+09:00",
+  "BTC_ETF": "+$26.1M",
+  "ETH_ETF": "+$18.0M",
+  "BTC_OI_24h": "-0.46%",
   "ETH_OI_24h": "+0.59%",
-  "DAT_WEEKLY_NET_INFLOW": "+$224M",
-  "Coinbase_Premium": "+0.0082%",
+  "DAT_WEEKLY_NET_INFLOW": "+$1.1B",
+  "Coinbase_Premium": "+0.04%",
   "sources": {
     "BTC_ETF": {
-      "value": "+$358M",
+      "value": "+$411M",
       "source": "sosovalue",
-      "data_date": "2026-04-10",
-      "fetched_at": "2026-04-10T23:52:46.175277+09:00"
+      "data_date": "2026-04-17",
+      "fetched_at": "2026-04-16T02:03:47.586089+09:00",
+      "fresh": true
     },
     "ETH_ETF": {
-      "value": "+$85.19M",
+      "value": "+$53M",
       "source": "sosovalue",
-      "data_date": "2026-04-10",
-      "fetched_at": "2026-04-10T23:52:46.175277+09:00"
+      "data_date": "2026-04-17",
+      "fetched_at": "2026-04-16T02:03:47.586089+09:00",
+      "fresh": true
     },
     "BTC_OI_24h": {
-      "value": "+3.20%",
+      "value": "+0.16%",
       "source": "coinglass",
-      "data_date": "2026-04-10",
-      "fetched_at": "2026-04-10T23:52:46.175277+09:00"
+      "data_date": "2026-04-17",
+      "fetched_at": "2026-04-16T02:03:47.586089+09:00",
+      "fresh": true
     },
     "ETH_OI_24h": {
       "value": "+0.59%",
       "source": "coinglass",
-      "data_date": "2026-04-10",
-      "fetched_at": "2026-04-10T23:52:46.175277+09:00"
+      "data_date": "2026-04-17",
+      "fetched_at": "2026-04-16T02:03:47.586089+09:00",
+      "fresh": true
     },
     "DAT_WEEKLY_NET_INFLOW": {
-      "value": "+$224M",
+      "value": "+$1.1B",
       "source": "coinglass",
-      "data_date": "2026-04-10",
-      "fetched_at": "2026-04-10T23:52:46.175277+09:00"
+      "data_date": "2026-04-17",
+      "fetched_at": "2026-04-16T02:03:47.586089+09:00",
+      "fresh": true
     },
     "Coinbase_Premium": {
-      "value": "+0.0082%",
+      "value": "+0.01%",
       "source": "starchild",
-      "data_date": "2026-04-10",
-      "fetched_at": "2026-04-10T23:52:46.175277+09:00"
+      "data_date": "2026-04-17",
+      "fetched_at": "2026-04-16T02:03:47.586089+09:00",
+      "fresh": true
     }
   },
   "validation": {
-    "all_same_period": true,
+    "all_same_period": false,
     "stale_sources": [],
+    "unknown_staleness": [],
     "failed_sources": [],
     "status": "clean"
   }

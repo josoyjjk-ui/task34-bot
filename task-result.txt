@@ -1,0 +1,21 @@
+✅ 일일 리포트 이미지 생성 스크립트 실행 성공
+
+요약:
+1. generate-daily-report-image.py 스크립트 실행 완료 — daily-report-latest.png (1408x768, PNG RGB) 생성됨
+2. 출력 파일 확인: 1,315,906 bytes, PNG image data 정상
+3. Pillow DeprecationWarning 존재 (기능 영향 없음), 원래 명령의 --btc-oi '-0.46%'는 쉘 파싱 이슈로 --btc-oi="-0.46%"로 우회 실행함
+
+변경 파일: /Users/fireant/.openclaw/workspace/daily-report-latest.png (생성)
+실행한 테스트: python3 scripts/generate-daily-report-image.py 실행 및 ls -la, file 로 파일 검증
+경고: Pillow 'mode' parameter deprecated (Pillow 13 대응 필요), 쉘 인자 파싱 이슈로 등호 결합 형식 사용
+
+=== 스크립트 stdout/stderr ===
+/Users/fireant/.openclaw/workspace/scripts/generate-daily-report-image.py:75: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  img = Image.fromarray(base, 'RGB')
+✅ saved: /Users/fireant/.openclaw/workspace/daily-report-latest.png (1408x768)
+
+=== ls -la 결과 ===
+-rw-------@ 1 fireant  staff  1315906 Apr 17 16:13 /Users/fireant/.openclaw/workspace/daily-report-latest.png
+
+=== file 결과 ===
+/Users/fireant/.openclaw/workspace/daily-report-latest.png: PNG image data, 1408 x 768, 8-bit/color RGB, non-interlaced

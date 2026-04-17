@@ -1,0 +1,170 @@
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+██░▄▄▄░██░▄▄░██░▄▄▄██░▀██░██░▄▄▀██░████░▄▄▀██░███░██
+██░███░██░▀▀░██░▄▄▄██░█░█░██░█████░████░▀▀░██░█░█░██
+██░▀▀▀░██░█████░▀▀▀██░██▄░██░▀▀▄██░▀▀░█░██░██▄▀▄▀▄██
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+                  🦞 OPENCLAW 🦞                    
+ 
+┌  OpenClaw doctor
+│
+◇  Doctor warnings ───────────────────────────────────────────────────────╮
+│                                                                         │
+│  - channels.telegram: Telegram is in first-time setup mode. DMs use     │
+│    allowlist mode, so only sender IDs in channels.telegram.allowFrom    │
+│    are accepted. Group messages stay blocked until you add allowed      │
+│    chats under channels.telegram.groups (and optional sender IDs under  │
+│    channels.telegram.groupAllowFrom), or set                            │
+│    channels.telegram.groupPolicy to "open" if you want broad group      │
+│    access.                                                              │
+│                                                                         │
+├─────────────────────────────────────────────────────────────────────────╯
+│
+◇  Auth profile cooldowns ───────────────────────────────────────────────╮
+│                                                                        │
+│  - zai:default: cooldown (4h) — Wait for cooldown or switch provider.  │
+│                                                                        │
+├────────────────────────────────────────────────────────────────────────╯
+│
+◇  Claude CLI ───────────────────────────────────────────────────────────╮
+│                                                                        │
+│  - Binary: ~/.local/bin/claude.                                        │
+│  - Headless Claude auth: OK (oauth).                                   │
+│  - OpenClaw auth profile: anthropic:claude-cli (provider claude-cli).  │
+│  - Workspace: ~/.openclaw/workspace (writable).                        │
+│  - Claude project dir:                                                 │
+│    ~/.claude/projects/-Users-fireant--openclaw-workspace (present).    │
+│                                                                        │
+├────────────────────────────────────────────────────────────────────────╯
+│
+◇  State integrity ────────────────────────────────────────────────────────╮
+│                                                                          │
+│  - Found 13 orphan transcript files in                                   │
+│    ~/.openclaw/agents/main/sessions.                                     │
+│    These .jsonl files are no longer referenced by sessions.json, so      │
+│    they are not part of any active session history.                      │
+│    Doctor can archive them safely by renaming each file to               │
+│    *.deleted.<timestamp>.                                                │
+│    Examples:                                                             │
+│    16e01c34-f8de-4d11-b3d7-e182912342a5.checkpoint.316983de-3b65-49c5-a  │
+│    613-9b932769d5d5.jsonl,                                               │
+│    507e8a73-5912-4430-9812-fdb6c59c5e38.jsonl,                           │
+│    74f7683a-7234-4fd8-8871-5f04f13fb8d4.jsonl, and 10 more               │
+│                                                                          │
+├──────────────────────────────────────────────────────────────────────────╯
+│
+◇  Other gateway-like services detected ───────────────────────────────────────╮
+│                                                                              │
+│  - com.bridge34.task34bot (user, plist:                                      │
+│    /Users/fireant/Library/LaunchAgents/com.bridge34.task34bot.plist)         │
+│  - com.claude-anthropic-bridge (user, plist:                                 │
+│    /Users/fireant/Library/LaunchAgents/com.claude-anthropic-bridge.plist)    │
+│  - com.claude-max-proxy (user, plist:                                        │
+│    /Users/fireant/Library/LaunchAgents/com.claude-max-proxy.plist)           │
+│  - com.fireant.codex-token-refresh (user, plist:                             │
+│                                                                              │
+│  /Users/fireant/Library/LaunchAgents/com.fireant.codex-token-refresh.plist)  │
+│  - com.fireant.giyulbot (user, plist:                                        │
+│    /Users/fireant/Library/LaunchAgents/com.fireant.giyulbot.plist)           │
+│  - com.fireant.health-check (user, plist:                                    │
+│    /Users/fireant/Library/LaunchAgents/com.fireant.health-check.plist)       │
+│  - com.fireant.memory-v3-server (user, plist:                                │
+│    /Users/fireant/Library/LaunchAgents/com.fireant.memory-v3-server.plist)   │
+│  - com.fireant.openclaw-autoheal (user, plist:                               │
+│    /Users/fireant/Library/LaunchAgents/com.fireant.openclaw-autoheal.plist)  │
+│  - com.fireant.referral-bot (user, plist:                                    │
+│    /Users/fireant/Library/LaunchAgents/com.fireant.referral-bot.plist)       │
+│  - com.fireant.referral-leaderboard-sync (user, plist:                       │
+│    /Users/fireant/Library/LaunchAgents/com.fireant.referral-leaderboard-syn  │
+│  c.plist)                                                                    │
+│  - com.fireant.wallet-monitor (user, plist:                                  │
+│    /Users/fireant/Library/LaunchAgents/com.fireant.wallet-monitor.plist)     │
+│  - com.fireant.watchdog-bot (user, plist:                                    │
+│    /Users/fireant/Library/LaunchAgents/com.fireant.watchdog-bot.plist)       │
+│  - com.openclaw-auth-watchdog (user, plist:                                  │
+│    /Users/fireant/Library/LaunchAgents/com.openclaw-auth-watchdog.plist)     │
+│                                                                              │
+├──────────────────────────────────────────────────────────────────────────────╯
+│
+◇  Cleanup hints ─────────────────────────────────────────╮
+│                                                         │
+│  - launchctl bootout gui/$UID/ai.openclaw.gateway       │
+│  - rm ~/Library/LaunchAgents/ai.openclaw.gateway.plist  │
+│                                                         │
+├─────────────────────────────────────────────────────────╯
+│
+◇  Gateway recommendation ───────────────────────────────────────────────╮
+│                                                                        │
+│  Recommendation: run a single gateway per machine for most setups.     │
+│  One gateway supports multiple agents.                                 │
+│  If you need multiple gateways (e.g., a rescue bot on the same host),  │
+│  isolate ports + config/state (see docs:                               │
+│  /gateway#multiple-gateways-same-host).                                │
+│                                                                        │
+├────────────────────────────────────────────────────────────────────────╯
+│
+◇  Security ─────────────────────────────────╮
+│                                            │
+│  - No channel security warnings detected.  │
+│  - Run: openclaw security audit --deep     │
+│                                            │
+├────────────────────────────────────────────╯
+│
+◇  Browser ───────────────────────────────────────────────────────────────╮
+│                                                                         │
+│  - Chrome MCP existing-session is configured for profile(s):            │
+│    chrome-relay, user.                                                  │
+│  - These profiles use an explicit Chromium user data directory instead  │
+│    of Chrome's default auto-connect path.                               │
+│  - Verify the matching Chromium-based browser is version 144+ on the    │
+│    same host as the Gateway or node.                                    │
+│  - Enable remote debugging in that browser's inspect page               │
+│    (chrome://inspect/#remote-debugging,                                 │
+│    brave://inspect/#remote-debugging,                                   │
+│    edge://inspect/#remote-debugging).                                   │
+│  - Keep the browser running and accept the attach consent prompt the    │
+│    first time OpenClaw connects.                                        │
+│                                                                         │
+├─────────────────────────────────────────────────────────────────────────╯
+│
+◇  Skills status ────────────╮
+│                            │
+│  Eligible: 21              │
+│  Missing requirements: 35  │
+│  Blocked by allowlist: 0   │
+│                            │
+├────────────────────────────╯
+│
+◇  Plugins ──────╮
+│                │
+│  Loaded: 58    │
+│  Imported: 58  │
+│  Disabled: 40  │
+│  Errors: 0     │
+│                │
+├────────────────╯
+│
+◇  Gateway port ──────────────────────────────────────────────────────────╮
+│                                                                         │
+│  Port 18789 is already in use.                                          │
+│  - pid 56616 fireant: openclaw-gateway (127.0.0.1:18789)                │
+│  - Gateway already running locally. Stop it (openclaw gateway stop) or  │
+│    use a different port.                                                │
+│                                                                         │
+├─────────────────────────────────────────────────────────────────────────╯
+│
+◇  Gateway ────────────────────────────────────╮
+│                                              │
+│  Runtime: running (pid 56616, state active)  │
+│                                              │
+├──────────────────────────────────────────────╯
+│
+◇  Gateway ──────────────────────────────────────────────────────────╮
+│                                                                    │
+│  LaunchAgent loaded; stopping requires "openclaw gateway stop" or  │
+│  launchctl bootout gui/$UID/ai.openclaw.gateway.                   │
+│                                                                    │
+├────────────────────────────────────────────────────────────────────╯
+Run "openclaw doctor --fix" to apply changes.
+│
+└  Doctor complete.
+

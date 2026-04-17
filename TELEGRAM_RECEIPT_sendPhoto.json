@@ -1,0 +1,17 @@
+{
+  "method": "curl sendPhoto (direct)",
+  "timestamp": "2026-04-13T04:11:50Z",
+  "target_chat_id": 477743685,
+  "file_sent": "/Users/fireant/.openclaw/workspace/ANIMATED_FIREANT_FINAL.jpg",
+  "caption": "🔥 불개미 크립토 애니메이션 배너 (중앙 집중형) - 전송 재시도",
+  "telegram_response": {
+    "ok": true,
+    "result": {
+      "message_id": 22647,
+      "from": {"id": 8270734691, "is_bot": true, "first_name": "ddalsu (딸수)", "username": "ddalsu_bot"},
+      "chat": {"id": 477743685, "first_name": "불개미", "last_name": "Fireant (theo acc)", "username": "fireantico", "type": "private"},
+      "date": 1776019910,
+      "caption": "🔥 불개미 크립토 애니메이션 배너 (중앙 집중형) - 전송 재시도"
+    }
+  }
+}
