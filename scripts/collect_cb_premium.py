@@ -68,7 +68,6 @@ def main():
         premium, coinbase, binance = get_cb_premium()
         sign = "+" if premium >= 0 else ""
         existing["cb_premium"] = f"{sign}{premium:.4f}%"
-        existing["cb_premium_as_of"] = today
         existing["value"] = existing["cb_premium"]
         existing["cb_premium_detail"] = {
             "coinbase_btc_usd": round(coinbase, 2),
@@ -87,7 +86,6 @@ def main():
         if btc_oi is not None:
             sign = "+" if btc_oi >= 0 else ""
             existing["btc_oi_24h"] = f"{sign}{btc_oi:.2f}%"
-            existing["btc_oi_24h_as_of"] = today
             print(f"[INFO] BTC OI 24h: {existing['btc_oi_24h']}")
     except Exception as e:
         errors.append(f"BTC OI: {e}")
@@ -99,7 +97,6 @@ def main():
         if eth_oi is not None:
             sign = "+" if eth_oi >= 0 else ""
             existing["eth_oi_24h"] = f"{sign}{eth_oi:.2f}%"
-            existing["eth_oi_24h_as_of"] = today
             print(f"[INFO] ETH OI 24h: {existing['eth_oi_24h']}")
     except Exception as e:
         errors.append(f"ETH OI: {e}")

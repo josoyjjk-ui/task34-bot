@@ -1,5 +1,0 @@
-Health check failed: Error: gateway timeout after 10000ms
-Gateway target: ws://127.0.0.1:18789
-Source: local loopback
-Config: /Users/fireant/.openclaw/openclaw.json
-Bind: loopback

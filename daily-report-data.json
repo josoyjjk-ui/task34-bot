@@ -1,60 +1,53 @@
 {
-  "date": "2026-04-17",
-  "collected_at": "2026-04-17T15:30:00+09:00",
-  "BTC_ETF": "+$26.1M",
-  "ETH_ETF": "+$18.0M",
-  "BTC_OI_24h": "-0.46%",
+  "date": "2026-04-10",
+  "collected_at": "2026-04-10T23:52:46.175277+09:00",
+  "BTC_ETF": "+$358M",
+  "ETH_ETF": "+$85.19M",
+  "BTC_OI_24h": "+3.20%",
   "ETH_OI_24h": "+0.59%",
-  "DAT_WEEKLY_NET_INFLOW": "+$1.1B",
-  "Coinbase_Premium": "+0.04%",
+  "DAT_WEEKLY_NET_INFLOW": "+$224M",
+  "Coinbase_Premium": "+0.0082%",
   "sources": {
     "BTC_ETF": {
-      "value": "+$411M",
+      "value": "+$358M",
       "source": "sosovalue",
-      "data_date": "2026-04-17",
-      "fetched_at": "2026-04-16T02:03:47.586089+09:00",
-      "fresh": true
+      "data_date": "2026-04-10",
+      "fetched_at": "2026-04-10T23:52:46.175277+09:00"
     },
     "ETH_ETF": {
-      "value": "+$53M",
+      "value": "+$85.19M",
       "source": "sosovalue",
-      "data_date": "2026-04-17",
-      "fetched_at": "2026-04-16T02:03:47.586089+09:00",
-      "fresh": true
+      "data_date": "2026-04-10",
+      "fetched_at": "2026-04-10T23:52:46.175277+09:00"
     },
     "BTC_OI_24h": {
-      "value": "+0.16%",
+      "value": "+3.20%",
       "source": "coinglass",
-      "data_date": "2026-04-17",
-      "fetched_at": "2026-04-16T02:03:47.586089+09:00",
-      "fresh": true
+      "data_date": "2026-04-10",
+      "fetched_at": "2026-04-10T23:52:46.175277+09:00"
     },
     "ETH_OI_24h": {
       "value": "+0.59%",
       "source": "coinglass",
-      "data_date": "2026-04-17",
-      "fetched_at": "2026-04-16T02:03:47.586089+09:00",
-      "fresh": true
+      "data_date": "2026-04-10",
+      "fetched_at": "2026-04-10T23:52:46.175277+09:00"
     },
     "DAT_WEEKLY_NET_INFLOW": {
-      "value": "+$1.1B",
+      "value": "+$224M",
       "source": "coinglass",
-      "data_date": "2026-04-17",
-      "fetched_at": "2026-04-16T02:03:47.586089+09:00",
-      "fresh": true
+      "data_date": "2026-04-10",
+      "fetched_at": "2026-04-10T23:52:46.175277+09:00"
     },
     "Coinbase_Premium": {
-      "value": "+0.01%",
+      "value": "+0.0082%",
       "source": "starchild",
-      "data_date": "2026-04-17",
-      "fetched_at": "2026-04-16T02:03:47.586089+09:00",
-      "fresh": true
+      "data_date": "2026-04-10",
+      "fetched_at": "2026-04-10T23:52:46.175277+09:00"
     }
   },
   "validation": {
-    "all_same_period": false,
+    "all_same_period": true,
     "stale_sources": [],
-    "unknown_staleness": [],
     "failed_sources": [],
     "status": "clean"
   }

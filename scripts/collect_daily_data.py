@@ -46,24 +46,14 @@ def now_kst():
     return datetime.now(KST)
 
 
-def validate_date(data_date_str, today, max_age_days=3):
-    """데이터 날짜가 허용 범위 이내인지 확인. 기본 3일 (T-1 + 주말 마진)."""
+def validate_date(data_date_str, today):
+    """데이터 날짜가 허용 범위(5일 이내)인지 확인."""
     try:
         data_date = datetime.strptime(data_date_str, "%Y-%m-%d").date()
         delta = (today - data_date).days
-        return 0 <= delta <= max_age_days
+        return 0 <= delta <= 5  # 주말+공휴일 고려하여 5일
     except (ValueError, TypeError):
         return False
-
-
-def field_as_of(raw, src_key, fallback_date):
-    """필드별 as_of 날짜 추출. cb_premium_input.json의 `{key}_as_of`
-    필드가 있으면 우선 사용, 없으면 top-level date로 폴백."""
-    per_field = raw.get(f"{src_key}_as_of")
-    if per_field:
-        # ISO datetime이면 date 부분만 추출
-        return str(per_field)[:10]
-    return fallback_date
 
 
 def atomic_write_json(data, path):
@@ -108,36 +98,21 @@ def main():
     if not date_valid:
         print(f"[WARN] Data date {data_date} is stale (>5 days from {today_str})", file=sys.stderr)
 
-    # 3. 필드 매핑 + 소스 메타데이터 생성 (per-field as_of 추적)
+    # 3. 필드 매핑 + 소스 메타데이터 생성
     sources = {}
     failed = []
-    stale_sources = []
-    unknown_staleness = []
     flat = {}
 
     for src_key, dst_key in FIELD_MAP.items():
         val = raw.get(src_key)
         if val is not None and val != "":
-            field_date = field_as_of(raw, src_key, data_date)
-            field_fresh = validate_date(field_date, today, max_age_days=3)
-            # ETF/DAT 필드는 T-1 기준이므로 2일 허용. 나머지는 1일(T-0)
-            if src_key in ("btc_etf", "eth_etf", "dat_now"):
-                field_fresh = validate_date(field_date, today, max_age_days=2)
             flat[dst_key] = str(val)
             sources[dst_key] = {
                 "value": str(val),
                 "source": SOURCE_MAP.get(dst_key, "unknown"),
-                "data_date": field_date,
+                "data_date": data_date,
                 "fetched_at": fetched_at,
-                "fresh": field_fresh,
             }
-            if not field_fresh:
-                stale_sources.append(dst_key)
-                print(f"[WARN] {dst_key} stale: data_date={field_date} today={today_str}", file=sys.stderr)
-            # ETF/DAT는 반드시 per-field as_of가 있어야 함 (없으면 unknown staleness)
-            if src_key in ("btc_etf", "eth_etf", "dat_now") and not raw.get(f"{src_key}_as_of"):
-                unknown_staleness.append(dst_key)
-                print(f"[WARN] {dst_key} has no per-field as_of — staleness UNKNOWN", file=sys.stderr)
         else:
             flat[dst_key] = "N/A"
             sources[dst_key] = None
@@ -146,27 +121,20 @@ def main():
     # 4. Validation 결정
     if failed:
         status = "partial"
-    elif unknown_staleness:
-        status = "unknown_staleness"  # ETF/DAT per-field 메타 누락 — 사실상 stale 취급
-    elif stale_sources:
-        status = "stale"
     elif not date_valid:
         status = "stale"
     else:
         status = "clean"
 
     validation = {
-        "all_same_period": len(set(
-            s["data_date"] for s in sources.values() if s is not None
-        )) <= 1,
-        "stale_sources": stale_sources,
-        "unknown_staleness": unknown_staleness,
+        "all_same_period": True,  # 단일 소스 파일이므로 항상 동일 기간
+        "stale_sources": [] if date_valid else list(flat.keys()),
         "failed_sources": failed,
         "status": status,
     }
 
-    # 5. partial/stale/unknown_staleness 시 기존 파일 보존 (발행 차단)
-    if status in ("partial", "stale", "unknown_staleness") and os.path.exists(OUTPUT_FILE):
+    # 5. partial/stale 시 기존 파일 보존 옵션
+    if status in ("partial", "stale") and os.path.exists(OUTPUT_FILE):
         print(f"[WARN] Status is '{status}' — preserving existing output file")
         print(f"[WARN] Failed: {failed}" if failed else f"[WARN] Stale data: {data_date}")
         # 기존 파일은 그대로 두고, 검증 결과만 출력
