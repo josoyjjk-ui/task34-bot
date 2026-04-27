@@ -1,6 +1,12 @@
 {
-  "updated": "2026-04-27T18:36:47.948022+09:00",
+  "updated": "2026-04-27T20:42:29.697978+09:00",
   "youtube": [
+    {
+      "title": "📌 불개미 주간 시황 - 트레이딩에 대하여",
+      "url": "https://www.youtube.com/watch?v=fCim0ZYfy1s",
+      "thumbnail": "https://i.ytimg.com/vi/fCim0ZYfy1s/mqdefault.jpg",
+      "published": "2026-04-27T20:09:55+09:00"
+    },
     {
       "title": "불개미의 정기 시황분석 라이브 - 4월 5주차",
       "url": "https://www.youtube.com/watch?v=UeSXvBYWwzs",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=yinF6GWm-1Y",
       "thumbnail": "https://i.ytimg.com/vi/yinF6GWm-1Y/mqdefault.jpg",
       "published": "2026-04-21T16:24:43+09:00"
-    },
-    {
-      "title": "📌 불개미 주간 시황 - 한달동안 1조 해킹 알트, 이제 없어질까?",
-      "url": "https://www.youtube.com/watch?v=2zV5RI-p7hI",
-      "thumbnail": "https://i.ytimg.com/vi/2zV5RI-p7hI/mqdefault.jpg",
-      "published": "2026-04-20T18:00:08+09:00"
     }
   ],
   "telegram": [
