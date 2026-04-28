@@ -34,8 +34,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger("task34bot")
 
-SUPABASE_URL = "https://npdzxtnzjkdzwbpphduf.supabase.co"
-SUPABASE_KEY = "sb_publishable_-TVlChpvyWRZEweQ8wHe2g_WxQD5nql"
+SUPABASE_URL = "https://upuvwvpnsinqonvszify.supabase.co"
+SUPABASE_KEY = "sb_publishable_Xa4mx6eGxwbvUw5BOlJKLQ_Zf8DnnzA"
 
 PROJECT_KEYWORD_MAP = [
     ("eigen", "#EigenCloud"),

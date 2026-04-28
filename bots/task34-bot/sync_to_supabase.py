@@ -14,8 +14,8 @@ from pathlib import Path
 
 import requests
 
-SUPABASE_URL = "https://npdzxtnzjkdzwbpphduf.supabase.co"
-SUPABASE_KEY = "sb_publishable_-TVlChpvyWRZEweQ8wHe2g_WxQD5nql"
+SUPABASE_URL = "https://upuvwvpnsinqonvszify.supabase.co"
+SUPABASE_KEY = "sb_publishable_Xa4mx6eGxwbvUw5BOlJKLQ_Zf8DnnzA"
 DB_PATH = Path(__file__).resolve().parent / "task34.db"
 
 
