@@ -1,6 +1,37 @@
 {
-  "updated": "2026-05-05T14:39:31.765879+09:00",
-  "youtube": [],
+  "updated": "2026-05-05T17:04:03.556151+09:00",
+  "youtube": [
+    {
+      "title": "불개미 크립토 라이브 - 5주연속 ETF 순유입과 알트장",
+      "url": "https://www.youtube.com/watch?v=Z_mJOScNcTE",
+      "thumbnail": "https://i.ytimg.com/vi/Z_mJOScNcTE/mqdefault.jpg",
+      "published": "2026-05-04T10:16:39+09:00"
+    },
+    {
+      "title": "2026.05.02 (토) 일일시황",
+      "url": "https://www.youtube.com/watch?v=h87w1cKYpgs",
+      "thumbnail": "https://i.ytimg.com/vi/h87w1cKYpgs/mqdefault.jpg",
+      "published": "2026-05-02T18:42:14+09:00"
+    },
+    {
+      "title": "2026.05.01 (금) 일일시황",
+      "url": "https://www.youtube.com/watch?v=OktjkRw--jE",
+      "thumbnail": "https://i.ytimg.com/vi/OktjkRw--jE/mqdefault.jpg",
+      "published": "2026-05-01T15:30:55+09:00"
+    },
+    {
+      "title": "2026.04.30 (목) 일일시황",
+      "url": "https://www.youtube.com/watch?v=NQy9LQig8lM",
+      "thumbnail": "https://i.ytimg.com/vi/NQy9LQig8lM/mqdefault.jpg",
+      "published": "2026-04-30T17:11:26+09:00"
+    },
+    {
+      "title": "2026.04.29 (수) 일일시황",
+      "url": "https://www.youtube.com/watch?v=28xiRZUFYHo",
+      "thumbnail": "https://i.ytimg.com/vi/28xiRZUFYHo/mqdefault.jpg",
+      "published": "2026-04-29T18:01:23+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
