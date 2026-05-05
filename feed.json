@@ -1,6 +1,12 @@
 {
-  "updated": "2026-05-05T17:04:03.556151+09:00",
+  "updated": "2026-05-05T19:17:16.031144+09:00",
   "youtube": [
+    {
+      "title": "2026.05.05 (화) 일일시황",
+      "url": "https://www.youtube.com/watch?v=rj91Wh8opaY",
+      "thumbnail": "https://i.ytimg.com/vi/rj91Wh8opaY/mqdefault.jpg",
+      "published": "2026-05-05T17:37:12+09:00"
+    },
     {
       "title": "불개미 크립토 라이브 - 5주연속 ETF 순유입과 알트장",
       "url": "https://www.youtube.com/watch?v=Z_mJOScNcTE",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=NQy9LQig8lM",
       "thumbnail": "https://i.ytimg.com/vi/NQy9LQig8lM/mqdefault.jpg",
       "published": "2026-04-30T17:11:26+09:00"
-    },
-    {
-      "title": "2026.04.29 (수) 일일시황",
-      "url": "https://www.youtube.com/watch?v=28xiRZUFYHo",
-      "thumbnail": "https://i.ytimg.com/vi/28xiRZUFYHo/mqdefault.jpg",
-      "published": "2026-04-29T18:01:23+09:00"
     }
   ],
   "telegram": [
