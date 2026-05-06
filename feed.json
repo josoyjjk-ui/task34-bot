@@ -1,6 +1,37 @@
 {
-  "updated": "2026-05-06T14:54:08.332979+09:00",
-  "youtube": [],
+  "updated": "2026-05-06T19:32:21.673304+09:00",
+  "youtube": [
+    {
+      "title": "2026.05.05 (화) 일일시황",
+      "url": "https://www.youtube.com/watch?v=rj91Wh8opaY",
+      "thumbnail": "https://i.ytimg.com/vi/rj91Wh8opaY/mqdefault.jpg",
+      "published": "2026-05-05T17:37:12+09:00"
+    },
+    {
+      "title": "불개미 크립토 라이브 - 5주연속 ETF 순유입과 알트장",
+      "url": "https://www.youtube.com/watch?v=Z_mJOScNcTE",
+      "thumbnail": "https://i.ytimg.com/vi/Z_mJOScNcTE/mqdefault.jpg",
+      "published": "2026-05-04T10:16:39+09:00"
+    },
+    {
+      "title": "2026.05.02 (토) 일일시황",
+      "url": "https://www.youtube.com/watch?v=h87w1cKYpgs",
+      "thumbnail": "https://i.ytimg.com/vi/h87w1cKYpgs/mqdefault.jpg",
+      "published": "2026-05-02T18:42:14+09:00"
+    },
+    {
+      "title": "2026.05.01 (금) 일일시황",
+      "url": "https://www.youtube.com/watch?v=OktjkRw--jE",
+      "thumbnail": "https://i.ytimg.com/vi/OktjkRw--jE/mqdefault.jpg",
+      "published": "2026-05-01T15:30:55+09:00"
+    },
+    {
+      "title": "2026.04.30 (목) 일일시황",
+      "url": "https://www.youtube.com/watch?v=NQy9LQig8lM",
+      "thumbnail": "https://i.ytimg.com/vi/NQy9LQig8lM/mqdefault.jpg",
+      "published": "2026-04-30T17:11:26+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
@@ -15,6 +46,21 @@
   ],
   "naver": [
     {
+      "title": "이놈 가격 잘버틴드아? 10월에 에드주지 않나?",
+      "url": "https://blog.naver.com/fireant_korea/224276757539?fromRss=true&trackingCode=rss",
+      "published": "2026-05-06T17:47:57+09:00"
+    },
+    {
+      "title": "KGeN 의 ARR이 8580만 달러라는데",
+      "url": "https://blog.naver.com/fireant_korea/224276754505?fromRss=true&trackingCode=rss",
+      "published": "2026-05-06T17:45:20+09:00"
+    },
+    {
+      "title": "A16Z가 다섯번째 펀드를 조성했습니다. 규모는 약 3조 1천억원 규모",
+      "url": "https://blog.naver.com/fireant_korea/224276747226?fromRss=true&trackingCode=rss",
+      "published": "2026-05-06T17:39:40+09:00"
+    },
+    {
       "title": "왜 나는 코인을 버리지 않는가?",
       "url": "https://blog.naver.com/fireant_korea/224275205121?fromRss=true&trackingCode=rss",
       "published": "2026-05-05T10:06:22+09:00"
@@ -23,21 +69,6 @@
       "title": "(진행중)  Virtuals 앵콜 입장 이벤트!",
       "url": "https://blog.naver.com/fireant_korea/224274331701?fromRss=true&trackingCode=rss",
       "published": "2026-05-04T14:17:41+09:00"
-    },
-    {
-      "title": "✏️ 주말동안 단기매매 코인 찾는데 결국 두개로 귀결 - MegaETH",
-      "url": "https://blog.naver.com/fireant_korea/224274326934?fromRss=true&trackingCode=rss",
-      "published": "2026-05-04T14:13:25+09:00"
-    },
-    {
-      "title": "✏️ 주말동안 단기매매 코인 찾는데 결국 두개로 귀결 - Virtuals",
-      "url": "https://blog.naver.com/fireant_korea/224274324657?fromRss=true&trackingCode=rss",
-      "published": "2026-05-04T14:11:23+09:00"
-    },
-    {
-      "title": "Bio Protocol의 이그니션 세일이 12배 초과청약 되었습니다.",
-      "url": "https://blog.naver.com/fireant_korea/224274320728?fromRss=true&trackingCode=rss",
-      "published": "2026-05-04T14:08:29+09:00"
     }
   ]
 }
