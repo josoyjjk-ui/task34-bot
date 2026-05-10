@@ -1,6 +1,12 @@
 {
-  "updated": "2026-05-10T20:55:46.492242+09:00",
+  "updated": "2026-05-10T22:13:36.064137+09:00",
   "youtube": [
+    {
+      "title": "불프로의 라이브 - 모두가 상승장을 보고있다.",
+      "url": "https://www.youtube.com/watch?v=up0UiWg8Zis",
+      "thumbnail": "https://i.ytimg.com/vi/up0UiWg8Zis/mqdefault.jpg",
+      "published": "2026-05-10T21:26:47+09:00"
+    },
     {
       "title": "2026.05.09 (토) 일일시황",
       "url": "https://www.youtube.com/watch?v=QtvvVDhgAh0",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=Z_mJOScNcTE",
       "thumbnail": "https://i.ytimg.com/vi/Z_mJOScNcTE/mqdefault.jpg",
       "published": "2026-05-04T10:16:39+09:00"
-    },
-    {
-      "title": "2026.05.02 (토) 일일시황",
-      "url": "https://www.youtube.com/watch?v=h87w1cKYpgs",
-      "thumbnail": "https://i.ytimg.com/vi/h87w1cKYpgs/mqdefault.jpg",
-      "published": "2026-05-02T18:42:14+09:00"
     }
   ],
   "telegram": [
