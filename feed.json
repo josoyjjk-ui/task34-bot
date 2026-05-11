@@ -1,6 +1,37 @@
 {
-  "updated": "2026-05-11T15:36:35.195705+09:00",
-  "youtube": [],
+  "updated": "2026-05-11T19:35:18.567822+09:00",
+  "youtube": [
+    {
+      "title": "📌 불개미 주간 시황 - 모두가 상승장을 보고있다",
+      "url": "https://www.youtube.com/watch?v=fSrUYrXN89w",
+      "thumbnail": "https://i.ytimg.com/vi/fSrUYrXN89w/mqdefault.jpg",
+      "published": "2026-05-11T18:00:55+09:00"
+    },
+    {
+      "title": "불프로의 라이브 - 모두가 상승장을 보고있다.",
+      "url": "https://www.youtube.com/watch?v=up0UiWg8Zis",
+      "thumbnail": "https://i.ytimg.com/vi/up0UiWg8Zis/mqdefault.jpg",
+      "published": "2026-05-11T12:34:13+09:00"
+    },
+    {
+      "title": "2026.05.09 (토) 일일시황",
+      "url": "https://www.youtube.com/watch?v=QtvvVDhgAh0",
+      "thumbnail": "https://i.ytimg.com/vi/QtvvVDhgAh0/mqdefault.jpg",
+      "published": "2026-05-09T19:19:01+09:00"
+    },
+    {
+      "title": "2026.05.08 (금) 일일시황",
+      "url": "https://www.youtube.com/watch?v=IqQKBOoDsXk",
+      "thumbnail": "https://i.ytimg.com/vi/IqQKBOoDsXk/mqdefault.jpg",
+      "published": "2026-05-08T15:06:38+09:00"
+    },
+    {
+      "title": "2026.05.05 (화) 일일시황",
+      "url": "https://www.youtube.com/watch?v=rj91Wh8opaY",
+      "thumbnail": "https://i.ytimg.com/vi/rj91Wh8opaY/mqdefault.jpg",
+      "published": "2026-05-05T17:37:12+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
