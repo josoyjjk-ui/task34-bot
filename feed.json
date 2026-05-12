@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-12T18:18:04.258842+09:00",
+  "updated": "2026-05-12T20:29:52.078627+09:00",
   "youtube": [
     {
       "title": "2026.05.12 (화) 일일시황",
@@ -46,6 +46,11 @@
   ],
   "naver": [
     {
+      "title": "아서 헤이즈가 비트코인 최대 강세 선언했습니다.",
+      "url": "https://blog.naver.com/fireant_korea/224283313830?fromRss=true&trackingCode=rss",
+      "published": "2026-05-12T19:54:44+09:00"
+    },
+    {
       "title": "Circle - Acr Network 에어드랍",
       "url": "https://blog.naver.com/fireant_korea/224282932543?fromRss=true&trackingCode=rss",
       "published": "2026-05-12T14:12:11+09:00"
@@ -64,11 +69,6 @@
       "title": "이더나가 USDe 담보를 금을 기반으로한 토크나이즈 자산으로 확장합니다.",
       "url": "https://blog.naver.com/fireant_korea/224281770468?fromRss=true&trackingCode=rss",
       "published": "2026-05-11T14:41:38+09:00"
-    },
-    {
-      "title": "$BSB가 BitkubOfficial 에 상장합니다.",
-      "url": "https://blog.naver.com/fireant_korea/224281762999?fromRss=true&trackingCode=rss",
-      "published": "2026-05-11T14:35:36+09:00"
     }
   ]
 }
