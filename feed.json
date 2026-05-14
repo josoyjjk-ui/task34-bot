@@ -1,6 +1,37 @@
 {
-  "updated": "2026-05-14T15:21:45.631021+09:00",
-  "youtube": [],
+  "updated": "2026-05-14T18:14:01.179318+09:00",
+  "youtube": [
+    {
+      "title": "BlockStreet의 CEO이자 Co-Founder, Hedy Wang 인터뷰",
+      "url": "https://www.youtube.com/watch?v=_qtnlDeleOw",
+      "thumbnail": "https://i.ytimg.com/vi/_qtnlDeleOw/mqdefault.jpg",
+      "published": "2026-05-14T17:37:08+09:00"
+    },
+    {
+      "title": "2026.05.14 (목) 일일시황",
+      "url": "https://www.youtube.com/watch?v=KIVCtwTm90g",
+      "thumbnail": "https://i.ytimg.com/vi/KIVCtwTm90g/mqdefault.jpg",
+      "published": "2026-05-14T15:45:19+09:00"
+    },
+    {
+      "title": "MegaETH 파운더 Shuyao와 함께한 AMA 리캡",
+      "url": "https://www.youtube.com/watch?v=5bi_ZA8Pcek",
+      "thumbnail": "https://i.ytimg.com/vi/5bi_ZA8Pcek/mqdefault.jpg",
+      "published": "2026-05-14T14:44:07+09:00"
+    },
+    {
+      "title": "2026.05.13 (수) 일일시황",
+      "url": "https://www.youtube.com/watch?v=qCJCYCGvVDk",
+      "thumbnail": "https://i.ytimg.com/vi/qCJCYCGvVDk/mqdefault.jpg",
+      "published": "2026-05-13T14:59:55+09:00"
+    },
+    {
+      "title": "2026.05.12 (화) 일일시황",
+      "url": "https://www.youtube.com/watch?v=RkmkHfmlsR8",
+      "thumbnail": "https://i.ytimg.com/vi/RkmkHfmlsR8/mqdefault.jpg",
+      "published": "2026-05-12T17:59:08+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
@@ -15,6 +46,16 @@
   ],
   "naver": [
     {
+      "title": "Xitadel 예치했던거 3개월 락업기간이 끝났습니다.",
+      "url": "https://blog.naver.com/fireant_korea/224285583533?fromRss=true&trackingCode=rss",
+      "published": "2026-05-14T18:09:30+09:00"
+    },
+    {
+      "title": "오늘은 미국의 클레리티법안 은행위원회 마크업이 예정되어있습니다.",
+      "url": "https://blog.naver.com/fireant_korea/224285581081?fromRss=true&trackingCode=rss",
+      "published": "2026-05-14T18:07:03+09:00"
+    },
+    {
       "title": "1천만원 코인 이체하면 의심거래로 분류하여 정부에 신고하는 정책?",
       "url": "https://blog.naver.com/fireant_korea/224284493198?fromRss=true&trackingCode=rss",
       "published": "2026-05-13T19:45:23+09:00"
@@ -28,16 +69,6 @@
       "title": "업비트 상장하는 Super Form 상장 거래소 현황입니다.",
       "url": "https://blog.naver.com/fireant_korea/224284479151?fromRss=true&trackingCode=rss",
       "published": "2026-05-13T19:28:00+09:00"
-    },
-    {
-      "title": "✏️ 슈카월드 - 코스피 7,800 돌파, 박탈감에 시달리는 사람들편에 보면",
-      "url": "https://blog.naver.com/fireant_korea/224284475548?fromRss=true&trackingCode=rss",
-      "published": "2026-05-13T19:23:25+09:00"
-    },
-    {
-      "title": "[광고게시물] 네사, 프라이버시 AI 시장 공략?",
-      "url": "https://blog.naver.com/fireant_korea/224284119250?fromRss=true&trackingCode=rss",
-      "published": "2026-05-13T14:17:08+09:00"
     }
   ]
 }
