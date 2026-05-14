@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-14T18:14:01.179318+09:00",
+  "updated": "2026-05-14T20:25:09.090419+09:00",
   "youtube": [
     {
       "title": "BlockStreet의 CEO이자 Co-Founder, Hedy Wang 인터뷰",
@@ -46,6 +46,11 @@
   ],
   "naver": [
     {
+      "title": "▶️ Block Street Hedy와 함께한 인터뷰 후기남기기 캠페인",
+      "url": "https://blog.naver.com/fireant_korea/224285589599?fromRss=true&trackingCode=rss",
+      "published": "2026-05-14T18:16:30+09:00"
+    },
+    {
       "title": "Xitadel 예치했던거 3개월 락업기간이 끝났습니다.",
       "url": "https://blog.naver.com/fireant_korea/224285583533?fromRss=true&trackingCode=rss",
       "published": "2026-05-14T18:09:30+09:00"
@@ -64,11 +69,6 @@
       "title": "왜 요즘 업비트, 빗썸은 왜 이렇게 리스크 있는 코인들을 상장할까?",
       "url": "https://blog.naver.com/fireant_korea/224284483256?fromRss=true&trackingCode=rss",
       "published": "2026-05-13T19:32:59+09:00"
-    },
-    {
-      "title": "업비트 상장하는 Super Form 상장 거래소 현황입니다.",
-      "url": "https://blog.naver.com/fireant_korea/224284479151?fromRss=true&trackingCode=rss",
-      "published": "2026-05-13T19:28:00+09:00"
     }
   ]
 }
