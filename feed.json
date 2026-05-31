@@ -1,6 +1,12 @@
 {
-  "updated": "2026-05-31T20:15:53.409624+09:00",
+  "updated": "2026-05-31T21:55:40.064328+09:00",
   "youtube": [
+    {
+      "title": "불개미 크립토 라이브 - 비트코인 미국 기관 패닉셀 시작",
+      "url": "https://www.youtube.com/watch?v=t5X13BZ7kxo",
+      "thumbnail": "https://i.ytimg.com/vi/t5X13BZ7kxo/mqdefault.jpg",
+      "published": "2026-05-31T20:59:58+09:00"
+    },
     {
       "title": "2026.05.31 (일) 일일시황",
       "url": "https://www.youtube.com/watch?v=ZPo-baUm5Pc",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=FKpmJPPnxWA",
       "thumbnail": "https://i.ytimg.com/vi/FKpmJPPnxWA/mqdefault.jpg",
       "published": "2026-05-28T15:09:52+09:00"
-    },
-    {
-      "title": "솔목지",
-      "url": "https://www.youtube.com/watch?v=O3xZG_XR-Qs",
-      "thumbnail": "https://i.ytimg.com/vi/O3xZG_XR-Qs/mqdefault.jpg",
-      "published": "2026-05-28T13:00:26+09:00"
     }
   ],
   "telegram": [
