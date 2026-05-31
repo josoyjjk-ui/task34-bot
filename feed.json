@@ -1,6 +1,12 @@
 {
-  "updated": "2026-05-31T15:14:42.482013+09:00",
+  "updated": "2026-05-31T18:27:36.226115+09:00",
   "youtube": [
+    {
+      "title": "2026.05.31 (일) 일일시황",
+      "url": "https://www.youtube.com/watch?v=ZPo-baUm5Pc",
+      "thumbnail": "https://i.ytimg.com/vi/ZPo-baUm5Pc/mqdefault.jpg",
+      "published": "2026-05-31T15:59:02+09:00"
+    },
     {
       "title": "2026.05.30 (토) 일일시황",
       "url": "https://www.youtube.com/watch?v=fSY7U8J4-sY",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=O3xZG_XR-Qs",
       "thumbnail": "https://i.ytimg.com/vi/O3xZG_XR-Qs/mqdefault.jpg",
       "published": "2026-05-28T13:00:26+09:00"
-    },
-    {
-      "title": "2026.05.27 (수) 일일시황",
-      "url": "https://www.youtube.com/watch?v=FmaQ-CZYI2o",
-      "thumbnail": "https://i.ytimg.com/vi/FmaQ-CZYI2o/mqdefault.jpg",
-      "published": "2026-05-27T14:42:55+09:00"
     }
   ],
   "telegram": [
