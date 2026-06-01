@@ -1,6 +1,12 @@
 {
-  "updated": "2026-06-01T14:23:46.901309+09:00",
+  "updated": "2026-06-01T19:36:52.848084+09:00",
   "youtube": [
+    {
+      "title": "📌 불개미 주간 시황 - 비트코인 미국 기관 패닉셀 시작",
+      "url": "https://www.youtube.com/watch?v=gLugIEMg0qo",
+      "thumbnail": "https://i.ytimg.com/vi/gLugIEMg0qo/mqdefault.jpg",
+      "published": "2026-06-01T18:00:19+09:00"
+    },
     {
       "title": "불개미 크립토 라이브 - 비트코인 미국 기관 패닉셀 시작",
       "url": "https://www.youtube.com/watch?v=t5X13BZ7kxo",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=OaqPo7bJ3z8",
       "thumbnail": "https://i.ytimg.com/vi/OaqPo7bJ3z8/mqdefault.jpg",
       "published": "2026-05-29T19:11:26+09:00"
-    },
-    {
-      "title": "2026.05.28 (목) 일일시황",
-      "url": "https://www.youtube.com/watch?v=FKpmJPPnxWA",
-      "thumbnail": "https://i.ytimg.com/vi/FKpmJPPnxWA/mqdefault.jpg",
-      "published": "2026-05-28T15:09:52+09:00"
     }
   ],
   "telegram": [
@@ -46,6 +46,16 @@
   ],
   "naver": [
     {
+      "title": "✏️ \"크라임\" 이라고 불리우는 미친듯 오르는 코인들을 찾는 공식",
+      "url": "https://blog.naver.com/fireant_korea/224302714398?fromRss=true&trackingCode=rss",
+      "published": "2026-06-01T14:47:50+09:00"
+    },
+    {
+      "title": "비트코인 방향 분석",
+      "url": "https://blog.naver.com/fireant_korea/224302704655?fromRss=true&trackingCode=rss",
+      "published": "2026-06-01T14:39:24+09:00"
+    },
+    {
       "title": "Arcium ZINC라는 앱을 출시했습니다.",
       "url": "https://blog.naver.com/fireant_korea/224300230836?fromRss=true&trackingCode=rss",
       "published": "2026-05-29T17:20:41+09:00"
@@ -59,16 +69,6 @@
       "title": "Ethena 담보자산 활용 대시보드",
       "url": "https://blog.naver.com/fireant_korea/224300037674?fromRss=true&trackingCode=rss",
       "published": "2026-05-29T14:23:47+09:00"
-    },
-    {
-      "title": "✏️ 혼자 끄적여보는 생각..... 대한민국 거래소의 판도가 바뀌고있다...",
-      "url": "https://blog.naver.com/fireant_korea/224300022432?fromRss=true&trackingCode=rss",
-      "published": "2026-05-29T14:09:04+09:00"
-    },
-    {
-      "title": "[광고게시물] 상장한 Citrea 에어드랍과 거래소 관련 정보",
-      "url": "https://blog.naver.com/fireant_korea/224298194761?fromRss=true&trackingCode=rss",
-      "published": "2026-05-27T18:35:12+09:00"
     }
   ]
 }
