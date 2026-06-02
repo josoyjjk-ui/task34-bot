@@ -1,6 +1,37 @@
 {
-  "updated": "2026-06-02T14:09:53.173223+09:00",
-  "youtube": [],
+  "updated": "2026-06-02T18:47:34.906756+09:00",
+  "youtube": [
+    {
+      "title": "2026.06.02 (화) 일일시황",
+      "url": "https://www.youtube.com/watch?v=BC6D7Xd_xoU",
+      "thumbnail": "https://i.ytimg.com/vi/BC6D7Xd_xoU/mqdefault.jpg",
+      "published": "2026-06-02T15:54:10+09:00"
+    },
+    {
+      "title": "📌 불개미 주간 시황 - 비트코인 미국 기관 패닉셀 시작",
+      "url": "https://www.youtube.com/watch?v=gLugIEMg0qo",
+      "thumbnail": "https://i.ytimg.com/vi/gLugIEMg0qo/mqdefault.jpg",
+      "published": "2026-06-01T18:00:19+09:00"
+    },
+    {
+      "title": "불개미 크립토 라이브 - 비트코인 미국 기관 패닉셀 시작",
+      "url": "https://www.youtube.com/watch?v=t5X13BZ7kxo",
+      "thumbnail": "https://i.ytimg.com/vi/t5X13BZ7kxo/mqdefault.jpg",
+      "published": "2026-06-01T10:20:15+09:00"
+    },
+    {
+      "title": "2026.05.31 (일) 일일시황",
+      "url": "https://www.youtube.com/watch?v=ZPo-baUm5Pc",
+      "thumbnail": "https://i.ytimg.com/vi/ZPo-baUm5Pc/mqdefault.jpg",
+      "published": "2026-05-31T15:59:02+09:00"
+    },
+    {
+      "title": "2026.05.30 (토) 일일시황",
+      "url": "https://www.youtube.com/watch?v=fSY7U8J4-sY",
+      "thumbnail": "https://i.ytimg.com/vi/fSY7U8J4-sY/mqdefault.jpg",
+      "published": "2026-05-30T17:05:13+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
@@ -15,6 +46,21 @@
   ],
   "naver": [
     {
+      "title": "[광고게시물] P&G, 프라이빗 AI 추론 레이어 1 Nesa 기술 도입",
+      "url": "https://blog.naver.com/fireant_korea/224304049744?fromRss=true&trackingCode=rss",
+      "published": "2026-06-02T18:03:04+09:00"
+    },
+    {
+      "title": "지금 하락물량의 출처 대부분은 블랙락입니다.",
+      "url": "https://blog.naver.com/fireant_korea/224303975032?fromRss=true&trackingCode=rss",
+      "published": "2026-06-02T16:51:00+09:00"
+    },
+    {
+      "title": "Stable은 정석 디파이 플레이북으로 생태계 TVL 모으기 스타트!",
+      "url": "https://blog.naver.com/fireant_korea/224303972640?fromRss=true&trackingCode=rss",
+      "published": "2026-06-02T16:48:50+09:00"
+    },
+    {
       "title": "✏️ \"크라임\" 이라고 불리우는 미친듯 오르는 코인들을 찾는 공식",
       "url": "https://blog.naver.com/fireant_korea/224302714398?fromRss=true&trackingCode=rss",
       "published": "2026-06-01T14:47:50+09:00"
@@ -23,21 +69,6 @@
       "title": "비트코인 방향 분석",
       "url": "https://blog.naver.com/fireant_korea/224302704655?fromRss=true&trackingCode=rss",
       "published": "2026-06-01T14:39:24+09:00"
-    },
-    {
-      "title": "Arcium ZINC라는 앱을 출시했습니다.",
-      "url": "https://blog.naver.com/fireant_korea/224300230836?fromRss=true&trackingCode=rss",
-      "published": "2026-05-29T17:20:41+09:00"
-    },
-    {
-      "title": "✏️ Memeland도 생태계에 트레이딩 플랫폼을 만들었습니다.",
-      "url": "https://blog.naver.com/fireant_korea/224300040836?fromRss=true&trackingCode=rss",
-      "published": "2026-05-29T14:26:37+09:00"
-    },
-    {
-      "title": "Ethena 담보자산 활용 대시보드",
-      "url": "https://blog.naver.com/fireant_korea/224300037674?fromRss=true&trackingCode=rss",
-      "published": "2026-05-29T14:23:47+09:00"
     }
   ]
 }
