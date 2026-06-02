@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-02T18:47:34.906756+09:00",
+  "updated": "2026-06-02T22:58:27.454142+09:00",
   "youtube": [
     {
       "title": "2026.06.02 (화) 일일시황",
@@ -46,6 +46,16 @@
   ],
   "naver": [
     {
+      "title": "Arcium RTG 2 웨이브 체커 나왔습니다.",
+      "url": "https://blog.naver.com/fireant_korea/224304112756?fromRss=true&trackingCode=rss",
+      "published": "2026-06-02T19:21:55+09:00"
+    },
+    {
+      "title": "비트코인, 왜 빠지나 — 돈이 새는 5개의 구멍",
+      "url": "https://blog.naver.com/fireant_korea/224304101866?fromRss=true&trackingCode=rss",
+      "published": "2026-06-02T19:08:57+09:00"
+    },
+    {
       "title": "[광고게시물] P&G, 프라이빗 AI 추론 레이어 1 Nesa 기술 도입",
       "url": "https://blog.naver.com/fireant_korea/224304049744?fromRss=true&trackingCode=rss",
       "published": "2026-06-02T18:03:04+09:00"
@@ -59,16 +69,6 @@
       "title": "Stable은 정석 디파이 플레이북으로 생태계 TVL 모으기 스타트!",
       "url": "https://blog.naver.com/fireant_korea/224303972640?fromRss=true&trackingCode=rss",
       "published": "2026-06-02T16:48:50+09:00"
-    },
-    {
-      "title": "✏️ \"크라임\" 이라고 불리우는 미친듯 오르는 코인들을 찾는 공식",
-      "url": "https://blog.naver.com/fireant_korea/224302714398?fromRss=true&trackingCode=rss",
-      "published": "2026-06-01T14:47:50+09:00"
-    },
-    {
-      "title": "비트코인 방향 분석",
-      "url": "https://blog.naver.com/fireant_korea/224302704655?fromRss=true&trackingCode=rss",
-      "published": "2026-06-01T14:39:24+09:00"
     }
   ]
 }
