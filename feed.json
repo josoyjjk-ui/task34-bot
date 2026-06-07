@@ -1,6 +1,12 @@
 {
-  "updated": "2026-06-07T21:06:56.952612+09:00",
+  "updated": "2026-06-07T23:27:32.677466+09:00",
   "youtube": [
+    {
+      "title": "비트코인 장기 하락장은 종료는?",
+      "url": "https://www.youtube.com/watch?v=pBu5l7FEVVQ",
+      "thumbnail": "https://i.ytimg.com/vi/pBu5l7FEVVQ/mqdefault.jpg",
+      "published": "2026-06-07T22:00:26+09:00"
+    },
     {
       "title": "2026.06.06 (토) 일일시황",
       "url": "https://www.youtube.com/watch?v=FIobgoDHqls",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=BC6D7Xd_xoU",
       "thumbnail": "https://i.ytimg.com/vi/BC6D7Xd_xoU/mqdefault.jpg",
       "published": "2026-06-02T15:54:10+09:00"
-    },
-    {
-      "title": "📌 불개미 주간 시황 - 비트코인 미국 기관 패닉셀 시작",
-      "url": "https://www.youtube.com/watch?v=gLugIEMg0qo",
-      "thumbnail": "https://i.ytimg.com/vi/gLugIEMg0qo/mqdefault.jpg",
-      "published": "2026-06-01T18:00:19+09:00"
     }
   ],
   "telegram": [
