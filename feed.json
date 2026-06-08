@@ -1,6 +1,37 @@
 {
-  "updated": "2026-06-08T15:39:44.551255+09:00",
-  "youtube": [],
+  "updated": "2026-06-08T20:53:30.052333+09:00",
+  "youtube": [
+    {
+      "title": "비트코인 장기 하락장은 종료는?",
+      "url": "https://www.youtube.com/watch?v=pBu5l7FEVVQ",
+      "thumbnail": "https://i.ytimg.com/vi/pBu5l7FEVVQ/mqdefault.jpg",
+      "published": "2026-06-08T12:03:34+09:00"
+    },
+    {
+      "title": "2026.06.06 (토) 일일시황",
+      "url": "https://www.youtube.com/watch?v=FIobgoDHqls",
+      "thumbnail": "https://i.ytimg.com/vi/FIobgoDHqls/mqdefault.jpg",
+      "published": "2026-06-06T16:31:53+09:00"
+    },
+    {
+      "title": "2026.06.05 (금) 일일시황",
+      "url": "https://www.youtube.com/watch?v=wzhAqaPw0D4",
+      "thumbnail": "https://i.ytimg.com/vi/wzhAqaPw0D4/mqdefault.jpg",
+      "published": "2026-06-05T14:49:06+09:00"
+    },
+    {
+      "title": "2026.06.03 (수) 일일시황",
+      "url": "https://www.youtube.com/watch?v=NcOc6iJIluI",
+      "thumbnail": "https://i.ytimg.com/vi/NcOc6iJIluI/mqdefault.jpg",
+      "published": "2026-06-04T00:35:20+09:00"
+    },
+    {
+      "title": "2026.06.02 (화) 일일시황",
+      "url": "https://www.youtube.com/watch?v=BC6D7Xd_xoU",
+      "thumbnail": "https://i.ytimg.com/vi/BC6D7Xd_xoU/mqdefault.jpg",
+      "published": "2026-06-02T15:54:10+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
