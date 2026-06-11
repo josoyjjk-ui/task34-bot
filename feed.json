@@ -1,6 +1,37 @@
 {
-  "updated": "2026-06-11T12:42:01.681505+09:00",
-  "youtube": [],
+  "updated": "2026-06-11T17:42:07.779693+09:00",
+  "youtube": [
+    {
+      "title": "2026.06.10 (수) 일일시황",
+      "url": "https://www.youtube.com/watch?v=NOs7AzDmbu0",
+      "thumbnail": "https://i.ytimg.com/vi/NOs7AzDmbu0/mqdefault.jpg",
+      "published": "2026-06-10T15:49:07+09:00"
+    },
+    {
+      "title": "2026.06.09 (화) 일일시황",
+      "url": "https://www.youtube.com/watch?v=iqR_7dr2--8",
+      "thumbnail": "https://i.ytimg.com/vi/iqR_7dr2--8/mqdefault.jpg",
+      "published": "2026-06-09T15:25:00+09:00"
+    },
+    {
+      "title": "📌 불개미 주간 시황 - 비트코인 장기 하락장 종료는?",
+      "url": "https://www.youtube.com/watch?v=-jl2SVb01-0",
+      "thumbnail": "https://i.ytimg.com/vi/-jl2SVb01-0/mqdefault.jpg",
+      "published": "2026-06-08T22:05:41+09:00"
+    },
+    {
+      "title": "Aligned Layer란?",
+      "url": "https://www.youtube.com/watch?v=VCGMeF4TRJY",
+      "thumbnail": "https://i.ytimg.com/vi/VCGMeF4TRJY/mqdefault.jpg",
+      "published": "2026-06-08T22:00:36+09:00"
+    },
+    {
+      "title": "비트코인 장기 하락장은 종료는?",
+      "url": "https://www.youtube.com/watch?v=pBu5l7FEVVQ",
+      "thumbnail": "https://i.ytimg.com/vi/pBu5l7FEVVQ/mqdefault.jpg",
+      "published": "2026-06-08T12:03:34+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
@@ -15,29 +46,29 @@
   ],
   "naver": [
     {
-      "title": "Ethena 가 Janus Henderson과 파트너십(투자)을 맺었습니다.",
-      "url": "https://blog.naver.com/fireant_korea/224311726925?fromRss=true&trackingCode=rss",
-      "published": "2026-06-10T14:26:28+09:00"
+      "title": "[광고게시물] Ondo Perps: 토큰화 주식 다음은 파생상품 시장",
+      "url": "https://blog.naver.com/fireant_korea/224312998569?fromRss=true&trackingCode=rss",
+      "published": "2026-06-11T17:06:47+09:00"
     },
     {
-      "title": "비트코인이 미국장에 상승세로 돌아서려면 블랙락이 돌아와야 합니다.",
-      "url": "https://blog.naver.com/fireant_korea/224311724104?fromRss=true&trackingCode=rss",
-      "published": "2026-06-10T14:23:58+09:00"
+      "title": "우리가 항상 이야기하는 \"데드캣 바운스\" 의 어원은?",
+      "url": "https://blog.naver.com/fireant_korea/224312995841?fromRss=true&trackingCode=rss",
+      "published": "2026-06-11T17:04:38+09:00"
     },
     {
-      "title": "Bonk의 새로운 Product Bonkuji.com 입니다. 이거 진짜 돈으로 밀면 수학게임",
-      "url": "https://blog.naver.com/fireant_korea/224311722064?fromRss=true&trackingCode=rss",
-      "published": "2026-06-10T14:22:10+09:00"
+      "title": "MNX 가 프리시드에서 6.4M 을 투자유치 했습니다.",
+      "url": "https://blog.naver.com/fireant_korea/224312993088?fromRss=true&trackingCode=rss",
+      "published": "2026-06-11T17:02:02+09:00"
     },
     {
-      "title": "마이크로 스트라티지 STRC 홀더는 이제 월에 2번 배당을 받게됩니다.",
-      "url": "https://blog.naver.com/fireant_korea/224310916493?fromRss=true&trackingCode=rss",
-      "published": "2026-06-09T19:29:12+09:00"
+      "title": "Arcium이 Coinbase 로드맵에 추가되었습니다.",
+      "url": "https://blog.naver.com/fireant_korea/224312990541?fromRss=true&trackingCode=rss",
+      "published": "2026-06-11T16:59:54+09:00"
     },
     {
-      "title": "Arcium의 Cerberus 백서 뜯고 씹고 맛보고 즐기기",
-      "url": "https://blog.naver.com/fireant_korea/224310914878?fromRss=true&trackingCode=rss",
-      "published": "2026-06-09T19:26:59+09:00"
+      "title": "아서헤이즈 아티클 비트코인이 안 오른 진짜 범인은 'AI'였다",
+      "url": "https://blog.naver.com/fireant_korea/224312987599?fromRss=true&trackingCode=rss",
+      "published": "2026-06-11T16:57:17+09:00"
     }
   ]
 }
