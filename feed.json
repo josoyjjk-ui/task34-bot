@@ -1,6 +1,12 @@
 {
-  "updated": "2026-06-11T21:41:40.706235+09:00",
+  "updated": "2026-06-12T01:51:13.063386+09:00",
   "youtube": [
+    {
+      "title": "2026.06.11 (목) 일일시황",
+      "url": "https://www.youtube.com/watch?v=D0mmKfFh6ro",
+      "thumbnail": "https://i.ytimg.com/vi/D0mmKfFh6ro/mqdefault.jpg",
+      "published": "2026-06-11T21:59:55+09:00"
+    },
     {
       "title": "2026.06.10 (수) 일일시황",
       "url": "https://www.youtube.com/watch?v=NOs7AzDmbu0",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=VCGMeF4TRJY",
       "thumbnail": "https://i.ytimg.com/vi/VCGMeF4TRJY/mqdefault.jpg",
       "published": "2026-06-08T22:00:36+09:00"
-    },
-    {
-      "title": "비트코인 장기 하락장은 종료는?",
-      "url": "https://www.youtube.com/watch?v=pBu5l7FEVVQ",
-      "thumbnail": "https://i.ytimg.com/vi/pBu5l7FEVVQ/mqdefault.jpg",
-      "published": "2026-06-08T12:03:34+09:00"
     }
   ],
   "telegram": [
