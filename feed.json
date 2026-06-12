@@ -1,6 +1,12 @@
 {
-  "updated": "2026-06-12T17:21:30.558580+09:00",
+  "updated": "2026-06-12T20:58:16.718659+09:00",
   "youtube": [
+    {
+      "title": "옛날 옛날에 USDT가 있었어요",
+      "url": "https://www.youtube.com/watch?v=U_pg7XbaopM",
+      "thumbnail": "https://i.ytimg.com/vi/U_pg7XbaopM/mqdefault.jpg",
+      "published": "2026-06-12T20:00:08+09:00"
+    },
     {
       "title": "2026.06.12 (금) 일일시황",
       "url": "https://www.youtube.com/watch?v=H1f1F96nMMU",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=iqR_7dr2--8",
       "thumbnail": "https://i.ytimg.com/vi/iqR_7dr2--8/mqdefault.jpg",
       "published": "2026-06-09T15:25:00+09:00"
-    },
-    {
-      "title": "📌 불개미 주간 시황 - 비트코인 장기 하락장 종료는?",
-      "url": "https://www.youtube.com/watch?v=-jl2SVb01-0",
-      "thumbnail": "https://i.ytimg.com/vi/-jl2SVb01-0/mqdefault.jpg",
-      "published": "2026-06-08T22:05:41+09:00"
     }
   ],
   "telegram": [
