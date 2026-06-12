@@ -1,6 +1,12 @@
 {
-  "updated": "2026-06-12T12:33:46.235220+09:00",
+  "updated": "2026-06-12T17:21:30.558580+09:00",
   "youtube": [
+    {
+      "title": "2026.06.12 (금) 일일시황",
+      "url": "https://www.youtube.com/watch?v=H1f1F96nMMU",
+      "thumbnail": "https://i.ytimg.com/vi/H1f1F96nMMU/mqdefault.jpg",
+      "published": "2026-06-12T15:19:08+09:00"
+    },
     {
       "title": "2026.06.11 (목) 일일시황",
       "url": "https://www.youtube.com/watch?v=D0mmKfFh6ro",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=-jl2SVb01-0",
       "thumbnail": "https://i.ytimg.com/vi/-jl2SVb01-0/mqdefault.jpg",
       "published": "2026-06-08T22:05:41+09:00"
-    },
-    {
-      "title": "Aligned Layer란?",
-      "url": "https://www.youtube.com/watch?v=VCGMeF4TRJY",
-      "thumbnail": "https://i.ytimg.com/vi/VCGMeF4TRJY/mqdefault.jpg",
-      "published": "2026-06-08T22:00:36+09:00"
     }
   ],
   "telegram": [
@@ -46,6 +46,16 @@
   ],
   "naver": [
     {
+      "title": "블랙락이 돌아왔...다? - 비트코인 바닥 쳤다?",
+      "url": "https://blog.naver.com/fireant_korea/224314006971?fromRss=true&trackingCode=rss",
+      "published": "2026-06-12T15:52:35+09:00"
+    },
+    {
+      "title": "[광고게시물] FIFA 월드컵 2026 공식 파트너 온체인 플랫폼",
+      "url": "https://blog.naver.com/fireant_korea/224314003665?fromRss=true&trackingCode=rss",
+      "published": "2026-06-12T15:49:43+09:00"
+    },
+    {
       "title": "[광고게시물] Ondo Perps: 토큰화 주식 다음은 파생상품 시장",
       "url": "https://blog.naver.com/fireant_korea/224312998569?fromRss=true&trackingCode=rss",
       "published": "2026-06-11T17:06:47+09:00"
@@ -59,16 +69,6 @@
       "title": "MNX 가 프리시드에서 6.4M 을 투자유치 했습니다.",
       "url": "https://blog.naver.com/fireant_korea/224312993088?fromRss=true&trackingCode=rss",
       "published": "2026-06-11T17:02:02+09:00"
-    },
-    {
-      "title": "Arcium이 Coinbase 로드맵에 추가되었습니다.",
-      "url": "https://blog.naver.com/fireant_korea/224312990541?fromRss=true&trackingCode=rss",
-      "published": "2026-06-11T16:59:54+09:00"
-    },
-    {
-      "title": "아서헤이즈 아티클 비트코인이 안 오른 진짜 범인은 'AI'였다",
-      "url": "https://blog.naver.com/fireant_korea/224312987599?fromRss=true&trackingCode=rss",
-      "published": "2026-06-11T16:57:17+09:00"
     }
   ]
 }
