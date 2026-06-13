@@ -1,6 +1,12 @@
 {
-  "updated": "2026-06-13T17:01:05.601200+09:00",
+  "updated": "2026-06-13T19:55:59.897172+09:00",
   "youtube": [
+    {
+      "title": "2026.06.13 (토) 일일시황",
+      "url": "https://www.youtube.com/watch?v=SoyPi48Mtbg",
+      "thumbnail": "https://i.ytimg.com/vi/SoyPi48Mtbg/mqdefault.jpg",
+      "published": "2026-06-13T17:51:37+09:00"
+    },
     {
       "title": "옛날 옛날에 USDT가 있었어요",
       "url": "https://www.youtube.com/watch?v=U_pg7XbaopM",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=NOs7AzDmbu0",
       "thumbnail": "https://i.ytimg.com/vi/NOs7AzDmbu0/mqdefault.jpg",
       "published": "2026-06-10T15:49:07+09:00"
-    },
-    {
-      "title": "2026.06.09 (화) 일일시황",
-      "url": "https://www.youtube.com/watch?v=iqR_7dr2--8",
-      "thumbnail": "https://i.ytimg.com/vi/iqR_7dr2--8/mqdefault.jpg",
-      "published": "2026-06-09T15:25:00+09:00"
     }
   ],
   "telegram": [
