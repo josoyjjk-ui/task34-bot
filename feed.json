@@ -1,6 +1,12 @@
 {
-  "updated": "2026-06-14T19:21:59.957634+09:00",
+  "updated": "2026-06-14T21:21:36.254023+09:00",
   "youtube": [
+    {
+      "title": "비트코인 시황분석 - 바닥나왔나 비트코인?",
+      "url": "https://www.youtube.com/watch?v=zRBJKDyWDK8",
+      "thumbnail": "https://i.ytimg.com/vi/zRBJKDyWDK8/mqdefault.jpg",
+      "published": "2026-06-14T21:08:22+09:00"
+    },
     {
       "title": "2026.06.13 (토) 일일시황",
       "url": "https://www.youtube.com/watch?v=SoyPi48Mtbg",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=D0mmKfFh6ro",
       "thumbnail": "https://i.ytimg.com/vi/D0mmKfFh6ro/mqdefault.jpg",
       "published": "2026-06-11T21:59:55+09:00"
-    },
-    {
-      "title": "2026.06.10 (수) 일일시황",
-      "url": "https://www.youtube.com/watch?v=NOs7AzDmbu0",
-      "thumbnail": "https://i.ytimg.com/vi/NOs7AzDmbu0/mqdefault.jpg",
-      "published": "2026-06-10T15:49:07+09:00"
     }
   ],
   "telegram": [
