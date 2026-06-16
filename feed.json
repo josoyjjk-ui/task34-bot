@@ -1,37 +1,6 @@
 {
-  "updated": "2026-06-16T09:27:45.779551+09:00",
-  "youtube": [
-    {
-      "title": "📌 불개미 주간 시황 - 바닥 나왔나 비트코인?",
-      "url": "https://www.youtube.com/watch?v=sat8BVl6CV0",
-      "thumbnail": "https://i.ytimg.com/vi/sat8BVl6CV0/mqdefault.jpg",
-      "published": "2026-06-15T18:00:39+09:00"
-    },
-    {
-      "title": "비트코인 시황분석 - 바닥나왔나 비트코인?",
-      "url": "https://www.youtube.com/watch?v=zRBJKDyWDK8",
-      "thumbnail": "https://i.ytimg.com/vi/zRBJKDyWDK8/mqdefault.jpg",
-      "published": "2026-06-15T10:15:57+09:00"
-    },
-    {
-      "title": "2026.06.13 (토) 일일시황",
-      "url": "https://www.youtube.com/watch?v=SoyPi48Mtbg",
-      "thumbnail": "https://i.ytimg.com/vi/SoyPi48Mtbg/mqdefault.jpg",
-      "published": "2026-06-13T17:51:37+09:00"
-    },
-    {
-      "title": "옛날 옛날에 USDT가 있었어요",
-      "url": "https://www.youtube.com/watch?v=U_pg7XbaopM",
-      "thumbnail": "https://i.ytimg.com/vi/U_pg7XbaopM/mqdefault.jpg",
-      "published": "2026-06-12T20:00:08+09:00"
-    },
-    {
-      "title": "2026.06.12 (금) 일일시황",
-      "url": "https://www.youtube.com/watch?v=H1f1F96nMMU",
-      "thumbnail": "https://i.ytimg.com/vi/H1f1F96nMMU/mqdefault.jpg",
-      "published": "2026-06-12T15:19:08+09:00"
-    }
-  ],
+  "updated": "2026-06-16T15:07:03.646429+09:00",
+  "youtube": [],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
@@ -46,6 +15,16 @@
   ],
   "naver": [
     {
+      "title": "Space X 상장과 함께 이제 우주메타가 시작되었습니다. 시작은 Spacecoin",
+      "url": "https://blog.naver.com/fireant_korea/224317638447?fromRss=true&trackingCode=rss",
+      "published": "2026-06-16T14:37:32+09:00"
+    },
+    {
+      "title": "OKX 에서 월드컵 승부예측 이벤트를 진행중입니다.",
+      "url": "https://blog.naver.com/fireant_korea/224317635899?fromRss=true&trackingCode=rss",
+      "published": "2026-06-16T14:35:24+09:00"
+    },
+    {
       "title": "개미투자정보 새로운 프로덕트 - 한국거래소 완전정복 대시보드",
       "url": "https://blog.naver.com/fireant_korea/224316778236?fromRss=true&trackingCode=rss",
       "published": "2026-06-15T19:10:13+09:00"
@@ -59,16 +38,6 @@
       "title": "비트코인 거래의 무게추가 움직이고있다. (Feat. BTC ETF)",
       "url": "https://blog.naver.com/fireant_korea/224316775099?fromRss=true&trackingCode=rss",
       "published": "2026-06-15T19:05:53+09:00"
-    },
-    {
-      "title": "Doma의 거래량이 약 1900억원가량까지 올라옴.",
-      "url": "https://blog.naver.com/fireant_korea/224316773866?fromRss=true&trackingCode=rss",
-      "published": "2026-06-15T19:04:12+09:00"
-    },
-    {
-      "title": "대부분 주장하는게 \"60K가 바닥이 아닌 이유는\" 거래량이 안터졌기 때문.",
-      "url": "https://blog.naver.com/fireant_korea/224316772224?fromRss=true&trackingCode=rss",
-      "published": "2026-06-15T19:01:57+09:00"
     }
   ]
 }
