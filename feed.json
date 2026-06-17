@@ -1,6 +1,37 @@
 {
-  "updated": "2026-06-17T13:18:25.304481+09:00",
-  "youtube": [],
+  "updated": "2026-06-17T18:17:49.002945+09:00",
+  "youtube": [
+    {
+      "title": "2026.06.16 (화) 일일시황",
+      "url": "https://www.youtube.com/watch?v=_1LIFhuk8_0",
+      "thumbnail": "https://i.ytimg.com/vi/_1LIFhuk8_0/mqdefault.jpg",
+      "published": "2026-06-16T22:20:45+09:00"
+    },
+    {
+      "title": "📌 불개미 주간 시황 - 바닥 나왔나 비트코인?",
+      "url": "https://www.youtube.com/watch?v=sat8BVl6CV0",
+      "thumbnail": "https://i.ytimg.com/vi/sat8BVl6CV0/mqdefault.jpg",
+      "published": "2026-06-15T18:00:39+09:00"
+    },
+    {
+      "title": "비트코인 시황분석 - 바닥나왔나 비트코인?",
+      "url": "https://www.youtube.com/watch?v=zRBJKDyWDK8",
+      "thumbnail": "https://i.ytimg.com/vi/zRBJKDyWDK8/mqdefault.jpg",
+      "published": "2026-06-15T10:15:57+09:00"
+    },
+    {
+      "title": "2026.06.13 (토) 일일시황",
+      "url": "https://www.youtube.com/watch?v=SoyPi48Mtbg",
+      "thumbnail": "https://i.ytimg.com/vi/SoyPi48Mtbg/mqdefault.jpg",
+      "published": "2026-06-13T17:51:37+09:00"
+    },
+    {
+      "title": "옛날 옛날에 USDT가 있었어요",
+      "url": "https://www.youtube.com/watch?v=U_pg7XbaopM",
+      "thumbnail": "https://i.ytimg.com/vi/U_pg7XbaopM/mqdefault.jpg",
+      "published": "2026-06-12T20:00:08+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
@@ -15,6 +46,21 @@
   ],
   "naver": [
     {
+      "title": "최근 퍼블릭세일중인 프로젝트가 많지 않은데 Cap 은 유니스왑에서 옥션 세일중",
+      "url": "https://blog.naver.com/fireant_korea/224318871141?fromRss=true&trackingCode=rss",
+      "published": "2026-06-17T16:13:01+09:00"
+    },
+    {
+      "title": "월드컵에는 원조 스포츠 코인 칠리즈",
+      "url": "https://blog.naver.com/fireant_korea/224318869014?fromRss=true&trackingCode=rss",
+      "published": "2026-06-17T16:11:03+09:00"
+    },
+    {
+      "title": "Shieldify 가 Multipli 의 보안감사를 맡고있습니다.",
+      "url": "https://blog.naver.com/fireant_korea/224318866444?fromRss=true&trackingCode=rss",
+      "published": "2026-06-17T16:08:39+09:00"
+    },
+    {
       "title": "Space X 상장과 함께 이제 우주메타가 시작되었습니다. 시작은 Spacecoin",
       "url": "https://blog.naver.com/fireant_korea/224317638447?fromRss=true&trackingCode=rss",
       "published": "2026-06-16T14:37:32+09:00"
@@ -23,21 +69,6 @@
       "title": "OKX 에서 월드컵 승부예측 이벤트를 진행중입니다.",
       "url": "https://blog.naver.com/fireant_korea/224317635899?fromRss=true&trackingCode=rss",
       "published": "2026-06-16T14:35:24+09:00"
-    },
-    {
-      "title": "개미투자정보 새로운 프로덕트 - 한국거래소 완전정복 대시보드",
-      "url": "https://blog.naver.com/fireant_korea/224316778236?fromRss=true&trackingCode=rss",
-      "published": "2026-06-15T19:10:13+09:00"
-    },
-    {
-      "title": "이번 Fable 의 미국외 수출 금지로 인해 탈중앙화 인공지능에 대한 필요성이 대두되고 있습니다.",
-      "url": "https://blog.naver.com/fireant_korea/224316776751?fromRss=true&trackingCode=rss",
-      "published": "2026-06-15T19:08:07+09:00"
-    },
-    {
-      "title": "비트코인 거래의 무게추가 움직이고있다. (Feat. BTC ETF)",
-      "url": "https://blog.naver.com/fireant_korea/224316775099?fromRss=true&trackingCode=rss",
-      "published": "2026-06-15T19:05:53+09:00"
     }
   ]
 }
