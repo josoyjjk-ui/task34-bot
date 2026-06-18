@@ -1,6 +1,18 @@
 {
-  "updated": "2026-06-18T21:48:38.241090+09:00",
+  "updated": "2026-06-19T01:26:33.955858+09:00",
   "youtube": [
+    {
+      "title": "2026.06.18 (목) 일일시황",
+      "url": "https://www.youtube.com/watch?v=6nQYVpd4pEY",
+      "thumbnail": "https://i.ytimg.com/vi/6nQYVpd4pEY/mqdefault.jpg",
+      "published": "2026-06-18T23:37:00+09:00"
+    },
+    {
+      "title": "Fire Anterview - Cap 의 벤자민 사장님",
+      "url": "https://www.youtube.com/watch?v=sC77oVkY-l0",
+      "thumbnail": "https://i.ytimg.com/vi/sC77oVkY-l0/mqdefault.jpg",
+      "published": "2026-06-18T22:11:09+09:00"
+    },
     {
       "title": "2026.06.17 (수) 일일시황",
       "url": "https://www.youtube.com/watch?v=Mvhf_0OMQyI",
@@ -18,18 +30,6 @@
       "url": "https://www.youtube.com/watch?v=sat8BVl6CV0",
       "thumbnail": "https://i.ytimg.com/vi/sat8BVl6CV0/mqdefault.jpg",
       "published": "2026-06-15T18:00:39+09:00"
-    },
-    {
-      "title": "비트코인 시황분석 - 바닥나왔나 비트코인?",
-      "url": "https://www.youtube.com/watch?v=zRBJKDyWDK8",
-      "thumbnail": "https://i.ytimg.com/vi/zRBJKDyWDK8/mqdefault.jpg",
-      "published": "2026-06-15T10:15:57+09:00"
-    },
-    {
-      "title": "2026.06.13 (토) 일일시황",
-      "url": "https://www.youtube.com/watch?v=SoyPi48Mtbg",
-      "thumbnail": "https://i.ytimg.com/vi/SoyPi48Mtbg/mqdefault.jpg",
-      "published": "2026-06-13T17:51:37+09:00"
     }
   ],
   "telegram": [
