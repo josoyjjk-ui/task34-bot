@@ -1,6 +1,12 @@
 {
-  "updated": "2026-06-21T20:29:26.200593+09:00",
+  "updated": "2026-06-21T22:23:16.977796+09:00",
   "youtube": [
+    {
+      "title": "비트코인 바닥치고 상승한다?!",
+      "url": "https://www.youtube.com/watch?v=rY-XYGvq6fo",
+      "thumbnail": "https://i.ytimg.com/vi/rY-XYGvq6fo/mqdefault.jpg",
+      "published": "2026-06-21T21:16:13+09:00"
+    },
     {
       "title": "2026.06.20 (토) 일일시황",
       "url": "https://www.youtube.com/watch?v=skLs_xsa6OA",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=6nQYVpd4pEY",
       "thumbnail": "https://i.ytimg.com/vi/6nQYVpd4pEY/mqdefault.jpg",
       "published": "2026-06-18T23:37:00+09:00"
-    },
-    {
-      "title": "Fire Anterview - Cap 의 벤자민 사장님",
-      "url": "https://www.youtube.com/watch?v=sC77oVkY-l0",
-      "thumbnail": "https://i.ytimg.com/vi/sC77oVkY-l0/mqdefault.jpg",
-      "published": "2026-06-18T22:11:09+09:00"
     }
   ],
   "telegram": [
