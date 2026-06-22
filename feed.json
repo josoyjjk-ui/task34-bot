@@ -1,6 +1,12 @@
 {
-  "updated": "2026-06-22T12:50:44.239657+09:00",
+  "updated": "2026-06-22T18:45:18.672507+09:00",
   "youtube": [
+    {
+      "title": "📌 불개미 주간 시황 - 비트코인, 바닥치고 상승한다?!",
+      "url": "https://www.youtube.com/watch?v=UglnjY_iEeI",
+      "thumbnail": "https://i.ytimg.com/vi/UglnjY_iEeI/mqdefault.jpg",
+      "published": "2026-06-22T18:00:09+09:00"
+    },
     {
       "title": "비트코인 바닥치고 상승한다?!",
       "url": "https://www.youtube.com/watch?v=rY-XYGvq6fo",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=TGboujqY28w",
       "thumbnail": "https://i.ytimg.com/vi/TGboujqY28w/mqdefault.jpg",
       "published": "2026-06-19T15:57:51+09:00"
-    },
-    {
-      "title": "2026.06.18 (목) 일일시황",
-      "url": "https://www.youtube.com/watch?v=6nQYVpd4pEY",
-      "thumbnail": "https://i.ytimg.com/vi/6nQYVpd4pEY/mqdefault.jpg",
-      "published": "2026-06-18T23:37:00+09:00"
     }
   ],
   "telegram": [
