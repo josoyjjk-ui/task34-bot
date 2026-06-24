@@ -1,6 +1,12 @@
 {
-  "updated": "2026-06-24T18:21:25.699027+09:00",
+  "updated": "2026-06-24T21:04:01.257829+09:00",
   "youtube": [
+    {
+      "title": "2026.06.24 (수) 일일시황",
+      "url": "https://www.youtube.com/watch?v=tht1KZhtUok",
+      "thumbnail": "https://i.ytimg.com/vi/tht1KZhtUok/mqdefault.jpg",
+      "published": "2026-06-24T19:30:09+09:00"
+    },
     {
       "title": "2026.06.23 (화) 일일시황",
       "url": "https://www.youtube.com/watch?v=1c6HrsiIGuU",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=skLs_xsa6OA",
       "thumbnail": "https://i.ytimg.com/vi/skLs_xsa6OA/mqdefault.jpg",
       "published": "2026-06-20T19:36:40+09:00"
-    },
-    {
-      "title": "아직도 삼전닉스 안사고 코인하는 흑우있노?",
-      "url": "https://www.youtube.com/watch?v=PKNx3dl3eR0",
-      "thumbnail": "https://i.ytimg.com/vi/PKNx3dl3eR0/mqdefault.jpg",
-      "published": "2026-06-19T20:00:08+09:00"
     }
   ],
   "telegram": [
