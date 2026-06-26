@@ -1,6 +1,37 @@
 {
-  "updated": "2026-06-26T15:55:01.972556+09:00",
-  "youtube": [],
+  "updated": "2026-06-26T19:21:08.600086+09:00",
+  "youtube": [
+    {
+      "title": "Web3 AI 정보 인프라, DSCVR",
+      "url": "https://www.youtube.com/watch?v=-MqTblS6Vbs",
+      "thumbnail": "https://i.ytimg.com/vi/-MqTblS6Vbs/mqdefault.jpg",
+      "published": "2026-06-26T16:00:27+09:00"
+    },
+    {
+      "title": "2026.06.25 (목) 일일시황",
+      "url": "https://www.youtube.com/watch?v=_zrjvqxvaLg",
+      "thumbnail": "https://i.ytimg.com/vi/_zrjvqxvaLg/mqdefault.jpg",
+      "published": "2026-06-25T23:18:25+09:00"
+    },
+    {
+      "title": "2026.06.24 (수) 일일시황",
+      "url": "https://www.youtube.com/watch?v=tht1KZhtUok",
+      "thumbnail": "https://i.ytimg.com/vi/tht1KZhtUok/mqdefault.jpg",
+      "published": "2026-06-24T19:30:09+09:00"
+    },
+    {
+      "title": "2026.06.23 (화) 일일시황",
+      "url": "https://www.youtube.com/watch?v=1c6HrsiIGuU",
+      "thumbnail": "https://i.ytimg.com/vi/1c6HrsiIGuU/mqdefault.jpg",
+      "published": "2026-06-23T22:40:25+09:00"
+    },
+    {
+      "title": "📌 불개미 주간 시황 - 비트코인, 바닥치고 상승한다?!",
+      "url": "https://www.youtube.com/watch?v=UglnjY_iEeI",
+      "thumbnail": "https://i.ytimg.com/vi/UglnjY_iEeI/mqdefault.jpg",
+      "published": "2026-06-22T18:00:09+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
