@@ -1,6 +1,12 @@
 {
-  "updated": "2026-06-28T20:44:59.848341+09:00",
+  "updated": "2026-06-28T22:28:16.646179+09:00",
   "youtube": [
+    {
+      "title": "6월의 마지막 불개미 크립토 주간시황 라이브",
+      "url": "https://www.youtube.com/watch?v=bw4xzUQZKZo",
+      "thumbnail": "https://i.ytimg.com/vi/bw4xzUQZKZo/mqdefault.jpg",
+      "published": "2026-06-28T20:54:00+09:00"
+    },
     {
       "title": "2026.06.27 (토) 일일시황",
       "url": "https://www.youtube.com/watch?v=JoKyTkApz3k",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=tht1KZhtUok",
       "thumbnail": "https://i.ytimg.com/vi/tht1KZhtUok/mqdefault.jpg",
       "published": "2026-06-24T19:30:09+09:00"
-    },
-    {
-      "title": "2026.06.23 (화) 일일시황",
-      "url": "https://www.youtube.com/watch?v=1c6HrsiIGuU",
-      "thumbnail": "https://i.ytimg.com/vi/1c6HrsiIGuU/mqdefault.jpg",
-      "published": "2026-06-23T22:40:25+09:00"
     }
   ],
   "telegram": [
