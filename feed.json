@@ -1,6 +1,12 @@
 {
-  "updated": "2026-06-29T22:03:23.008133+09:00",
+  "updated": "2026-06-30T01:44:39.786614+09:00",
   "youtube": [
+    {
+      "title": "📌 불개미 주간 시황 - 6월의 마지막, 불개미 주간시황",
+      "url": "https://www.youtube.com/watch?v=LxmPfJ7U3ow",
+      "thumbnail": "https://i.ytimg.com/vi/LxmPfJ7U3ow/mqdefault.jpg",
+      "published": "2026-06-30T00:42:23+09:00"
+    },
     {
       "title": "Fire Anterview - Memeland의 CBO, 케빈님",
       "url": "https://www.youtube.com/watch?v=uon1Ut-dcGY",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=-MqTblS6Vbs",
       "thumbnail": "https://i.ytimg.com/vi/-MqTblS6Vbs/mqdefault.jpg",
       "published": "2026-06-26T16:00:27+09:00"
-    },
-    {
-      "title": "2026.06.25 (목) 일일시황",
-      "url": "https://www.youtube.com/watch?v=_zrjvqxvaLg",
-      "thumbnail": "https://i.ytimg.com/vi/_zrjvqxvaLg/mqdefault.jpg",
-      "published": "2026-06-25T23:18:25+09:00"
     }
   ],
   "telegram": [
