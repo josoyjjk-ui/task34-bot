@@ -1,6 +1,12 @@
 {
-  "updated": "2026-06-30T17:05:30.330735+09:00",
+  "updated": "2026-06-30T20:25:55.945717+09:00",
   "youtube": [
+    {
+      "title": "2026.06.30 (화) 일일시황",
+      "url": "https://www.youtube.com/watch?v=NyXlcLYAJ6w",
+      "thumbnail": "https://i.ytimg.com/vi/NyXlcLYAJ6w/mqdefault.jpg",
+      "published": "2026-06-30T18:16:09+09:00"
+    },
     {
       "title": "Fireweek DSCVR 완벽분석영상",
       "url": "https://www.youtube.com/watch?v=EyPzAF9ySVE",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=bw4xzUQZKZo",
       "thumbnail": "https://i.ytimg.com/vi/bw4xzUQZKZo/mqdefault.jpg",
       "published": "2026-06-29T10:30:40+09:00"
-    },
-    {
-      "title": "2026.06.27 (토) 일일시황",
-      "url": "https://www.youtube.com/watch?v=JoKyTkApz3k",
-      "thumbnail": "https://i.ytimg.com/vi/JoKyTkApz3k/mqdefault.jpg",
-      "published": "2026-06-27T18:29:36+09:00"
     }
   ],
   "telegram": [
