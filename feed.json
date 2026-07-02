@@ -1,6 +1,12 @@
 {
-  "updated": "2026-07-02T22:50:35.399601+09:00",
+  "updated": "2026-07-03T01:02:50.585138+09:00",
   "youtube": [
+    {
+      "title": "2026.07.02 (목) 일일시황",
+      "url": "https://www.youtube.com/watch?v=ByryfA55pCQ",
+      "thumbnail": "https://i.ytimg.com/vi/ByryfA55pCQ/mqdefault.jpg",
+      "published": "2026-07-02T23:40:53+09:00"
+    },
     {
       "title": "2026.07.01 (수) 일일시황",
       "url": "https://www.youtube.com/watch?v=y4To0C5MBps",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=LxmPfJ7U3ow",
       "thumbnail": "https://i.ytimg.com/vi/LxmPfJ7U3ow/mqdefault.jpg",
       "published": "2026-06-30T00:42:23+09:00"
-    },
-    {
-      "title": "Fire Anterview - Memeland의 CBO, 케빈님",
-      "url": "https://www.youtube.com/watch?v=uon1Ut-dcGY",
-      "thumbnail": "https://i.ytimg.com/vi/uon1Ut-dcGY/mqdefault.jpg",
-      "published": "2026-06-29T16:00:06+09:00"
     }
   ],
   "telegram": [
