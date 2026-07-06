@@ -1,6 +1,12 @@
 {
-  "updated": "2026-07-06T19:10:33.945899+09:00",
+  "updated": "2026-07-06T23:04:42.704999+09:00",
   "youtube": [
+    {
+      "title": "명탐정 불개미와 DSCVR",
+      "url": "https://www.youtube.com/watch?v=CuSChDHD8zc",
+      "thumbnail": "https://i.ytimg.com/vi/CuSChDHD8zc/mqdefault.jpg",
+      "published": "2026-07-06T21:30:12+09:00"
+    },
     {
       "title": "불개미의 주간 시황 - 극단적 XXX",
       "url": "https://www.youtube.com/watch?v=nDSoWS9yW-Y",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=ByryfA55pCQ",
       "thumbnail": "https://i.ytimg.com/vi/ByryfA55pCQ/mqdefault.jpg",
       "published": "2026-07-02T23:40:53+09:00"
-    },
-    {
-      "title": "2026.07.01 (수) 일일시황",
-      "url": "https://www.youtube.com/watch?v=y4To0C5MBps",
-      "thumbnail": "https://i.ytimg.com/vi/y4To0C5MBps/mqdefault.jpg",
-      "published": "2026-07-01T16:39:51+09:00"
     }
   ],
   "telegram": [
