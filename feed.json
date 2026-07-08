@@ -1,6 +1,37 @@
 {
-  "updated": "2026-07-08T15:11:23.650711+09:00",
-  "youtube": [],
+  "updated": "2026-07-08T18:05:03.582314+09:00",
+  "youtube": [
+    {
+      "title": "2026.07.07 (화) 일일시황",
+      "url": "https://www.youtube.com/watch?v=3dZI4HT_rXI",
+      "thumbnail": "https://i.ytimg.com/vi/3dZI4HT_rXI/mqdefault.jpg",
+      "published": "2026-07-07T23:33:04+09:00"
+    },
+    {
+      "title": "📌 불개미 주간 시황 - 극단적 공포를 넘어 극단적 무관심",
+      "url": "https://www.youtube.com/watch?v=DfoBNokQrOo",
+      "thumbnail": "https://i.ytimg.com/vi/DfoBNokQrOo/mqdefault.jpg",
+      "published": "2026-07-07T00:30:00+09:00"
+    },
+    {
+      "title": "명탐정 불개미와 DSCVR",
+      "url": "https://www.youtube.com/watch?v=CuSChDHD8zc",
+      "thumbnail": "https://i.ytimg.com/vi/CuSChDHD8zc/mqdefault.jpg",
+      "published": "2026-07-06T21:30:12+09:00"
+    },
+    {
+      "title": "불개미의 주간 시황 - 극단적 XXX",
+      "url": "https://www.youtube.com/watch?v=nDSoWS9yW-Y",
+      "thumbnail": "https://i.ytimg.com/vi/nDSoWS9yW-Y/mqdefault.jpg",
+      "published": "2026-07-06T10:09:52+09:00"
+    },
+    {
+      "title": "2026.07.04 (토) 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=FNLcFLkCzqI",
+      "thumbnail": "https://i.ytimg.com/vi/FNLcFLkCzqI/mqdefault.jpg",
+      "published": "2026-07-04T19:26:22+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
