@@ -1,6 +1,37 @@
 {
-  "updated": "2026-07-10T13:31:29.277342+09:00",
-  "youtube": [],
+  "updated": "2026-07-10T17:18:09.223282+09:00",
+  "youtube": [
+    {
+      "title": "2026.07.09 (목) 일일시황",
+      "url": "https://www.youtube.com/watch?v=VbDO07so0pM",
+      "thumbnail": "https://i.ytimg.com/vi/VbDO07so0pM/mqdefault.jpg",
+      "published": "2026-07-10T02:06:07+09:00"
+    },
+    {
+      "title": "2026.07.08 (수) 일일시황",
+      "url": "https://www.youtube.com/watch?v=0NKUBdatmmQ",
+      "thumbnail": "https://i.ytimg.com/vi/0NKUBdatmmQ/mqdefault.jpg",
+      "published": "2026-07-09T00:03:01+09:00"
+    },
+    {
+      "title": "2026.07.07 (화) 일일시황",
+      "url": "https://www.youtube.com/watch?v=3dZI4HT_rXI",
+      "thumbnail": "https://i.ytimg.com/vi/3dZI4HT_rXI/mqdefault.jpg",
+      "published": "2026-07-07T23:33:04+09:00"
+    },
+    {
+      "title": "📌 불개미 주간 시황 - 극단적 공포를 넘어 극단적 무관심",
+      "url": "https://www.youtube.com/watch?v=DfoBNokQrOo",
+      "thumbnail": "https://i.ytimg.com/vi/DfoBNokQrOo/mqdefault.jpg",
+      "published": "2026-07-07T00:30:00+09:00"
+    },
+    {
+      "title": "명탐정 불개미와 DSCVR",
+      "url": "https://www.youtube.com/watch?v=CuSChDHD8zc",
+      "thumbnail": "https://i.ytimg.com/vi/CuSChDHD8zc/mqdefault.jpg",
+      "published": "2026-07-06T21:30:12+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
