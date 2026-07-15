@@ -1,6 +1,12 @@
 {
-  "updated": "2026-07-15T21:50:18.430823+09:00",
+  "updated": "2026-07-15T23:45:02.081405+09:00",
   "youtube": [
+    {
+      "title": "07.15 불개미의 일일시황 (수)",
+      "url": "https://www.youtube.com/watch?v=KHXUGqznXxg",
+      "thumbnail": "https://i.ytimg.com/vi/KHXUGqznXxg/mqdefault.jpg",
+      "published": "2026-07-15T23:28:43+09:00"
+    },
     {
       "title": "2026.07.14 (화) 일일시황",
       "url": "https://www.youtube.com/watch?v=Y_MESM_8sr8",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=EcEIWi7Zg4Q",
       "thumbnail": "https://i.ytimg.com/vi/EcEIWi7Zg4Q/mqdefault.jpg",
       "published": "2026-07-13T15:00:00+09:00"
-    },
-    {
-      "title": "불개미의 주간 시황 - 코인시장 상승의 트리거는...?!",
-      "url": "https://www.youtube.com/watch?v=nH7qiT-KhQA",
-      "thumbnail": "https://i.ytimg.com/vi/nH7qiT-KhQA/mqdefault.jpg",
-      "published": "2026-07-13T11:23:36+09:00"
     }
   ],
   "telegram": [
