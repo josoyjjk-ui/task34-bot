@@ -1,6 +1,12 @@
 {
-  "updated": "2026-07-16T23:06:47.297784+09:00",
+  "updated": "2026-07-17T00:53:53.682238+09:00",
   "youtube": [
+    {
+      "title": "2026.07.16 (목) 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=Xdwg2azqlw0",
+      "thumbnail": "https://i.ytimg.com/vi/Xdwg2azqlw0/mqdefault.jpg",
+      "published": "2026-07-16T23:21:14+09:00"
+    },
     {
       "title": "07.15 불개미의 일일시황 (수)",
       "url": "https://www.youtube.com/watch?v=KHXUGqznXxg",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=3K2SCMuaTa8",
       "thumbnail": "https://i.ytimg.com/vi/3K2SCMuaTa8/mqdefault.jpg",
       "published": "2026-07-14T01:25:53+09:00"
-    },
-    {
-      "title": "마법소녀 불개미: Get Aligned! ~각성~",
-      "url": "https://www.youtube.com/watch?v=EcEIWi7Zg4Q",
-      "thumbnail": "https://i.ytimg.com/vi/EcEIWi7Zg4Q/mqdefault.jpg",
-      "published": "2026-07-13T15:00:00+09:00"
     }
   ],
   "telegram": [
