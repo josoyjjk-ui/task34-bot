@@ -1,6 +1,12 @@
 {
-  "updated": "2026-07-22T18:56:22.285083+09:00",
+  "updated": "2026-07-22T20:45:56.165768+09:00",
   "youtube": [
+    {
+      "title": "2026.07.22 (수) 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=gF87UmX4veA",
+      "thumbnail": "https://i.ytimg.com/vi/gF87UmX4veA/mqdefault.jpg",
+      "published": "2026-07-22T20:30:07+09:00"
+    },
     {
       "title": "인생도 물린 불개미, KGEN 으로 마지막 반등을 노려본다?!",
       "url": "https://www.youtube.com/watch?v=OybHTRSN9TQ",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=Xdwg2azqlw0",
       "thumbnail": "https://i.ytimg.com/vi/Xdwg2azqlw0/mqdefault.jpg",
       "published": "2026-07-16T23:21:14+09:00"
-    },
-    {
-      "title": "07.15 불개미의 일일시황 (수)",
-      "url": "https://www.youtube.com/watch?v=KHXUGqznXxg",
-      "thumbnail": "https://i.ytimg.com/vi/KHXUGqznXxg/mqdefault.jpg",
-      "published": "2026-07-15T23:28:43+09:00"
     }
   ],
   "telegram": [
