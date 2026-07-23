@@ -1,6 +1,37 @@
 {
-  "updated": "2026-07-23T15:26:51.409715+09:00",
-  "youtube": [],
+  "updated": "2026-07-23T18:06:39.277244+09:00",
+  "youtube": [
+    {
+      "title": "2026.07.22 (수) 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=gF87UmX4veA",
+      "thumbnail": "https://i.ytimg.com/vi/gF87UmX4veA/mqdefault.jpg",
+      "published": "2026-07-22T20:30:07+09:00"
+    },
+    {
+      "title": "인생도 물린 불개미, KGEN 으로 마지막 반등을 노려본다?!",
+      "url": "https://www.youtube.com/watch?v=OybHTRSN9TQ",
+      "thumbnail": "https://i.ytimg.com/vi/OybHTRSN9TQ/mqdefault.jpg",
+      "published": "2026-07-22T18:04:22+09:00"
+    },
+    {
+      "title": "2026 .07.18 (토) 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=BzgbFOv0MHY",
+      "thumbnail": "https://i.ytimg.com/vi/BzgbFOv0MHY/mqdefault.jpg",
+      "published": "2026-07-18T23:15:04+09:00"
+    },
+    {
+      "title": "2026.07.17 불개미의 일일시황 (금)",
+      "url": "https://www.youtube.com/watch?v=Xs18trVkfZg",
+      "thumbnail": "https://i.ytimg.com/vi/Xs18trVkfZg/mqdefault.jpg",
+      "published": "2026-07-17T18:02:11+09:00"
+    },
+    {
+      "title": "2026.07.16 (목) 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=Xdwg2azqlw0",
+      "thumbnail": "https://i.ytimg.com/vi/Xdwg2azqlw0/mqdefault.jpg",
+      "published": "2026-07-16T23:21:14+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
