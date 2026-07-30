@@ -1,6 +1,37 @@
 {
-  "updated": "2026-07-30T15:23:24.019616+09:00",
-  "youtube": [],
+  "updated": "2026-07-30T18:11:07.346735+09:00",
+  "youtube": [
+    {
+      "title": "2026.07.30 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=8dIzx55mmLo",
+      "thumbnail": "https://i.ytimg.com/vi/8dIzx55mmLo/mqdefault.jpg",
+      "published": "2026-07-30T16:09:14+09:00"
+    },
+    {
+      "title": "불개미의 일일시황 07.29",
+      "url": "https://www.youtube.com/watch?v=TR6-hc3GsyE",
+      "thumbnail": "https://i.ytimg.com/vi/TR6-hc3GsyE/mqdefault.jpg",
+      "published": "2026-07-29T18:56:15+09:00"
+    },
+    {
+      "title": "불개미의 일일시황 07.28 (화)",
+      "url": "https://www.youtube.com/watch?v=YF5gBt0-Jy8",
+      "thumbnail": "https://i.ytimg.com/vi/YF5gBt0-Jy8/mqdefault.jpg",
+      "published": "2026-07-28T21:55:54+09:00"
+    },
+    {
+      "title": "📌 불개미의 주간 시황 - 7월의 마지막주",
+      "url": "https://www.youtube.com/watch?v=Y0b0p1dLCh8",
+      "thumbnail": "https://i.ytimg.com/vi/Y0b0p1dLCh8/mqdefault.jpg",
+      "published": "2026-07-27T18:00:22+09:00"
+    },
+    {
+      "title": "불개미의 주간시황 라이브 - 7월 마지막주",
+      "url": "https://www.youtube.com/watch?v=uTfCDZ-GJ2c",
+      "thumbnail": "https://i.ytimg.com/vi/uTfCDZ-GJ2c/mqdefault.jpg",
+      "published": "2026-07-27T10:28:36+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
