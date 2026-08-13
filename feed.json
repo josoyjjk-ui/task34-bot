@@ -1,6 +1,37 @@
 {
-  "updated": "2026-08-13T14:53:49.264059+09:00",
-  "youtube": [],
+  "updated": "2026-08-13T16:19:40.511213+09:00",
+  "youtube": [
+    {
+      "title": "2026.08.12 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=SMubJpFFXZs",
+      "thumbnail": "https://i.ytimg.com/vi/SMubJpFFXZs/mqdefault.jpg",
+      "published": "2026-08-12T15:25:37+09:00"
+    },
+    {
+      "title": "2026.08.11 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=xjxp8D1JW10",
+      "thumbnail": "https://i.ytimg.com/vi/xjxp8D1JW10/mqdefault.jpg",
+      "published": "2026-08-11T15:33:38+09:00"
+    },
+    {
+      "title": "2026.08.08 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=bHo5TsWqLRA",
+      "thumbnail": "https://i.ytimg.com/vi/bHo5TsWqLRA/mqdefault.jpg",
+      "published": "2026-08-08T20:02:50+09:00"
+    },
+    {
+      "title": "2026.08.07 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=Uyd0N3DDOHw",
+      "thumbnail": "https://i.ytimg.com/vi/Uyd0N3DDOHw/mqdefault.jpg",
+      "published": "2026-08-07T15:30:21+09:00"
+    },
+    {
+      "title": "2026.08.06 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=aoNe4jtYa1I",
+      "thumbnail": "https://i.ytimg.com/vi/aoNe4jtYa1I/mqdefault.jpg",
+      "published": "2026-08-06T17:10:02+09:00"
+    }
+  ],
   "telegram": [
     {
       "title": "🟡 This community is now protected by Collab.Land  Token-gate your community and verify members automatically. Click belo…",
