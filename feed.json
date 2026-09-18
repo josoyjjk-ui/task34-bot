@@ -1,6 +1,12 @@
 {
-  "updated": "2026-09-18T23:35:25.465241+09:00",
+  "updated": "2026-09-19T03:01:56.649001+09:00",
   "youtube": [
+    {
+      "title": "2026.09.18 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=y4-CF4964_E",
+      "thumbnail": "https://i.ytimg.com/vi/y4-CF4964_E/mqdefault.jpg",
+      "published": "2026-09-19T01:41:50+09:00"
+    },
     {
       "title": "2026.09.17 불개미의 일일시황",
       "url": "https://www.youtube.com/watch?v=mAmxl1hflzg",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=2yFFF34DYwg",
       "thumbnail": "https://i.ytimg.com/vi/2yFFF34DYwg/mqdefault.jpg",
       "published": "2026-09-14T20:06:00+09:00"
-    },
-    {
-      "title": "불개미의 비트코인 주간시황 - 9월 3주차",
-      "url": "https://www.youtube.com/watch?v=1PzVzu5NkAs",
-      "thumbnail": "https://i.ytimg.com/vi/1PzVzu5NkAs/mqdefault.jpg",
-      "published": "2026-09-14T09:59:12+09:00"
     }
   ],
   "telegram": [
