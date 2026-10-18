@@ -1,6 +1,12 @@
 {
-  "updated": "2026-10-18T20:31:23.176008+09:00",
+  "updated": "2026-10-19T00:18:06.739313+09:00",
   "youtube": [
+    {
+      "title": "10월 3주차 불개미의 주간시황",
+      "url": "https://www.youtube.com/watch?v=-2U2pctHEnQ",
+      "thumbnail": "https://i.ytimg.com/vi/-2U2pctHEnQ/mqdefault.jpg",
+      "published": "2026-10-18T21:04:17+09:00"
+    },
     {
       "title": "2026.10.17 불개미의 일일시황",
       "url": "https://www.youtube.com/watch?v=gA23xVanw1s",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=f3oEsW_qN8M",
       "thumbnail": "https://i.ytimg.com/vi/f3oEsW_qN8M/mqdefault.jpg",
       "published": "2026-10-13T18:02:01+09:00"
-    },
-    {
-      "title": "2026.10.10 불개미의 일일시황",
-      "url": "https://www.youtube.com/watch?v=T25nHPkRWTw",
-      "thumbnail": "https://i.ytimg.com/vi/T25nHPkRWTw/mqdefault.jpg",
-      "published": "2026-10-10T19:46:23+09:00"
     }
   ],
   "telegram": [
