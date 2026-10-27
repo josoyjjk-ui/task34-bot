@@ -1,6 +1,12 @@
 {
-  "updated": "2026-10-27T22:29:39.954447+09:00",
+  "updated": "2026-10-28T03:52:32.642266+09:00",
   "youtube": [
+    {
+      "title": "2026.10.27 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=ZDHAsaOAUm0",
+      "thumbnail": "https://i.ytimg.com/vi/ZDHAsaOAUm0/mqdefault.jpg",
+      "published": "2026-10-28T03:15:34+09:00"
+    },
     {
       "title": "📌 불개미의 주간 시황 - 코인과세 유예와 함께 비트코인 반등?!",
       "url": "https://www.youtube.com/watch?v=AvchfDYheAU",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=q6VCw_Q_Rcc",
       "thumbnail": "https://i.ytimg.com/vi/q6VCw_Q_Rcc/mqdefault.jpg",
       "published": "2026-10-23T16:41:27+09:00"
-    },
-    {
-      "title": "2026.10.22 불개미의 일일시황",
-      "url": "https://www.youtube.com/watch?v=unXB7DDJpM8",
-      "thumbnail": "https://i.ytimg.com/vi/unXB7DDJpM8/mqdefault.jpg",
-      "published": "2026-10-22T16:51:32+09:00"
     }
   ],
   "telegram": [
