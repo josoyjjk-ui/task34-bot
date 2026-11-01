@@ -1,6 +1,12 @@
 {
-  "updated": "2026-11-01T20:25:00.414912+09:00",
+  "updated": "2026-11-02T02:12:26.092532+09:00",
   "youtube": [
+    {
+      "title": "세계 최대거래소 바이낸스 해킹! 비트코인 주간시황",
+      "url": "https://www.youtube.com/watch?v=T3X7x9tEPOo",
+      "thumbnail": "https://i.ytimg.com/vi/T3X7x9tEPOo/mqdefault.jpg",
+      "published": "2026-11-01T21:52:24+09:00"
+    },
     {
       "title": "2026.10.31 불개미의 일일시황",
       "url": "https://www.youtube.com/watch?v=tE-Laui7DpA",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=ZDHAsaOAUm0",
       "thumbnail": "https://i.ytimg.com/vi/ZDHAsaOAUm0/mqdefault.jpg",
       "published": "2026-10-28T03:15:34+09:00"
-    },
-    {
-      "title": "📌 불개미의 주간 시황 - 코인과세 유예와 함께 비트코인 반등?!",
-      "url": "https://www.youtube.com/watch?v=AvchfDYheAU",
-      "thumbnail": "https://i.ytimg.com/vi/AvchfDYheAU/mqdefault.jpg",
-      "published": "2026-10-26T18:00:34+09:00"
     }
   ],
   "telegram": [
