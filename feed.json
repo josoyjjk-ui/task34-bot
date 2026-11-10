@@ -1,6 +1,12 @@
 {
-  "updated": "2026-11-10T12:07:04.183319+09:00",
+  "updated": "2026-11-10T20:29:17.543989+09:00",
   "youtube": [
+    {
+      "title": "2026.11.10 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=_jBnwyynQ5A",
+      "thumbnail": "https://i.ytimg.com/vi/_jBnwyynQ5A/mqdefault.jpg",
+      "published": "2026-11-10T20:09:59+09:00"
+    },
     {
       "title": "📌 불개미의 주간 시황 - 재미없는 노잼장 다시커밍",
       "url": "https://www.youtube.com/watch?v=gqm5JGn57xs",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=yiNzXTBU_UI",
       "thumbnail": "https://i.ytimg.com/vi/yiNzXTBU_UI/mqdefault.jpg",
       "published": "2026-11-04T21:58:33+09:00"
-    },
-    {
-      "title": "2026.11.03 불개미의 일일시황",
-      "url": "https://www.youtube.com/watch?v=Ct4nTlZCNik",
-      "thumbnail": "https://i.ytimg.com/vi/Ct4nTlZCNik/mqdefault.jpg",
-      "published": "2026-11-03T21:58:34+09:00"
     }
   ],
   "telegram": [
