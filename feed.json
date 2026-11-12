@@ -1,6 +1,12 @@
 {
-  "updated": "2026-11-12T18:11:37.863508+09:00",
+  "updated": "2026-11-13T02:40:26.738455+09:00",
   "youtube": [
+    {
+      "title": "2026.11.12 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=qpVnJgmxMUk",
+      "thumbnail": "https://i.ytimg.com/vi/qpVnJgmxMUk/mqdefault.jpg",
+      "published": "2026-11-12T18:12:49+09:00"
+    },
     {
       "title": "2026.11.11 불개미의 일일시황",
       "url": "https://www.youtube.com/watch?v=uSQQxzC0rDM",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=eUKOKyzoS-w",
       "thumbnail": "https://i.ytimg.com/vi/eUKOKyzoS-w/mqdefault.jpg",
       "published": "2026-11-09T10:24:33+09:00"
-    },
-    {
-      "title": "싱가폴에서 만난 사람들 - Infinit, Turtle, Ondo, Eigen",
-      "url": "https://www.youtube.com/watch?v=hidaKqykY0E",
-      "thumbnail": "https://i.ytimg.com/vi/hidaKqykY0E/mqdefault.jpg",
-      "published": "2026-11-05T14:20:31+09:00"
     }
   ],
   "telegram": [
