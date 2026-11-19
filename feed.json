@@ -1,6 +1,12 @@
 {
-  "updated": "2026-11-19T10:00:43.198242+09:00",
+  "updated": "2026-11-19T18:04:27.288271+09:00",
   "youtube": [
+    {
+      "title": "2026.11.19 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=jHuHLtxgqkM",
+      "thumbnail": "https://i.ytimg.com/vi/jHuHLtxgqkM/mqdefault.jpg",
+      "published": "2026-11-19T17:58:06+09:00"
+    },
     {
       "title": "2026.11.18 불개미의 일일시황",
       "url": "https://www.youtube.com/watch?v=3AJSXDcS6fY",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=mUqAGMbvbco",
       "thumbnail": "https://i.ytimg.com/vi/mUqAGMbvbco/mqdefault.jpg",
       "published": "2026-11-16T18:00:36+09:00"
-    },
-    {
-      "title": "비트코인 폭락 후 반등?",
-      "url": "https://www.youtube.com/watch?v=Jgd-bF_Hcks",
-      "thumbnail": "https://i.ytimg.com/vi/Jgd-bF_Hcks/mqdefault.jpg",
-      "published": "2026-11-16T00:26:16+09:00"
     }
   ],
   "telegram": [
