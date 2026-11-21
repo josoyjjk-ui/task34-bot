@@ -1,6 +1,18 @@
 {
-  "updated": "2026-11-21T12:45:13.706167+09:00",
+  "updated": "2026-11-21T21:01:20.651752+09:00",
   "youtube": [
+    {
+      "title": "2026.11.21 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=th7bvkF3RSc",
+      "thumbnail": "https://i.ytimg.com/vi/th7bvkF3RSc/mqdefault.jpg",
+      "published": "2026-11-21T17:00:08+09:00"
+    },
+    {
+      "title": "비트코인 긴급 초대형 하락중",
+      "url": "https://www.youtube.com/watch?v=whE8cjR1EI0",
+      "thumbnail": "https://i.ytimg.com/vi/whE8cjR1EI0/mqdefault.jpg",
+      "published": "2026-11-21T12:52:44+09:00"
+    },
     {
       "title": "2026.11.20 불개미의 일일시황",
       "url": "https://www.youtube.com/watch?v=sdjQ2Tbjbkw",
@@ -18,18 +30,6 @@
       "url": "https://www.youtube.com/watch?v=3AJSXDcS6fY",
       "thumbnail": "https://i.ytimg.com/vi/3AJSXDcS6fY/mqdefault.jpg",
       "published": "2026-11-18T16:30:12+09:00"
-    },
-    {
-      "title": "2026.11.17 불개미의 일일시황",
-      "url": "https://www.youtube.com/watch?v=a3ZIWBqsWJk",
-      "thumbnail": "https://i.ytimg.com/vi/a3ZIWBqsWJk/mqdefault.jpg",
-      "published": "2026-11-17T21:26:34+09:00"
-    },
-    {
-      "title": "2026.11.17 불개미의 일일시황",
-      "url": "https://www.youtube.com/watch?v=o0d8IEHlZNc",
-      "thumbnail": "https://i.ytimg.com/vi/o0d8IEHlZNc/mqdefault.jpg",
-      "published": "2026-11-17T16:53:17+09:00"
     }
   ],
   "telegram": [
