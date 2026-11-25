@@ -1,6 +1,12 @@
 {
-  "updated": "2026-11-25T11:41:19.700220+09:00",
+  "updated": "2026-11-25T21:01:37.676927+09:00",
   "youtube": [
+    {
+      "title": "2026.11.25 불개미의 일일시황",
+      "url": "https://www.youtube.com/watch?v=TvrTxDmZio8",
+      "thumbnail": "https://i.ytimg.com/vi/TvrTxDmZio8/mqdefault.jpg",
+      "published": "2026-11-25T15:19:27+09:00"
+    },
     {
       "title": "2026.11.24 불개미의 일일시황",
       "url": "https://www.youtube.com/watch?v=SV2XEa9fOXQ",
@@ -24,12 +30,6 @@
       "url": "https://www.youtube.com/watch?v=th7bvkF3RSc",
       "thumbnail": "https://i.ytimg.com/vi/th7bvkF3RSc/mqdefault.jpg",
       "published": "2026-11-21T17:00:08+09:00"
-    },
-    {
-      "title": "2026.11.20 불개미의 일일시황",
-      "url": "https://www.youtube.com/watch?v=sdjQ2Tbjbkw",
-      "thumbnail": "https://i.ytimg.com/vi/sdjQ2Tbjbkw/mqdefault.jpg",
-      "published": "2026-11-20T18:10:38+09:00"
     }
   ],
   "telegram": [
